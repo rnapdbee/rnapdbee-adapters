@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-import io
 import orjson
 import os
 import sys
@@ -137,16 +136,14 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
 
 def main():
     with open(os.devnull, 'w') as devnull:
-        content = sys.stdin.read()
-
         original_stdout = sys.stdout
         sys.stdout = devnull
 
-        structure = Cif(io.StringIO(content)).structure()
+        structure = Cif(sys.stdin).structure()
         bases = structure.residues(type=["RNA linking", "DNA linking"])
         cubes, neighbours = interactions.make_nt_cubes(bases, SCREEN_DISTANCE_CUTOFF)
-        interaction_to_triple_list, pair_to_interaction, list_nt_nt, _ = interactions.annotate_nt_nt_interactions(
-            bases, SCREEN_DISTANCE_CUTOFF, cubes, neighbours, {})
+        _, pair_to_interaction, _, _ = interactions.annotate_nt_nt_interactions(bases, SCREEN_DISTANCE_CUTOFF, cubes,
+                                                                                neighbours, {})
 
         sys.stdout = original_stdout
 
