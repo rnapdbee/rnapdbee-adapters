@@ -1,3 +1,2 @@
 orjson
-
 git+https://github.com/tzok/fr3d-python

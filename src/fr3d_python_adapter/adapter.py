@@ -135,7 +135,7 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
     return (lw, stacking, base_ribose, base_phosphate)
 
 
-if __name__ == '__main__':
+def main():
     with open(os.devnull, 'w') as devnull:
         content = sys.stdin.read()
 
@@ -169,3 +169,7 @@ if __name__ == '__main__':
 
         result = AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions)
         print(orjson.dumps(result).decode('utf-8'))
+
+
+if __name__ == '__main__':
+    main()
