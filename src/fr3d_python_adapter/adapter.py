@@ -1,101 +1,25 @@
 #! /usr/bin/env python
-import orjson
+import io
 import os
 import sys
 
-from dataclasses import dataclass
-from enum import Enum
-from typing import List, Optional, Tuple
+from typing import List, Tuple
+
+import orjson
 
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 
+from model import Structure2D, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, Residue, ResidueAuth, \
+    Stacking, StackingTopology
+
 SCREEN_DISTANCE_CUTOFF = 12
-
-
-class LeontisWesthof(Enum):
-    cWW = 'cWW'
-    cWH = 'cWH'
-    cWS = 'cWS'
-    cHW = 'cHW'
-    cHH = 'cHH'
-    cHS = 'cHS'
-    cSW = 'cSW'
-    cSH = 'cSH'
-    cSS = 'cSS'
-    tWW = 'tWW'
-    tWH = 'tWH'
-    tWS = 'tWS'
-    tHW = 'tHW'
-    tHH = 'tHH'
-    tHS = 'tHS'
-    tSW = 'tSW'
-    tSH = 'tSH'
-    tSS = 'tSS'
-
-
-class StackingTopology(Enum):
-    upward = 'upward'
-    downward = 'downward'
-    inward = 'inward'
-    outward = 'outward'
-
-
-# TODO
-class BR(Enum):
-    unknown = 'unknown'
-
-
-# TODO
-class BPh(Enum):
-    unknown = 'unknown'
-
-
-@dataclass
-class Residue:
-    chain: str
-    number: int
-    icode: Optional[str]
-    name: str
-
-
-@dataclass
-class Interaction:
-    nt1: Residue
-    nt2: Residue
-
-
-@dataclass
-class BasePair(Interaction):
-    lw: LeontisWesthof
-
-
-@dataclass
-class Stacking(Interaction):
-    topology: StackingTopology
-
-
-@dataclass
-class BaseRibose(Interaction):
-    br: BR
-
-
-@dataclass
-class BasePhosphate(Interaction):
-    bph: BPh
-
-
-@dataclass
-class AnalysisOutput:
-    basePairs: List[BasePair]
-    stackings: List[Stacking]
-    baseRiboseInteractions: List[BaseRibose]
-    basePhosphateInteractions: List[BasePhosphate]
 
 
 def parse_unit_id(nt: str) -> Residue:
     fields = nt.split('|')
-    return Residue(fields[2], int(fields[4]), fields[8] if len(fields) >= 9 else None, fields[3])
+    auth = ResidueAuth(fields[2], int(fields[4]), fields[7] if len(fields) >= 8 else ' ')
+    return Residue(None, auth)
 
 
 def parse_unit_ids(pair: Tuple) -> Tuple[Residue, Residue]:
@@ -125,7 +49,7 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
         elif name in ("s3O2'", "s3O3'", "s3O4'"):
             base_ribose.add(BR.unknown)
         elif name in ("s3O5'", "s3OP1", "s3OP2"):
-            base_phosphate.add(BR.unknown)
+            base_phosphate.add(BPh.unknown)
         else:
             assert len(name) == 3, name
             name = 'tHS' if name.lower() == 'hts' else name  # typo?
@@ -134,12 +58,12 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
     return (lw, stacking, base_ribose, base_phosphate)
 
 
-def main():
+def analyze(cif_content: str) -> Structure2D:
     with open(os.devnull, 'w') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
 
-        structure = Cif(sys.stdin).structure()
+        structure = Cif(io.StringIO(cif_content)).structure()
         bases = structure.residues(type=["RNA linking", "DNA linking"])
         cubes, neighbours = interactions.make_nt_cubes(bases, SCREEN_DISTANCE_CUTOFF)
         _, pair_to_interaction, _, _ = interactions.annotate_nt_nt_interactions(bases, SCREEN_DISTANCE_CUTOFF, cubes,
@@ -147,26 +71,26 @@ def main():
 
         sys.stdout = original_stdout
 
-        base_pairs = []
-        stackings = []
-        base_ribose_interactions = []
-        base_phosphate_interactions = []
+    base_pairs = []
+    stackings = []
+    base_ribose_interactions = []
+    base_phosphate_interactions = []
 
-        for key, value in pair_to_interaction.items():
-            nt1, nt2 = parse_unit_ids(key)
-            lw, stacking, br, bph = unify_classification(value)
-            for x in lw:
-                base_pairs.append(BasePair(nt1, nt2, x))
-            for x in stacking:
-                stackings.append(Stacking(nt1, nt2, x))
-            for x in br:
-                base_ribose_interactions.append(BaseRibose(nt1, nt2, x))
-            for x in bph:
-                base_phosphate_interactions.append(BasePhosphate(nt1, nt2, x))
+    for key, value in pair_to_interaction.items():
+        nt1, nt2 = parse_unit_ids(key)
+        lw, stacking, br, bph = unify_classification(value)
+        for x in lw:
+            base_pairs.append(BasePair(nt1, nt2, x))
+        for x in stacking:
+            stackings.append(Stacking(nt1, nt2, x))
+        for x in br:
+            base_ribose_interactions.append(BaseRibose(nt1, nt2, x))
+        for x in bph:
+            base_phosphate_interactions.append(BasePhosphate(nt1, nt2, x))
 
-        result = AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions)
-        print(orjson.dumps(result).decode('utf-8'))
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions)
 
 
 if __name__ == '__main__':
-    main()
+    result = analyze(sys.stdin.read())
+    print(orjson.dumps(result).decode('utf-8'))
