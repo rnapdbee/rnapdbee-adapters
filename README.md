@@ -40,4 +40,4 @@ $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localh
 
 ## Example
 
-The data model can be understood by looking at [src/adapters/model.py]. An example output JSON produced by BPNET for 1EHZ structure is available in [1ehz.json](1ehz.json) file.
+The data model can be understood by looking at [src/adapters/model.py](src/adapters/model.py). An example output JSON produced by BPNET for 1EHZ structure is available in [1ehz.json](1ehz.json) file.
