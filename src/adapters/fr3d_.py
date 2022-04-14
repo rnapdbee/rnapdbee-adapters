@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+# IMPORTANT! this file cannot be named fr3d.py, because it imports from "fr3d", and Python complains about that
 import io
 import os
 import sys
@@ -10,15 +11,15 @@ import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 
-from model import Structure2D, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, Residue, ResidueAuth, \
-    Stacking, StackingTopology
+from adapters.model import Structure2D, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, \
+    Residue, ResidueAuth, Stacking, StackingTopology
 
 SCREEN_DISTANCE_CUTOFF = 12
 
 
 def parse_unit_id(nt: str) -> Residue:
     fields = nt.split('|')
-    auth = ResidueAuth(fields[2], int(fields[4]), fields[7] if len(fields) >= 8 else ' ')
+    auth = ResidueAuth(fields[2], int(fields[4]), fields[7] if len(fields) >= 8 else '?', fields[3])
     return Residue(None, auth)
 
 
@@ -58,12 +59,12 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
     return (lw, stacking, base_ribose, base_phosphate)
 
 
-def analyze(cif_content: str) -> Structure2D:
+def analyze(file_content: str) -> Structure2D:
     with open(os.devnull, 'w') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
 
-        structure = Cif(io.StringIO(cif_content)).structure()
+        structure = Cif(io.StringIO(file_content)).structure()
         bases = structure.residues(type=["RNA linking", "DNA linking"])
         cubes, neighbours = interactions.make_nt_cubes(bases, SCREEN_DISTANCE_CUTOFF)
         _, pair_to_interaction, _, _ = interactions.annotate_nt_nt_interactions(bases, SCREEN_DISTANCE_CUTOFF, cubes,
@@ -88,9 +89,13 @@ def analyze(cif_content: str) -> Structure2D:
         for x in bph:
             base_phosphate_interactions.append(BasePhosphate(nt1, nt2, x))
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions)
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, [])
+
+
+def main():
+    result = analyze(sys.stdin.read())
+    print(orjson.dumps(result).decode('utf-8'))
 
 
 if __name__ == '__main__':
-    result = analyze(sys.stdin.read())
-    print(orjson.dumps(result).decode('utf-8'))
+    main()

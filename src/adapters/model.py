@@ -29,6 +29,7 @@ class StackingTopology(Enum):
     downward = 'downward'
     inward = 'inward'
     outward = 'outward'
+    unknown = 'unknown'
 
 
 # TODO
@@ -45,6 +46,7 @@ class BPh(Enum):
 class ResidueLabel:
     chain: str
     number: int
+    name: str
 
 
 @dataclass
@@ -52,6 +54,7 @@ class ResidueAuth:
     chain: str
     number: int
     icode: str
+    name: str
 
 
 @dataclass
@@ -87,8 +90,14 @@ class BasePhosphate(Interaction):
 
 
 @dataclass
+class OtherInteraction(Interaction):
+    pass
+
+
+@dataclass
 class Structure2D:
     basePairs: List[BasePair]
     stackings: List[Stacking]
     baseRiboseInteractions: List[BaseRibose]
     basePhosphateInteractions: List[BasePhosphate]
+    otherInteractions: List[OtherInteraction]
