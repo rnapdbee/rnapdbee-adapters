@@ -37,3 +37,7 @@ $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localh
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/fr3d
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/maxit
 ```
+
+## Example
+
+The data model can be understood by looking at [src/adapters/model.py]. An example output JSON produced by BPNET for 1EHZ structure is available in [1ehz.json](1ehz.json) file.
