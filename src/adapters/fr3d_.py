@@ -11,7 +11,7 @@ import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 
-from adapters.model import Structure2D, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, \
+from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, \
     Residue, ResidueAuth, Stacking, StackingTopology
 
 SCREEN_DISTANCE_CUTOFF = 12
@@ -59,7 +59,7 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
     return (lw, stacking, base_ribose, base_phosphate)
 
 
-def analyze(file_content: str) -> Structure2D:
+def analyze(file_content: str) -> AnalysisOutput:
     with open(os.devnull, 'w') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
@@ -89,7 +89,7 @@ def analyze(file_content: str) -> Structure2D:
         for x in bph:
             base_phosphate_interactions.append(BasePhosphate(nt1, nt2, x))
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, [])
+    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, [])
 
 
 def main():

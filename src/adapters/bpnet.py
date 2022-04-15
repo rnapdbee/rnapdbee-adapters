@@ -6,7 +6,7 @@ import tempfile
 
 import orjson
 
-from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, Structure2D, Stacking, StackingTopology, \
+from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, StackingTopology, \
     BaseRibose, BR, BasePhosphate, BPh, OtherInteraction
 
 
@@ -156,7 +156,7 @@ def parse_overlaps(bpnet_output: str):
     return stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions
 
 
-def analyze(file_content: str) -> Structure2D:
+def analyze(file_content: str) -> AnalysisOutput:
     directory = tempfile.TemporaryDirectory()
     file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
     file.write(file_content)
@@ -173,7 +173,7 @@ def analyze(file_content: str) -> Structure2D:
 
     base_pairs = parse_base_pairs(bpnet_output)
     stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
+    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
 
 
 def main():

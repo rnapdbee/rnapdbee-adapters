@@ -95,7 +95,7 @@ class OtherInteraction(Interaction):
 
 
 @dataclass
-class Structure2D:
+class AnalysisOutput:
     basePairs: List[BasePair]
     stackings: List[Stacking]
     baseRiboseInteractions: List[BaseRibose]
