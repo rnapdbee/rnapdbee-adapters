@@ -16,6 +16,12 @@ def ensure_cif(file_content: str) -> str:
     return pdb2cif(file_content)
 
 
+def ensure_pdb(file_content: str) -> str:
+    if is_cif(file_content):
+        return cif2pdb(file_content)
+    return file_content
+
+
 def pdb2cif(pdb_content):
     pdb = tempfile.NamedTemporaryFile('w+', suffix='.pdb')
     pdb.write(pdb_content)

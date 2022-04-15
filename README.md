@@ -33,9 +33,10 @@ $ docker run -p 8000:8000 rnapdbee-adapter-server
 In another terminal:
 
 ```
-$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/bpnet
-$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/fr3d
-$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/maxit
+$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analyze/bpnet
+$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analyze/fr3d
+$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/convert/ensure-cif
+$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/convert/ensure-pdb
 ```
 
 ## Example
