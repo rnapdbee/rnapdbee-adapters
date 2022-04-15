@@ -13,9 +13,7 @@ app = Flask(__name__)
 def bpnet_handler():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    cif_or_pdb = request.data.decode('utf-8')
-    cif = maxit.ensure_cif(cif_or_pdb)
-    structure = bpnet.analyze(cif)
+    structure = bpnet.analyze(request.data.decode('utf-8'))
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
 

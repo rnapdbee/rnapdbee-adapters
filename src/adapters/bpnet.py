@@ -8,6 +8,7 @@ import orjson
 
 from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, BaseRibose, \
     BasePhosphate, OtherInteraction
+from adapters.utils import is_cif
 
 
 class Element(enum.Enum):
@@ -172,8 +173,10 @@ def residues_from_overlap_info(fields):
 
 
 def analyze(file_content: str) -> AnalysisOutput:
+    suffix = '.cif' if is_cif(file_content) else '.pdb'
+
     directory = tempfile.TemporaryDirectory()
-    file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
+    file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix=suffix)
     file.write(file_content)
     file.seek(0)
 
@@ -181,9 +184,9 @@ def analyze(file_content: str) -> AnalysisOutput:
 
     file.close()
 
-    with open(file.name.replace('.cif', '.out')) as f:
+    with open(file.name.replace(suffix, '.out')) as f:
         bpnet_output = f.read()
-    with open(file.name.replace('.cif', '.rob')) as f:
+    with open(file.name.replace(suffix, '.rob')) as f:
         bpnet_rob = f.read()
 
     base_pairs = parse_base_pairs(bpnet_output)

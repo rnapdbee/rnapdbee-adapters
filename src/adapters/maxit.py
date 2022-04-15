@@ -3,16 +3,11 @@ import subprocess
 import sys
 import tempfile
 
+from adapters.utils import is_cif
+
 # constants defined by MAXIT
 MODE_PDB2CIF = '1'
 MODE_CIF2PDB = '2'
-
-
-def is_cif(file_content: str) -> bool:
-    for line in file_content.splitlines():
-        if line.startswith('_atom_site'):
-            return True
-    return False
 
 
 def ensure_cif(file_content: str) -> str:
