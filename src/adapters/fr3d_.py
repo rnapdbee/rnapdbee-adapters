@@ -3,15 +3,13 @@
 import io
 import os
 import sys
-
 from typing import List, Tuple
 
 import orjson
-
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, BPh, BR, LeontisWesthof, \
+from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
     Residue, ResidueAuth, Stacking, StackingTopology
 
 SCREEN_DISTANCE_CUTOFF = 12
@@ -25,7 +23,7 @@ def parse_unit_id(nt: str) -> Residue:
 
 def parse_unit_ids(pair: Tuple) -> Tuple[Residue, Residue]:
     nt1, nt2 = pair
-    return (parse_unit_id(nt1), parse_unit_id(nt2))
+    return parse_unit_id(nt1), parse_unit_id(nt2)
 
 
 def unify_classification(fr3d_names: List[str]) -> Tuple:
@@ -48,15 +46,15 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
         elif name == 's53':
             stacking.add(StackingTopology.inward)
         elif name in ("s3O2'", "s3O3'", "s3O4'"):
-            base_ribose.add(BR.unknown)
+            base_ribose.add(None)
         elif name in ("s3O5'", "s3OP1", "s3OP2"):
-            base_phosphate.add(BPh.unknown)
+            base_phosphate.add(None)
         else:
             assert len(name) == 3, name
             name = 'tHS' if name.lower() == 'hts' else name  # typo?
             name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
             lw.add(LeontisWesthof[name])
-    return (lw, stacking, base_ribose, base_phosphate)
+    return lw, stacking, base_ribose, base_phosphate
 
 
 def analyze(file_content: str) -> AnalysisOutput:
@@ -81,7 +79,7 @@ def analyze(file_content: str) -> AnalysisOutput:
         nt1, nt2 = parse_unit_ids(key)
         lw, stacking, br, bph = unify_classification(value)
         for x in lw:
-            base_pairs.append(BasePair(nt1, nt2, x))
+            base_pairs.append(BasePair(nt1, nt2, x, None))
         for x in stacking:
             stackings.append(Stacking(nt1, nt2, x))
         for x in br:

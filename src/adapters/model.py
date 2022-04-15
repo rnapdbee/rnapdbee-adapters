@@ -24,22 +24,68 @@ class LeontisWesthof(Enum):
     tSS = 'tSS'
 
 
+class Saenger(Enum):
+    I = 'I'
+    II = 'II'
+    III = 'III'
+    IV = 'IV'
+    V = 'V'
+    VI = 'VI'
+    VII = 'VII'
+    VIII = 'VIII'
+    IX = 'IX'
+    X = 'X'
+    XI = 'XI'
+    XII = 'XII'
+    XIII = 'XIII'
+    XIV = 'XIV'
+    XV = 'XV'
+    XVI = 'XVI'
+    XVII = 'XVII'
+    XVIII = 'XVIII'
+    XIX = 'XIX'
+    XX = 'XX'
+    XXI = 'XXI'
+    XXII = 'XXII'
+    XXIII = 'XXIII'
+    XXIV = 'XXIV'
+    XXV = 'XXV'
+    XXVI = 'XXVI'
+    XXVII = 'XXVII'
+    XXVIII = 'XXVIII'
+
+
 class StackingTopology(Enum):
     upward = 'upward'
     downward = 'downward'
     inward = 'inward'
     outward = 'outward'
-    unknown = 'unknown'
 
 
-# TODO
 class BR(Enum):
-    unknown = 'unknown'
+    _0 = 0
+    _1 = 1
+    _2 = 2
+    _3 = 3
+    _4 = 4
+    _5 = 5
+    _6 = 6
+    _7 = 7
+    _8 = 8
+    _9 = 9
 
 
-# TODO
 class BPh(Enum):
-    unknown = 'unknown'
+    _0 = 0
+    _1 = 1
+    _2 = 2
+    _3 = 3
+    _4 = 4
+    _5 = 5
+    _6 = 6
+    _7 = 7
+    _8 = 8
+    _9 = 9
 
 
 @dataclass
@@ -72,21 +118,22 @@ class Interaction:
 @dataclass
 class BasePair(Interaction):
     lw: LeontisWesthof
+    saenger: Optional[Saenger]
 
 
 @dataclass
 class Stacking(Interaction):
-    topology: StackingTopology
+    topology: Optional[StackingTopology]
 
 
 @dataclass
 class BaseRibose(Interaction):
-    br: BR
+    br: Optional[BR]
 
 
 @dataclass
 class BasePhosphate(Interaction):
-    bph: BPh
+    bph: Optional[BPh]
 
 
 @dataclass

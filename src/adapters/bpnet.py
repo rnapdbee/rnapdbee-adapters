@@ -6,8 +6,8 @@ import tempfile
 
 import orjson
 
-from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, StackingTopology, \
-    BaseRibose, BR, BasePhosphate, BPh, OtherInteraction
+from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, BaseRibose, \
+    BasePhosphate, OtherInteraction
 
 
 class Element(enum.Enum):
@@ -76,28 +76,33 @@ def parse_base_pairs(bpnet_output: str):
             pass
         elif len(fields) == 13:
             # pair
-            resinfo = fields[1:5]
-            nt1 = Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
-            resinfo = fields[6:10]
-            nt2 = Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
+            nt1 = residue_from_pair(fields[1:5])
+            nt2 = residue_from_pair(fields[6:10])
             lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw))
+            base_pairs.append(BasePair(nt1, nt2, lw, None))
         elif len(fields) == 21:
             # triple
-            resinfo = fields[1:5]
-            nt1 = Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
-            resinfo = fields[6:10]
-            nt2 = Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
+            nt1 = residue_from_pair(fields[1:5])
+            nt2 = residue_from_pair(fields[6:10])
             lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw))
-            resinfo = fields[14:18]
-            nt3 = Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
+            base_pairs.append(BasePair(nt1, nt2, lw, None))
+            nt3 = residue_from_pair(fields[14:18])
             lw = convert_lw(fields[18])
-            base_pairs.append(BasePair(nt1, nt3, lw))
+            base_pairs.append(BasePair(nt1, nt3, lw, None))
         else:
             raise RuntimeError('Failed to parse line: ' + line)
 
     return base_pairs
+
+
+# Examples:
+# 2   G ? A
+#         ^--- chain name
+#       ^----- insertion code
+#     ^------- residue name
+# ^----------- residue number
+def residue_from_pair(resinfo):
+    return Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
 
 
 # Example lines:
@@ -115,38 +120,31 @@ def parse_overlaps(bpnet_output: str):
             fields = line.strip().split()
             if len(fields) == 13:
                 if fields[8] != 'BP':
-                    chain1, chain2 = fields[6].split('-')
-                    number1, number2 = map(int, fields[3].split(':'))
-                    icode1, icode2 = fields[2], fields[4]
-                    name1, name2 = fields[5].split(':')
-                    nt1 = Residue(None, ResidueAuth(chain1, number1, icode1, name1))
-                    nt2 = Residue(None, ResidueAuth(chain2, number2, icode2, name2))
-                    stackings.append(Stacking(nt1, nt2, StackingTopology.unknown))
+                    # TODO: below you can infer StackingTopology from the fields
+                    nt1, nt2 = residues_from_overlap_info(fields)
+                    stackings.append(Stacking(nt1, nt2, None))
             else:
                 raise RuntimeError('Failed to parse OVLP line: ' + line)
         elif line.startswith('PROX'):
             fields = line.strip().split()
             if len(fields) == 11:
-                chain1, chain2 = fields[6].split('-')
-                number1, number2 = map(int, fields[3].split(':'))
-                icode1, icode2 = fields[2], fields[4]
-                name1, name2 = fields[5].split(':')
-                nt1 = Residue(None, ResidueAuth(chain1, number1, icode1, name1))
-                nt2 = Residue(None, ResidueAuth(chain2, number2, icode2, name2))
+                nt1, nt2 = residues_from_overlap_info(fields)
                 atom1, atom2 = fields[7].split(':')
                 element1, element2 = Element.assign(atom1), Element.assign(atom2)
 
+                # TODO: below you can infer the BR classification from atom names
                 # base-ribose
                 if element1 == Element.base and element2 == Element.ribose:
-                    base_ribose_interactions.append(BaseRibose(nt1, nt2, BR.unknown))
+                    base_ribose_interactions.append(BaseRibose(nt1, nt2, None))
                 elif element1 == Element.ribose and element2 == Element.base:
-                    base_ribose_interactions.append(BaseRibose(nt2, nt1, BR.unknown))
+                    base_ribose_interactions.append(BaseRibose(nt2, nt1, None))
 
+                # TODO: below you can infer the BPh classification from atom names
                 # base-phosphate
                 if element1 == Element.base and element2 == Element.phosphate:
-                    base_phosphate_interactions.append(BasePhosphate(nt1, nt2, BPh.unknown))
+                    base_phosphate_interactions.append(BasePhosphate(nt1, nt2, None))
                 elif element1 == Element.phosphate and element2 == Element.base:
-                    base_phosphate_interactions.append(BasePhosphate(nt2, nt1, BPh.unknown))
+                    base_phosphate_interactions.append(BasePhosphate(nt2, nt1, None))
 
                 # other
                 other_interactions.append(OtherInteraction(nt1, nt2))
@@ -154,6 +152,23 @@ def parse_overlaps(bpnet_output: str):
                 raise RuntimeError('Failed to parse PROX line: ' + line)
 
     return stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions
+
+
+# Example:
+# OVLP         2:3       ?      2:3      ?     G:G       A-A
+#                                                         ^--- chains
+#                                               ^------------- residue names
+#                                        ^-------------------- insertion code (rhs)
+#                                ^---------------------------- residue numbers
+#                        ^------------------------------------ insertion code (lhs)
+def residues_from_overlap_info(fields):
+    chain1, chain2 = fields[6].split('-')
+    number1, number2 = map(int, fields[3].split(':'))
+    icode1, icode2 = fields[2], fields[4]
+    name1, name2 = fields[5].split(':')
+    nt1 = Residue(None, ResidueAuth(chain1, number1, icode1, name1))
+    nt2 = Residue(None, ResidueAuth(chain2, number2, icode2, name2))
+    return nt1, nt2
 
 
 def analyze(file_content: str) -> AnalysisOutput:
@@ -173,7 +188,8 @@ def analyze(file_content: str) -> AnalysisOutput:
 
     base_pairs = parse_base_pairs(bpnet_output)
     stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
-    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
+    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions,
+                          other_interactions)
 
 
 def main():
