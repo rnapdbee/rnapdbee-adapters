@@ -4,7 +4,7 @@ from http import HTTPStatus
 import orjson
 from flask import Flask, Response, request
 
-from adapters import bpnet, fr3d_, maxit
+from adapters import bpnet, fr3d_, barnaba_, maxit
 
 app = Flask(__name__)
 
@@ -25,6 +25,15 @@ def fr3d_handler():
     cif_or_pdb = request.data.decode('utf-8')
     cif = maxit.ensure_cif(cif_or_pdb)
     structure = fr3d_.analyze(cif)
+    return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+
+
+@app.route('/analyze/barnaba', methods=['POST'])
+def barnaba_handler():
+    if request.headers['Content-Type'] != 'text/plain':
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    cif_or_pdb = request.data.decode('utf-8')
+    structure = barnaba_.analyze(cif_or_pdb)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
 

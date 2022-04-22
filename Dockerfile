@@ -39,7 +39,22 @@ CMD ["python3", "/rnapdbee-adapters/src/adapters/fr3d_.py"]
 
 ################################################################################
 
-FROM fr3d-adapter AS maxit
+FROM fr3d-adapter AS barnaba-adapter
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        git \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install barnaba
+
+COPY src/adapters/barnaba_.py /rnapdbee-adapters/src/adapters/barnaba_.py
+
+CMD ["python3", "/rnapdbee-adapters/src/adapters/barnaba_.py"]
+
+################################################################################
+
+FROM barnaba-adapter AS maxit
 
 RUN apt-get update -y \
  && apt-get install -y \
