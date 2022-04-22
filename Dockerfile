@@ -1,4 +1,4 @@
-FROM ubuntu AS bpnet-adapter
+FROM ubuntu:20.04 AS bpnet-adapter
 
 RUN apt-get update -y \
  && apt-get install -y \
