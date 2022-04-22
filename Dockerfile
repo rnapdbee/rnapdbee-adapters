@@ -14,6 +14,7 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 COPY src/adapters/__init__.py /rnapdbee-adapters/src/adapters/__init__.py
 COPY src/adapters/model.py /rnapdbee-adapters/src/adapters/model.py
 COPY src/adapters/bpnet.py /rnapdbee-adapters/src/adapters/bpnet.py
+COPY src/adapters/utils.py /rnapdbee-adapters/src/adapters/utils.py
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin \
