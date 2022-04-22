@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 import enum
+import os.path
 import subprocess
 import sys
 import tempfile
 
 import orjson
 
+from adapters import cif_filter
 from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, BaseRibose, \
     BasePhosphate, OtherInteraction
 from adapters.utils import is_cif
@@ -173,24 +175,31 @@ def residues_from_overlap_info(fields):
 
 
 def analyze(file_content: str) -> AnalysisOutput:
-    suffix = '.cif' if is_cif(file_content) else '.pdb'
+    cif_content = cif_filter.fix_occupancy(file_content)
 
     directory = tempfile.TemporaryDirectory()
-    file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix=suffix)
-    file.write(file_content)
+    file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
+    file.write(cif_content)
     file.seek(0)
 
     subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     file.close()
 
-    with open(file.name.replace(suffix, '.out')) as f:
-        bpnet_output = f.read()
-    with open(file.name.replace(suffix, '.rob')) as f:
-        bpnet_rob = f.read()
+    if os.path.exists(file.name.replace('.cif', '.out')):
+        with open(file.name.replace('.cif', '.out')) as f:
+            bpnet_output = f.read()
+        base_pairs = parse_base_pairs(bpnet_output)
+    else:
+        base_pairs = []
 
-    base_pairs = parse_base_pairs(bpnet_output)
-    stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
+    if os.path.exists(file.name.replace('.cif', '.rob')):
+        with open(file.name.replace('.cif', '.rob')) as f:
+            bpnet_rob = f.read()
+        stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
+    else:
+        stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
+
     return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions,
                           other_interactions)
 
