@@ -29,7 +29,7 @@ def fr3d_handler():
 
 
 @app.route('/convert/ensure-cif', methods=['POST'])
-def maxit_handler():
+def maxit_cif_handler():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     cif = maxit.ensure_cif(request.data.decode('utf-8'))
@@ -37,7 +37,7 @@ def maxit_handler():
 
 
 @app.route('/convert/ensure-pdb', methods=['POST'])
-def maxit_handler():
+def maxit_pdb_handler():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     pdb = maxit.ensure_pdb(request.data.decode('utf-8'))
