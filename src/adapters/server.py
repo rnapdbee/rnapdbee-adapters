@@ -5,6 +5,7 @@ import orjson
 from flask import Flask, Response, request
 
 from adapters import bpnet, fr3d_, maxit, cif_filter
+from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 
 app = Flask(__name__)
 
@@ -13,7 +14,11 @@ app = Flask(__name__)
 def analyze_bpnet_model(model):
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    cif_content = cif_filter.filter_by_model(request.data.decode('utf-8'), model)
+    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
+        (leave_single_model, {'model': model}),
+        (remove_proteins, {}),
+        (fix_occupancy, {})
+    ])
     structure = bpnet.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
@@ -32,7 +37,11 @@ def analyze_model(model):
 def analyze_fr3d_model(model):
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    cif_content = cif_filter.filter_by_model(request.data.decode('utf-8'), model)
+    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
+        (leave_single_model, {'model': model}),
+        (remove_proteins, {}),
+        (fix_occupancy, {})
+    ])
     structure = fr3d_.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
@@ -61,6 +70,17 @@ def convert_ensure_pdb():
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     pdb = maxit.ensure_pdb(request.data.decode('utf-8'))
     return Response(response=pdb, status=HTTPStatus.OK, mimetype='text/plain')
+
+
+@app.route('/filter', methods=['POST'])
+def filter_cif():
+    if request.headers['Content-Type'] != 'text/plain':
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
+        (remove_proteins, {}),
+        (fix_occupancy, {})
+    ])
+    return Response(response=cif_content, status=HTTPStatus.OK, mimetype='text/plain')
 
 
 if __name__ == '__main__':

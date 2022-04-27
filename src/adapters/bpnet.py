@@ -7,10 +7,8 @@ import tempfile
 
 import orjson
 
-from adapters import cif_filter
 from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, BaseRibose, \
     BasePhosphate, OtherInteraction
-from adapters.utils import is_cif
 
 
 class Element(enum.Enum):
@@ -174,9 +172,7 @@ def residues_from_overlap_info(fields):
     return nt1, nt2
 
 
-def analyze(file_content: str) -> AnalysisOutput:
-    cif_content = cif_filter.fix_occupancy(file_content)
-
+def analyze(cif_content: str) -> AnalysisOutput:
     directory = tempfile.TemporaryDirectory()
     file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
     file.write(cif_content)
