@@ -66,7 +66,8 @@ COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/maxit/bin \
-    PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src
+    PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
+    RCSBROOT=/maxit
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
