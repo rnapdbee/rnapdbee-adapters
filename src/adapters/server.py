@@ -4,28 +4,42 @@ from http import HTTPStatus
 import orjson
 from flask import Flask, Response, request
 
-from adapters import bpnet, fr3d_, barnaba_, maxit
+from adapters import bpnet, fr3d_, barnaba_, maxit, cif_filter
 
 app = Flask(__name__)
 
 
-@app.route('/analyze', methods=['POST'])
-@app.route('/analyze/bpnet', methods=['POST'])
-def bpnet_handler():
+@app.route('/analyze/bpnet/<int:model>', methods=['POST'])
+def analyze_bpnet_model(model):
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    structure = bpnet.analyze(request.data.decode('utf-8'))
+    cif_content = cif_filter.filter_by_model(request.data.decode('utf-8'), model)
+    structure = bpnet.analyze(cif_content)
+    return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+
+
+@app.route('/analyze/bpnet', methods=['POST'])
+def analyze_bpnet():
+    return analyze_bpnet_model(1)
+
+
+@app.route('/analyze/<int:model>', methods=['POST'])
+def analyze_model(model):
+    return analyze_bpnet_model(model)
+
+
+@app.route('/analyze/fr3d/<int:model>', methods=['POST'])
+def analyze_fr3d_model(model):
+    if request.headers['Content-Type'] != 'text/plain':
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    cif_content = cif_filter.filter_by_model(request.data.decode('utf-8'), model)
+    structure = fr3d_.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
 
 @app.route('/analyze/fr3d', methods=['POST'])
-def fr3d_handler():
-    if request.headers['Content-Type'] != 'text/plain':
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    cif_or_pdb = request.data.decode('utf-8')
-    cif = maxit.ensure_cif(cif_or_pdb)
-    structure = fr3d_.analyze(cif)
-    return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+def analyze_fr3d():
+    return analyze_fr3d_model(1)
 
 
 @app.route('/analyze/barnaba', methods=['POST'])
@@ -33,12 +47,18 @@ def barnaba_handler():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     cif_or_pdb = request.data.decode('utf-8')
-    structure = barnaba_.analyze(cif_or_pdb)
+    pdb = maxit.ensure_pdb(cif_or_pdb)
+    structure = barnaba_.analyze(pdb)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
 
 
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    return analyze_model(1)
+
+
 @app.route('/convert/ensure-cif', methods=['POST'])
-def maxit_cif_handler():
+def convert_ensure_cif():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     cif = maxit.ensure_cif(request.data.decode('utf-8'))
@@ -46,7 +66,7 @@ def maxit_cif_handler():
 
 
 @app.route('/convert/ensure-pdb', methods=['POST'])
-def maxit_pdb_handler():
+def convert_ensure_pdb():
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     pdb = maxit.ensure_pdb(request.data.decode('utf-8'))

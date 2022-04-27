@@ -12,9 +12,6 @@ from typing import List
 from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
     Residue, ResidueAuth, Stacking, StackingTopology
 
-from adapters.utils import is_cif
-from adapters.maxit import cif2pdb
-
 
 def residue_from_pair(resinfo: str) -> Residue:
     resinfo = resinfo.split('_')
@@ -65,13 +62,12 @@ def parse_base_stackings(stackings: List[str], res: List[str]) -> List[Stacking]
 
 
 def analyze(file_content: str) -> AnalysisOutput:
-    pdb_content = cif2pdb(file_content) if is_cif(file_content) else file_content
     suffix = '.pdb'
 
     directory = tempfile.TemporaryDirectory()
     file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix=suffix)
     filename = file.name
-    file.write(pdb_content)
+    file.write(file_content)
     file.seek(0)
 
     stackings, pairings, res = barnaba.annotate(filename)
