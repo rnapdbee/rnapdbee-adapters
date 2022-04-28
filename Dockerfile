@@ -44,15 +44,6 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS barnaba-builder
-
-RUN apt-get update -y \
- && apt-get install -y \
-        git \
- && rm -rf /var/lib/apt/lists/*
-
-################################################################################
-
 FROM ubuntu:20.04 AS server
 
 RUN apt-get update -y \
