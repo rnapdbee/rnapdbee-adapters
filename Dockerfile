@@ -57,7 +57,7 @@ RUN pip3 install flask mmcif orjson
 
 COPY --from=fr3d-builder /fr3d-python /fr3d-python
 
-RUN pip install /fr3d-python
+RUN pip3 install /fr3d-python
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
 
