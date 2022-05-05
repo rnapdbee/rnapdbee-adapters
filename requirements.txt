@@ -1,4 +1,5 @@
-mmcif
-flask
-orjson
+mmcif==0.76
+Flask==2.1.*
+orjson==3.6.*
+barnaba==0.1.7
 git+https://github.com/tzok/fr3d-python

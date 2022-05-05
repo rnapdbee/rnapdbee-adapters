@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM ubuntu:20.04 AS bpnet-builder
 
 RUN apt-get update -y \
@@ -53,7 +54,7 @@ RUN apt-get update -y \
         python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install flask mmcif orjson
+RUN pip3 install flask==2.1.* mmcif==0.76 orjson==3.6.*
 
 COPY --from=fr3d-builder /fr3d-python /fr3d-python
 
@@ -61,7 +62,7 @@ RUN pip3 install /fr3d-python
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
 
-RUN pip3 install barnaba
+RUN pip3 install barnaba==0.1.7
 
 ARG maxit_version=11.100
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit

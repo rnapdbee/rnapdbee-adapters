@@ -24,5 +24,8 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    install_requires=['orjson', 'fr3d @ git+https://github.com/tzok/fr3d-python'],
+    install_requires=[
+        'orjson==3.6.*', 'fr3d @ git+https://github.com/tzok/fr3d-python', 'barnaba==0.1.7', 'Flask==2.1.*',
+        'mmcif==0.76'
+    ],
     entry_points={'console_scripts': ['fr3d-python-adapter=fr3d_python_adapter.adapter:main']})
