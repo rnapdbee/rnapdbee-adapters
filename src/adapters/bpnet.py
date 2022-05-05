@@ -61,8 +61,9 @@ def convert_lw(bpnet_lw) -> LeontisWesthof:
 
 # Example lines:
 #      1       1   U ? A
-#      2       2   G ? A       14     2   G ? AB   W:HC BP 0.36    20     2   G ? AC   H:WC TP 0.36
 #      3       3   G ? A       70    70   C ? A    W:WC BP 0.19
+#      2       2   G ? A       14     2   G ? AB   W:HC BP 0.36    20     2   G ? AC   H:WC TP 0.36
+#      1       1   G ? A        3     3   A ? A    S:HT BP 0.62    13    13   G ? A    H:WC TP 0.80     4     4   G ? A    W:HC TP 1.31
 def parse_base_pairs(bpnet_output: str):
     base_pairs = []
 
@@ -90,6 +91,18 @@ def parse_base_pairs(bpnet_output: str):
             nt3 = residue_from_pair(fields[14:18])
             lw = convert_lw(fields[18])
             base_pairs.append(BasePair(nt1, nt3, lw, None))
+        elif len(fields) == 29:
+            # quadruple
+            nt1 = residue_from_pair(fields[1:5])
+            nt2 = residue_from_pair(fields[6:10])
+            lw = convert_lw(fields[10])
+            base_pairs.append(BasePair(nt1, nt2, lw, None))
+            nt3 = residue_from_pair(fields[14:18])
+            lw = convert_lw(fields[18])
+            base_pairs.append(BasePair(nt1, nt3, lw, None))
+            nt4 = residue_from_pair(fields[22:26])
+            lw = convert_lw(fields[26])
+            base_pairs.append(BasePair(nt1, nt4, lw, None))
         else:
             raise RuntimeError('Failed to parse line: ' + line)
 
