@@ -38,7 +38,7 @@ def parse_pdb(file_content: str) -> List[str]:
 
     # Column 21 - chainID
     for line in file_content.splitlines():
-        if line.startswith('ATOM'):
+        if line.startswith('ATOM') or line.startswith('HETATM'):
             if line[21] not in chain_ids:
                 chain_ids.append(line[21])
 
