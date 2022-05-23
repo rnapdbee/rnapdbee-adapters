@@ -17,7 +17,7 @@ def analyze_bpnet_model(model):
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (leave_single_model, {'model': model}),
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     structure = bpnet.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
@@ -40,7 +40,7 @@ def analyze_fr3d_model(model):
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (leave_single_model, {'model': model}),
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     structure = fr3d_.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
@@ -88,7 +88,7 @@ def filter_cif():
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     return Response(response=cif_content, status=HTTPStatus.OK, mimetype='text/plain')
 
