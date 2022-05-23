@@ -4,7 +4,7 @@ from http import HTTPStatus
 import orjson
 from flask import Flask, Response, request
 
-from adapters import bpnet, fr3d_, maxit, cif_filter, barnaba_
+from adapters import bpnet, fr3d_, maxit, cif_filter, pdb_filter, barnaba_
 from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 
 app = Flask(__name__)
@@ -51,14 +51,20 @@ def analyze_fr3d():
     return analyze_fr3d_model(1)
 
 
-@app.route('/analyze/barnaba', methods=['POST'])
-def barnaba_handler():
+@app.route('/analyze/barnaba/<int:model>', methods=['POST'])
+def analyze_barnaba_model(model):
     if request.headers['Content-Type'] != 'text/plain':
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-    cif_or_pdb = request.data.decode('utf-8')
-    pdb = maxit.ensure_pdb(cif_or_pdb)
-    structure = barnaba_.analyze(pdb)
+    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
+        (pdb_filter.leave_single_model, {'model': model}),
+    ])
+    structure = barnaba_.analyze(pdb_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+
+
+@app.route('/analyze/barnaba', methods=['POST'])
+def analyze_barnaba():
+    return analyze_barnaba_model(1)
 
 
 @app.route('/analyze', methods=['POST'])
