@@ -95,13 +95,13 @@ def renumber_pdb(file_content: str) -> Tuple[str, Dict[str, Dict[int, Tuple[int,
     new_numbers = defaultdict(int)
     mapped_numbers = defaultdict(dict)
 
-    renum_content = ''
+    renum_arr = []
 
     # Column 21 - chainID (Character)
     # Column 22-25 - resSeq (Integer)
     # Column 26 - iCode (Character)
 
-    for line in file_content.splitlines():
+    for line in file_content.splitlines(True):
         new_line = ''
 
         if line.startswith('ATOM') or line.startswith('HETATM'):
@@ -119,8 +119,9 @@ def renumber_pdb(file_content: str) -> Tuple[str, Dict[str, Dict[int, Tuple[int,
         else:
             new_line = line
 
-        renum_content += f'{new_line}\n'
+        renum_arr.append(new_line)
 
+    renum_content = ''.join(renum_arr)
     return renum_content, mapped_numbers
 
 

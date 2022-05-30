@@ -15,10 +15,10 @@ def leave_single_model(file_content: str, **kwargs) -> str:
     model = int(kwargs.get('model', 1))
 
     append_mode = True
-    new_content = ''
+    new_content_arr = []
     models_count = 0
 
-    for line in file_content.splitlines():
+    for line in file_content.splitlines(True):
         if line.startswith('MODEL'):
             current_model = int(line[10:14].strip())
             models_count += 1
@@ -26,7 +26,7 @@ def leave_single_model(file_content: str, **kwargs) -> str:
         elif line.startswith('ENDMDL'):
             append_mode = True
         elif append_mode:
-            new_content += f'{line}\n'
+            new_content_arr.append(line)
 
     # Only one model in original file
     if models_count == 0:
@@ -35,4 +35,5 @@ def leave_single_model(file_content: str, **kwargs) -> str:
     if model > models_count or model < 1:
         raise ValueError(f'File has {models_count} model(s), number {model} passed.')
 
+    new_content = ''.join(new_content_arr)
     return new_content
