@@ -1,4 +1,5 @@
 # RNApdbee-adapters
+![workflow](https://github.com/rnapdbee/rnapdbee-adapters/actions/workflows/docker.yml/badge.svg)
 
 ## Description
 
