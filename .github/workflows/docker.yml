@@ -1,0 +1,37 @@
+name: Docker Image CI v2
+
+on:
+  push:
+    branches: [ github-actions, develop, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    env:
+      DOCKER_IMAGE: rnapdbee-image
+      DOCKER_CONTAINER: rnapdbee-container
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the docker image
+      run: DOCKER_BUILDKIT=1 docker build --target server -t $DOCKER_IMAGE .
+
+    - name: Create the docker container
+      run: |
+        docker create --name $DOCKER_CONTAINER $DOCKER_IMAGE
+    
+    - name: Start the docker container
+      run: docker start $DOCKER_CONTAINER
+
+    - name: Copy test directory
+      run: docker cp tests/ $DOCKER_CONTAINER:rnapdbee-adapters/src/
+
+    - name: Install pytest-cov
+      run: docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install pytest-cov==3.0.*"
+
+    - name: Run test 
+      run: |
+        docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest --cov='adapters'"
