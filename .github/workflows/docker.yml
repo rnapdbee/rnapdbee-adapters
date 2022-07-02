@@ -35,3 +35,4 @@ jobs:
     - name: Run test 
       run: |
         docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest --cov='adapters'"
+        
