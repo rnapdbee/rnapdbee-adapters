@@ -1,4 +1,5 @@
-FROM ubuntu AS bpnet-builder
+# syntax=docker/dockerfile:1
+FROM ubuntu:20.04 AS bpnet-builder
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -9,7 +10,7 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 
 ################################################################################
 
-FROM ubuntu AS fr3d-builder
+FROM ubuntu:20.04 AS fr3d-builder
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -20,7 +21,7 @@ RUN git clone https://github.com/tzok/fr3d-python
 
 ################################################################################
 
-FROM ubuntu AS maxit-builder
+FROM ubuntu:20.04 AS maxit-builder
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -44,7 +45,7 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
-FROM ubuntu AS server
+FROM ubuntu:20.04 AS server
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -53,13 +54,15 @@ RUN apt-get update -y \
         python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install flask mmcif orjson
+RUN pip3 install flask==2.1.* mmcif==0.76 orjson==3.6.*
 
 COPY --from=fr3d-builder /fr3d-python /fr3d-python
 
-RUN pip install /fr3d-python
+RUN pip3 install /fr3d-python
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
+
+RUN pip3 install barnaba==0.1.7
 
 ARG maxit_version=11.100
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit

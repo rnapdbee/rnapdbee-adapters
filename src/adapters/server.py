@@ -4,7 +4,7 @@ from http import HTTPStatus
 import orjson
 from flask import Flask, Response, request
 
-from adapters import bpnet, fr3d_, maxit, cif_filter
+from adapters import bpnet, fr3d_, maxit, cif_filter, pdb_filter, barnaba_
 from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ def analyze_bpnet_model(model):
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (leave_single_model, {'model': model}),
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     structure = bpnet.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
@@ -40,7 +40,7 @@ def analyze_fr3d_model(model):
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (leave_single_model, {'model': model}),
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     structure = fr3d_.analyze(cif_content)
     return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
@@ -49,6 +49,22 @@ def analyze_fr3d_model(model):
 @app.route('/analyze/fr3d', methods=['POST'])
 def analyze_fr3d():
     return analyze_fr3d_model(1)
+
+
+@app.route('/analyze/barnaba/<int:model>', methods=['POST'])
+def analyze_barnaba_model(model):
+    if request.headers['Content-Type'] != 'text/plain':
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
+        (pdb_filter.leave_single_model, {'model': model}),
+    ])
+    structure = barnaba_.analyze(pdb_content)
+    return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+
+
+@app.route('/analyze/barnaba', methods=['POST'])
+def analyze_barnaba():
+    return analyze_barnaba_model(1)
 
 
 @app.route('/analyze', methods=['POST'])
@@ -78,7 +94,7 @@ def filter_cif():
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     cif_content = cif_filter.apply(request.data.decode('utf-8'), [
         (remove_proteins, {}),
-        (fix_occupancy, {})
+        (fix_occupancy, {}),
     ])
     return Response(response=cif_content, status=HTTPStatus.OK, mimetype='text/plain')
 
