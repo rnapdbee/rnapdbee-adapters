@@ -2,7 +2,9 @@ name: Docker Image CI v2
 
 on:
   push:
-    branches: [ github-actions, develop, main ]
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
   workflow_dispatch:
 
 jobs:
