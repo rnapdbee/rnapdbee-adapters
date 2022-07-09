@@ -45,6 +45,20 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
+FROM ubuntu:20.04 AS mc-annotate-builder
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+        unzip \
+ && rm -rf /var/lib/apt/lists/*
+
+ RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
+  && unzip mc-annotate.zip \
+  && mv MC-Annotate mc-annotate
+
+################################################################################
+
 FROM ubuntu:20.04 AS server
 
 RUN apt-get update -y \
@@ -67,8 +81,10 @@ RUN pip3 install barnaba==0.1.7
 ARG maxit_version=11.100
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
+COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
+
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit
 
