@@ -4,7 +4,7 @@ from http import HTTPStatus
 import orjson
 from flask import Flask, Response, request
 
-from adapters import bpnet, fr3d_, maxit, cif_filter, pdb_filter, barnaba_
+from adapters import bpnet, fr3d_, maxit, cif_filter, pdb_filter, barnaba_, mc_annotate
 from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 
 app = Flask(__name__)
@@ -65,6 +65,22 @@ def analyze_barnaba_model(model):
 @app.route('/analyze/barnaba', methods=['POST'])
 def analyze_barnaba():
     return analyze_barnaba_model(1)
+
+
+@app.route('/analyze/mc-annotate/<int:model>', methods=['POST'])
+def analyze_mc_annotate_model(model):
+    if request.headers['Content-Type'] != 'text/plain':
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
+        (pdb_filter.leave_single_model, {'model': model}),
+    ])
+    structure = mc_annotate.analyze(pdb_content)
+    return Response(response=orjson.dumps(structure).decode('utf-8'), status=HTTPStatus.OK, mimetype='application/json')
+
+
+@app.route('/analyze/mc-annotate', methods=['POST'])
+def analyze_mc_annotate():
+    return analyze_mc_annotate_model(1)
 
 
 @app.route('/analyze', methods=['POST'])
