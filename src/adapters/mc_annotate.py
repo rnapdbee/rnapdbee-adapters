@@ -4,6 +4,7 @@ import sys
 import subprocess
 import orjson
 import tempfile
+import re
 
 from typing import Dict, List, Tuple
 from enum import Enum
@@ -11,150 +12,224 @@ from enum import Enum
 from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
     Residue, ResidueAuth, Saenger, Stacking, StackingTopology
 
-BASE_EDGES = ('Hh', 'Hw', 'Bh', 'C8', 'Wh', 'Ww', 'Ws', 'Ss', 'Sw', 'Bs')
 
+class MCAnnotateAdapter:
 
-class ParseState(str, Enum):
-    residue = 'Residue conformations',
-    adjacent = 'Adjacent stackings',
-    non_adjacent = 'Non-Adjacent stackings',
-    base_pairs = 'Base-pairs',
-    number_of = 'Number of'
+    # Represents state of parsing MC-Annotate result
+    # Luckily every important part of file
+    # begins with a unique sentence
+    class ParseState(str, Enum):
+        RESIDUES_INFORMATION = 'Residue conformations',
+        ADJACENT_STACKINGS = 'Adjacent stackings',
+        NON_ADJACENT_STACKINGS = 'Non-Adjacent stackings',
+        BASE_PAIRS_SECTION = 'Base-pairs',
+        SUMMARY_SECTION = 'Number of'
 
+    # This dictionary maps our model edges
+    # to edge representation used by MC-Annotate
+    EDGES: Dict[str, Tuple[str, ...]] = {
+        'H': ('Hh', 'Hw', 'Bh', 'C8'),
+        'W': ('Wh', 'Ww', 'Ws'),
+        'S': ('Ss', 'Sw', 'Bs'),
+    }
 
-def classify(type: str) -> str:
-    if type in ('Hh', 'Hw', 'Bh', 'C8'):
-        return 'H'
-    if type in ('Wh', 'Ww', 'Ws'):
-        return 'W'
-    if type in ('Ss', 'Sw', 'Bs'):
-        return 'S'
-    raise ValueError('Type "{type}" unknown')
+    # Contains flatten EDGES values (in one touple)
+    ALL_EDGES = sum(EDGES.values(), ())
 
+    # Based on these tokens
+    # BaseRiboseInteractions and BasePhosphateInteractions are created
+    RIBOSE_ATOM = "O2'"
+    PHOSPHATE_ATOM = "O2P"
 
-def get_residues(res_info: str, names: Dict[str, str]) -> Tuple[Residue, Residue]:
-    chainID1 = res_info[0]
-    tail = res_info[1:]
+    # Cis/trans tokens used by MC-Annotate
+    CIS = 'cis'
+    TRANS = 'trans'
 
-    if tail[0] == '-':
-        tail1, res2_info = tail.split('-', 2)[1:]
-        tail1 = '-' + tail1
-        number1_icode1 = tail1.split('.', 1)
-    else:
-        tail1, res2_info = tail.split('-', 1)
-        number1_icode1 = tail1.split('.', 1)
+    # Since insertion code is required in our model
+    # we need a character to represent no insertion code
+    NO_ICODE_CHAR = '?'
 
-    res1_info = f'{chainID1}{tail1}'
-    number1 = int(number1_icode1[0])
-    icode1 = '?' if len(number1_icode1) == 1 else number1_icode1[1]
-    res1 = Residue(None, ResidueAuth(chainID1, number1, icode1, names[res1_info]))
+    # This regex is used to capture 6 groups of residues information:
+    # (1) (2) (3) (4) (5) (6)
+    # 1, 4 - chain IDs
+    # 2, 5 - numbers
+    # 3, 6 - icodes (or empty string if no icode)
+    # Example - match and groups:
+    # A-100.X-B200
+    # ('A'), ('-100'), ('X'), ('B'), ('200'), ('')
+    RESIDUE_REGEX = re.compile(r'(.)(-?[0-9]+)\.?([a-zA-Z]?)-(.)(-?[0-9]+)\.?([a-zA-Z]?)')
 
-    chainID2 = res2_info[0]
-    number2_icode2 = res2_info[1:].split('.', 1)
-    number2 = int(number2_icode2[0])
-    icode2 = '?' if len(number2_icode2) == 1 else number2_icode2[1]
-    res2 = Residue(None, ResidueAuth(chainID2, number2, icode2, names[res2_info]))
+    # Roman numerals used by Saenger
+    # both in our model and MC-Annotate
+    ROMAN_NUMERALS = ('I', 'V', 'X')
 
-    return res1, res2
+    def __init__(self) -> None:
+        # OtherInteractions list is always empty for MC-Annotate
+        self.analysis_output = AnalysisOutput([], [], [], [], [])
+        # Since names are not present in adjacent and non-adjacent stackings
+        # we need save these values eariler
+        self.names: Dict[str, str] = {}
 
+    def classify_edge(self, type: str) -> str:
+        for edge in self.EDGES:
+            if type in self.EDGES[edge]:
+                return edge
+        raise ValueError('Edge type "{type}" unknown')
 
-def get_stacking(line: str, names: Dict[str, str], topology_pos: int) -> Stacking:
-    splitted = line.split()
-    topology_info = splitted[topology_pos]
+    def get_resiude(self, residue_info_list: Tuple[str, str, str]) -> Residue:
+        chain = residue_info_list[0]
+        number = int(residue_info_list[1])
 
-    res1, res2 = get_residues(splitted[0], names)
-    return Stacking(res1, res2, StackingTopology[topology_info])
+        if residue_info_list[2] == '':
+            icode = self.NO_ICODE_CHAR
+            residue_info = f'{chain}{number}'
+        else:
+            icode = residue_info_list[2]
+            residue_info = f'{chain}{number}.{icode}'
 
+        return Residue(None, ResidueAuth(chain, number, icode, self.names[residue_info]))
 
-def get_others(
-    line: str,
-    names: Dict[str, str],
-    base_pairs: List[BasePair],
-    base_ribose: List[BaseRibose],
-    base_phosphate: List[BasePhosphate],
-) -> None:
-    splitted = line.split()
+    def get_residues(self, residues_info: str) -> Tuple[Residue, Residue]:
+        residues_info_list = re.search(self.RESIDUE_REGEX, residues_info).groups()
+        # Expects (chain1, number1, icode1, chain2, number2, icode2)
+        assert len(residues_info_list) == 6
+        residue_left = self.get_resiude(residues_info_list[:3])
+        residue_right = self.get_resiude(residues_info_list[3:])
+        return residue_left, residue_right
 
-    res1, res2 = get_residues(splitted[0], names)
+    def append_stacking(self, line: str, topology_position: int) -> None:
+        splitted_line = line.split()
+        topology_info = splitted_line[topology_position]
+        residue_left, residue_right = self.get_residues(splitted_line[0])
+        stacking = Stacking(residue_left, residue_right, StackingTopology[topology_info])
+        self.analysis_output.stackings.append(stacking)
 
-    base_added, ribose_added, phosphate_added = False, False, False
+    def get_ribose_interaction(self, residues: Tuple[Residue, Residue], token: str) -> BaseRibose:
+        # BasePair is preffered first so swap if necessary
+        if token.split('/', 1)[0] == self.RIBOSE_ATOM:
+            residue_left, residue_right = residues[1], residues[0]
+        else:
+            residue_left, residue_right = residues[0], residues[1]
+        return BaseRibose(residue_left, residue_right, None)
 
-    for type in splitted[3:]:
-        if "O2'" in type and not ribose_added:
-            if type.split('/', 1)[0] == "O2'":
-                res1, res2 = res2, res1
-            base_ribose.append(BaseRibose(res1, res2, None))
-            ribose_added = True
+    def get_phosphate_interaction(self, residues: Tuple[Residue, Residue], token: str) -> BasePhosphate:
+        # BasePair is preffered first so swap if necessary
+        if token.split('/', 1)[0] == self.PHOSPHATE_ATOM:
+            residue_left, residue_right = residues[1], residues[0]
+        else:
+            residue_left, residue_right = residues[0], residues[1]
+        return BasePhosphate(residue_left, residue_right, None)
 
-        elif 'O2P' in type and not phosphate_added:
-            if type.split('/', 1)[0] == 'O2P':
-                res1, res2 = res2, res1
-            base_phosphate.append(BasePhosphate(res1, res2, None))
-            phosphate_added = True
+    def get_base_interaction(
+        self,
+        residues: Tuple[Residue, Residue],
+        token: str,
+        tokens: List[str],
+    ) -> BasePair:
+        if self.CIS in tokens:
+            cis_trans = 'c'
+        elif self.TRANS in tokens:
+            cis_trans = 't'
+        else:
+            raise ValueError(f'Cis/trans expected, but not present in {tokens}')
 
-        elif any(i in type.split('/', 1)[0] for i in BASE_EDGES) and any(
-                i in type.split('/', 1)[1] for i in BASE_EDGES) and not base_added:
-
-            if 'cis' in splitted[3:]:
-                cis_trans = 'c'
-            elif 'trans' in splitted[3:]:
-                cis_trans = 't'
-            else:
-                raise ValueError(f'Cis/trans expected, but not present in {line}')
-
-            if not all(char in ('I', 'V', 'X') for char in splitted[-1]):
-                saenger = None
-            else:
-                saenger = Saenger[splitted[-1]]
-
-            left, right = type.split("/", 1)
-            lw_left, lw_right = classify(left), classify(right)
-            lw = LeontisWesthof[f'{cis_trans}{lw_left}{lw_right}']
-            base_pairs.append(BasePair(res1, res2, lw, saenger))
-            base_added = True
-
-
-def analyze(pdb_content: str) -> AnalysisOutput:
-
-    directory = tempfile.TemporaryDirectory()
-    with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
-        file.write(pdb_content)
-        file.seek(0)
-        mc_result = subprocess.run(['mc-annotate', file.name], stdout=subprocess.PIPE,
-                                   stderr=subprocess.DEVNULL).stdout.decode('utf-8')
-
-    current_state = None
-    names = {}
-
-    base_pairs = []
-    stackings = []
-    base_ribose = []
-    base_phosphate = []
-
-    for line in mc_result.splitlines():
-
-        for state in ParseState:
-            if line.startswith(state.value):
-                current_state = state
+        # example saenger: XIX
+        for saenger_token in tokens:
+            if all(char in self.ROMAN_NUMERALS for char in saenger_token):
+                saenger = Saenger[saenger_token]
                 break
         else:
-            if current_state == ParseState.residue:
-                splitted = line.split()
-                chain, name = splitted[0], splitted[2]
-                names[chain] = name
-            elif current_state == ParseState.adjacent:
-                stackings.append(get_stacking(line, names, 3))
-            elif current_state == ParseState.non_adjacent:
-                stackings.append(get_stacking(line, names, 2))
-            elif current_state == ParseState.base_pairs:
-                get_others(line, names, base_pairs, base_ribose, base_phosphate)
+            saenger = None
 
-    return AnalysisOutput(base_pairs, stackings, base_ribose, base_phosphate, [])
+        left_edge, right_edge = token.split("/", 1)
+        leontis_westhof_left = self.classify_edge(left_edge)
+        leontis_westohf_right = self.classify_edge(right_edge)
+        leontis_westhof = LeontisWesthof[f'{cis_trans}{leontis_westhof_left}{leontis_westohf_right}']
+        residue_left, residue_right = residues
+        return BasePair(residue_left, residue_right, leontis_westhof, saenger)
+
+    def append_interactions(self, line: str) -> None:
+        splitted_line = line.split()
+        residues = self.get_residues(splitted_line[0])
+        # Assumes that one pair can belong to every interaction type
+        # no more than once!
+        base_added, ribose_added, phosphate_added = False, False, False
+        # example tokens: Ww/Ww pairing antiparallel cis XX
+        tokens: List[str] = splitted_line[3:]
+
+        for token in tokens:
+
+            if self.RIBOSE_ATOM in token and not ribose_added:
+                # example token: Ss/O2'
+                ribose_interaction = self.get_ribose_interaction(residues, token)
+                self.analysis_output.baseRiboseInteractions.append(ribose_interaction)
+                ribose_added = True
+
+            elif self.PHOSPHATE_ATOM in token and not phosphate_added:
+                # example token: O2P/Bh
+                phosphate_interaction = self.get_phosphate_interaction(residues, token)
+                self.analysis_output.basePhosphateInteractions.append(phosphate_interaction)
+                phosphate_added = True
+
+            elif len(token.split('/', 1)) > 1:
+                token_left, token_right = token.split('/', 1)
+                tokens_in_edges = token_left in self.ALL_EDGES and token_right in self.ALL_EDGES
+                if tokens_in_edges and not base_added:
+                    # example token_left: Ww | example token_right: Ws
+                    base_pair_interaction = self.get_base_interaction(residues, token, tokens)
+                    self.analysis_output.basePairs.append(base_pair_interaction)
+                    base_added = True
+
+    def run_mc_annotate(self, pdb_content: str) -> str:
+        directory = tempfile.TemporaryDirectory()
+        with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
+            file.write(pdb_content)
+            file.seek(0)
+            mc_result = subprocess.run(['mc-annotate', file.name], stdout=subprocess.PIPE,
+                                       stderr=subprocess.DEVNULL).stdout.decode('utf-8')
+        return mc_result
+
+    def append_name(self, line: str) -> None:
+        splitted_line = line.split()
+        chain, name = splitted_line[0], splitted_line[2]
+        self.names[chain] = name
+
+    def analyze(self, pdb_content: str) -> AnalysisOutput:
+        mc_result = self.run_mc_annotate(pdb_content)
+        current_state = None
+
+        for line in mc_result.splitlines():
+
+            for state in self.ParseState:
+                if line.startswith(state.value):
+                    current_state = state
+                    break
+            # Loop ended without break - parse file
+            else:
+                if current_state == self.ParseState.RESIDUES_INFORMATION:
+                    # example line: X7.H : G C3p_endo anti
+                    self.append_name(line)
+                elif current_state == self.ParseState.ADJACENT_STACKINGS:
+                    # example line: X4.E-X5.F : adjacent_5p upward
+                    self.append_stacking(line, 3)
+                elif current_state == self.ParseState.NON_ADJACENT_STACKINGS:
+                    # example line: Y40.M-Y67.N : inward pairing
+                    self.append_stacking(line, 2)
+                elif current_state == self.ParseState.BASE_PAIRS_SECTION:
+                    # example line: Y38.K-Y51.X : A-U Ww/Ww pairing antiparallel cis XX
+                    self.append_interactions(line)
+                elif current_state == self.ParseState.SUMMARY_SECTION:
+                    # example line: Number of non adjacent stackings = 26
+                    # Skip summary section - meaningless information
+                    pass
+
+        return self.analysis_output
 
 
 def main() -> None:
-    structure = analyze(sys.stdin.read())
-    print(orjson.dumps(structure).decode('utf-8'))
+    mc_annotate_adapter = MCAnnotateAdapter()
+    analysis_output = mc_annotate_adapter.analyze(sys.stdin.read())
+    print(orjson.dumps(analysis_output).decode('utf-8'))
 
 
 if __name__ == '__main__':
