@@ -1,6 +1,16 @@
-.idea
+### VS Code ###
 .vscode
+
+# Byte-compiled / optimized / DLL files
 __pycache__
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Test cache & coverage tools ###
 .coverage
 .pytest_cache
 dev/
