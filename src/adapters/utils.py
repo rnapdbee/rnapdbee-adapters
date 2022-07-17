@@ -12,6 +12,12 @@ def is_cif(file_content: str) -> bool:
 
 
 def content_type(mimetype: str):
+    """Decorate a flask route to check `Content-Type` in request header.
+    If `Content-Type` is not equal `mimetype` returns `415 Unsupported Media Type`.
+
+    Args:
+        mimetype (str): required value of `Content-Type` header
+    """
 
     def _content_type(function):
 
@@ -28,6 +34,9 @@ def content_type(mimetype: str):
 
 
 def json_response():
+    """Decorate a flask route to return `Response` with status `200`and
+    `Content-Type: application/json`. Additionally, `orjson` is used to dump object.
+    """
 
     def _json_response(function):
 
@@ -44,6 +53,9 @@ def json_response():
 
 
 def plain_response():
+    """Decorate a flask route to return `Response` with status `200` and
+    `Content-Type: text/plain`.
+    """
 
     def _plain_response(function):
 
