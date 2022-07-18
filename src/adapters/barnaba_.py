@@ -11,6 +11,7 @@ from collections import defaultdict
 
 from adapters.model import AnalysisOutput, BasePair, LeontisWesthof, OtherInteraction, \
     Residue, ResidueAuth, Stacking, StackingTopology
+from adapters.utils import suppress_stdout_stderr
 
 
 class BarnabaAdapter:
@@ -131,6 +132,7 @@ class BarnabaAdapter:
         with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
             file.write(file_content)
             file.seek(0)
+            with suppress_stdout_stderr():
             barnaba_result = barnaba.annotate(file.name)
         return barnaba_result
 
