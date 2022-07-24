@@ -5,12 +5,14 @@ import orjson
 import barnaba
 import tempfile
 import sys
+import re
 
 from typing import List, Optional, Tuple, Dict
 from collections import defaultdict
 
 from adapters.model import AnalysisOutput, BasePair, LeontisWesthof, OtherInteraction, \
     Residue, ResidueAuth, Stacking, StackingTopology
+from adapters.utils import suppress_stdout_stderr
 
 
 class BarnabaAdapter:
@@ -38,6 +40,8 @@ class BarnabaAdapter:
     # we need a character to represent no insertion code
     NO_ICODE_CHAR = '?'
 
+    RESIDUE_REGEX = re.compile(r'(.+)_([0-9]+)_([0-9]+)')
+
     def __init__(self) -> None:
         # In the case of BaRNAba BasePhosphateIneractions
         # and BaseRiboseInteractions are always empty
@@ -52,7 +56,9 @@ class BarnabaAdapter:
         self.mapped_residues_info: Dict[str, Dict[int, Tuple[int, str]]] = defaultdict(dict)
 
     def get_residue(self, residue_info: str) -> Residue:
-        residue_info_list = residue_info.split('_')
+        residue_info_list = re.search(self.RESIDUE_REGEX, residue_info).groups()
+        # Expects [name, number, chain_index]
+        assert len(residue_info_list) == 3
         chain = self.chains[int(residue_info_list[2])]
         name = residue_info_list[0]
         new_number = int(residue_info_list[1])
@@ -131,7 +137,8 @@ class BarnabaAdapter:
         with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
             file.write(file_content)
             file.seek(0)
-            barnaba_result = barnaba.annotate(file.name)
+            with suppress_stdout_stderr():
+                barnaba_result = barnaba.annotate(file.name)
         return barnaba_result
 
     def analyze(self, file_content: str) -> AnalysisOutput:
