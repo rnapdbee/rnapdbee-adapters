@@ -57,6 +57,7 @@ class BarnabaAdapter:
 
     def get_residue(self, residue_info: str) -> Residue:
         residue_info_list = re.search(self.RESIDUE_REGEX, residue_info).groups()
+        # Expects [name, number, chain_index]
         assert len(residue_info_list) == 3
         chain = self.chains[int(residue_info_list[2])]
         name = residue_info_list[0]
