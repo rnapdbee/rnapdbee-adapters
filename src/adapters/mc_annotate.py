@@ -45,6 +45,10 @@ class MCAnnotateAdapter:
     CIS = 'cis'
     TRANS = 'trans'
 
+    # Tokens used in PDB files
+    ATOM = 'ATOM'
+    HETATM = 'HETATM'
+
     # Since insertion code is required in our model
     # we need a character to represent no insertion code
     NO_ICODE_CHAR = '?'
@@ -62,6 +66,12 @@ class MCAnnotateAdapter:
     # Roman numerals used by Saenger
     # both in our model and MC-Annotate
     ROMAN_NUMERALS = ('I', 'V', 'X')
+
+    # Positions of resiudes info in PDB files
+    CHAIN_INDEX = 21
+    NUMBER_INDEX = slice(22, 26)
+    ICODE_INDEX = 26
+    NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
         # OtherInteractions list is always empty for MC-Annotate
@@ -189,12 +199,18 @@ class MCAnnotateAdapter:
                                        stderr=subprocess.DEVNULL).stdout.decode('utf-8')
         return mc_result
 
-    def append_name(self, line: str) -> None:
-        splitted_line = line.split()
-        chain, name = splitted_line[0], splitted_line[2]
-        self.names[chain] = name
+    def append_names(self, file_content: str) -> None:
+        for line in file_content.splitlines():
+            if line.startswith(self.ATOM) or line.startswith(self.HETATM):
+                chain = line[self.CHAIN_INDEX].strip()
+                number = line[self.NUMBER_INDEX].strip()
+                icode = line[self.ICODE_INDEX].strip()
+                name = line[self.NAME_INDEX].strip()
+                residue_info = f'{chain}{number}' if icode == '' else f'{chain}{number}.{icode}'
+                self.names[residue_info] = name
 
     def analyze(self, pdb_content: str) -> AnalysisOutput:
+        self.append_names(pdb_content)
         mc_result = self.run_mc_annotate(pdb_content)
         current_state = None
 
@@ -208,7 +224,8 @@ class MCAnnotateAdapter:
             else:
                 if current_state == self.ParseState.RESIDUES_INFORMATION:
                     # example line: X7.H : G C3p_endo anti
-                    self.append_name(line)
+                    # Skip residues information - meaningless information
+                    pass
                 elif current_state == self.ParseState.ADJACENT_STACKINGS:
                     # example line: X4.E-X5.F : adjacent_5p upward
                     self.append_stacking(line, 3)
