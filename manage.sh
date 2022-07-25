@@ -13,6 +13,7 @@ port="8000:8000" # Port mapping in 'docker create' command
 # Colors for echo command
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+BLUE='\033[0;34m'
 NORMAL='\033[0m'
 
 function show_help {
@@ -67,10 +68,22 @@ fi
 # Stage test
 # ------------
 if [ ${stage[test]} = true ] ; then
+    `# Start container`
     docker start $container && \
+    `# Copy tests`
     docker cp tests/ $container:rnapdbee-adapters/src/ && \
-    docker exec $container bin/bash -c "pip3 install pytest-cov==3.0.*" && \
+    `# Copy pylint settings`
+    docker cp pylintrc $container:/ && \
+    `# Copy development requirements (e.g. pytest)`
+    docker cp dev_requirements.txt $container:/ && \
+    `# Install development requirements`
+    echo -e "${BLUE}Installing dev_requirements.txt...${NORMAL}" && \
+    docker exec $container bin/bash -c "pip3 install -r dev_requirements.txt" > /dev/null && \
+    `# Run pylint`
+    docker exec $container bin/bash -c "pylint --fail-under=7 --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
+    `# Run pytest`
     docker exec $container bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'" && \
+    `# Stop container`
     docker stop $container && \
     echo -e "${GREEN}### TEST OK ###${NORMAL}" || { echo -e "${RED}### TEST FAILED ###${NORMAL}" ; exit 1; }
 fi
