@@ -80,7 +80,7 @@ if [ ${stage[test]} = true ] ; then
     echo -e "${BLUE}Installing dev_requirements.txt...${NORMAL}" && \
     docker exec $container bin/bash -c "pip3 install -r dev_requirements.txt" > /dev/null && \
     `# Run pylint`
-    docker exec $container bin/bash -c "pylint --fail-under=7 --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
+    docker exec $container bin/bash -c "pylint --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
     `# Run pytest`
     docker exec $container bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'" && \
     `# Stop container`
