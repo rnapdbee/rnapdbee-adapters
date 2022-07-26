@@ -62,34 +62,26 @@ if [ ${stage[create]} = true ] ; then
     docker container rm -f $container && \
     docker create --name $container -p $port $image && \
     docker image prune -f && \
-    echo -e "${GREEN}### CREATE OK ###${NORMAL}" || { echo -e "${RED}### CREATE FAILED ###${NORMAL}" ; exit 1; }
+    echo -e "${GREEN}### CREATE OK ###${NORMAL}" || { echo -e "${RED}### CREATE FAILED ###${NORMAL}" ; exit 1 ; }
 fi
 
 # Stage test
 # ------------
 if [ ${stage[test]} = true ] ; then
-    `# Start container`
     docker start $container && \
-    `# Copy tests`
     docker cp tests/ $container:rnapdbee-adapters/src/ && \
-    `# Copy pylint settings`
     docker cp pylintrc $container:/ && \
-    `# Copy test requirements (e.g. pytest)`
     docker cp test_requirements.txt $container:/ && \
-    `# Install test requirements`
     echo -e "${BLUE}Installing test_requirements.txt...${NORMAL}" && \
-    docker exec $container bin/bash -c "pip3 install -r test_requirements.txt" > /dev/null && \
-    `# Run pylint`
-    docker exec $container bin/bash -c "pylint --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
-    `# Run pytest`
-    docker exec $container bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'" && \
-    `# Stop container`
+    docker exec -t $container bin/bash -c "pip3 install -r test_requirements.txt" > /dev/null && \
+    docker exec -t $container bin/bash -c "pylint --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
+    docker exec -t $container bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'" && \
     docker stop $container && \
-    echo -e "${GREEN}### TEST OK ###${NORMAL}" || { echo -e "${RED}### TEST FAILED ###${NORMAL}" ; exit 1; }
+    echo -e "${GREEN}### TEST OK ###${NORMAL}" || { echo -e "${RED}### TEST FAILED ###${NORMAL}" ; exit 1 ; }
 fi
 
 # Stage run
 # ------------
 if [ ${stage[run]} = true ] ; then
-    docker start -a -i $container || { echo -e "${RED}### RUN FAILED ###${NORMAL}" ; exit 1; }
+    docker start -a -i $container || { echo -e "${RED}### RUN FAILED ###${NORMAL}" ; exit 1 ; }
 fi

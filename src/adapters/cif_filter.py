@@ -32,7 +32,8 @@ def end(cif: tempfile.NamedTemporaryFile, data: List) -> str:
     return cif.read()
 
 
-# Leave only one specified model in the file and sets its number to 1. Some tools like BPNET work only with model number 1.
+# Leave only one specified model in the file and sets its number to 1.
+# Some tools like BPNET work only with model number 1.
 def leave_single_model(data: List, **kwargs):
     model = kwargs.get('model', 1)
 

@@ -1,14 +1,14 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named barnaba.py, because it imports from "barnaba", and Python complains about that
 
-import orjson
-import barnaba
 import tempfile
 import sys
 import re
 
 from typing import List, Optional, Tuple, Dict
 from collections import defaultdict
+import orjson
+import barnaba
 
 from adapters.model import AnalysisOutput, BasePair, LeontisWesthof, OtherInteraction, \
     Residue, ResidueAuth, Stacking, StackingTopology
@@ -132,13 +132,14 @@ class BarnabaAdapter:
         renumbered_content = ''.join(renumbered_content_list)
         return renumbered_content
 
-    def run_barnaba(self, file_content: str) -> str:
-        directory = tempfile.TemporaryDirectory()
-        with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
-            file.write(file_content)
-            file.seek(0)
-            with suppress_stdout_stderr():
-                barnaba_result = barnaba.annotate(file.name)
+    @classmethod
+    def run_barnaba(cls, file_content: str) -> str:
+        with tempfile.TemporaryDirectory() as directory_name:
+            with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
+                file.write(file_content)
+                file.seek(0)
+                with suppress_stdout_stderr():
+                    barnaba_result = barnaba.annotate(file.name)
         return barnaba_result
 
     def analyze(self, file_content: str) -> AnalysisOutput:
