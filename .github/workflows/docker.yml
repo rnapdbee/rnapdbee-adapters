@@ -28,13 +28,37 @@ jobs:
     - name: Start the docker container
       run: docker start $DOCKER_CONTAINER
 
-    - name: Copy test directory
-      run: docker cp tests/ $DOCKER_CONTAINER:rnapdbee-adapters/src/
+    - name: Copy files
+      run: | 
+        docker cp tests/ $DOCKER_CONTAINER:rnapdbee-adapters/src/
+        docker cp test_requirements.txt $DOCKER_CONTAINER:/
 
-    - name: Install pytest-cov
-      run: docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install pytest-cov==3.0.*"
+    - name: Install test requirements
+      run: docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install -r test_requirements.txt"
 
     - name: Run test 
       run: |
-        docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest --cov='adapters'"
-        
+        docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
+  
+  lint:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r test_requirements.txt
+
+    - name: Analyze with pylint
+      run: pylint --rcfile pylintrc src/ 
