@@ -58,7 +58,7 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
 
 
 def analyze(file_content: str) -> AnalysisOutput:
-    with open(os.devnull, 'w') as devnull:
+    with open(os.devnull, 'w', encoding='utf-8') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
 

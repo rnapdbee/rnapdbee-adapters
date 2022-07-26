@@ -22,7 +22,7 @@ def leave_single_model(file_content: str, **kwargs) -> str:
         if line.startswith('MODEL'):
             current_model = int(line[10:14].strip())
             models_count += 1
-            append_mode = True if current_model == model else False
+            append_mode = (current_model == model)
         elif line.startswith('ENDMDL'):
             append_mode = True
         elif append_mode:
