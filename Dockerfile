@@ -10,17 +10,6 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 
 ################################################################################
 
-FROM ubuntu:20.04 AS fr3d-builder
-
-RUN apt-get update -y \
- && apt-get install -y \
-        git \
- && rm -rf /var/lib/apt/lists/*
-
-RUN git clone https://github.com/tzok/fr3d-python
-
-################################################################################
-
 FROM ubuntu:20.04 AS maxit-builder
 
 RUN apt-get update -y \
@@ -66,22 +55,18 @@ RUN apt-get update -y \
         gunicorn \
         python3 \
         python3-pip \
+        git \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install flask==2.1.* mmcif==0.76 orjson==3.6.*
-
-COPY --from=fr3d-builder /fr3d-python /fr3d-python
-
-RUN pip3 install /fr3d-python
-
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
-
-RUN pip3 install barnaba==0.1.7
 
 ARG maxit_version=11.100
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
 COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate \
