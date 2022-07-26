@@ -33,10 +33,6 @@ def adapter_test_result(request):
         expected_path,
     ))
 
-    # TODO: Fix fr3d adapter
-    if 'fr3d' in expected_path:
-        pytest.skip('Fr3d adapter has to be fixed')
-
     app.config.update({
         "TESTING": True,
     })
