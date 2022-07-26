@@ -74,11 +74,11 @@ if [ ${stage[test]} = true ] ; then
     docker cp tests/ $container:rnapdbee-adapters/src/ && \
     `# Copy pylint settings`
     docker cp pylintrc $container:/ && \
-    `# Copy development requirements (e.g. pytest)`
-    docker cp dev_requirements.txt $container:/ && \
-    `# Install development requirements`
-    echo -e "${BLUE}Installing dev_requirements.txt...${NORMAL}" && \
-    docker exec $container bin/bash -c "pip3 install -r dev_requirements.txt" > /dev/null && \
+    `# Copy test requirements (e.g. pytest)`
+    docker cp test_requirements.txt $container:/ && \
+    `# Install test requirements`
+    echo -e "${BLUE}Installing test_requirements.txt...${NORMAL}" && \
+    docker exec $container bin/bash -c "pip3 install -r test_requirements.txt" > /dev/null && \
     `# Run pylint`
     docker exec $container bin/bash -c "pylint --rcfile pylintrc rnapdbee-adapters/src/adapters" && \
     `# Run pytest`
