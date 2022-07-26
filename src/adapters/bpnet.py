@@ -191,19 +191,19 @@ def analyze(cif_content: str) -> AnalysisOutput:
     file.write(cif_content)
     file.seek(0)
 
-    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
     file.close()
 
     if os.path.exists(file.name.replace('.cif', '.out')):
-        with open(file.name.replace('.cif', '.out')) as f:
+        with open(file.name.replace('.cif', '.out'), encoding='utf-8') as f:
             bpnet_output = f.read()
         base_pairs = parse_base_pairs(bpnet_output)
     else:
         base_pairs = []
 
     if os.path.exists(file.name.replace('.cif', '.rob')):
-        with open(file.name.replace('.cif', '.rob')) as f:
+        with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as f:
             bpnet_rob = f.read()
         stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
     else:

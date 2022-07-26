@@ -27,7 +27,7 @@ def pdb2cif(pdb_content):
     pdb.write(pdb_content)
     pdb.seek(0)
     cif = tempfile.NamedTemporaryFile('w+', suffix='.cif')
-    subprocess.run(['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF])
+    subprocess.run(['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF], check=True)
     cif.seek(0)
     return cif.read()
 
@@ -37,7 +37,7 @@ def cif2pdb(cif_content):
     cif.write(cif_content)
     cif.seek(0)
     pdb = tempfile.NamedTemporaryFile('w+', suffix='.pdb')
-    subprocess.run(['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB])
+    subprocess.run(['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB], check=True)
     pdb.seek(0)
     return pdb.read()
 

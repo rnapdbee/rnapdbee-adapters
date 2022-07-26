@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 
-import sys
-import subprocess
-import orjson
 import tempfile
 import re
 
 from typing import Dict, List, Tuple
 from enum import Enum
+
+import sys
+import subprocess
+import orjson
 
 from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
     Residue, ResidueAuth, Saenger, Stacking, StackingTopology
@@ -19,10 +20,10 @@ class MCAnnotateAdapter:
     # Luckily every important part of file
     # begins with a unique sentence
     class ParseState(str, Enum):
-        RESIDUES_INFORMATION = 'Residue conformations',
-        ADJACENT_STACKINGS = 'Adjacent stackings',
-        NON_ADJACENT_STACKINGS = 'Non-Adjacent stackings',
-        BASE_PAIRS_SECTION = 'Base-pairs',
+        RESIDUES_INFORMATION = 'Residue conformations'
+        ADJACENT_STACKINGS = 'Adjacent stackings'
+        NON_ADJACENT_STACKINGS = 'Non-Adjacent stackings'
+        BASE_PAIRS_SECTION = 'Base-pairs'
         SUMMARY_SECTION = 'Number of'
 
     # This dictionary maps our model edges
@@ -80,9 +81,9 @@ class MCAnnotateAdapter:
         # we need save these values eariler
         self.names: Dict[str, str] = {}
 
-    def classify_edge(self, type: str) -> str:
-        for edge in self.EDGES:
-            if type in self.EDGES[edge]:
+    def classify_edge(self, edge_type: str) -> str:
+        for edge, edges in self.EDGES.items():
+            if edge_type in edges:
                 return edge
         raise ValueError('Edge type "{type}" unknown')
 
@@ -190,13 +191,16 @@ class MCAnnotateAdapter:
                     self.analysis_output.basePairs.append(base_pair_interaction)
                     base_added = True
 
-    def run_mc_annotate(self, pdb_content: str) -> str:
-        directory = tempfile.TemporaryDirectory()
-        with tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.pdb') as file:
-            file.write(pdb_content)
-            file.seek(0)
-            mc_result = subprocess.run(['mc-annotate', file.name], stdout=subprocess.PIPE,
-                                       stderr=subprocess.DEVNULL).stdout.decode('utf-8')
+    @classmethod
+    def run_mc_annotate(cls, pdb_content: str) -> str:
+        with tempfile.TemporaryDirectory() as directory_name:
+            with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
+                file.write(pdb_content)
+                file.seek(0)
+                mc_result = subprocess.run(['mc-annotate', file.name],
+                                           stdout=subprocess.PIPE,
+                                           stderr=subprocess.DEVNULL,
+                                           check=True).stdout.decode('utf-8')
         return mc_result
 
     def append_names(self, file_content: str) -> None:
