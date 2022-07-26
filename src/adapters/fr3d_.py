@@ -66,7 +66,7 @@ def analyze(file_content: str) -> AnalysisOutput:
         bases = structure.residues(type=["RNA linking", "DNA linking"])
         cubes, neighbours = interactions.make_nt_cubes(bases, SCREEN_DISTANCE_CUTOFF)
         _, pair_to_interaction, _, _ = interactions.annotate_nt_nt_interactions(bases, SCREEN_DISTANCE_CUTOFF, cubes,
-                                                                                neighbours, {})
+                                                                                neighbours, {}, {})
 
         sys.stdout = original_stdout
 
