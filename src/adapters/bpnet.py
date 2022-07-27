@@ -116,7 +116,9 @@ def parse_base_pairs(bpnet_output: str):
 #     ^------- residue name
 # ^----------- residue number
 def residue_from_pair(resinfo):
-    return Residue(None, ResidueAuth(resinfo[3], int(resinfo[0]), resinfo[2], resinfo[1]))
+    icode = None if resinfo[2] in ' ?' else resinfo[2]
+    auth = ResidueAuth(resinfo[3], int(resinfo[0]), icode, resinfo[1])
+    return Residue(None, auth)
 
 
 # Example lines:
@@ -180,6 +182,12 @@ def residues_from_overlap_info(fields):
     number1, number2 = map(int, fields[3].split(':'))
     icode1, icode2 = fields[2], fields[4]
     name1, name2 = fields[5].split(':')
+
+    if icode1 in ' ?':
+        icode1 = None
+    if icode2 in ' ?':
+        icode2 = None
+
     nt1 = Residue(None, ResidueAuth(chain1, number1, icode1, name1))
     nt2 = Residue(None, ResidueAuth(chain2, number2, icode2, name2))
     return nt1, nt2
