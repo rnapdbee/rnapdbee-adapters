@@ -58,7 +58,7 @@ def test_renumber_pdb(adapter, file_content, expected_mapped_values, expected_co
         ('G_2_0', Residue(None, ResidueAuth('X', '1', 'B', 'G'))),
         ('._1_1', Residue(None, ResidueAuth('-', '-1', 'A', '.'))),
         ('-_1_2', Residue(None, ResidueAuth('.', '-1', 'A', '-'))),
-        ('__1_3', Residue(None, ResidueAuth('_', '-1', '?', '_'))),
+        ('__1_3', Residue(None, ResidueAuth('_', '-1', None, '_'))),
     ],
 )
 def test_get_residue(adapter_after_pdb_parsing, residue_info, expected):
