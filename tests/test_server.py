@@ -121,6 +121,21 @@ def test_adapter(adapter_test_result):
     assert adapter_test_result.response == adapter_test_result.expected
 
 
+@pytest.mark.parametrize(
+    'adapter_test_result',
+    [
+        ('1ehz_mod.pdb', 'icode_bpnet.json', '/analyze/bpnet'),
+        ('1ehz_mod.pdb', 'icode_fr3d.json', '/analyze/fr3d'),
+        ('1ehz_mod.pdb', 'icode_barnaba.json', '/analyze/barnaba'),
+        ('1ehz_mod.pdb', 'icode_mc_annotate.json', '/analyze/mc-annotate'),
+    ],
+    indirect=True,
+)
+def test_icode(adapter_test_result):
+    assert adapter_test_result.status_code == 200
+    assert adapter_test_result.response == adapter_test_result.expected
+
+
 # Parameters: (pdb_or_cif, expected_pdb_or_cif, route)
 @pytest.mark.parametrize(
     'tool_test_result',

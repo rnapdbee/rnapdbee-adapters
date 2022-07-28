@@ -5,25 +5,23 @@
 
 from adapters.model import Residue, ResidueAuth, Stacking, StackingTopology
 
-NO_ICODE_CHAR = '?'
-
 RESIDUES = [
     Residue(None, ResidueAuth('X', -1, 'A', 'res')),  # 0
     Residue(None, ResidueAuth('Y', 65, 'L', '123')),  # 1
     Residue(None, ResidueAuth('X', 2, 'C', 'aBc')),  # 2
     Residue(None, ResidueAuth('Y', 64, 'K', 'G')),  # 3
-    Residue(None, ResidueAuth('A', 4, '?', 'U')),  # 4
-    Residue(None, ResidueAuth('A', 14, '?', 'T')),  # 5
+    Residue(None, ResidueAuth('A', 4, None, 'U')),  # 4
+    Residue(None, ResidueAuth('A', 14, None, 'T')),  # 5
     Residue(None, ResidueAuth('A', 1, 'Y', 'C')),  # 6
-    Residue(None, ResidueAuth('A', 71, '?', 'aaa')),  # 7
+    Residue(None, ResidueAuth('A', 71, None, 'aaa')),  # 7
     Residue(None, ResidueAuth('A', -122, 'Y', 'u')),  # 8
-    Residue(None, ResidueAuth('A', -122, '?', 'B')),  # 9
-    Residue(None, ResidueAuth('.', -100, '?', 'C')),  # 10
-    Residue(None, ResidueAuth('-', -1, '?', 'K')),  # 11
+    Residue(None, ResidueAuth('A', -122, None, 'B')),  # 9
+    Residue(None, ResidueAuth('.', -100, None, 'C')),  # 10
+    Residue(None, ResidueAuth('-', -1, None, 'K')),  # 11
     Residue(None, ResidueAuth('.', -100, 'A', 'C')),  # 12
     Residue(None, ResidueAuth('-', -1, 'a', 'U')),  # 13
     Residue(None, ResidueAuth('-', -12, 'C', 'D')),  # 14
-    Residue(None, ResidueAuth('-', 0, '?', 'd')),  # 15
+    Residue(None, ResidueAuth('-', 0, None, 'd')),  # 15
     Residue(None, ResidueAuth('.', 111, 'Z', 'aby')),  # 16
     Residue(None, ResidueAuth('.', 2, 'X', 'I')),  # 17
 ]
