@@ -99,7 +99,7 @@ class ResidueLabel:
 class ResidueAuth:
     chain: str
     number: int
-    icode: str
+    icode: Optional[str]
     name: str
 
 

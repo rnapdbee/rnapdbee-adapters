@@ -36,10 +36,6 @@ class BarnabaAdapter:
         '><': 'inward',
     }
 
-    # Since insertion code is required in our model
-    # we need a character to represent no insertion code
-    NO_ICODE_CHAR = '?'
-
     RESIDUE_REGEX = re.compile(r'(.+)_([0-9]+)_([0-9]+)')
 
     def __init__(self) -> None:
@@ -63,7 +59,7 @@ class BarnabaAdapter:
         name = residue_info_list[0]
         new_number = int(residue_info_list[1])
         number, icode = self.mapped_residues_info[chain][new_number]
-        icode = self.NO_ICODE_CHAR if icode == '' else icode
+        icode = None if icode == '' else icode
         return Residue(None, ResidueAuth(chain, number, icode, name))
 
     def get_leontis_westhof(self, interaction: str) -> Optional[LeontisWesthof]:

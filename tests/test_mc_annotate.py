@@ -2,7 +2,7 @@ from adapters.mc_annotate import MCAnnotateAdapter
 from contextlib import ExitStack as does_not_raise  # ExitStack for support Python 3.3+
 import pytest
 from adapters.model import BasePair, BasePhosphate, BaseRibose, LeontisWesthof, Saenger
-from data import RESIDUES, NO_ICODE_CHAR, STACKINGS, PDB_LINES
+from data import RESIDUES, STACKINGS, PDB_LINES
 
 # -------- FIXTURES --------
 
@@ -21,7 +21,7 @@ def adapter_with_names():
     adapter = MCAnnotateAdapter()
     names = {}
     for res in RESIDUES:
-        if res.auth.icode == NO_ICODE_CHAR:
+        if res.auth.icode is None:
             key = f'{res.auth.chain}{res.auth.number}'
         else:
             key = f'{res.auth.chain}{res.auth.number}.{res.auth.icode}'

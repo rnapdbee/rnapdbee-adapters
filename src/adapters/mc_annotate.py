@@ -50,10 +50,6 @@ class MCAnnotateAdapter:
     ATOM = 'ATOM'
     HETATM = 'HETATM'
 
-    # Since insertion code is required in our model
-    # we need a character to represent no insertion code
-    NO_ICODE_CHAR = '?'
-
     # This regex is used to capture 6 groups of residues information:
     # (1) (2) (3) (4) (5) (6)
     # 1, 4 - chain IDs
@@ -92,7 +88,7 @@ class MCAnnotateAdapter:
         number = int(residue_info_list[1])
 
         if residue_info_list[2] == '':
-            icode = self.NO_ICODE_CHAR
+            icode = None
             residue_info = f'{chain}{number}'
         else:
             icode = residue_info_list[2]
