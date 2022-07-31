@@ -57,11 +57,13 @@ done
 # ------------
 # WARNING: Force remove container $container: docker container rm -f $container
 # WARNING: Force prune of all dangling images: docker image prune -f 
+# WARNING: Force prune of all dangling cache: docker builder prune -f 
 if [ ${stage[create]} = true ] ; then
     DOCKER_BUILDKIT=1 docker build --target $target -t $image . && \
-    docker container rm -f $container && \
+    docker container rm -f $container > /dev/null && \
     docker create --name $container -p $port $image && \
-    docker image prune -f && \
+    docker image prune -f > /dev/null && \
+    docker builder prune -f > /dev/null && \
     echo -e "${GREEN}### CREATE OK ###${NORMAL}" || { echo -e "${RED}### CREATE FAILED ###${NORMAL}" ; exit 1 ; }
 fi
 
