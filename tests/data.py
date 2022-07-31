@@ -24,6 +24,8 @@ RESIDUES = [
     Residue(None, ResidueAuth('-', 0, None, 'd')),  # 15
     Residue(None, ResidueAuth('.', 111, 'Z', 'aby')),  # 16
     Residue(None, ResidueAuth('.', 2, 'X', 'I')),  # 17
+    Residue(None, ResidueAuth('9', 2, 'X', 'I')),  # 18
+    Residue(None, ResidueAuth("'", 2, 'X', 'I')),  # 19
 ]
 
 STACKINGS = [
@@ -42,6 +44,11 @@ STACKINGS = [
         RESIDUES[7],
         StackingTopology['inward'],
     ),
+    Stacking(
+        RESIDUES[18],
+        RESIDUES[19],
+        StackingTopology['inward'],
+    ),
 ]
 
 PDB_LINES = [
@@ -51,7 +58,9 @@ PDB_LINES = [
     "REMARK 465       C A    17                                                      ",
     "ATOM      1  O5'   . -  -1A     40.280   7.360  22.271  1.00 46.51           O  ",
     "ATOM      1  O5'   - .  -1A     40.280   7.360  22.271  1.00 46.51           O  ",
-    "ATOM      1  O5'   _ _  -1      40.280   7.360  22.271  1.00 46.51           O  "
+    "ATOM      1  O5'   _ _  -1      40.280   7.360  22.271  1.00 46.51           O  ",
+    "ATOM      1  O5'   I 9   2X     40.280   7.360  22.271  1.00 46.51           O  ",
+    "ATOM      1  O5'   I '   2X     40.280   7.360  22.271  1.00 46.51           O  ",
 ]
 
 PDB_LINES_RENUMBERED = [
@@ -61,7 +70,9 @@ PDB_LINES_RENUMBERED = [
     "REMARK 465       C A    17                                                      ",
     "ATOM      1  O5'   . -   1      40.280   7.360  22.271  1.00 46.51           O  ",
     "ATOM      1  O5'   - .   1      40.280   7.360  22.271  1.00 46.51           O  ",
-    "ATOM      1  O5'   _ _   1      40.280   7.360  22.271  1.00 46.51           O  "
+    "ATOM      1  O5'   _ _   1      40.280   7.360  22.271  1.00 46.51           O  ",
+    "ATOM      1  O5'   I 9   1      40.280   7.360  22.271  1.00 46.51           O  ",
+    "ATOM      1  O5'   I '   1      40.280   7.360  22.271  1.00 46.51           O  ",
 ]
 
 MAPPED_VALUES = {
@@ -69,4 +80,6 @@ MAPPED_VALUES = {
     '-': {1: (-1, 'A')},
     '.': {1: (-1, 'A')},
     '_': {1: (-1, '')},
+    '9': {1: (2, 'X')},
+    "'": {1: (2, 'X')},
 }

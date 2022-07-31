@@ -72,6 +72,7 @@ def test_classify_edge_exception(adapter, type, expected):
         ('.-100.A---1.a', (RESIDUES[12], RESIDUES[13])),
         ('--12.C--0', (RESIDUES[14], RESIDUES[15])),
         ('.111.Z-.2.X', (RESIDUES[16], RESIDUES[17])),
+        ("'9'2.X-'''2.X", (RESIDUES[18], RESIDUES[19])),
     ],
 )
 def test_get_residues(adapter_with_names, residues_info, expected):
@@ -84,6 +85,7 @@ def test_get_residues(adapter_with_names, residues_info, expected):
         ('X-1.A-Y65.L : adjacent_5p upward', 3, [STACKINGS[0]]),
         ('.-100.A---1.a : outward', 2, [STACKINGS[1]]),
         ('A1.Y-A71 : inward pairing', 2, [STACKINGS[2]]),
+        ("'9'2.X-'''2.X : inward pairing", 2, [STACKINGS[3]]),
     ],
 )
 def test_append_stacking(adapter_with_names, line, topology_position, expected):
