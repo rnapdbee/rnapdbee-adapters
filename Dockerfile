@@ -45,9 +45,9 @@ RUN apt-get update -y \
         unzip \
  && rm -rf /var/lib/apt/lists/*
 
- RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
-  && unzip mc-annotate.zip \
-  && mv MC-Annotate mc-annotate
+RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
+ && unzip mc-annotate.zip \
+ && mv MC-Annotate mc-annotate
 
 ################################################################################
 
@@ -66,12 +66,33 @@ RUN cd RNAVIEW \
 
 ################################################################################
 
+FROM ubuntu:20.04 AS python-builder
+
 RUN apt-get update -y \
  && apt-get install -y \
-        gunicorn \
+        build-essential \
         python3 \
         python3-pip \
+        python3-venv \
         git \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /venv
+ENV PATH=/venv/bin:$PATH
+
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir wheel \
+ && pip3 install --no-cache-dir -r requirements.txt
+
+################################################################################
+
+FROM ubuntu:20.04 AS server
+
+RUN apt-get update -y \
+ && apt-get install -y \
+       python3 \
+       python3-venv \
+       build-essential \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
@@ -83,6 +104,7 @@ COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
 
 COPY --from=rnaview-builder /RNAVIEW /rnaview
 
+COPY --from=python-builder /venv /venv
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
