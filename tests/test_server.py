@@ -141,7 +141,7 @@ def test_icode(adapter_test_result):
     'tool_test_result',
     [
         ('2z_74.pdb', '2z_74.cif', '/convert/ensure-cif'),
-        ('2z_74.pdb', '2z_74.pdb', '/convert/ensure-pdb'),
+        ('2z_74.cif', '2z_74_out.pdb', '/convert/ensure-pdb'),
         ('2z_74.pdb', '2z_74_filter.cif', '/filter'),
     ],
     indirect=True,

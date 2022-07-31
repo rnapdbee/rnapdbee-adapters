@@ -20,6 +20,7 @@ RUN apt-get update -y \
         curl \
         flex \
         tcsh \
+        sed \
  && rm -rf /var/lib/apt/lists/*
 
 ARG maxit_version=11.100
@@ -29,6 +30,8 @@ RUN curl -L https://sw-tools.rcsb.org/apps/MAXIT/maxit-v${maxit_version}-prod-sr
 ENV RCSBROOT=/maxit-v${maxit_version}-prod-src
 
 RUN cd ${RCSBROOT} \
+ && sed -i '18i %define api.header.include {"CifParser.h"}' cifparse-obj-v7.0/src/CifParser.y \
+ && sed -i '17i %define api.header.include {"DICParser.h"}' cifparse-obj-v7.0/src/DICParser.y \
  && make \
  && make binary
 
@@ -42,9 +45,44 @@ RUN apt-get update -y \
         unzip \
  && rm -rf /var/lib/apt/lists/*
 
- RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
-  && unzip mc-annotate.zip \
-  && mv MC-Annotate mc-annotate
+RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
+ && unzip mc-annotate.zip \
+ && mv MC-Annotate mc-annotate
+
+################################################################################
+
+FROM ubuntu:20.04 AS rnaview-builder
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        build-essential \
+        curl \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
+
+RUN cd RNAVIEW \
+ && make
+
+################################################################################
+
+FROM ubuntu:20.04 AS python-builder
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        build-essential \
+        python3 \
+        python3-pip \
+        python3-venv \
+        git \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /venv
+ENV PATH=/venv/bin:$PATH
+
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir wheel \
+ && pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################
 
@@ -52,10 +90,9 @@ FROM ubuntu:20.04 AS server
 
 RUN apt-get update -y \
  && apt-get install -y \
-        gunicorn \
-        python3 \
-        python3-pip \
-        git \
+       python3 \
+       python3-venv \
+       build-essential \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
@@ -65,13 +102,15 @@ COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
 COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+COPY --from=rnaview-builder /RNAVIEW /rnaview
+
+COPY --from=python-builder /venv /venv
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
-    RCSBROOT=/maxit
+    RCSBROOT=/maxit \
+    RNAVIEW=/rnaview
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
