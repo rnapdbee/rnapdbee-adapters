@@ -135,8 +135,7 @@ REMARK   3  OTHER REFINEMENT REMARKS: NULL
 REMARK   4                                                                      
 REMARK   4 2Z74 COMPLIES WITH FORMAT V. 3.30, 13-JUL-11                         
 REMARK 100                                                                      
-REMARK 100 THIS ENTRY HAS BEEN PROCESSED BY PDBJ.                               
-REMARK 100 THE DEPOSITION ID IS D_1000027604.                                   
+REMARK 100 THIS ENTRY HAS BEEN PROCESSED BY BNL.                                
 REMARK 200                                                                      
 REMARK 200 EXPERIMENTAL DETAILS                                                 
 REMARK 200  EXPERIMENT TYPE                : X-RAY DIFFRACTION                  
@@ -192,7 +191,6 @@ REMARK 280 SOLVENT CONTENT, VS   (%): 52.60
 REMARK 280 MATTHEWS COEFFICIENT, VM (ANGSTROMS**3/DA): 2.59                     
 REMARK 280                                                                      
 REMARK 280 CRYSTALLIZATION CONDITIONS: GROWN FROM: 12% PEG 4000, 1M LICL,       
-REMARK 280  100MM MES-NAOH PH 5.4, 5MM MGCL2 STABILIZED IN: 24% PEG 4000,       
 REMARK 280  1.5M LICL, 30MM MGCL2, 100MM MES-NAOH PH 5.5, 20MM GLUCOSE-6-       
 REMARK 280  PHOSPHATE, VAPOR DIFFUSION, SITTING DROP, TEMPERATURE 295K          
 REMARK 290                                                                      
@@ -429,6 +427,7 @@ REMARK 500
 REMARK 500 THE FOLLOWING ATOMS ARE IN CLOSE CONTACT.                            
 REMARK 500                                                                      
 REMARK 500  ATM1  RES C  SSEQI   ATM2  RES C  SSEQI           DISTANCE          
+REMARK 500   N3     U Y    48U    O    HOH Y   410L             2.13            
 REMARK 500                                                                      
 REMARK 500 REMARK: NULL                                                         
 REMARK 500                                                                      
@@ -447,6 +446,19 @@ REMARK 500 EXPECTED VALUES PROTEIN: ENGH AND HUBER, 1999
 REMARK 500 EXPECTED VALUES NUCLEIC ACID: CLOWNEY ET AL 1996                     
 REMARK 500                                                                      
 REMARK 500  M RES CSSEQI ATM1   ATM2   ATM3                                     
+REMARK 500      C X   5F  C2' -  C3' -  O3' ANGL. DEV. =  15.6 DEGREES          
+REMARK 500      U Y  48U  C2' -  C3' -  O3' ANGL. DEV. =  15.1 DEGREES          
+REMARK 500      U Y  49V  C2' -  C3' -  O3' ANGL. DEV. =  13.2 DEGREES          
+REMARK 500      A Y  50W  O3' -  P   -  OP2 ANGL. DEV. = -35.6 DEGREES          
+REMARK 500      A Y  50W  O3' -  P   -  OP1 ANGL. DEV. = -39.8 DEGREES          
+REMARK 500      A Y  50W  O5' -  P   -  OP1 ANGL. DEV. = -22.8 DEGREES          
+REMARK 500      A Y  50W  O5' -  P   -  OP2 ANGL. DEV. = -12.8 DEGREES          
+REMARK 500      C Y  57D  C2' -  C3' -  O3' ANGL. DEV. =  13.9 DEGREES          
+REMARK 500      A Y  58E  N9  -  C1' -  C2' ANGL. DEV. =   8.1 DEGREES          
+REMARK 500      U Y  91L  N1  -  C1' -  C2' ANGL. DEV. =   8.2 DEGREES          
+REMARK 500      G Y  94O  O4' -  C1' -  N9  ANGL. DEV. =   5.0 DEGREES          
+REMARK 500      U Y 103X  C2' -  C3' -  O3' ANGL. DEV. =  12.1 DEGREES          
+REMARK 500      G Y 130Y  N9  -  C1' -  C2' ANGL. DEV. =   9.9 DEGREES          
 REMARK 500                                                                      
 REMARK 500 REMARK: NULL                                                         
 REMARK 500                                                                      
@@ -462,6 +474,7 @@ REMARK 500 (M=MODEL NUMBER; RES=RESIDUE NAME; C=CHAIN IDENTIFIER;
 REMARK 500 SSEQ=SEQUENCE NUMBER; I=INSERTION CODE).                             
 REMARK 500                                                                      
 REMARK 500  M RES CSSEQI        RMS     TYPE                                    
+REMARK 500      G Y 114I        0.05    SIDE CHAIN                              
 REMARK 500                                                                      
 REMARK 500 REMARK: NULL                                                         
 REMARK 900                                                                      
@@ -3690,5 +3703,5 @@ CONECT 3080 3079 3081 3082 3083
 CONECT 3081 3080                                                                
 CONECT 3082 3080                                                                
 CONECT 3083 3080                                                                
-MASTER      431    0    9    0    0    0    0    6 3152    2   16   25          
+MASTER      444    0    9    0    0    0    0    6 3152    2   16   25          
 END                                                                             
