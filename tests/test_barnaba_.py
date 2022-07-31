@@ -1,7 +1,7 @@
 from adapters.model import LeontisWesthof, Residue, ResidueAuth
 from adapters.barnaba_ import BarnabaAdapter
 import pytest
-from data import PDB_LINES, PDB_LINES_RENUMBERED, MAPPED_VALUES
+from data import PDB_LINES, PDB_LINES_RENUMBERED, MAPPED_VALUES, RESIDUES
 
 # -------- FIXTURES --------
 
@@ -18,10 +18,13 @@ def adapter():
 def adapter_after_pdb_parsing():
     # Setup
     adapter = BarnabaAdapter()
-    adapter.chains = ['X', '-', '.', '_']
+    adapter.chains = ['X', '-', '.', '_', '9', "'"]
     adapter.mapped_residues_info = MAPPED_VALUES
     yield adapter
     # Teardown
+
+
+# -------- TESTS --------
 
 
 @pytest.mark.parametrize(
@@ -31,6 +34,8 @@ def adapter_after_pdb_parsing():
         (PDB_LINES[1], ['X']),
         (PDB_LINES[2], ['X']),
         (PDB_LINES[3], []),
+        (PDB_LINES[7], ['9']),
+        (PDB_LINES[8], ["'"]),
     ],
 )
 def test_append_chains(adapter, file_content, expected):
@@ -41,9 +46,9 @@ def test_append_chains(adapter, file_content, expected):
 @pytest.mark.parametrize(
     'file_content,expected_mapped_values,expected_content',
     [(
-        '\n'.join(PDB_LINES[:7]),
+        '\n'.join(PDB_LINES[:9]),
         MAPPED_VALUES,
-        '\n'.join(PDB_LINES_RENUMBERED[:7]),
+        '\n'.join(PDB_LINES_RENUMBERED[:9]),
     )],
 )
 def test_renumber_pdb(adapter, file_content, expected_mapped_values, expected_content):
@@ -59,6 +64,8 @@ def test_renumber_pdb(adapter, file_content, expected_mapped_values, expected_co
         ('._1_1', Residue(None, ResidueAuth('-', '-1', 'A', '.'))),
         ('-_1_2', Residue(None, ResidueAuth('.', '-1', 'A', '-'))),
         ('__1_3', Residue(None, ResidueAuth('_', '-1', None, '_'))),
+        ('I_1_4', RESIDUES[18]),
+        ('I_1_5', RESIDUES[19]),
     ],
 )
 def test_get_residue(adapter_after_pdb_parsing, residue_info, expected):
