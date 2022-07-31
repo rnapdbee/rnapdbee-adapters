@@ -20,6 +20,7 @@ RUN apt-get update -y \
         curl \
         flex \
         tcsh \
+        sed \
  && rm -rf /var/lib/apt/lists/*
 
 ARG maxit_version=11.100
@@ -29,6 +30,8 @@ RUN curl -L https://sw-tools.rcsb.org/apps/MAXIT/maxit-v${maxit_version}-prod-sr
 ENV RCSBROOT=/maxit-v${maxit_version}-prod-src
 
 RUN cd ${RCSBROOT} \
+ && sed -i '18i %define api.header.include {"CifParser.h"}' cifparse-obj-v7.0/src/CifParser.y \
+ && sed -i '17i %define api.header.include {"DICParser.h"}' cifparse-obj-v7.0/src/DICParser.y \
  && make \
  && make binary
 
