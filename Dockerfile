@@ -51,7 +51,20 @@ RUN apt-get update -y \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS server
+FROM ubuntu:20.04 AS rnaview-builder
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        build-essential \
+        curl \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
+
+RUN cd RNAVIEW \
+ && make
+
+################################################################################
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -68,13 +81,14 @@ COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
 COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+COPY --from=rnaview-builder /RNAVIEW /rnaview
+
 
 ENV NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
-    RCSBROOT=/maxit
+    RCSBROOT=/maxit \
+    RNAVIEW=/rnaview
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
