@@ -58,7 +58,7 @@ class MCAnnotateAdapter:
     # Example - match and groups:
     # A-100.X-B200
     # ('A'), ('-100'), ('X'), ('B'), ('200'), ('')
-    RESIDUE_REGEX = re.compile(r'(.)(-?[0-9]+)\.?([a-zA-Z]?)-(.)(-?[0-9]+)\.?([a-zA-Z]?)')
+    RESIDUE_REGEX = re.compile(r"'?(.)'?(-?[0-9]+)\.?([a-zA-Z]?)-'?(.)'?(-?[0-9]+)\.?([a-zA-Z]?)")
 
     # Roman numerals used by Saenger
     # both in our model and MC-Annotate
