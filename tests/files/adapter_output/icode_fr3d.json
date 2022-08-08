@@ -27,28 +27,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 68,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 5,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 4,
                     "icode": null,
                     "name": "G"
@@ -61,28 +39,6 @@
                     "number": 69,
                     "icode": null,
                     "name": "U"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 69,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 4,
-                    "icode": null,
-                    "name": "G"
                 }
             },
             "lw": "cWW",
@@ -115,50 +71,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 23,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "lw": "tHH",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 22,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 13,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 13,
                     "icode": null,
                     "name": "C"
@@ -174,28 +86,6 @@
                 }
             },
             "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 14,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "lw": "tHW",
             "saenger": null
         },
         {
@@ -247,50 +137,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 48,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 15,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "lw": "tWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "lw": "tSS",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 8,
                     "icode": null,
                     "name": "U"
@@ -313,28 +159,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 24,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 11,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 11,
                     "icode": null,
                     "name": "C"
@@ -347,28 +171,6 @@
                     "number": 24,
                     "icode": null,
                     "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 23,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 12,
-                    "icode": null,
-                    "name": "U"
                 }
             },
             "lw": "cWW",
@@ -423,50 +225,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 41,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 29,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 42,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 28,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 28,
                     "icode": null,
                     "name": "C"
@@ -482,28 +240,6 @@
                 }
             },
             "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 36,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "lw": "tHS",
             "saenger": null
         },
         {
@@ -533,28 +269,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 64,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 50,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 50,
                     "icode": null,
                     "name": "U"
@@ -567,28 +281,6 @@
                     "number": 64,
                     "icode": null,
                     "name": "A"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 62,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 52,
-                    "icode": null,
-                    "name": "U"
                 }
             },
             "lw": "cWW",
@@ -643,28 +335,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 63,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 51,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 53,
                     "icode": null,
                     "name": "G"
@@ -687,50 +357,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 53,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 67,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 6,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 6,
                     "icode": null,
                     "name": "U"
@@ -743,28 +369,6 @@
                     "number": 67,
                     "icode": null,
                     "name": "A"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 66,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 7,
-                    "icode": null,
-                    "name": "U"
                 }
             },
             "lw": "cWW",
@@ -808,50 +412,6 @@
                     "chain": "A",
                     "number": 72,
                     "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 72,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
-                    "icode": "X",
-                    "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 71,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
-                    "icode": "Y",
                     "name": "C"
                 }
             },
@@ -907,28 +467,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 70,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 3,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 19,
                     "icode": null,
                     "name": "G"
@@ -939,50 +477,6 @@
                 "auth": {
                     "chain": "A",
                     "number": 56,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 56,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 19,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 43,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 27,
                     "icode": null,
                     "name": "C"
                 }
