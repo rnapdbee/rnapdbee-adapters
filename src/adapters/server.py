@@ -2,7 +2,7 @@
 
 from flask import Flask, request
 
-from adapters import bpnet, fr3d_, maxit, cif_filter, pdb_filter
+from adapters import analysis_output_filter, bpnet, fr3d_, maxit, cif_filter, pdb_filter
 from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.barnaba_ import BarnabaAdapter
 from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
@@ -22,8 +22,11 @@ def analyze_bpnet_model(model):
         (remove_proteins, {}),
         (fix_occupancy, {}),
     ])
-    structure = bpnet.analyze(cif_content)
-    return structure
+    analysis_output = bpnet.analyze(cif_content)
+    filtered_analysis_output = analysis_output_filter.apply(analysis_output, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
 
 
 @app.route('/analyze/bpnet', methods=['POST'])
@@ -53,8 +56,11 @@ def analyze_fr3d_model(model):
         (remove_proteins, {}),
         (fix_occupancy, {}),
     ])
-    structure = fr3d_.analyze(cif_content)
-    return structure
+    analysis_output = fr3d_.analyze(cif_content)
+    filtered_analysis_output = analysis_output_filter.apply(analysis_output, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
 
 
 @app.route('/analyze/fr3d', methods=['POST'])
@@ -72,8 +78,11 @@ def analyze_barnaba_model(model):
     pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
         (pdb_filter.leave_single_model, {'model': model}),
     ])
-    structure = BarnabaAdapter().analyze(pdb_content)
-    return structure
+    analysis_output = BarnabaAdapter().analyze(pdb_content)
+    filtered_analysis_output = analysis_output_filter.apply(analysis_output, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
 
 
 @app.route('/analyze/barnaba', methods=['POST'])
@@ -92,7 +101,10 @@ def analyze_mc_annotate_model(model):
         (pdb_filter.leave_single_model, {'model': model}),
     ])
     analysis_output = MCAnnotateAdapter().analyze(pdb_content)
-    return analysis_output
+    filtered_analysis_output = analysis_output_filter.apply(analysis_output, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
 
 
 @app.route('/analyze/mc-annotate', methods=['POST'])

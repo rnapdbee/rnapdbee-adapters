@@ -88,14 +88,14 @@ class BPh(Enum):
     _9 = 9
 
 
-@dataclass
+@dataclass(order=True)
 class ResidueLabel:
     chain: str
     number: int
     name: str
 
 
-@dataclass
+@dataclass(order=True)
 class ResidueAuth:
     chain: str
     number: int
@@ -103,7 +103,7 @@ class ResidueAuth:
     name: str
 
 
-@dataclass
+@dataclass(order=True)
 class Residue:
     label: Optional[ResidueLabel]
     auth: Optional[ResidueAuth]
