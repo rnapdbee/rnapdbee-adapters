@@ -2,6 +2,8 @@ from typing import Tuple, Iterable, Callable, Dict, List, TypeVar
 from adapters.model import AnalysisOutput, BasePair, \
     LeontisWesthof, OtherInteraction, Stacking, StackingTopology
 
+INTERACTION_TYPE = TypeVar('INTERACTION_TYPE', BasePair, Stacking, OtherInteraction)
+
 
 def apply(analysis_output: AnalysisOutput, functions_args: Iterable[Tuple[Callable, Dict]]) -> AnalysisOutput:
 
@@ -12,8 +14,6 @@ def apply(analysis_output: AnalysisOutput, functions_args: Iterable[Tuple[Callab
 
 
 def remove_duplicate_pairs(analysis_output: AnalysisOutput, *_) -> AnalysisOutput:
-    InteractionType = TypeVar("InteractionType", BasePair, Stacking, OtherInteraction)
-
     stacking_topology_mapping = {
         StackingTopology.upward: StackingTopology.downward,
         StackingTopology.downward: StackingTopology.upward,
@@ -35,32 +35,29 @@ def remove_duplicate_pairs(analysis_output: AnalysisOutput, *_) -> AnalysisOutpu
         return OtherInteraction(interaction.nt2, interaction.nt1)
 
     def remove_duplicate_pairs_from_list(
-        interactions: List[InteractionType],
-        reverse_interaction: Callable[[InteractionType], InteractionType],
-    ) -> List[InteractionType]:
-        unique_interactions = []
-        for i, interaction1 in enumerate(interactions):
-            nt1, nt2 = interaction1.nt1, interaction1.nt2
-            for interaction2 in interactions[i + 1:]:
-                if (nt1, nt2) == (interaction2.nt2, interaction2.nt1):
-                    # Append this interaction later
-                    break
+        interactions: List[INTERACTION_TYPE],
+        reverse_interaction: Callable[[INTERACTION_TYPE], INTERACTION_TYPE],
+    ) -> List[INTERACTION_TYPE]:
+        unique_interactions = {}
+        for interaction in interactions:
+            if interaction.nt1 < interaction.nt2:
+                unique_interactions[str(interaction)] = interaction
             else:
-                if nt1 < nt2:
-                    unique_interactions.append(interaction1)
-                else:
-                    reversed_interaction = reverse_interaction(interaction1)
-                    unique_interactions.append(reversed_interaction)
-        return unique_interactions
+                reversed_interaction = reverse_interaction(interaction)
+                unique_interactions[str(reversed_interaction)] = reversed_interaction
+        return list(unique_interactions.values())
 
-    base_pairs = remove_duplicate_pairs_from_list(analysis_output.basePairs, reverse_base_interaction)
-    stackings = remove_duplicate_pairs_from_list(analysis_output.stackings, reverse_stacking_interaction)
-    other_interactions = remove_duplicate_pairs_from_list(analysis_output.otherInteractions, reverse_other_interaction)
+    filtered_base_pairs = remove_duplicate_pairs_from_list(analysis_output.basePairs, reverse_base_interaction)
+    filtered_stackings = remove_duplicate_pairs_from_list(analysis_output.stackings, reverse_stacking_interaction)
+    filtered_other_interactions = remove_duplicate_pairs_from_list(
+        analysis_output.otherInteractions,
+        reverse_other_interaction,
+    )
 
     return AnalysisOutput(
-        base_pairs,
-        stackings,
+        filtered_base_pairs,
+        filtered_stackings,
         analysis_output.baseRiboseInteractions,
         analysis_output.basePhosphateInteractions,
-        other_interactions,
+        filtered_other_interactions,
     )
