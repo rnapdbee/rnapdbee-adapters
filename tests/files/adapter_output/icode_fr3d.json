@@ -261,6 +261,28 @@
                     "name": "A"
                 }
             },
+            "lw": "tSH",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 33,
+                    "icode": null,
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 36,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
             "lw": "tHS",
             "saenger": null
         },
