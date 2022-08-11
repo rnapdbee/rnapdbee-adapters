@@ -5,8 +5,8 @@ from adapters import maxit
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
     pdb_content = maxit.ensure_pdb(file_content)
 
-    for f, kwargs in functions_args:
-        pdb_content = f(pdb_content, **kwargs)
+    for function, kwargs in functions_args:
+        pdb_content = function(pdb_content, **kwargs)
 
     return pdb_content
 

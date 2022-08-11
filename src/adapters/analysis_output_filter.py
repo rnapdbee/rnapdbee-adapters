@@ -2,13 +2,13 @@ from typing import Tuple, Iterable, Callable, Dict, List, TypeVar
 from adapters.model import AnalysisOutput, BasePair, \
     LeontisWesthof, OtherInteraction, Stacking, StackingTopology
 
-INTERACTION_TYPE = TypeVar('INTERACTION_TYPE', BasePair, Stacking, OtherInteraction)
+InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
 
 
 def apply(analysis_output: AnalysisOutput, functions_args: Iterable[Tuple[Callable, Dict]]) -> AnalysisOutput:
 
-    for f, kwargs in functions_args:
-        analysis_output = f(analysis_output, **kwargs)
+    for function, kwargs in functions_args:
+        analysis_output = function(analysis_output, **kwargs)
 
     return analysis_output
 
@@ -35,9 +35,9 @@ def remove_duplicate_pairs(analysis_output: AnalysisOutput, *_) -> AnalysisOutpu
         return OtherInteraction(interaction.nt2, interaction.nt1)
 
     def remove_duplicate_pairs_from_list(
-        interactions: List[INTERACTION_TYPE],
-        reverse_interaction: Callable[[INTERACTION_TYPE], INTERACTION_TYPE],
-    ) -> List[INTERACTION_TYPE]:
+        interactions: List[InteractionTypeT],
+        reverse_interaction: Callable[[InteractionTypeT], InteractionTypeT],
+    ) -> List[InteractionTypeT]:
         unique_interactions = {}
         for interaction in interactions:
             if interaction.nt1 < interaction.nt2:
