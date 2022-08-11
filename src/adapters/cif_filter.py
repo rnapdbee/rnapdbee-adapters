@@ -9,8 +9,8 @@ from adapters import maxit
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
     cif, data = begin(file_content)
 
-    for f, kwargs in functions_args:
-        f(data, **kwargs)
+    for function, kwargs in functions_args:
+        function(data, **kwargs)
 
     return end(cif, data)
 
@@ -56,7 +56,7 @@ def leave_single_model(data: List, **kwargs):
 
 
 # Modify occupancy column so that it always parses to a float
-def fix_occupancy(data: List, **kwargs):
+def fix_occupancy(data: List, *_):
     if len(data) > 0:
         atom_site = data[0].getObj('atom_site')
 
@@ -64,15 +64,15 @@ def fix_occupancy(data: List, **kwargs):
             occupancy = atom_site.getAttributeIndex('occupancy')
 
             if occupancy != -1:
-                for i, row in enumerate(atom_site.getRowList()):
+                for _, row in enumerate(atom_site.getRowList()):
                     try:
                         _ = float(row[occupancy])
-                    except:
+                    except Exception:
                         row[occupancy] = '1.0'
 
 
 # Remove all atoms which belong to proteins
-def remove_proteins(data: List, **kwargs):
+def remove_proteins(data: List, *_):
     if len(data) > 0:
         entity_poly = data[0].getObj('entity_poly')
         atom_site = data[0].getObj('atom_site')
