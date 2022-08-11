@@ -114,6 +114,18 @@ def tool_test_result(request):
         ('2z_74.pdb', 'mc_annotate.json', '/analyze/mc-annotate/1'),
         ('2z_74.pdb', 'mc_annotate.json', '/analyze/mc-annotate'),
     ],
+    ids=[
+        '/analyze/bpnet/1',
+        '/analyze/bpnet',
+        '/analyze/1',
+        '/analyze',
+        '/analyze/fr3d/1',
+        '/analyze/fr3d',
+        '/analyze/barnaba/1',
+        '/analyze/barnaba',
+        '/analyze/mc-annotate/1',
+        '/analyze/mc-annotate',
+    ],
     indirect=True,
 )
 def test_adapter(adapter_test_result):
@@ -129,6 +141,12 @@ def test_adapter(adapter_test_result):
         ('1ehz_mod.pdb', 'icode_barnaba.json', '/analyze/barnaba'),
         ('1ehz_mod.pdb', 'icode_mc_annotate.json', '/analyze/mc-annotate'),
     ],
+    ids=[
+        '/analyze/bpnet',
+        '/analyze/fr3d',
+        '/analyze/barnaba',
+        '/analyze/mc-annotate',
+    ],
     indirect=True,
 )
 def test_icode(adapter_test_result):
@@ -143,6 +161,11 @@ def test_icode(adapter_test_result):
         ('2z_74.pdb', '2z_74.cif', '/convert/ensure-cif'),
         ('2z_74.cif', '2z_74_out.pdb', '/convert/ensure-pdb'),
         ('2z_74.pdb', '2z_74_filter.cif', '/filter'),
+    ],
+    ids=[
+        '/convert/ensure-cif',
+        '/convert/ensure-pdb',
+        '/filter',
     ],
     indirect=True,
 )
