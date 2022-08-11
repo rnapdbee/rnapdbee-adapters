@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional

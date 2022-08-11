@@ -155,6 +155,15 @@ def test_get_base_interaction(adapter_with_names, residues, token, tokens, expec
         (PDB_LINES[5], {'.-1.A': '-'}),
         (PDB_LINES[6], {'_-1.A:': '_'}),
     ],
+    ids=[
+        'LINE 0',
+        'LINE 1',
+        'LINE 2',
+        'LINE 3',
+        'LINE 4',
+        'LINE 5',
+        'LINE 6',
+    ],
 )
 def test_append_names(adapter, file_content, expected):
     adapter.append_names(file_content)

@@ -37,6 +37,14 @@ def adapter_after_pdb_parsing():
         (PDB_LINES[7], ['9']),
         (PDB_LINES[8], ["'"]),
     ],
+    ids=[
+        'LINE 0',
+        'LINE 1',
+        'LINE 2',
+        'LINE 3',
+        'LINE 7',
+        'LINE 8',
+    ],
 )
 def test_append_chains(adapter, file_content, expected):
     adapter.append_chains(file_content)
@@ -50,6 +58,7 @@ def test_append_chains(adapter, file_content, expected):
         MAPPED_VALUES,
         '\n'.join(PDB_LINES_RENUMBERED[:9]),
     )],
+    ids=['renumber pdb'],
 )
 def test_renumber_pdb(adapter, file_content, expected_mapped_values, expected_content):
     assert adapter.renumber_pdb(file_content) == expected_content
