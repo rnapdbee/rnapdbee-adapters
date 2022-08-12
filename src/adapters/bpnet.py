@@ -134,7 +134,12 @@ def parse_overlaps(bpnet_output: str):
         if line.startswith('OVLP'):
             fields = line.strip().split()
             if len(fields) == 13:
-                if fields[8] != 'BP':
+                # ABVR      ASTK means Adjacent Stacking.
+                # ABVR      OSTK means Non-Adjacent Stacking.
+                # ABVR      ADJA means Adjacent contact but not proper stacking.
+                # ABVR      CROS means Cross overlap between BP and the opposite Diagonal.
+                # ABVR      CLOS means Otherwise overlap between any two bases.
+                if fields[7] in ['ASTK', 'OSTK', 'ADJA']:
                     # TODO: below you can infer StackingTopology from the fields
                     nt1, nt2 = residues_from_overlap_info(fields)
                     stackings.append(Stacking(nt1, nt2, None))
