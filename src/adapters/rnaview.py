@@ -4,10 +4,10 @@ import math
 import subprocess
 import sys
 import re
-from typing import Any, Dict, Tuple, Union
+from typing import Dict, Tuple, Union
 import tempfile
 from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, \
-                            LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
+                           LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
 import orjson
 
 
@@ -61,7 +61,7 @@ class RNAViewAdapter:
         position_c6: Union[None, Tuple[float, float, float]]
         position_n1: Union[None, Tuple[float, float, float]]
 
-        def is_correct(self) -> bool:
+        def is_correct_according_to_rnaview(self) -> bool:
             if any((self.position_c2 is None, self.position_c6 is None, self.position_n1 is None)):
                 return False
             distance_c2_c6 = math.dist(self.position_c2, self.position_c6)
@@ -84,9 +84,24 @@ class RNAViewAdapter:
     ATOM_C2 = 'C2'
     ATOM_N1 = 'N1'
 
+    # Groups of RNAVIEW_REGEX
+
     # RNAView tokens
     BEGIN_BASE_PAIR = 'BEGIN_base-pair'
     END_BASE_PAIR = 'END_base-pair'
+    STACKING = 'stacked'
+    BASE_RIBOSE = '!(b_s)'
+    BASE_PHOSPHATE = '!b_(O1P,O2P)'
+    OTHER_INTERACTION = '!(s_s)'
+    SAENGER_UNKNOWN = 'n/a'
+    PLUS_INTERACTION = '+/+'  # For us - cWW or tWW
+    MINUS_INTERACTION = '-/-'  # For us - cWW or tWW
+    ONE_HBOND = '!1H(b_b)'  # For us - OtherInteraction
+    DOUBLE_SAENGER = ('XIV,XV', 'XII,XIII')
+
+    # Roman numerals used by Saenger
+    # both in our model and MC-Annotate
+    ROMAN_NUMERALS = ('I', 'V', 'X')
 
     def __init__(self) -> None:
         self.residues_from_pdb: Dict[int, Residue] = {}
@@ -108,7 +123,7 @@ class RNAViewAdapter:
                     rnaview_result = rnaview_file.read()
         return rnaview_result
 
-    def append_residues_from_pdb(self, pdb_content: str) -> None:
+    def append_residues_from_pdb_using_rnaview_indexing(self, pdb_content: str) -> None:
         potential_residues: Dict[str, RNAViewAdapter.PotentialResidue] = {}
 
         for line in pdb_content.splitlines():
@@ -141,39 +156,47 @@ class RNAViewAdapter:
 
         counter = 1
         for potential_residue in potential_residues.values():
-            if potential_residue.is_correct():
+            if potential_residue.is_correct_according_to_rnaview():
                 self.residues_from_pdb[counter] = potential_residue.residue
                 counter += 1
 
     def get_leontis_westhof(self, lw_info: str, trans_cis_info: str) -> LeontisWesthof:
-        # TODO: make sure about small letters (for example 'S/s')
         trans_cis = trans_cis_info[0]
-        if lw_info == '+/+' or lw_info == '-/-':
+        if lw_info in (self.PLUS_INTERACTION, self.MINUS_INTERACTION):
             return LeontisWesthof[f'{trans_cis}WW']
         return LeontisWesthof[f'{trans_cis}{lw_info[0].upper()}{lw_info[2].upper()}']
 
-    def append_interaction(self, rnaview_regex_result: Tuple[Union[str, Any], ...]) -> None:
+    def append_interaction(self, rnaview_regex_result: Tuple[str, ...]) -> None:
         residue_left = self.residues_from_pdb[int(rnaview_regex_result[0])]
         residue_right = self.residues_from_pdb[int(rnaview_regex_result[1])]
 
-        if rnaview_regex_result[9] == 'stacked':
+        # Interaction OR Saenger OR n/a OR empty string
+        token = rnaview_regex_result[13]
+
+        if rnaview_regex_result[9] == self.STACKING:
             self.analysis_output.stackings.append(Stacking(residue_left, residue_right, None))
-        elif rnaview_regex_result[13] == '!(b_s)':
+
+        elif token == self.BASE_RIBOSE:
             self.analysis_output.baseRiboseInteractions.append(BaseRibose(residue_left, residue_right, None))
-        elif rnaview_regex_result[13] == '!b_(O1P,O2P)':
+
+        elif token == self.BASE_PHOSPHATE:
             self.analysis_output.basePhosphateInteractions.append(BasePhosphate(residue_left, residue_right, None))
-        elif rnaview_regex_result[13] == '!(s_s)':
+
+        elif token in (self.OTHER_INTERACTION, self.ONE_HBOND):
             self.analysis_output.otherInteractions.append(OtherInteraction(residue_left, residue_right))
-        elif rnaview_regex_result[13] == '!1H(b_b)' or rnaview_regex_result[13] == 'n/a':
-            # TODO: make sure that 'n/a' and '!1H(b_b)' are BasePair interaction
+
+        elif token == self.SAENGER_UNKNOWN:
             leontis_westhof = self.get_leontis_westhof(rnaview_regex_result[10], rnaview_regex_result[11])
             self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, None))
-        elif all([char in ('X', 'V', 'I') for char in rnaview_regex_result[13]]):
-            # TODO: make sure about double Saenger (for example 'XII,XIII')
+
+        elif all(char in self.ROMAN_NUMERALS for char in token) or token in self.DOUBLE_SAENGER:
             leontis_westhof = self.get_leontis_westhof(rnaview_regex_result[10], rnaview_regex_result[11])
-            saenger = Saenger[rnaview_regex_result[13]]
+            saenger = Saenger[token.split(',', 1)[0]] if token in self.DOUBLE_SAENGER else Saenger[token]
             self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, saenger))
+
         else:
+            raise RuntimeError(f'Unknown RNAView interaction: {token}')
+
     def check_indexing_correctness(self, regex_result: Tuple[str, ...]) -> None:
         residue_left = self.residues_from_pdb[int(regex_result[0])]
 
@@ -186,7 +209,7 @@ class RNAViewAdapter:
             raise RuntimeError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
 
     def analyze(self, file_content: str) -> AnalysisOutput:
-        self.append_residues_from_pdb(file_content)
+        self.append_residues_from_pdb_using_rnaview_indexing(file_content)
         rnaview_result = RNAViewAdapter.run_rnaview(file_content)
 
         base_pair_section = False
@@ -200,6 +223,7 @@ class RNAViewAdapter:
                 if rnaview_regex_result is None:
                     raise RuntimeError('RNAView regex failed')
                 rnaview_regex_groups = rnaview_regex_result.groups()
+                self.check_indexing_correctness(rnaview_regex_groups)
                 self.append_interaction(rnaview_regex_groups)
 
         return self.analysis_output
