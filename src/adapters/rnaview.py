@@ -174,7 +174,16 @@ class RNAViewAdapter:
             saenger = Saenger[rnaview_regex_result[13]]
             self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, saenger))
         else:
-            raise RuntimeError(f'Unknown RNAView interaction: {rnaview_regex_result[13]}')
+    def check_indexing_correctness(self, regex_result: Tuple[str, ...]) -> None:
+        residue_left = self.residues_from_pdb[int(regex_result[0])]
+
+        if residue_left.auth.chain != regex_result[2] or residue_left.auth.number != int(regex_result[3]):
+            raise RuntimeError(f'Wrong internal index for {residue_left}. Fix RNAView internal index mapping.')
+
+        residue_right = self.residues_from_pdb[int(regex_result[1])]
+
+        if residue_right.auth.chain != regex_result[7] or residue_right.auth.number != int(regex_result[6]):
+            raise RuntimeError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
 
     def analyze(self, file_content: str) -> AnalysisOutput:
         self.append_residues_from_pdb(file_content)
