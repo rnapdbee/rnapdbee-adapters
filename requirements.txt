@@ -1,4 +1,4 @@
-mmcif==0.76
+mmcif==0.77
 Flask==2.1.*
 orjson==3.7.*
 barnaba==0.1.8
