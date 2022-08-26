@@ -61,7 +61,10 @@ RUN apt-get update -y \
 
 RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
 
-RUN cd RNAVIEW \
+COPY rnaview.patch rnaview.patch
+
+RUN patch -p0 < rnaview.patch \
+ && cd RNAVIEW \
  && make
 
 ################################################################################

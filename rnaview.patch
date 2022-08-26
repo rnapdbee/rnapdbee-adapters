@@ -1,0 +1,78 @@
+diff -ur RNAVIEW-org/Makefile RNAVIEW/Makefile
+--- RNAVIEW-org/Makefile	2003-08-16 15:38:01.000000000 +0200
++++ RNAVIEW/Makefile	2017-12-27 13:37:38.942450814 +0100
+@@ -58,7 +58,7 @@
+ 
+ all: $(RNAVIEW)
+ 
+-CFLAGS  =  $(LINCLUDES) 
++CFLAGS  = -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt $(LINCLUDES) 
+ 
+ $(RNAVIEW) : $(HFILES) $(OBJ_FILE) 
+ 	$(CC) $(CFLAGS) -o $@ $(OBJ_FILE) $(LDFLAGS) -lm $(MALLOCLIB)
+diff -ur RNAVIEW-org/src/fpair_sub.c RNAVIEW/src/fpair_sub.c
+--- RNAVIEW-org/src/fpair_sub.c	2003-08-16 17:01:34.000000000 +0200
++++ RNAVIEW/src/fpair_sub.c	2017-12-27 13:34:52.653172664 +0100
+@@ -41,7 +41,7 @@
+ 
+ void get_reference_pdb(char *BDIR)
+ {
+-    char **sAtomName, spdb[80];
++    char **sAtomName, spdb[BUF512];
+     char ref[] = "AGCUTIP";
+     long i,j,k,snum;
+     double  **sx;
+diff -ur RNAVIEW-org/src/rnaview.c RNAVIEW/src/rnaview.c
+--- RNAVIEW-org/src/rnaview.c	2004-07-13 22:28:03.000000000 +0200
++++ RNAVIEW/src/rnaview.c	2017-12-27 13:35:11.173092209 +0100
+@@ -129,8 +129,6 @@
+     }
+     
+     rna(pdbfile, type_stat, pair_stat, &base_all);
+-    if(XML==0)
+-        base_edge_stat(pdbfile, A, U, G, C, T, P, I);
+ 
+     fprintf(fstat,"\nNumber of the total bases = %d\n", base_all);
+     print_statistic(fstat, type_stat, pair_stat);
+@@ -698,9 +696,12 @@
+ 
+     bs_atoms = 0;
+     for (i=1; i<=nchain; i++){ /* rid of ligand */
+-        if((chain_idx[i][2] - chain_idx[i][1]) <= 0)continue;
+         ib=chain_idx[i][1];
+         ie=chain_idx[i][2];
++
++        if (ie < ib) {
++            continue;
++        }
+         
+         printf("RNA/DNA chain_ID:  %c  from residue %4d to %4d\n",
+                ChainID[ seidx[ib][1]], ResSeq[ seidx[ib][1] ], ResSeq[ seidx[ie][1] ]);
+@@ -753,9 +754,6 @@
+     base_all=base_all+nres; /* acculate all the bases */
+     *bs_all=base_all;
+     
+-    if(!(PS>0 || VRML>0 || XML>0 || ALL>0) )
+-        write_tmp_pdb(pdbfile,nres,seidx,AtomName,ResName,ChainID,ResSeq,xyz);
+- 
+     
+     free_cmatrix(AtomName, 1, num, 0, 4);
+     free_cmatrix(ResName, 1, num, 0, 3);
+@@ -852,7 +850,7 @@
+ 
+     ntot = 2*num_pair_tot;
+ /*    if(ARGC <=2){ */
+-    motif(pdbfile);  /*  write the RNA motif pattern */   
++    // motif(pdbfile);  /*  write the RNA motif pattern */   
+     	print_sorted_pair(ntot, pdbfile);/* sort pairs according to W-H-S*/
+ /*    	write_multiplets(pdbfile);  */
+             /*
+@@ -1021,7 +1019,7 @@
+     long i, j, np=0, n, n1[25], **index;
+     
+     char str[200], **str_pair,**str_tmp ;
+-    char inpfile[80], outfile[80];
++    char inpfile[BUF512], outfile[BUF512];
+     
+     FILE  *finp, *fout;
+     str_pair = cmatrix(0, ntot, 0, 120);
