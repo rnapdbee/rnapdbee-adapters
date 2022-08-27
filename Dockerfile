@@ -84,7 +84,7 @@ RUN python3 -m venv /venv
 ENV PATH=/venv/bin:$PATH
 
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir wheel \
+RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
  && pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################
