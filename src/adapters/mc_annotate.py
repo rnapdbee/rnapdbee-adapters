@@ -42,6 +42,9 @@ class MCAnnotateAdapter:
     RIBOSE_ATOM = "O2'"
     PHOSPHATE_ATOM = "O2P"
 
+    # Single hydrogen bond - for us it's OtherInteraction
+    ONE_HBOND = 'one_hbond'
+
     # Cis/trans tokens used by MC-Annotate
     CIS = 'cis'
     TRANS = 'trans'
@@ -71,7 +74,6 @@ class MCAnnotateAdapter:
     NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
-        # OtherInteractions list is always empty for MC-Annotate
         self.analysis_output = AnalysisOutput([], [], [], [], [])
         # Since names are not present in adjacent and non-adjacent stackings
         # we need save these values eariler
@@ -141,9 +143,10 @@ class MCAnnotateAdapter:
             raise ValueError(f'Cis/trans expected, but not present in {tokens}')
 
         # example saenger: XIX
-        for saenger_token in tokens:
-            if all(char in self.ROMAN_NUMERALS for char in saenger_token):
-                saenger = Saenger[saenger_token]
+        for potential_saenger_token in tokens:
+            potential_saenger_without_comma = potential_saenger_token.split(',')[0]
+            if all(char in self.ROMAN_NUMERALS for char in potential_saenger_without_comma):
+                saenger = Saenger[potential_saenger_without_comma]
                 break
         else:
             saenger = None
@@ -193,10 +196,12 @@ class MCAnnotateAdapter:
             with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
                 file.write(pdb_content)
                 file.seek(0)
-                mc_result = subprocess.run(['mc-annotate', file.name],
-                                           stdout=subprocess.PIPE,
-                                           stderr=subprocess.DEVNULL,
-                                           check=True).stdout.decode('utf-8')
+                mc_result = subprocess.run(
+                    ['mc-annotate', file.name],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.DEVNULL,
+                    check=True,
+                ).stdout.decode('utf-8')
         return mc_result
 
     def append_names(self, file_content: str) -> None:
