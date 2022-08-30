@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    if: ${{ github.actor != 'dependabot[bot]' }}
 
     env:
       DOCKER_IMAGE: rnapdbee-image
@@ -42,6 +43,8 @@ jobs:
   
   lint:
     runs-on: ubuntu-20.04
+    if: ${{ github.actor != 'dependabot[bot]' }}
+
     strategy:
       matrix:
         python-version: ["3.8", "3.10"]
