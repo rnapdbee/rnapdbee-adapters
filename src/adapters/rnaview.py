@@ -94,8 +94,9 @@ class RNAViewAdapter:
     BASE_PHOSPHATE = '!b_(O1P,O2P)'
     OTHER_INTERACTION = '!(s_s)'
     SAENGER_UNKNOWN = 'n/a'
-    PLUS_INTERACTION = '+/+'  # For us - cWW or tWW
-    MINUS_INTERACTION = '-/-'  # For us - cWW or tWW
+    PLUS_INTERACTION = '+/+'  # For us - cWW
+    MINUS_INTERACTION = '-/-'  # For us - cWW
+    X_INTERACTION = 'X/X'  # For us - cWW
     ONE_HBOND = '!1H(b_b)'  # For us - OtherInteraction
     DOUBLE_SAENGER = ('XIV,XV', 'XII,XIII')
 
@@ -162,7 +163,7 @@ class RNAViewAdapter:
 
     def get_leontis_westhof(self, lw_info: str, trans_cis_info: str) -> LeontisWesthof:
         trans_cis = trans_cis_info[0]
-        if lw_info in (self.PLUS_INTERACTION, self.MINUS_INTERACTION):
+        if lw_info in (self.PLUS_INTERACTION, self.MINUS_INTERACTION, self.X_INTERACTION):
             return LeontisWesthof[f'{trans_cis}WW']
         return LeontisWesthof[f'{trans_cis}{lw_info[0].upper()}{lw_info[2].upper()}']
 
