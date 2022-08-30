@@ -27,28 +27,6 @@
                 "label": null,
                 "auth": {
                     "chain": "X",
-                    "number": -1,
-                    "icode": "A",
-                    "name": "DA"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 67,
-                    "icode": "N",
-                    "name": "U"
-                }
-            },
-            "lw": "tHH",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "X",
                     "number": 2,
                     "icode": "C",
                     "name": "C"
@@ -131,28 +109,6 @@
             },
             "lw": "cWW",
             "saenger": "XIX"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "X",
-                    "number": 7,
-                    "icode": "H",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 34,
-                    "icode": "G",
-                    "name": "G"
-                }
-            },
-            "lw": "tHS",
-            "saenger": null
         },
         {
             "nt1": {
@@ -511,28 +467,6 @@
                 "label": null,
                 "auth": {
                     "chain": "Y",
-                    "number": 37,
-                    "icode": "J",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 127,
-                    "icode": "V",
-                    "name": "A"
-                }
-            },
-            "lw": "tSW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
                     "number": 38,
                     "icode": "K",
                     "name": "A"
@@ -731,28 +665,6 @@
                 "label": null,
                 "auth": {
                     "chain": "Y",
-                    "number": 53,
-                    "icode": "Z",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 104,
-                    "icode": "Y",
-                    "name": "A"
-                }
-            },
-            "lw": "tSW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
                     "number": 54,
                     "icode": "A",
                     "name": "A"
@@ -901,28 +813,6 @@
             },
             "lw": "cWW",
             "saenger": "XIX"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 79,
-                    "icode": "Z",
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 81,
-                    "icode": "B",
-                    "name": "C"
-                }
-            },
-            "lw": "cWH",
-            "saenger": null
         },
         {
             "nt1": {
@@ -4609,5 +4499,106 @@
             "bph": null
         }
     ],
-    "otherInteractions": []
+    "otherInteractions": [
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "X",
+                    "number": 7,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 34,
+                    "icode": "G",
+                    "name": "G"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 37,
+                    "icode": "J",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 127,
+                    "icode": "V",
+                    "name": "A"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 53,
+                    "icode": "Z",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 104,
+                    "icode": "Y",
+                    "name": "A"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 79,
+                    "icode": "Z",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 81,
+                    "icode": "B",
+                    "name": "C"
+                }
+            }
+        }
+    ]
 }
