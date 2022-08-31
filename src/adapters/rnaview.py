@@ -118,7 +118,7 @@ class RNAViewAdapter:
                     ['rnaview', file.name],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
-                    check=True,
+                    check=False,
                 )
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()

@@ -203,7 +203,7 @@ def analyze(cif_content: str) -> AnalysisOutput:
     file.write(cif_content)
     file.seek(0)
 
-    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
 
     file.close()
 
