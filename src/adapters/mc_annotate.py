@@ -10,7 +10,7 @@ import sys
 import subprocess
 import orjson
 
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
+from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, \
     Residue, ResidueAuth, Saenger, Stacking, StackingTopology
 
 
@@ -40,7 +40,10 @@ class MCAnnotateAdapter:
     # Based on these tokens
     # BaseRiboseInteractions and BasePhosphateInteractions are created
     RIBOSE_ATOM = "O2'"
-    PHOSPHATE_ATOM = "O2P"
+    PHOSPHATE_ATOM = 'O2P'
+
+    # Single hydrogen bond - for us it's OtherInteraction
+    ONE_HBOND = 'one_hbond'
 
     # Cis/trans tokens used by MC-Annotate
     CIS = 'cis'
@@ -71,7 +74,6 @@ class MCAnnotateAdapter:
     NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
-        # OtherInteractions list is always empty for MC-Annotate
         self.analysis_output = AnalysisOutput([], [], [], [], [])
         # Since names are not present in adjacent and non-adjacent stackings
         # we need save these values eariler
@@ -140,10 +142,11 @@ class MCAnnotateAdapter:
         else:
             raise ValueError(f'Cis/trans expected, but not present in {tokens}')
 
-        # example saenger: XIX
-        for saenger_token in tokens:
-            if all(char in self.ROMAN_NUMERALS for char in saenger_token):
-                saenger = Saenger[saenger_token]
+        # example saenger: XIX or XII,XIII (?)
+        for potential_saenger_token in tokens:
+            potential_saenger_without_comma = potential_saenger_token.split(',')[0]
+            if all(char in self.ROMAN_NUMERALS for char in potential_saenger_without_comma):
+                saenger = Saenger[potential_saenger_without_comma]
                 break
         else:
             saenger = None
@@ -155,6 +158,9 @@ class MCAnnotateAdapter:
         residue_left, residue_right = residues
         return BasePair(residue_left, residue_right, leontis_westhof, saenger)
 
+    def get_other_interaction(self, residues: Tuple[Residue, Residue]) -> OtherInteraction:
+        return OtherInteraction(residues[0], residues[1])
+
     def append_interactions(self, line: str) -> None:
         splitted_line = line.split()
         residues = self.get_residues(splitted_line[0])
@@ -164,8 +170,19 @@ class MCAnnotateAdapter:
         # example tokens: Ww/Ww pairing antiparallel cis XX
         tokens: List[str] = splitted_line[3:]
 
-        for token in tokens:
+        # Special case
+        # IF single hydrogen bond and base pairs only THEN
+        # append to OtherIneraction list
+        if self.ONE_HBOND in tokens:
+            for token in tokens:
+                if self.RIBOSE_ATOM in token or self.PHOSPHATE_ATOM in token:
+                    break
+            else:
+                other_interaction = self.get_other_interaction(residues)
+                self.analysis_output.otherInteractions.append(other_interaction)
+                return
 
+        for token in tokens:
             if self.RIBOSE_ATOM in token and not ribose_added:
                 # example token: Ss/O2'
                 ribose_interaction = self.get_ribose_interaction(residues, token)
@@ -193,10 +210,12 @@ class MCAnnotateAdapter:
             with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
                 file.write(pdb_content)
                 file.seek(0)
-                mc_result = subprocess.run(['mc-annotate', file.name],
-                                           stdout=subprocess.PIPE,
-                                           stderr=subprocess.DEVNULL,
-                                           check=True).stdout.decode('utf-8')
+                mc_result = subprocess.run(
+                    ['mc-annotate', file.name],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.DEVNULL,
+                    check=True,
+                ).stdout.decode('utf-8')
         return mc_result
 
     def append_names(self, file_content: str) -> None:
