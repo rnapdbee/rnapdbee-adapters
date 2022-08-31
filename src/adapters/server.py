@@ -5,6 +5,7 @@ from flask import Flask, request
 from adapters import analysis_output_filter, bpnet, fr3d_, maxit, cif_filter, pdb_filter
 from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.barnaba_ import BarnabaAdapter
+from adapters.rnaview import RNAViewAdapter
 from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 from adapters.utils import content_type, json_response, plain_response
 
@@ -110,6 +111,28 @@ def analyze_mc_annotate_model(model):
 @app.route('/analyze/mc-annotate', methods=['POST'])
 def analyze_mc_annotate():
     return analyze_mc_annotate_model(1)
+
+
+# RNAView adapter routes
+
+
+@app.route('/analyze/rnaview/<int:model>', methods=['POST'])
+@content_type('text/plain')
+@json_response()
+def analyze_rnaview_model(model):
+    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
+        (pdb_filter.leave_single_model, {'model': model}),
+    ])
+    analysis_output = RNAViewAdapter().analyze(pdb_content)
+    filtered_analysis_output = analysis_output_filter.apply(analysis_output, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
+
+
+@app.route('/analyze/rnaview', methods=['POST'])
+def analyze_rnaview():
+    return analyze_rnaview_model(1)
 
 
 # MAXIT tool routes
