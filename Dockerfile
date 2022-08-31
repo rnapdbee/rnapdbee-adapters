@@ -61,7 +61,10 @@ RUN apt-get update -y \
 
 RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
 
-RUN cd RNAVIEW \
+COPY rnaview.patch rnaview.patch
+
+RUN patch -p0 < rnaview.patch \
+ && cd RNAVIEW \
  && make
 
 ################################################################################
@@ -81,7 +84,7 @@ RUN python3 -m venv /venv
 ENV PATH=/venv/bin:$PATH
 
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir wheel \
+RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
  && pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################
