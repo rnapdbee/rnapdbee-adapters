@@ -214,7 +214,7 @@ class MCAnnotateAdapter:
                     ['mc-annotate', file.name],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.DEVNULL,
-                    check=True,
+                    check=False,
                 ).stdout.decode('utf-8')
         return mc_result
 
