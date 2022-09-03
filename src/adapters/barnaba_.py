@@ -135,7 +135,10 @@ class BarnabaAdapter:
                 file.write(file_content)
                 file.seek(0)
                 with suppress_stdout_stderr():
-                    barnaba_result = barnaba.annotate(file.name)
+                    try:
+                        barnaba_result = barnaba.annotate(file.name)
+                    except SystemExit as exception:
+                        raise RuntimeError('BaRNAba failed') from exception
         return barnaba_result
 
     def analyze(self, file_content: str) -> AnalysisOutput:
