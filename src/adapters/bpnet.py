@@ -7,7 +7,9 @@ import tempfile
 
 import orjson
 
-from adapters.model import BasePair, LeontisWesthof, Residue, ResidueAuth, AnalysisOutput, Stacking, BaseRibose, \
+from adapters.model import AnalysisOutput
+
+from rnapolis.common import BasePair, Residue, ResidueAuth, LeontisWesthof, Stacking, BaseRibose, \
     BasePhosphate, OtherInteraction
 
 

@@ -10,8 +10,9 @@ import sys
 import subprocess
 import orjson
 
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, \
-    Residue, ResidueAuth, Saenger, Stacking, StackingTopology
+from adapters.model import AnalysisOutput
+from rnapolis.common import LeontisWesthof, Saenger, BasePair, BasePhosphate, BaseRibose, OtherInteraction, \
+    Residue, ResidueAuth, Stacking, StackingTopology
 
 
 class MCAnnotateAdapter:

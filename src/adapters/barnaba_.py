@@ -10,9 +10,11 @@ from collections import defaultdict
 import orjson
 import barnaba
 
-from adapters.model import AnalysisOutput, BasePair, LeontisWesthof, OtherInteraction, \
-    Residue, ResidueAuth, Stacking, StackingTopology
+from adapters.model import AnalysisOutput
 from adapters.utils import suppress_stdout_stderr
+
+from rnapolis.common import LeontisWesthof, BasePair, OtherInteraction, \
+    Residue, ResidueAuth, Stacking, StackingTopology
 
 
 class BarnabaAdapter:

@@ -9,7 +9,8 @@ import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
+from adapters.model import AnalysisOutput
+from rnapolis.common import LeontisWesthof, BasePair, BasePhosphate, BaseRibose, \
     Residue, ResidueAuth, Stacking, StackingTopology
 
 SCREEN_DISTANCE_CUTOFF = 12

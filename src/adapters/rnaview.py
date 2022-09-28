@@ -6,9 +6,11 @@ import sys
 import re
 from typing import Dict, Tuple, Union
 import tempfile
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, \
-                           LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
+from adapters.model import AnalysisOutput
 import orjson
+
+from rnapolis.common import BasePair, BasePhosphate, BaseRibose, \
+                           LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
 
 
 class RNAViewAdapter:
