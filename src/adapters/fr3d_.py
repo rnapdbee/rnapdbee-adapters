@@ -8,10 +8,11 @@ from typing import List, Tuple
 import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             LeontisWesthof, Residue, ResidueAuth, Stacking,
+                             StackingTopology)
 
 from adapters.model import AnalysisOutput
-from rnapolis.common import LeontisWesthof, BasePair, BasePhosphate, BaseRibose, \
-    Residue, ResidueAuth, Stacking, StackingTopology
 
 SCREEN_DISTANCE_CUTOFF = 12
 

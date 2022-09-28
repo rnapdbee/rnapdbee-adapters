@@ -2,11 +2,13 @@
 
 from flask import Flask, request
 
-from adapters import analysis_output_filter, bpnet, fr3d_, maxit, cif_filter, pdb_filter
-from adapters.mc_annotate import MCAnnotateAdapter
+from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit,
+                      pdb_filter)
 from adapters.barnaba_ import BarnabaAdapter
+from adapters.cif_filter import (fix_occupancy, leave_single_model,
+                                 remove_proteins)
+from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.rnaview import RNAViewAdapter
-from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 from adapters.utils import content_type, json_response, plain_response
 
 app = Flask(__name__)

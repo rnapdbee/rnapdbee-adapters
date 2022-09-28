@@ -1,18 +1,18 @@
 #! /usr/bin/env python
 
-import tempfile
 import re
-
-from typing import Dict, List, Tuple
-from enum import Enum
-
-import sys
 import subprocess
+import sys
+import tempfile
+from enum import Enum
+from typing import Dict, List, Tuple
+
 import orjson
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             LeontisWesthof, OtherInteraction, Residue,
+                             ResidueAuth, Saenger, Stacking, StackingTopology)
 
 from adapters.model import AnalysisOutput
-from rnapolis.common import LeontisWesthof, Saenger, BasePair, BasePhosphate, BaseRibose, OtherInteraction, \
-    Residue, ResidueAuth, Stacking, StackingTopology
 
 
 class MCAnnotateAdapter:

@@ -1,20 +1,19 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named barnaba.py, because it imports from "barnaba", and Python complains about that
 
-import tempfile
-import sys
 import re
-
-from typing import List, Optional, Tuple, Dict
+import sys
+import tempfile
 from collections import defaultdict
-import orjson
+from typing import Dict, List, Optional, Tuple
+
 import barnaba
+import orjson
+from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction,
+                             Residue, ResidueAuth, Stacking, StackingTopology)
 
 from adapters.model import AnalysisOutput
 from adapters.utils import suppress_stdout_stderr
-
-from rnapolis.common import LeontisWesthof, BasePair, OtherInteraction, \
-    Residue, ResidueAuth, Stacking, StackingTopology
 
 
 class BarnabaAdapter:

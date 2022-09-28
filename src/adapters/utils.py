@@ -1,6 +1,6 @@
+from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from functools import wraps
 from http import HTTPStatus
-from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from os import devnull
 
 import orjson

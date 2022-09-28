@@ -1,6 +1,9 @@
-from typing import Tuple, Iterable, Callable, Dict, List, TypeVar
+from typing import Callable, Dict, Iterable, List, Tuple, TypeVar
+
+from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction,
+                             Stacking, StackingTopology)
+
 from adapters.model import AnalysisOutput
-from rnapolis.common import LeontisWesthof, BasePair, OtherInteraction, Stacking, StackingTopology
 
 InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
 

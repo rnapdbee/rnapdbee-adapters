@@ -1,8 +1,12 @@
-from adapters.mc_annotate import MCAnnotateAdapter
-from contextlib import ExitStack as does_not_raise  # ExitStack for support Python 3.3+
+from contextlib import \
+    ExitStack as does_not_raise  # ExitStack for support Python 3.3+
+
 import pytest
-from adapters.model import BasePair, BasePhosphate, BaseRibose, LeontisWesthof, Saenger
-from data import RESIDUES, STACKINGS, PDB_LINES
+from data import PDB_LINES, RESIDUES, STACKINGS
+
+from adapters.mc_annotate import MCAnnotateAdapter
+from adapters.model import (BasePair, BasePhosphate, BaseRibose,
+                            LeontisWesthof, Saenger)
 
 # -------- FIXTURES --------
 

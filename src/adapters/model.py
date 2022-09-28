@@ -2,7 +2,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from rnapolis.common import BasePair, Stacking, BasePhosphate, BaseRibose, OtherInteraction
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             OtherInteraction, Stacking)
 
 
 @dataclass

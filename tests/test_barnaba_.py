@@ -1,7 +1,8 @@
-from adapters.model import LeontisWesthof, Residue, ResidueAuth
-from adapters.barnaba_ import BarnabaAdapter
 import pytest
-from data import PDB_LINES, PDB_LINES_RENUMBERED, MAPPED_VALUES, RESIDUES
+from data import MAPPED_VALUES, PDB_LINES, PDB_LINES_RENUMBERED, RESIDUES
+
+from adapters.barnaba_ import BarnabaAdapter
+from adapters.model import LeontisWesthof, Residue, ResidueAuth
 
 # -------- FIXTURES --------
 

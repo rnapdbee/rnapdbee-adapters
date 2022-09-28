@@ -6,11 +6,11 @@ import sys
 import tempfile
 
 import orjson
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             LeontisWesthof, OtherInteraction, Residue,
+                             ResidueAuth, Stacking)
 
 from adapters.model import AnalysisOutput
-
-from rnapolis.common import BasePair, Residue, ResidueAuth, LeontisWesthof, Stacking, BaseRibose, \
-    BasePhosphate, OtherInteraction
 
 
 class Element(enum.Enum):

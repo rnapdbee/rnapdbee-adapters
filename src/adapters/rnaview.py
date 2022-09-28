@@ -1,16 +1,18 @@
 #! /usr/bin/env python
-from dataclasses import dataclass
 import math
+import re
 import subprocess
 import sys
-import re
-from typing import Dict, Tuple, Union
 import tempfile
-from adapters.model import AnalysisOutput
-import orjson
+from dataclasses import dataclass
+from typing import Dict, Tuple, Union
 
-from rnapolis.common import BasePair, BasePhosphate, BaseRibose, \
-                           LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
+import orjson
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             LeontisWesthof, OtherInteraction, Residue,
+                             ResidueAuth, Saenger, Stacking)
+
+from adapters.model import AnalysisOutput
 
 
 class RNAViewAdapter:
