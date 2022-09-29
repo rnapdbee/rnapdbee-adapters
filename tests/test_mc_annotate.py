@@ -3,10 +3,10 @@ from contextlib import \
 
 import pytest
 from data import PDB_LINES, RESIDUES, STACKINGS
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
+                             LeontisWesthof, Saenger)
 
 from adapters.mc_annotate import MCAnnotateAdapter
-from adapters.model import (BasePair, BasePhosphate, BaseRibose,
-                            LeontisWesthof, Saenger)
 
 # -------- FIXTURES --------
 

@@ -3,7 +3,7 @@
 # but please do not change or remove existing data (e.g. RESIDUES[0]).
 # Otherwise tests will fail.
 
-from adapters.model import Residue, ResidueAuth, Stacking, StackingTopology
+from rnapolis.common import Residue, ResidueAuth, Stacking, StackingTopology
 
 RESIDUES = [
     Residue(None, ResidueAuth('X', -1, 'A', 'res')),  # 0

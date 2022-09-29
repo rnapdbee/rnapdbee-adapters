@@ -1,8 +1,8 @@
 import pytest
 from data import MAPPED_VALUES, PDB_LINES, PDB_LINES_RENUMBERED, RESIDUES
+from rnapolis.common import LeontisWesthof, Residue, ResidueAuth
 
 from adapters.barnaba_ import BarnabaAdapter
-from adapters.model import LeontisWesthof, Residue, ResidueAuth
 
 # -------- FIXTURES --------
 
