@@ -12,7 +12,7 @@ from adapters.model import AnalysisOutput
 from adapters.rnaview import RNAViewAdapter
 from adapters.utils import content_type, json_response, plain_response
 
-import io
+import tempfile
 import rnapolis.parser
 import rnapolis.annotator
 
@@ -154,7 +154,12 @@ def analyze_rnapolis_model(model):
         (remove_proteins, {}),
         (fix_occupancy, {}),
     ])
-    tertiary_structure = rnapolis.parser.read_3d_structure(io.StringIO(cif_content), model)
+
+    with tempfile.NamedTemporaryFile('w+') as cif_file:
+        cif_file.write(cif_content)
+        cif_file.seek(0)
+        tertiary_structure = rnapolis.parser.read_3d_structure(cif_file, model)
+
     secondary_structure = rnapolis.annotator.extract_secondary_structure(tertiary_structure, model)
     analysis_output = AnalysisOutput(secondary_structure.basePairs, secondary_structure.stackings,
                                      secondary_structure.baseRiboseInteractions,
