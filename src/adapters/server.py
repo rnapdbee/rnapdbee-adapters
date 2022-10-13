@@ -1,5 +1,9 @@
 #! /usr/bin/env python
 
+import tempfile
+
+import rnapolis.annotator
+import rnapolis.parser
 from flask import Flask, request
 
 from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit,
@@ -11,10 +15,6 @@ from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.model import AnalysisOutput
 from adapters.rnaview import RNAViewAdapter
 from adapters.utils import content_type, json_response, plain_response
-
-import tempfile
-import rnapolis.parser
-import rnapolis.annotator
 
 app = Flask(__name__)
 
