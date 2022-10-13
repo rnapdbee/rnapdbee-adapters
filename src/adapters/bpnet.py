@@ -8,9 +8,7 @@ import tempfile
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
                              LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Stacking)
-
-from adapters.model import AnalysisOutput
+                             ResidueAuth, Stacking, Structure2D)
 
 
 class Element(enum.Enum):
@@ -199,7 +197,7 @@ def residues_from_overlap_info(fields):
     return nt1, nt2
 
 
-def analyze(cif_content: str) -> AnalysisOutput:
+def analyze(cif_content: str) -> Structure2D:
     directory = tempfile.TemporaryDirectory()
     file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
     file.write(cif_content)
@@ -223,8 +221,7 @@ def analyze(cif_content: str) -> AnalysisOutput:
     else:
         stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
 
-    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions,
-                          other_interactions)
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
 
 
 def main():

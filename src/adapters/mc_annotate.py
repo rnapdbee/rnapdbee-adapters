@@ -10,9 +10,8 @@ from typing import Dict, List, Tuple
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
                              LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Saenger, Stacking, StackingTopology)
-
-from adapters.model import AnalysisOutput
+                             ResidueAuth, Saenger, Stacking, StackingTopology,
+                             Structure2D)
 
 
 class MCAnnotateAdapter:
@@ -75,7 +74,7 @@ class MCAnnotateAdapter:
     NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
-        self.analysis_output = AnalysisOutput([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [])
         # Since names are not present in adjacent and non-adjacent stackings
         # we need save these values eariler
         self.names: Dict[str, str] = {}
@@ -229,7 +228,7 @@ class MCAnnotateAdapter:
                 residue_info = f'{chain}{number}' if icode == '' else f'{chain}{number}.{icode}'
                 self.names[residue_info] = name
 
-    def analyze(self, pdb_content: str) -> AnalysisOutput:
+    def analyze(self, pdb_content: str) -> Structure2D:
         self.append_names(pdb_content)
         mc_result = self.run_mc_annotate(pdb_content)
         current_state = None

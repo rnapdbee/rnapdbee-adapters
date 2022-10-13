@@ -10,9 +10,9 @@ from typing import Dict, List, Optional, Tuple
 import barnaba
 import orjson
 from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction,
-                             Residue, ResidueAuth, Stacking, StackingTopology)
+                             Residue, ResidueAuth, Stacking, StackingTopology,
+                             Structure2D)
 
-from adapters.model import AnalysisOutput
 from adapters.utils import suppress_stdout_stderr
 
 
@@ -42,7 +42,7 @@ class BarnabaAdapter:
     def __init__(self) -> None:
         # In the case of BaRNAba BasePhosphateIneractions
         # and BaseRiboseInteractions are always empty
-        self.analysis_output = AnalysisOutput([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [])
         # BaRNAba replaces chain identifiers with numbers
         # so we need to remember them before processing
         self.chains: List[str] = []
@@ -142,7 +142,7 @@ class BarnabaAdapter:
                         raise RuntimeError('BaRNAba failed') from exception
         return barnaba_result
 
-    def analyze(self, file_content: str) -> AnalysisOutput:
+    def analyze(self, file_content: str) -> Structure2D:
         self.append_chains(file_content)
         renumbered_pdb: str = self.renumber_pdb(file_content)
         stackings, pairings, res = self.run_barnaba(renumbered_pdb)

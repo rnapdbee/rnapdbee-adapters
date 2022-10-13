@@ -1,14 +1,12 @@
 from typing import Callable, Dict, Iterable, List, Tuple, TypeVar
 
 from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction,
-                             Stacking, StackingTopology)
-
-from adapters.model import AnalysisOutput
+                             Stacking, StackingTopology, Structure2D)
 
 InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
 
 
-def apply(analysis_output: AnalysisOutput, functions_args: Iterable[Tuple[Callable, Dict]]) -> AnalysisOutput:
+def apply(analysis_output: Structure2D, functions_args: Iterable[Tuple[Callable, Dict]]) -> Structure2D:
 
     for function, kwargs in functions_args:
         analysis_output = function(analysis_output, **kwargs)
@@ -16,7 +14,7 @@ def apply(analysis_output: AnalysisOutput, functions_args: Iterable[Tuple[Callab
     return analysis_output
 
 
-def remove_duplicate_pairs(analysis_output: AnalysisOutput, *_) -> AnalysisOutput:
+def remove_duplicate_pairs(analysis_output: Structure2D, *_) -> Structure2D:
     stacking_topology_mapping = {
         StackingTopology.upward: StackingTopology.downward,
         StackingTopology.downward: StackingTopology.upward,
@@ -57,7 +55,7 @@ def remove_duplicate_pairs(analysis_output: AnalysisOutput, *_) -> AnalysisOutpu
         reverse_other_interaction,
     )
 
-    return AnalysisOutput(
+    return Structure2D(
         filtered_base_pairs,
         filtered_stackings,
         analysis_output.baseRiboseInteractions,
