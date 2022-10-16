@@ -5,7 +5,6 @@ import tempfile
 import rnapolis.annotator
 import rnapolis.parser
 from flask import Flask, request
-from rnapolis.common import Structure2D
 
 from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit,
                       pdb_filter)
