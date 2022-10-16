@@ -8,9 +8,8 @@ from typing import List, Tuple
 import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
-
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, LeontisWesthof, \
-    Residue, ResidueAuth, Stacking, StackingTopology
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, Residue, ResidueAuth, Stacking,
+                             StackingTopology, Structure2D)
 
 SCREEN_DISTANCE_CUTOFF = 12
 
@@ -57,7 +56,7 @@ def unify_classification(fr3d_names: List[str]) -> Tuple:
     return lw, stacking, base_ribose, base_phosphate
 
 
-def analyze(file_content: str) -> AnalysisOutput:
+def analyze(file_content: str) -> Structure2D:
     with open(os.devnull, 'w', encoding='utf-8') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
@@ -87,7 +86,7 @@ def analyze(file_content: str) -> AnalysisOutput:
         for x in bph:
             base_phosphate_interactions.append(BasePhosphate(nt1, nt2, x))
 
-    return AnalysisOutput(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, [])
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, [])
 
 
 def main():

@@ -1,14 +1,15 @@
 #! /usr/bin/env python
-from dataclasses import dataclass
 import math
+import re
 import subprocess
 import sys
-import re
-from typing import Dict, Tuple, Union
 import tempfile
-from adapters.model import AnalysisOutput, BasePair, BasePhosphate, BaseRibose, \
-                           LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Saenger, Stacking
+from dataclasses import dataclass
+from typing import Dict, Tuple, Union
+
 import orjson
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
+                             ResidueAuth, Saenger, Stacking, Structure2D)
 
 
 class RNAViewAdapter:
@@ -106,7 +107,7 @@ class RNAViewAdapter:
 
     def __init__(self) -> None:
         self.residues_from_pdb: Dict[int, Residue] = {}
-        self.analysis_output = AnalysisOutput([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [])
 
     @classmethod
     def run_rnaview(cls, file_content: str) -> str:
@@ -209,7 +210,7 @@ class RNAViewAdapter:
         if residue_right.auth.chain != regex_result[7] or residue_right.auth.number != int(regex_result[6]):
             raise RuntimeError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
 
-    def analyze(self, file_content: str) -> AnalysisOutput:
+    def analyze(self, file_content: str) -> Structure2D:
         self.append_residues_from_pdb_using_rnaview_indexing(file_content)
         rnaview_result = RNAViewAdapter.run_rnaview(file_content)
 

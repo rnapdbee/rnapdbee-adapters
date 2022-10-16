@@ -1,8 +1,10 @@
-from collections import namedtuple
-import pytest
-from adapters.server import app
-import os
 import json
+import os
+from collections import namedtuple
+
+import pytest
+
+from adapters.server import app
 
 # -------- FIXTURES AND HELPERS --------
 
