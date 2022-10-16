@@ -1,12 +1,16 @@
 #! /usr/bin/env python
 
+import tempfile
+
+import rnapolis.annotator
+import rnapolis.parser
 from flask import Flask, request
 
-from adapters import analysis_output_filter, bpnet, fr3d_, maxit, cif_filter, pdb_filter
-from adapters.mc_annotate import MCAnnotateAdapter
+from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit, pdb_filter)
 from adapters.barnaba_ import BarnabaAdapter
+from adapters.cif_filter import (fix_occupancy, leave_single_model, remove_proteins)
+from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.rnaview import RNAViewAdapter
-from adapters.cif_filter import remove_proteins, leave_single_model, fix_occupancy
 from adapters.utils import content_type, json_response, plain_response
 
 app = Flask(__name__)
@@ -133,6 +137,36 @@ def analyze_rnaview_model(model):
 @app.route('/analyze/rnaview', methods=['POST'])
 def analyze_rnaview():
     return analyze_rnaview_model(1)
+
+
+# RNApolis adapter routes
+
+
+@app.route('/analyze/rnapolis/<int:model>', methods=['POST'])
+@content_type('text/plain')
+@json_response()
+def analyze_rnapolis_model(model):
+    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
+        (leave_single_model, {'model': model}),
+        (remove_proteins, {}),
+        (fix_occupancy, {}),
+    ])
+
+    with tempfile.NamedTemporaryFile('w+') as cif_file:
+        cif_file.write(cif_content)
+        cif_file.seek(0)
+        tertiary_structure = rnapolis.parser.read_3d_structure(cif_file, model)
+
+    secondary_structure = rnapolis.annotator.extract_secondary_structure(tertiary_structure, model)
+    filtered_analysis_output = analysis_output_filter.apply(secondary_structure, [
+        (analysis_output_filter.remove_duplicate_pairs, {}),
+    ])
+    return filtered_analysis_output
+
+
+@app.route('/analyze/rnapolis', methods=['POST'])
+def analyze_rnapolis():
+    return analyze_rnapolis_model(1)
 
 
 # MAXIT tool routes

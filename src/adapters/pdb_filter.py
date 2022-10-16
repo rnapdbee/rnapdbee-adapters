@@ -1,4 +1,5 @@
-from typing import Tuple, Iterable, Callable, Dict
+from typing import Callable, Dict, Iterable, Tuple
+
 from adapters import maxit
 
 

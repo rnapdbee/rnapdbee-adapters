@@ -1,5 +1,5 @@
 import tempfile
-from typing import Tuple, List, Iterable, Callable, Dict
+from typing import Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
 
