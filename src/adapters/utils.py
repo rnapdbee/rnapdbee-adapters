@@ -26,7 +26,7 @@ def content_type(mimetype: str):
 
         @wraps(function)
         def __content_type(*args, **kwargs):
-            if request.headers['Content-Type'] != mimetype:
+            if 'Content-Type' not in request.headers or request.headers['Content-Type'] != mimetype:
                 return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
             result = function(*args, **kwargs)
             return result
