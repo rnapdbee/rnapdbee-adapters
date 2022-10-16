@@ -8,8 +8,7 @@ from dataclasses import dataclass
 from typing import Dict, Tuple, Union
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
-                             LeontisWesthof, OtherInteraction, Residue,
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Saenger, Stacking, Structure2D)
 
 

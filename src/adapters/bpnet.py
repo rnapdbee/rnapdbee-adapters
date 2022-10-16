@@ -6,8 +6,7 @@ import sys
 import tempfile
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
-                             LeontisWesthof, OtherInteraction, Residue,
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Stacking, Structure2D)
 
 

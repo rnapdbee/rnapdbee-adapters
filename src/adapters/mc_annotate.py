@@ -8,10 +8,8 @@ from enum import Enum
 from typing import Dict, List, Tuple
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose,
-                             LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Saenger, Stacking, StackingTopology,
-                             Structure2D)
+from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
+                             ResidueAuth, Saenger, Stacking, StackingTopology, Structure2D)
 
 
 class MCAnnotateAdapter:

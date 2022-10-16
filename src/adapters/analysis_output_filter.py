@@ -1,7 +1,6 @@
 from typing import Callable, Dict, Iterable, List, Tuple, TypeVar
 
-from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction,
-                             Stacking, StackingTopology, Structure2D)
+from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Stacking, StackingTopology, Structure2D)
 
 InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
 

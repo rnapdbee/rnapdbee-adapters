@@ -6,11 +6,9 @@ import rnapolis.annotator
 import rnapolis.parser
 from flask import Flask, request
 
-from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit,
-                      pdb_filter)
+from adapters import (analysis_output_filter, bpnet, cif_filter, fr3d_, maxit, pdb_filter)
 from adapters.barnaba_ import BarnabaAdapter
-from adapters.cif_filter import (fix_occupancy, leave_single_model,
-                                 remove_proteins)
+from adapters.cif_filter import (fix_occupancy, leave_single_model, remove_proteins)
 from adapters.mc_annotate import MCAnnotateAdapter
 from adapters.rnaview import RNAViewAdapter
 from adapters.utils import content_type, json_response, plain_response
