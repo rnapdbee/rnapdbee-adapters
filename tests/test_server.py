@@ -117,6 +117,8 @@ def tool_test_result(request):
         ('2z_74.pdb', 'mc_annotate.json', '/analyze/mc-annotate'),
         ('2z_74.pdb', 'rnaview.json', '/analyze/rnaview/1'),
         ('2z_74.pdb', 'rnaview.json', '/analyze/rnaview'),
+        ('2z_74.pdb', 'rnapolis.json', '/analyze/rnapolis/1'),
+        ('2z_74.pdb', 'rnapolis.json', '/analyze/rnapolis'),
     ],
     ids=[
         '/analyze/bpnet/1',
@@ -131,6 +133,8 @@ def tool_test_result(request):
         '/analyze/mc-annotate',
         '/analyze/rnaview/1',
         '/analyze/rnaview',
+        '/analyze/rnapolis/1',
+        '/analyze/rnapolis',
     ],
     indirect=True,
 )
@@ -147,6 +151,7 @@ def test_adapter(adapter_test_result):
         ('1ehz_mod.pdb', 'icode_barnaba.json', '/analyze/barnaba'),
         ('1ehz_mod.pdb', 'icode_mc_annotate.json', '/analyze/mc-annotate'),
         ('1ehz_mod.pdb', 'icode_rnaview.json', '/analyze/rnaview'),
+        ('1ehz_mod.pdb', 'icode_rnapolis.json', '/analyze/rnapolis'),
     ],
     ids=[
         '/analyze/bpnet',
@@ -154,6 +159,7 @@ def test_adapter(adapter_test_result):
         '/analyze/barnaba',
         '/analyze/mc-annotate',
         '/analyze/rnaview',
+        '/analyze/rnapolis',
     ],
     indirect=True,
 )

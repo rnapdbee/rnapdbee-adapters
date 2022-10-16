@@ -1,0 +1,5071 @@
+{
+    "basePairs": [
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 3,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 2,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 42,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 64,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 11,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 10,
+                    "icode": "K",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 31,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 14,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 13,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 6,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 28,
+                    "icode": "A",
+                    "name": "U"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XX"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 15,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 14,
+                    "icode": "O",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 5,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 27,
+                    "icode": "Z",
+                    "name": "U"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 21,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 43,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 50,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 72,
+                    "icode": "S",
+                    "name": "U"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 24,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 46,
+                    "icode": "S",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 47,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 69,
+                    "icode": "P",
+                    "name": "C"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XXVIII"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 58,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 80,
+                    "icode": "A",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 122,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 144,
+                    "icode": "M",
+                    "name": "A"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 60,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 82,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 120,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 142,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XXVIII"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 61,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 83,
+                    "icode": "D",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 119,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 141,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 76,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 98,
+                    "icode": "S",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 112,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 134,
+                    "icode": "C",
+                    "name": "U"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 85,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 107,
+                    "icode": "B",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 102,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 124,
+                    "icode": "S",
+                    "name": "C"
+                }
+            },
+            "lw": "tHW",
+            "saenger": "XXIV"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 88,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 110,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 99,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 121,
+                    "icode": "P",
+                    "name": "U"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 89,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 111,
+                    "icode": "F",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 98,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 120,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 91,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 113,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 96,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 118,
+                    "icode": "M",
+                    "name": "C"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        }
+    ],
+    "stackings": [
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 4,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 3,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 5,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 4,
+                    "icode": "E",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 4,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 3,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 42,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 64,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "topology": "inward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 5,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 4,
+                    "icode": "E",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 6,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 5,
+                    "icode": "F",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 8,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 7,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 10,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 9,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 10,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 9,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 11,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 10,
+                    "icode": "K",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 11,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 10,
+                    "icode": "K",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 12,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 11,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 12,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 11,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 13,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 12,
+                    "icode": "M",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 13,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 12,
+                    "icode": "M",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 14,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 13,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 14,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 13,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 15,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 14,
+                    "icode": "O",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 15,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 14,
+                    "icode": "O",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 15,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 15,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 17,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 16,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 17,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 16,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 18,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 17,
+                    "icode": "R",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 18,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 17,
+                    "icode": "R",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 19,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 18,
+                    "icode": "S",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 20,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 19,
+                    "icode": "T",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 21,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 20,
+                    "icode": "U",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 5,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 27,
+                    "icode": "Z",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 6,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 28,
+                    "icode": "A",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 17,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 39,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 18,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 40,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 23,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 45,
+                    "icode": "R",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 24,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 46,
+                    "icode": "S",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 46,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 68,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 47,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 69,
+                    "icode": "P",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 49,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 71,
+                    "icode": "R",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 50,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 72,
+                    "icode": "S",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 52,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 74,
+                    "icode": "U",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 58,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 80,
+                    "icode": "A",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 59,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 81,
+                    "icode": "B",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 59,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 81,
+                    "icode": "B",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 60,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 82,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 60,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 82,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 61,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 83,
+                    "icode": "D",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 63,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 85,
+                    "icode": "F",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 64,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 86,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 74,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 96,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 74,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 96,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 75,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 97,
+                    "icode": "R",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 75,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 97,
+                    "icode": "R",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 76,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 98,
+                    "icode": "S",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 82,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 104,
+                    "icode": "Y",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 83,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 105,
+                    "icode": "Z",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 85,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 107,
+                    "icode": "B",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 103,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 125,
+                    "icode": "T",
+                    "name": "A"
+                }
+            },
+            "topology": "inward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 88,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 110,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 89,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 111,
+                    "icode": "F",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 98,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 120,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 99,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 121,
+                    "icode": "P",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 101,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 123,
+                    "icode": "R",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 102,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 124,
+                    "icode": "S",
+                    "name": "C"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 102,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 124,
+                    "icode": "S",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 103,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 125,
+                    "icode": "T",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 110,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 132,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 111,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 133,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 111,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 133,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 112,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 134,
+                    "icode": "C",
+                    "name": "U"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 119,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 141,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 120,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 142,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 122,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 144,
+                    "icode": "M",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 123,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 145,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "topology": "upward"
+        }
+    ],
+    "baseRiboseInteractions": [
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 1,
+                    "name": "DA"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 43,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 65,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 1,
+                    "name": "DA"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 43,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 65,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 1,
+                    "name": "DA"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 43,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 65,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 1,
+                    "name": "DA"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 43,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 65,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 1,
+                    "name": "DA"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": -1,
+                    "icode": "A",
+                    "name": "DA"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 44,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 66,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 3,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 2,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 3,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 2,
+                    "icode": "C",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 8,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 7,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 8,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 30,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 31,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 10,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 32,
+                    "icode": "E",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 11,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 33,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 15,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 37,
+                    "icode": "J",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 15,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 37,
+                    "icode": "J",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 18,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 40,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 45,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 18,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 40,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 45,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 19,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 41,
+                    "icode": "N",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 45,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 28,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 50,
+                    "icode": "W",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 46,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 68,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 104,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 126,
+                    "icode": "U",
+                    "name": "U"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 104,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 126,
+                    "icode": "U",
+                    "name": "U"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 104,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 126,
+                    "icode": "U",
+                    "name": "U"
+                }
+            },
+            "br": "4BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 8,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 10,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 9,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 36,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 58,
+                    "icode": "E",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 10,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 9,
+                    "icode": "J",
+                    "name": "A"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 34,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 56,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 34,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 56,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 38,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 60,
+                    "icode": "G",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 39,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 61,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 39,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 61,
+                    "icode": "H",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 40,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 62,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 44,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 66,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 28,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 50,
+                    "icode": "W",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 44,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 66,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 28,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 50,
+                    "icode": "W",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "br": "3BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 67,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 89,
+                    "icode": "J",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 67,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 89,
+                    "icode": "J",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 20,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 42,
+                    "icode": "O",
+                    "name": "C"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 53,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 75,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 76,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 76,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 76,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 76,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 76,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 71,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 93,
+                    "icode": "N",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "br": "9BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 72,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 94,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 116,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 138,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 72,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 94,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 72,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 94,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 74,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 96,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 115,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 137,
+                    "icode": "F",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 115,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 137,
+                    "icode": "F",
+                    "name": "G"
+                }
+            },
+            "br": "6BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 78,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 100,
+                    "icode": "U",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 79,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 101,
+                    "icode": "V",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 82,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 104,
+                    "icode": "Y",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 83,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 105,
+                    "icode": "Z",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 83,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 105,
+                    "icode": "Z",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 83,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 105,
+                    "icode": "Z",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 84,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 106,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 84,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 106,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 84,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 106,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 34,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 56,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 85,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 107,
+                    "icode": "B",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 85,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 107,
+                    "icode": "B",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 93,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 115,
+                    "icode": "J",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 13,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 12,
+                    "icode": "M",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 93,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 115,
+                    "icode": "J",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 13,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 12,
+                    "icode": "M",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 12,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 11,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 12,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 11,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 13,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 12,
+                    "icode": "M",
+                    "name": "U"
+                }
+            },
+            "br": "1BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 31,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 9,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 31,
+                    "icode": "D",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 10,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 32,
+                    "icode": "E",
+                    "name": "U"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 96,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 118,
+                    "icode": "M",
+                    "name": "C"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 100,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 122,
+                    "icode": "Q",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 101,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 123,
+                    "icode": "R",
+                    "name": "G"
+                }
+            },
+            "br": "5BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 38,
+                    "icode": "K",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 38,
+                    "icode": "K",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 30,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 52,
+                    "icode": "Y",
+                    "name": "C"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 30,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 52,
+                    "icode": "Y",
+                    "name": "C"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 38,
+                    "icode": "K",
+                    "name": "A"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 16,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 38,
+                    "icode": "K",
+                    "name": "A"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 109,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 131,
+                    "icode": "Z",
+                    "name": "C"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 108,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 130,
+                    "icode": "Y",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 29,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 51,
+                    "icode": "X",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 108,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 130,
+                    "icode": "Y",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 29,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 51,
+                    "icode": "X",
+                    "name": "U"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 108,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 130,
+                    "icode": "Y",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 108,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 130,
+                    "icode": "Y",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "br": "2BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 116,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 138,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 55,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 77,
+                    "icode": "X",
+                    "name": "U"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 116,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 138,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 55,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 77,
+                    "icode": "X",
+                    "name": "U"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 116,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 138,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 56,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 78,
+                    "icode": "Y",
+                    "name": "C"
+                }
+            },
+            "br": "0BR"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 116,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 138,
+                    "icode": "G",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 56,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 78,
+                    "icode": "Y",
+                    "name": "C"
+                }
+            },
+            "br": "9BR"
+        }
+    ],
+    "basePhosphateInteractions": [
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 13,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 35,
+                    "icode": "H",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 37,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 59,
+                    "icode": "F",
+                    "name": "U"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 17,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 39,
+                    "icode": "L",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "bph": "4BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 18,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 40,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "X",
+                    "number": 1,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "bph": "2BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 19,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 41,
+                    "icode": "N",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 44,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 66,
+                    "icode": "M",
+                    "name": "G"
+                }
+            },
+            "bph": "1BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 19,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 41,
+                    "icode": "N",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 45,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            },
+            "bph": "1BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 28,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 50,
+                    "icode": "W",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 45,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 67,
+                    "icode": "N",
+                    "name": "U"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 32,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 54,
+                    "icode": "A",
+                    "name": "A"
+                }
+            },
+            "bph": "1BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 34,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 56,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 34,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 56,
+                    "icode": "C",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 33,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 55,
+                    "icode": "B",
+                    "name": "G"
+                }
+            },
+            "bph": "7BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 69,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 91,
+                    "icode": "L",
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 68,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 90,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 73,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 95,
+                    "icode": "P",
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 72,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 94,
+                    "icode": "O",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 80,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 102,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 80,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 102,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 106,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 128,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "bph": "9BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 80,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 102,
+                    "icode": "W",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 107,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 129,
+                    "icode": "X",
+                    "name": "A"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 92,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 114,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 92,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 114,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 92,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 114,
+                    "icode": "I",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 94,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 116,
+                    "icode": "K",
+                    "name": "G"
+                }
+            },
+            "bph": "9BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 96,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 118,
+                    "icode": "M",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "bph": "0BPh"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "B",
+                    "number": 96,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 118,
+                    "icode": "M",
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "B",
+                    "number": 95,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "Y",
+                    "number": 117,
+                    "icode": "L",
+                    "name": "A"
+                }
+            },
+            "bph": "9BPh"
+        }
+    ],
+    "otherInteractions": []
+}
