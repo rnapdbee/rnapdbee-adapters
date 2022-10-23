@@ -12,7 +12,7 @@ import orjson
 from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Stacking,
                              StackingTopology, Structure2D)
 
-from adapters.utils import suppress_stdout_stderr
+from adapters.tools.utils import suppress_stdout_stderr
 
 
 class BarnabaAdapter:

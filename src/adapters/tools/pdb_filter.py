@@ -1,6 +1,6 @@
 from typing import Callable, Dict, Iterable, Tuple
 
-from adapters import maxit
+from adapters.tools import maxit
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:

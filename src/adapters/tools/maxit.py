@@ -3,7 +3,7 @@ import subprocess
 import sys
 import tempfile
 
-from adapters.utils import is_cif
+from adapters.tools.utils import is_cif
 
 # constants defined by MAXIT
 MODE_PDB2CIF = '1'

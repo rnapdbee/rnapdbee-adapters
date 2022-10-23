@@ -3,7 +3,7 @@ from typing import Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
 
-from adapters import maxit
+from adapters.tools import maxit
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
