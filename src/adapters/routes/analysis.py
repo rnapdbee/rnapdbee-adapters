@@ -2,14 +2,13 @@
 
 from flask import Blueprint, request
 
-from adapters.tools import (output_filter)
+from adapters.tools import output_filter, cif_filter, pdb_filter
+from adapters.tools.utils import content_type, json_response
+from adapters.tools.cif_filter import fix_occupancy, leave_single_model, remove_proteins
 from adapters.analysis import bpnet, fr3d_, rnapolis_
 from adapters.analysis.barnaba_ import BarnabaAdapter
-from adapters.tools.cif_filter import (fix_occupancy, leave_single_model, remove_proteins)
 from adapters.analysis.mc_annotate import MCAnnotateAdapter
 from adapters.analysis.rnaview import RNAViewAdapter
-from adapters.tools import cif_filter, pdb_filter
-from adapters.tools.utils import content_type, json_response
 
 server = Blueprint('analysis', __name__)
 

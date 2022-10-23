@@ -5,7 +5,6 @@ import tempfile
 import sys
 
 import orjson
-
 import rnapolis.annotator
 import rnapolis.parser
 from rnapolis.common import Structure2D

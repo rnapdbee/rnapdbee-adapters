@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 from flask import Blueprint, request
+
 from adapters.tools import cif_filter
 from adapters.tools.utils import content_type, plain_response
 from adapters.tools.cif_filter import remove_proteins, fix_occupancy

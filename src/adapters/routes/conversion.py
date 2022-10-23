@@ -1,6 +1,7 @@
 from flask import Blueprint, request
-from adapters.tools.utils import content_type, plain_response
+
 from adapters.tools import maxit
+from adapters.tools.utils import content_type, plain_response
 
 server = Blueprint('conversion', __name__)
 

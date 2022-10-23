@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 
+from flask import Flask
+
 from adapters.routes.analysis import server as analysis
 from adapters.routes.conversion import server as conversion
 from adapters.routes.filtering import server as filtering
-
-from flask import Flask
 
 app = Flask(__name__)
 

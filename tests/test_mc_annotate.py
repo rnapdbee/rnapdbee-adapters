@@ -1,10 +1,9 @@
-from contextlib import \
-    ExitStack as does_not_raise  # ExitStack for support Python 3.3+
+from contextlib import ExitStack as does_not_raise  # ExitStack for support Python 3.3+
 
 import pytest
-from data import PDB_LINES, RESIDUES, STACKINGS
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, Saenger)
 
+from data import PDB_LINES, RESIDUES, STACKINGS
 from adapters.analysis.mc_annotate import MCAnnotateAdapter
 
 # -------- FIXTURES --------
