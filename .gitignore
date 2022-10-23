@@ -13,4 +13,6 @@ __pycache__
 ### Test cache & coverage tools ###
 .coverage
 .pytest_cache
+
+### Development directories ###
 dev/
