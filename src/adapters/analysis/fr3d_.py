@@ -3,7 +3,7 @@
 import io
 import os
 import sys
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 import orjson
 from fr3d.cif.reader import Cif
@@ -28,8 +28,8 @@ def parse_unit_ids(pair: Tuple) -> Tuple[Residue, Residue]:
 def unify_classification(fr3d_names: List[str]) -> Tuple:
     lw = set()
     stacking = set()
-    base_ribose = set()
-    base_phosphate = set()
+    base_ribose: Set[None] = set()
+    base_phosphate: Set[None] = set()
 
     for name in fr3d_names:
         name = name.replace('_exp', '')

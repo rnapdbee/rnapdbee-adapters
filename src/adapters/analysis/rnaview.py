@@ -5,7 +5,7 @@ import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass
-from typing import Dict, Tuple, Union
+from typing import Dict, Tuple, Optional
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
@@ -58,16 +58,16 @@ class RNAViewAdapter:
     @dataclass
     class PotentialResidue:
         residue: Residue
-        position_c2: Union[None, Tuple[float, float, float]]
-        position_c6: Union[None, Tuple[float, float, float]]
-        position_n1: Union[None, Tuple[float, float, float]]
+        position_c2: Optional[Tuple[float, float, float]]
+        position_c6: Optional[Tuple[float, float, float]]
+        position_n1: Optional[Tuple[float, float, float]]
 
         def is_correct_according_to_rnaview(self) -> bool:
             if any((self.position_c2 is None, self.position_c6 is None, self.position_n1 is None)):
                 return False
-            distance_c2_c6 = math.dist(self.position_c2, self.position_c6)
-            distance_n1_c6 = math.dist(self.position_n1, self.position_c6)
-            distance_n1_c2 = math.dist(self.position_n1, self.position_c2)
+            distance_c2_c6 = math.dist(self.position_c2, self.position_c6)  # type: ignore
+            distance_n1_c6 = math.dist(self.position_n1, self.position_c6)  # type: ignore
+            distance_n1_c2 = math.dist(self.position_n1, self.position_c2)  # type: ignore
             return all((distance_c2_c6 <= 3.0, distance_n1_c6 <= 2.0, distance_n1_c2 <= 2.0))
 
     # Positions of resiudes info in PDB files

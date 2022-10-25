@@ -5,7 +5,7 @@ import subprocess
 import sys
 import tempfile
 from enum import Enum
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Union
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
@@ -83,7 +83,7 @@ class MCAnnotateAdapter:
                 return edge
         raise ValueError('Edge type "{type}" unknown')
 
-    def get_resiude(self, residue_info_list: Tuple[str, str, str]) -> Residue:
+    def get_resiude(self, residue_info_list: Tuple[Union[str, Any], ...]) -> Residue:
         chain = residue_info_list[0]
         number = int(residue_info_list[1])
 
@@ -97,7 +97,10 @@ class MCAnnotateAdapter:
         return Residue(None, ResidueAuth(chain, number, icode, self.names[residue_info]))
 
     def get_residues(self, residues_info: str) -> Tuple[Residue, Residue]:
-        residues_info_list = re.search(self.RESIDUE_REGEX, residues_info).groups()
+        regex_result = re.search(self.RESIDUE_REGEX, residues_info)
+        if regex_result is None:
+            raise RuntimeError(f'MC-Annotate regex failed: {residues_info}')
+        residues_info_list = regex_result.groups()
         # Expects (chain1, number1, icode1, chain2, number2, icode2)
         assert len(residues_info_list) == 6
         residue_left = self.get_resiude(residues_info_list[:3])
