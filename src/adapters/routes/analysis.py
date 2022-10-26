@@ -15,7 +15,7 @@ server = Blueprint('analysis', __name__)
 # BPNet adapter routes
 
 
-@server.route('/analyze/bpnet/<int:model>', methods=['POST'])
+@server.route('/bpnet/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_bpnet_model(model):
@@ -31,25 +31,15 @@ def analyze_bpnet_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/bpnet', methods=['POST'])
+@server.route('/bpnet', methods=['POST'])
 def analyze_bpnet():
     return analyze_bpnet_model(1)
-
-
-@server.route('/analyze/<int:model>', methods=['POST'])
-def analyze_model(model):
-    return analyze_bpnet_model(model)
-
-
-@server.route('/analyze', methods=['POST'])
-def analyze():
-    return analyze_model(1)
 
 
 # FR3D adapter routes
 
 
-@server.route('/analyze/fr3d/<int:model>', methods=['POST'])
+@server.route('/fr3d/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_fr3d_model(model):
@@ -65,7 +55,7 @@ def analyze_fr3d_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/fr3d', methods=['POST'])
+@server.route('/fr3d', methods=['POST'])
 def analyze_fr3d():
     return analyze_fr3d_model(1)
 
@@ -73,7 +63,7 @@ def analyze_fr3d():
 # BaRNAba adapter routes
 
 
-@server.route('/analyze/barnaba/<int:model>', methods=['POST'])
+@server.route('/barnaba/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_barnaba_model(model):
@@ -87,7 +77,7 @@ def analyze_barnaba_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/barnaba', methods=['POST'])
+@server.route('/barnaba', methods=['POST'])
 def analyze_barnaba():
     return analyze_barnaba_model(1)
 
@@ -95,7 +85,7 @@ def analyze_barnaba():
 # MC-Annotate adapter routes
 
 
-@server.route('/analyze/mc-annotate/<int:model>', methods=['POST'])
+@server.route('/mc-annotate/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_mc_annotate_model(model):
@@ -109,7 +99,7 @@ def analyze_mc_annotate_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/mc-annotate', methods=['POST'])
+@server.route('/mc-annotate', methods=['POST'])
 def analyze_mc_annotate():
     return analyze_mc_annotate_model(1)
 
@@ -117,7 +107,7 @@ def analyze_mc_annotate():
 # RNAView adapter routes
 
 
-@server.route('/analyze/rnaview/<int:model>', methods=['POST'])
+@server.route('/rnaview/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_rnaview_model(model):
@@ -131,7 +121,7 @@ def analyze_rnaview_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/rnaview', methods=['POST'])
+@server.route('/rnaview', methods=['POST'])
 def analyze_rnaview():
     return analyze_rnaview_model(1)
 
@@ -139,7 +129,7 @@ def analyze_rnaview():
 # RNApolis adapter routes
 
 
-@server.route('/analyze/rnapolis/<int:model>', methods=['POST'])
+@server.route('/rnapolis/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
 def analyze_rnapolis_model(model):
@@ -155,6 +145,6 @@ def analyze_rnapolis_model(model):
     return filtered_analysis_output
 
 
-@server.route('/analyze/rnapolis', methods=['POST'])
+@server.route('/rnapolis', methods=['POST'])
 def analyze_rnapolis():
     return analyze_rnapolis_model(1)
