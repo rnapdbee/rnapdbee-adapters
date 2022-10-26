@@ -1,0 +1,767 @@
+openapi: 3.0.0
+
+info:
+  description: "This is API of the adapters service of RNApdbee v3.0."
+  version: "1.0.0"
+  title: "RNApdbee Adapters API"
+
+tags:
+  - name: "Analysis API"
+    description: "RNApdbee adapters API which is able to perform sequential analysis"
+
+  - name: "Conversion API"
+    description: "RNApdbee adapters API which is able to perform pdb &#8594; cif or cif &#8594; pdb conversion"
+
+  - name: "Filtering API"
+    description: "RNApdbee adapters API which is able to perform structure filtering"
+
+servers:
+  - url: "{protocol}://{host}:{port}"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      host:
+        default: localhost
+        description: Base url of the server
+      port:
+        enum:
+          - "8000"
+          - "8001"
+          - "80"
+        default: "8000"
+
+paths:
+  /analysis-api/v1/barnaba:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using baRNAba"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/barnaba/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using baRNAba"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/bpnet:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using BPNet"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/bpnet/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using BPNet"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/fr3d:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using Fr3d"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/fr3d/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using Fr3d"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/mc-annotate:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using MC-Annotate"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/mc-annotate/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using MC-Annotate"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/rnaview:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using RNAView"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/rnaview/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using RNAVIEW"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/rnapolis:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using RNApolis"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/rnapolis/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using RNApolis"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Structure2D"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  # ---------- Conversion API ---------- #
+
+  /conversion-api/v1/ensure-cif:
+    post:
+      tags:
+        - "Conversion API"
+      summary: "Convert pdb to cif (if pdb passed) or return passed cif"
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FileCIF"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /conversion-api/v1/ensure-pdb:
+    post:
+      tags:
+        - "Conversion API"
+      summary: "Convert cif to pdb (if cif passed) or return passed pdb"
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FilePDB"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  # ---------- Filtering API ---------- #
+
+  /filtering-api/v1/filter:
+    post:
+      tags:
+        - "Filtering API"
+      summary: "Remove proteins, fix occupancy and return cif"
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FileCIF"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+components:
+  requestBodies:
+    fileWithStructure:
+      description: "RNA structure in PDB or CIF file format"
+      required: false
+      content:
+        text/plain:
+          schema:
+            $ref: "#/components/schemas/FileCIF"
+
+  responses:
+    ServerError:
+      description: "Internal Server Error"
+    UnsupportedMedia:
+      description: "Unsupported Media Type"
+
+  schemas:
+    ResidueLabel:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: "A"
+        number:
+          type: integer
+          example: 5
+        name:
+          type: string
+          example: "G"
+
+    ResidueAuth:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: "A"
+        number:
+          type: integer
+          example: 5
+        icode:
+          type: string
+          nullable: true
+          example: "X"
+        name:
+          type: string
+          example: "G"
+
+    LeontisWesthof:
+      type: string
+      enum:
+        - "cWW"
+        - "cWH"
+        - "cWS"
+        - "cHW"
+        - "cHH"
+        - "cHS"
+        - "cSW"
+        - "cSH"
+        - "cSS"
+        - "tWW"
+        - "tWH"
+        - "tWS"
+        - "tHW"
+        - "tHH"
+        - "tHS"
+        - "tSW"
+        - "tSH"
+        - "tSS"
+      example: "cWH"
+
+    Saenger:
+      type: string
+      enum:
+        - "I"
+        - "II"
+        - "III"
+        - "IV"
+        - "V"
+        - "VI"
+        - "VII"
+        - "VIII"
+        - "IX"
+        - "X"
+        - "XI"
+        - "XII"
+        - "XIII"
+        - "XIV"
+        - "XV"
+        - "XVI"
+        - "XVII"
+        - "XVIII"
+        - "XIX"
+        - "XX"
+        - "XXI"
+        - "XXII"
+        - "XXIII"
+        - "XXIV"
+        - "XXV"
+        - "XXVI"
+        - "XXVII"
+        - "XXVIII"
+      example: "XIV"
+
+    BR:
+      type: string
+      enum:
+        - "0BR"
+        - "1BR"
+        - "2BR"
+        - "3BR"
+        - "4BR"
+        - "5BR"
+        - "6BR"
+        - "7BR"
+        - "8BR"
+        - "9BR"
+      example: "3BR"
+
+    BPh:
+      type: string
+      enum:
+        - "0BPh"
+        - "1BPh"
+        - "2BPh"
+        - "3BPh"
+        - "4BPh"
+        - "5BPh"
+        - "6BPh"
+        - "7BPh"
+        - "8BPh"
+        - "9BPh"
+      example: "4BPh"
+
+    StackingTopology:
+      type: string
+      enum:
+        - "upward"
+        - "downward"
+        - "inward"
+        - "outward"
+      example: "inward"
+
+    Residue:
+      type: object
+      properties:
+        label:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ResidueLabel"
+        auth:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ResidueAuth"
+
+    Interaction:
+      type: object
+      properties:
+        nt1:
+          $ref: "#/components/schemas/Residue"
+        nt2:
+          $ref: "#/components/schemas/Residue"
+
+    BasePair:
+      allOf:
+        - $ref: "#/components/schemas/Interaction"
+        - type: object
+          properties:
+            lw:
+              $ref: "#/components/schemas/LeontisWesthof"
+            saenger:
+              nullable: true
+              allOf:
+                - $ref: "#/components/schemas/Saenger"
+
+    Stacking:
+      allOf:
+        - $ref: "#/components/schemas/Interaction"
+        - type: object
+          properties:
+            topology:
+              nullable: true
+              allOf:
+                - $ref: "#/components/schemas/StackingTopology"
+
+    BaseRibose:
+      allOf:
+        - $ref: "#/components/schemas/Interaction"
+        - type: object
+          properties:
+            br:
+              nullable: true
+              allOf:
+                - $ref: "#/components/schemas/BR"
+
+    BasePhosphate:
+      allOf:
+        - $ref: "#/components/schemas/Interaction"
+        - type: object
+          properties:
+            br:
+              nullable: true
+              allOf:
+                - $ref: "#/components/schemas/BPh"
+
+    OtherInteraction:
+      allOf:
+        - $ref: "#/components/schemas/Interaction"
+
+    Structure2D:
+      type: object
+      properties:
+        basePair:
+          type: array
+          items:
+            $ref: "#/components/schemas/BasePair"
+        stackings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Stacking"
+        baseRiboseInteractions:
+          type: array
+          items:
+            $ref: "#/components/schemas/BaseRibose"
+        basePhosphateInteractions:
+          type: array
+          items:
+            $ref: "#/components/schemas/BasePhosphate"
+        otherInteractions:
+          type: array
+          items:
+            $ref: "#/components/schemas/OtherInteraction"
+
+    FileCIF:
+      type: string
+      example: |
+        data_1ehz
+
+        loop_
+        _atom_site.group_PDB
+        _atom_site.id
+        _atom_site.type_symbol
+        _atom_site.label_atom_id
+        _atom_site.label_alt_id
+        _atom_site.label_comp_id
+        _atom_site.label_asym_id
+        _atom_site.label_entity_id
+        _atom_site.label_seq_id
+        _atom_site.pdbx_PDB_ins_code
+        _atom_site.Cartn_x
+        _atom_site.Cartn_y
+        _atom_site.Cartn_z
+        _atom_site.occupancy
+        _atom_site.B_iso_or_equiv
+        _atom_site.pdbx_formal_charge
+        _atom_site.auth_seq_id
+        _atom_site.auth_comp_id
+        _atom_site.auth_asym_id
+        _atom_site.auth_atom_id
+        _atom_site.pdbx_PDB_model_num
+        ATOM   1  P  P      .  A  0  1  1  A  68.530  45.722  46.789  1.00  59.03   0  -1  ?  9  ?  1  
+        ATOM   2  C  "C5'"  .  A  0  1  1  A  68.648  43.529  45.323  1.00  53.41   0  -1  ?  9  ?  1  
+        ATOM   3  O  "O5'"  .  A  0  1  1  A  67.957  44.735  45.675  1.00  57.14   0  -1  ?  9  ?  1  
+        ATOM   4  C  "C4'"  .  A  0  1  1  A  67.927  42.844  44.191  1.00  50.63   0  -1  ?  9  ?  1  
+        ATOM   5  O  "O4'"  .  A  0  1  1  A  66.589  42.480  44.646  1.00  48.70   0  -1  ?  9  ?  1  
+        ATOM   6  C  "C3'"  .  A  0  1  1  A  67.665  43.715  42.964  1.00  50.77   0  -1  ?  9  ?  1  
+        ATOM   7  O  "O3'"  .  A  0  1  1  A  68.747  43.769  42.051  1.00  52.86   0  -1  ?  9  ?  1  
+        ATOM   8  C  "C2'"  .  A  0  1  1  A  66.455  43.024  42.355  1.00  48.94   0  -1  ?  9  ?  1  
+        ATOM   9  O  "O2'"  .  A  0  1  1  A  66.864  41.798  41.731  1.00  48.54   0  -1  ?  9  ?  1  
+        ATOM  10  C  "C1'"  .  A  0  1  1  A  65.646  42.719  43.615  1.00  44.50   0  -1  ?  9  ?  1  
+        ATOM  11  N  N1     .  A  0  1  1  A  61.233  45.057  42.644  1.00  35.14   0  -1  ?  9  ?  1  
+        ATOM  12  C  C2     .  A  0  1  1  A  61.870  44.017  42.074  1.00  38.97   0  -1  ?  9  ?  1  
+        ATOM  13  N  N3     .  A  0  1  1  A  63.024  43.467  42.399  1.00  36.02   0  -1  ?  9  ?  1  
+        ATOM  14  C  C4     .  A  0  1  1  A  63.571  44.119  43.437  1.00  39.04   0  -1  ?  9  ?  1  
+        ATOM  15  C  C5     .  A  0  1  1  A  63.049  45.220  44.115  1.00  38.26   0  -1  ?  9  ?  1  
+        ATOM  16  C  C6     .  A  0  1  1  A  61.796  45.688  43.683  1.00  35.83   0  -1  ?  9  ?  1  
+        ATOM  17  N  N6     .  A  0  1  1  A  61.110  46.688  44.232  1.00  32.66   0  -1  ?  9  ?  1  
+        ATOM  18  N  N7     .  A  0  1  1  A  63.925  45.649  45.113  1.00  41.58   0  -1  ?  9  ?  1  
+        ATOM  19  C  C8     .  A  0  1  1  A  64.938  44.803  45.016  1.00  39.75   0  -1  ?  9  ?  1  
+        ATOM  20  N  N9     .  A  0  1  1  A  64.779  43.843  44.021  1.00  42.01   0  -1  ?  9  ?  1  
+        ATOM  21  O  OP1    .  A  0  1  1  A  69.991  45.842  46.548  1.00  60.84   0  -1  ?  9  ?  1  
+        ATOM  22  O  OP2    .  A  0  1  1  A  67.685  46.959  46.834  1.00  60.64  -1  -1  ?  9  ?  1  
+        ATOM  23  P  P      .  U  0  1  2  B  52.371  46.894  38.917  1.00  42.45   0  -1  ?  9  ?  1  
+        ATOM  24  C  "C5'"  .  U  0  1  2  B  53.889  45.709  37.150  1.00  43.19   0  -1  ?  9  ?  1  
+        ATOM  25  O  "O5'"  .  U  0  1  2  B  53.625  45.986  38.529  1.00  44.81   0  -1  ?  9  ?  1  
+        ATOM  26  C  "C4'"  .  U  0  1  2  B  55.168  44.940  37.012  1.00  43.76   0  -1  ?  9  ?  1  
+        ATOM  27  O  "O4'"  .  U  0  1  2  B  56.296  45.792  37.351  1.00  42.13   0  -1  ?  9  ?  1  
+        ATOM  28  C  "C3'"  .  U  0  1  2  B  55.315  43.758  37.955  1.00  41.59   0  -1  ?  9  ?  1  
+        ATOM  29  O  "O3'"  .  U  0  1  2  B  54.653  42.598  37.490  1.00  42.60   0  -1  ?  9  ?  1  
+        ATOM  30  C  "C2'"  .  U  0  1  2  B  56.825  43.573  37.996  1.00  38.55   0  -1  ?  9  ?  1  
+        ATOM  31  O  "O2'"  .  U  0  1  2  B  57.255  43.012  36.776  1.00  36.20   0  -1  ?  9  ?  1  
+        ATOM  32  C  "C1'"  .  U  0  1  2  B  57.286  45.028  38.018  1.00  40.75   0  -1  ?  9  ?  1  
+        ATOM  33  N  N1     .  U  0  1  2  B  57.451  45.543  39.385  1.00  40.94   0  -1  ?  9  ?  1  
+        ATOM  34  C  C2     .  U  0  1  2  B  58.636  45.212  40.015  1.00  38.74   0  -1  ?  9  ?  1  
+        ATOM  35  O  O2     .  U  0  1  2  B  59.470  44.485  39.490  1.00  38.70   0  -1  ?  9  ?  1  
+        ATOM  36  N  N3     .  U  0  1  2  B  58.804  45.747  41.261  1.00  37.87   0  -1  ?  9  ?  1  
+        ATOM  37  C  C4     .  U  0  1  2  B  57.924  46.564  41.939  1.00  41.13   0  -1  ?  9  ?  1  
+        ATOM  38  O  O4     .  U  0  1  2  B  58.175  46.857  43.097  1.00  38.53   0  -1  ?  9  ?  1  
+        ATOM  39  C  C5     .  U  0  1  2  B  56.693  46.846  41.241  1.00  42.38   0  -1  ?  9  ?  1  
+        ATOM  40  C  C6     .  U  0  1  2  B  56.502  46.326  40.013  1.00  41.40   0  -1  ?  9  ?  1  
+        ATOM  41  O  OP1    .  U  0  1  2  B  51.176  46.256  38.300  1.00  49.18   0  -1  ?  9  ?  1  
+        ATOM  42  O  OP2    .  U  0  1  2  B  52.399  47.127  40.381  1.00  41.13  -1  -1  ?  9  ?  1  
+        ##
+
+    FilePDB:
+      type: string
+      example: |
+        COMPND    MOL_ID: 1;                                                            
+        COMPND   2 MOLECULE: ADENOSINE-5'-MONOPHOSPHATE;                                
+        COMPND   3 CHAIN: 9;                                                            
+        COMPND   4 ENGINEERED: YES                                                      
+        SOURCE    MOL_ID: 1;                                                            
+        SOURCE   2 SYNTHETIC: YES                                                       
+        REMARK   2                                                                      
+        REMARK   2 RESOLUTION. NOT APPLICABLE.                                          
+        REMARK   4                                                                      
+        REMARK   4 NULL COMPLIES WITH FORMAT V. 3.30, 13-JUL-11                         
+        REMARK 250                                                                      
+        REMARK 250 EXPERIMENTAL DETAILS                                                 
+        REMARK 250  EXPERIMENT TYPE                : NULL                               
+        REMARK 250  DATE OF DATA COLLECTION        : NULL                               
+        REMARK 250                                                                      
+        REMARK 250 REMARK: NULL                                                         
+        REMARK 610                                                                      
+        REMARK 610 MISSING HETEROATOM                                                   
+        REMARK 610 THE FOLLOWING RESIDUES HAVE MISSING ATOMS (M=MODEL NUMBER;           
+        REMARK 610 RES=RESIDUE NAME; C=CHAIN IDENTIFIER; SSEQ=SEQUENCE NUMBER;          
+        REMARK 610 I=INSERTION CODE):                                                   
+        REMARK 610   M RES C SSEQI                                                      
+        REMARK 610       A 9   -1A                                                      
+        REMARK 610       U 9   -1B                                                      
+        HET      A  9  -1A     22                                                       
+        HET      U  9  -1B     20                                                       
+        HETNAM       A ADENOSINE-5'-MONOPHOSPHATE                                       
+        HETNAM       U URIDINE-5'-MONOPHOSPHATE                                         
+        FORMUL   1    A    C10 H14 N5 O7 P                                              
+        FORMUL   2    U    C9 H13 N2 O9 P                                               
+        CRYST1    1.000    1.000    1.000  90.00  90.00  90.00 P 1           1          
+        ORIGX1      1.000000  0.000000  0.000000        0.00000                         
+        ORIGX2      0.000000  1.000000  0.000000        0.00000                         
+        ORIGX3      0.000000  0.000000  1.000000        0.00000                         
+        HETATM    1  P     A 9  -1A     68.530  45.722  46.789  1.00 59.03           P0 
+        HETATM    2  OP1   A 9  -1A     69.991  45.842  46.548  1.00 60.84           O0 
+        HETATM    3  OP2   A 9  -1A     67.685  46.959  46.834  1.00 60.64           O1-
+        HETATM    4  O5'   A 9  -1A     67.957  44.735  45.675  1.00 57.14           O0 
+        HETATM    5  C5'   A 9  -1A     68.648  43.529  45.323  1.00 53.41           C0 
+        HETATM    6  C4'   A 9  -1A     67.927  42.844  44.191  1.00 50.63           C0 
+        HETATM    7  O4'   A 9  -1A     66.589  42.480  44.646  1.00 48.70           O0 
+        HETATM    8  C3'   A 9  -1A     67.665  43.715  42.964  1.00 50.77           C0 
+        HETATM    9  O3'   A 9  -1A     68.747  43.769  42.051  1.00 52.86           O0 
+        HETATM   10  C2'   A 9  -1A     66.455  43.024  42.355  1.00 48.94           C0 
+        HETATM   11  O2'   A 9  -1A     66.864  41.798  41.731  1.00 48.54           O0 
+        HETATM   12  C1'   A 9  -1A     65.646  42.719  43.615  1.00 44.50           C0 
+        HETATM   13  N9    A 9  -1A     64.779  43.843  44.021  1.00 42.01           N0 
+        HETATM   14  C8    A 9  -1A     64.938  44.803  45.016  1.00 39.75           C0 
+        HETATM   15  N7    A 9  -1A     63.925  45.649  45.113  1.00 41.58           N0 
+        HETATM   16  C5    A 9  -1A     63.049  45.220  44.115  1.00 38.26           C0 
+        HETATM   17  C6    A 9  -1A     61.796  45.688  43.683  1.00 35.83           C0 
+        HETATM   18  N6    A 9  -1A     61.110  46.688  44.232  1.00 32.66           N0 
+        HETATM   19  N1    A 9  -1A     61.233  45.057  42.644  1.00 35.14           N0 
+        HETATM   20  C2    A 9  -1A     61.870  44.017  42.074  1.00 38.97           C0 
+        HETATM   21  N3    A 9  -1A     63.024  43.467  42.399  1.00 36.02           N0 
+        HETATM   22  C4    A 9  -1A     63.571  44.119  43.437  1.00 39.04           C0 
+        HETATM   23  P     U 9  -1B     52.371  46.894  38.917  1.00 42.45           P0 
+        HETATM   24  OP1   U 9  -1B     51.176  46.256  38.300  1.00 49.18           O0 
+        HETATM   25  OP2   U 9  -1B     52.399  47.127  40.381  1.00 41.13           O1-
+        HETATM   26  O5'   U 9  -1B     53.625  45.986  38.529  1.00 44.81           O0 
+        HETATM   27  C5'   U 9  -1B     53.889  45.709  37.150  1.00 43.19           C0 
+        HETATM   28  C4'   U 9  -1B     55.168  44.940  37.012  1.00 43.76           C0 
+        HETATM   29  O4'   U 9  -1B     56.296  45.792  37.351  1.00 42.13           O0 
+        HETATM   30  C3'   U 9  -1B     55.315  43.758  37.955  1.00 41.59           C0 
+        HETATM   31  O3'   U 9  -1B     54.653  42.598  37.490  1.00 42.60           O0 
+        HETATM   32  C2'   U 9  -1B     56.825  43.573  37.996  1.00 38.55           C0 
+        HETATM   33  O2'   U 9  -1B     57.255  43.012  36.776  1.00 36.20           O0 
+        HETATM   34  C1'   U 9  -1B     57.286  45.028  38.018  1.00 40.75           C0 
+        HETATM   35  N1    U 9  -1B     57.451  45.543  39.385  1.00 40.94           N0 
+        HETATM   36  C2    U 9  -1B     58.636  45.212  40.015  1.00 38.74           C0 
+        HETATM   37  O2    U 9  -1B     59.470  44.485  39.490  1.00 38.70           O0 
+        HETATM   38  N3    U 9  -1B     58.804  45.747  41.261  1.00 37.87           N0 
+        HETATM   39  C4    U 9  -1B     57.924  46.564  41.939  1.00 41.13           C0 
+        HETATM   40  O4    U 9  -1B     58.175  46.857  43.097  1.00 38.53           O0 
+        HETATM   41  C5    U 9  -1B     56.693  46.846  41.241  1.00 42.38           C0 
+        HETATM   42  C6    U 9  -1B     56.502  46.326  40.013  1.00 41.40           C0 
+        MASTER       18    0    2    0    0    0    0    3   42    0    0    0          
+        END
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
