@@ -3,7 +3,7 @@ from typing import Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
 
-from adapters import maxit
+from adapters.tools import maxit
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
@@ -15,7 +15,7 @@ def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) ->
     return end(cif, data)
 
 
-def begin(file_content: str) -> Tuple[tempfile.NamedTemporaryFile, List]:
+def begin(file_content: str) -> Tuple[tempfile._TemporaryFileWrapper, List]:
     cif = tempfile.NamedTemporaryFile('w+', suffix='.cif')
     cif.write(maxit.ensure_cif(file_content))
     cif.flush()
@@ -23,7 +23,7 @@ def begin(file_content: str) -> Tuple[tempfile.NamedTemporaryFile, List]:
     return cif, mmcif.io.IoAdapter().readFile(cif.name)
 
 
-def end(cif: tempfile.NamedTemporaryFile, data: List) -> str:
+def end(cif: tempfile._TemporaryFileWrapper, data: List) -> str:
     cif.seek(0)
     cif.truncate(0)
     mmcif.io.IoAdapter().writeFile(cif.name, data)
@@ -64,9 +64,9 @@ def fix_occupancy(data: List, *_):
             occupancy = atom_site.getAttributeIndex('occupancy')
 
             if occupancy != -1:
-                for _, row in enumerate(atom_site.getRowList()):
+                for _, row in enumerate(atom_site.getRowList()):  # type: ignore
                     try:
-                        _ = float(row[occupancy])
+                        float(row[occupancy])
                     except Exception:
                         row[occupancy] = '1.0'
 

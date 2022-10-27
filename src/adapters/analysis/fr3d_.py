@@ -3,13 +3,13 @@
 import io
 import os
 import sys
-from typing import List, Tuple
+from typing import List, Tuple, Set, Optional
 
 import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, Residue, ResidueAuth, Stacking,
-                             StackingTopology, Structure2D)
+                             StackingTopology, Structure2D, BPh, BR)
 
 SCREEN_DISTANCE_CUTOFF = 12
 
@@ -26,10 +26,10 @@ def parse_unit_ids(pair: Tuple) -> Tuple[Residue, Residue]:
 
 
 def unify_classification(fr3d_names: List[str]) -> Tuple:
-    lw = set()
-    stacking = set()
-    base_ribose = set()
-    base_phosphate = set()
+    lw: Set[LeontisWesthof] = set()
+    stacking: Set[StackingTopology] = set()
+    base_ribose: Set[Optional[BR]] = set()
+    base_phosphate: Set[Optional[BPh]] = set()
 
     for name in fr3d_names:
         name = name.replace('_exp', '')

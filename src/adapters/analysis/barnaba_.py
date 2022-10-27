@@ -5,14 +5,14 @@ import re
 import sys
 import tempfile
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple
+from typing import Any, DefaultDict, Dict, List, Optional, Tuple
 
 import barnaba
 import orjson
 from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Stacking,
                              StackingTopology, Structure2D)
 
-from adapters.utils import suppress_stdout_stderr
+from adapters.tools.utils import suppress_stdout_stderr
 
 
 class BarnabaAdapter:
@@ -52,15 +52,18 @@ class BarnabaAdapter:
         self.mapped_residues_info: Dict[str, Dict[int, Tuple[int, str]]] = defaultdict(dict)
 
     def get_residue(self, residue_info: str) -> Residue:
-        residue_info_list = re.search(self.RESIDUE_REGEX, residue_info).groups()
+        regex_result = re.search(self.RESIDUE_REGEX, residue_info)
+        if regex_result is None:
+            raise RuntimeError(f'BaRNAba regex failed for {residue_info}')
+        residue_info_list = regex_result.groups()
         # Expects [name, number, chain_index]
         assert len(residue_info_list) == 3
         chain = self.chains[int(residue_info_list[2])]
         name = residue_info_list[0]
         new_number = int(residue_info_list[1])
         number, icode = self.mapped_residues_info[chain][new_number]
-        icode = None if icode == '' else icode
-        return Residue(None, ResidueAuth(chain, number, icode, name))
+        icode_or_none = None if icode == '' else icode
+        return Residue(None, ResidueAuth(chain, number, icode_or_none, name))
 
     def get_leontis_westhof(self, interaction: str) -> Optional[LeontisWesthof]:
         # Unknown interaction for BaRNAba
@@ -80,7 +83,7 @@ class BarnabaAdapter:
                 if line[self.CHAIN_INDEX] not in self.chains:
                     self.chains.append(line[self.CHAIN_INDEX])
 
-    def append_interactions(self, pairings: List[str], residues: List[str]) -> None:
+    def append_interactions(self, pairings: List[Any], residues: List[Any]) -> None:
         for p, pairing in enumerate(pairings[0][0]):
             residue_info_left, residue_info_right = residues[pairing[0]], residues[pairing[1]]
             interaction = pairings[0][1][p]
@@ -92,7 +95,7 @@ class BarnabaAdapter:
             else:
                 self.analysis_output.basePairs.append(BasePair(nt1, nt2, lw, None))
 
-    def append_stackings(self, stackings: List[str], residues: List[str]) -> None:
+    def append_stackings(self, stackings: List[Any], residues: List[Any]) -> None:
         for s, stacking in enumerate(stackings[0][0]):
             residue_info_left, residue_info_right = residues[stacking[0]], residues[stacking[1]]
             interaction = stackings[0][1][s]
@@ -105,7 +108,7 @@ class BarnabaAdapter:
     def renumber_pdb(self, file_content: str) -> str:
         # Counter for each chain
         # usage: new_numbers[chain] = new_number
-        new_numbers = defaultdict(int)
+        new_numbers: DefaultDict[str, int] = defaultdict(int)
         # For efficiency save content in list and use join()
         renumbered_content_list = []
 
@@ -129,7 +132,7 @@ class BarnabaAdapter:
         return renumbered_content
 
     @classmethod
-    def run_barnaba(cls, file_content: str) -> str:
+    def run_barnaba(cls, file_content: str) -> Tuple[List[Any], List[Any], List[Any]]:
         with tempfile.TemporaryDirectory() as directory_name:
             with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
                 file.write(file_content)
