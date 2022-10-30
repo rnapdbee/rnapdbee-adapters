@@ -1,29 +1,26 @@
-import json
 import os
 from collections import namedtuple
 
+import orjson
 import pytest
 
 from adapters.server import app
-
-# -------- FIXTURES AND HELPERS --------
-
-# Directory that contains input files (only text files, e.g. pdb, cif)
-INPUT_DIRECTORY = 'files/input/'
-
-# Directory that contains output from adapter endpoint (only json files)
-ADAPTER_OUTPUT_DIRECTORY = 'files/adapter_output/'
-
-# Directory that contains output from any other endpoint (only text files, e.g. pdb, cif)
-TOOL_OUTPUT_DIRECTORY = 'files/tool_output/'
+from data import TEST_DIRECTORY
 
 
 @pytest.fixture()
-def adapter_test_result(request):
+def analysis_test_result(request):
     # Setup
+
+    # Directory that contains input files
+    INPUT_DIRECTORY = 'files/input/'
+
+    # Directory that contains output from analysis-adapter endpoint
+    ANALYSIS_OUTPUT_DIRECTORY = 'files/analysis_output/'
+
     file_path, expected_path, route = request.param
 
-    test_directory = os.path.dirname(os.path.abspath(__file__))
+    test_directory = TEST_DIRECTORY
     file_absolute_path = os.path.abspath(os.path.join(
         test_directory,
         INPUT_DIRECTORY,
@@ -31,7 +28,7 @@ def adapter_test_result(request):
     ))
     expected_absolute_path = os.path.abspath(os.path.join(
         test_directory,
-        ADAPTER_OUTPUT_DIRECTORY,
+        ANALYSIS_OUTPUT_DIRECTORY,
         expected_path,
     ))
 
@@ -41,11 +38,11 @@ def adapter_test_result(request):
 
     client = app.test_client()
 
-    with open(file_absolute_path) as file:
+    with open(file_absolute_path, encoding='utf-8') as file:
         file_content = file.read()
 
-    with open(expected_absolute_path) as file:
-        expected = json.load(file)
+    with open(expected_absolute_path, encoding='utf-8') as file:
+        expected = orjson.loads(file.read())
 
     response = client.post(
         route,
@@ -58,52 +55,9 @@ def adapter_test_result(request):
     # Teardown
 
 
-@pytest.fixture()
-def tool_test_result(request):
-    # Setup
-    file_path, expected_path, route = request.param
-
-    test_directory = os.path.dirname(os.path.abspath(__file__))
-    file_absolute_path = os.path.abspath(os.path.join(
-        test_directory,
-        INPUT_DIRECTORY,
-        file_path,
-    ))
-    expected_absolute_path = os.path.abspath(os.path.join(
-        test_directory,
-        TOOL_OUTPUT_DIRECTORY,
-        expected_path,
-    ))
-
-    app.config.update({
-        "TESTING": True,
-    })
-
-    client = app.test_client()
-
-    with open(file_absolute_path) as file:
-        file_content = file.read()
-
-    with open(expected_absolute_path) as file:
-        expected = file.read()
-
-    response = client.post(
-        route,
-        headers={'Content-Type': 'text/plain'},
-        data=file_content,
-    )
-
-    Result = namedtuple('Result', 'status_code response expected')
-    yield Result(response.status_code, response.data.decode('utf-8'), expected)
-    # Teardown
-
-
-# -------- TESTS --------
-
-
 # Parameters: (pdb_or_cif, expected_json, route)
 @pytest.mark.parametrize(
-    'adapter_test_result',
+    'analysis_test_result',
     [
         ('2z_74.pdb', 'bpnet.json', '/analysis-api/v1/bpnet/1'),
         ('2z_74.pdb', 'bpnet.json', '/analysis-api/v1/bpnet'),
@@ -134,13 +88,13 @@ def tool_test_result(request):
     ],
     indirect=True,
 )
-def test_adapter(adapter_test_result):
-    assert adapter_test_result.status_code == 200
-    assert adapter_test_result.response == adapter_test_result.expected
+def test_analysis(analysis_test_result):
+    assert analysis_test_result.status_code == 200
+    assert analysis_test_result.response == analysis_test_result.expected
 
 
 @pytest.mark.parametrize(
-    'adapter_test_result',
+    'analysis_test_result',
     [
         ('1ehz_mod.pdb', 'icode_bpnet.json', '/analysis-api/v1/bpnet'),
         ('1ehz_mod.pdb', 'icode_fr3d.json', '/analysis-api/v1/fr3d'),
@@ -159,26 +113,6 @@ def test_adapter(adapter_test_result):
     ],
     indirect=True,
 )
-def test_icode(adapter_test_result):
-    assert adapter_test_result.status_code == 200
-    assert adapter_test_result.response == adapter_test_result.expected
-
-
-# Parameters: (pdb_or_cif, expected_pdb_or_cif, route)
-@pytest.mark.parametrize(
-    'tool_test_result',
-    [
-        ('2z_74.pdb', '2z_74.cif', '/conversion-api/v1/ensure-cif'),
-        ('2z_74.cif', '2z_74_out.pdb', '/conversion-api/v1/ensure-pdb'),
-        ('2z_74.pdb', '2z_74_filter.cif', '/filtering-api/v1/filter'),
-    ],
-    ids=[
-        '/conversion-api/v1/ensure-cif',
-        '/conversion-api/v1/ensure-pdb',
-        'filtering-api/v1/filter',
-    ],
-    indirect=True,
-)
-def test_tool(tool_test_result):
-    assert tool_test_result.status_code == 200
-    assert tool_test_result.response == tool_test_result.expected
+def test_icode(analysis_test_result):
+    assert analysis_test_result.status_code == 200
+    assert analysis_test_result.response == analysis_test_result.expected

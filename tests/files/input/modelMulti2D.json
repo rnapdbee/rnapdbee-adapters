@@ -1,0 +1,64 @@
+{
+    "results": [
+        {
+            "adapter": "MC_ANNOTATE",
+            "strands": [
+                {
+                    "name": "A",
+                    "sequence": "aGCGCCuGGACUUAAAGCCAUUGCACU",
+                    "structure": "..((((..(((((((((((..------"
+                },
+                {
+                    "name": "B",
+                    "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
+                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((...((((((((((..))))))))))....))))))).))))))."
+                }
+            ]
+        },
+        {
+            "adapter": "BARNABA",
+            "strands": [
+                {
+                    "name": "A",
+                    "sequence": "aGCGCCuGGACUUAAAGCCAUUGCACU",
+                    "structure": "..((((..(((((((((((..------"
+                },
+                {
+                    "name": "B",
+                    "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
+                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((...((((((((((..))))))))))....))))))).))))))."
+                }
+            ]
+        },
+        {
+            "adapter": "BPNET",
+            "strands": [
+                {
+                    "name": "A",
+                    "sequence": "aGCGCCuGGACUUAAAGCCAUUGCACU",
+                    "structure": "..((((..(((((((((((..------"
+                },
+                {
+                    "name": "B",
+                    "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
+                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((....((((((((....)))))))).....))))))).))))))."
+                }
+            ]
+        },
+        {
+            "adapter": "RNAVIEW",
+            "strands": [
+                {
+                    "name": "A",
+                    "sequence": "aGCGCCuGGACUUAAAGCCAUUGCACU",
+                    "structure": "..((((..(((((((((((..------"
+                },
+                {
+                    "name": "B",
+                    "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
+                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((...((((((((((..))))))))))....))))))).))))))."
+                }
+            ]
+        }
+    ]
+}
