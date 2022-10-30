@@ -72,6 +72,23 @@ def plain_response():
     return _plain_response
 
 
+def svg_response():
+    """Decorate a flask route to return `Response` with status `200` and
+    `Content-Type: image/svg+xml`.
+    """
+
+    def _svg_response(function):
+
+        @wraps(function)
+        def __svg_response(*args, **kwargs):
+            result = function(*args, **kwargs)
+            return Response(response=result, status=HTTPStatus.OK, mimetype='image/svg+xml')
+
+        return __svg_response
+
+    return _svg_response
+
+
 @contextmanager
 def suppress_stdout_stderr():
     """A context manager that redirects stdout and stderr to devnull"""
