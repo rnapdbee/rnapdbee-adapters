@@ -76,9 +76,6 @@ class WeblogoDrawer:
 
         ghost_script = w.GhostscriptAPI()
 
-        assert logo_format.logo_height is not None
-        assert logo_format.logo_width is not None
-
         pdf_bytes = ghost_script.convert('pdf', eps_bytes.decode(), logo_format.logo_width, logo_format.logo_height)
 
         command = shutil.which('pdf2svg')
