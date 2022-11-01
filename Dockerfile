@@ -1,4 +1,9 @@
 # syntax=docker/dockerfile:1
+
+ARG maxit_version=11.100
+
+################################################################################
+
 FROM ubuntu:20.04 AS bpnet-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,7 +19,7 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 
 FROM ubuntu:20.04 AS maxit-builder
 
-ARG maxit_version=11.100
+ARG maxit_version
 ENV DEBIAN_FRONTEND=noninteractive \
     RCSBROOT=/maxit-v${maxit_version}-prod-src
 
@@ -99,7 +104,7 @@ RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
 
 FROM ubuntu:20.04 AS server
 
-ARG maxit_version=11.100
+ARG maxit_version
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
