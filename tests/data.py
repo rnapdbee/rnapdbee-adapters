@@ -3,7 +3,11 @@
 # but please do not change or remove existing data (e.g. RESIDUES[0]).
 # Otherwise tests will fail.
 
+import os
+
 from rnapolis.common import Residue, ResidueAuth, Stacking, StackingTopology
+
+TEST_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 RESIDUES = [
     Residue(None, ResidueAuth('X', -1, 'A', 'res')),  # 0

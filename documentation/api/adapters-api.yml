@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   description: "This is API of the adapters service of RNApdbee v3.0."
-  version: "1.0.0"
+  version: "1.0.1"
   title: "RNApdbee Adapters API"
 
 tags:
@@ -14,6 +14,9 @@ tags:
 
   - name: "Filtering API"
     description: "RNApdbee adapters API which is able to perform structure filtering"
+
+  - name: "Visualization API"
+    description: "RNApdbee adapters API which is able to perform structure visualization"
 
 servers:
   - url: "{protocol}://{host}:{port}"
@@ -377,15 +380,44 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
+  # ---------- Visualization API ---------- #
+
+  /visualization-api/v1/weblogo:
+    post:
+      tags:
+        - "Visualization API"
+      summary: "Visualize dotBracket to Multi2D using weblogo"
+      requestBody:
+        $ref: "#/components/requestBodies/ModelMulti2D"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            image/svg+xml:
+              schema:
+                $ref: "#/components/schemas/FileSVG"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
 components:
   requestBodies:
     fileWithStructure:
       description: "RNA structure in PDB or CIF file format"
-      required: false
+      required: true
       content:
         text/plain:
           schema:
             $ref: "#/components/schemas/FileCIF"
+
+    ModelMulti2D:
+      description: "ModelMulti2D in JSON format"
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModelMulti2D"
 
   responses:
     ServerError:
@@ -609,6 +641,38 @@ components:
           items:
             $ref: "#/components/schemas/OtherInteraction"
 
+    Strand:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "A"
+        sequence:
+          type: string
+          example: "aGCGCCuGGACUUAAAGCCAUUGCACU"
+        structure:
+          type: string
+          example: "..((((..(((((((((((..------"
+
+    ResultMulti2D:
+      type: object
+      properties:
+        adapter:
+          type: string
+          example: "MC-ANNOTATE"
+        strands:
+          type: array
+          items:
+            $ref: "#/components/schemas/Strand"
+
+    ModelMulti2D:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResultMulti2D"
+
     FileCIF:
       type: string
       example: |
@@ -761,6 +825,13 @@ components:
         HETATM   42  C6    U 9  -1B     56.502  46.326  40.013  1.00 41.40           C0 
         MASTER       18    0    2    0    0    0    0    3   42    0    0    0          
         END
+
+    FileSVG:
+      type: string
+      example: |
+        <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+        </svg>
 
 externalDocs:
   description: "Find out more about Swagger"
