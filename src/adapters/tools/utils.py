@@ -1,3 +1,5 @@
+import tempfile
+import subprocess
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from functools import wraps
 from http import HTTPStatus
@@ -38,8 +40,7 @@ def content_type(mimetype: str):
 
 def json_response():
     """Decorate a flask route to return `Response` with status `200`and
-    `Content-Type: application/json`. Additionally, `orjson` is used to dump object.
-    """
+    `Content-Type: application/json`. Additionally, `orjson` is used to dump object."""
 
     def _json_response(function):
 
@@ -57,8 +58,7 @@ def json_response():
 
 def plain_response():
     """Decorate a flask route to return `Response` with status `200` and
-    `Content-Type: text/plain`.
-    """
+    `Content-Type: text/plain`."""
 
     def _plain_response(function):
 
@@ -74,15 +74,26 @@ def plain_response():
 
 def svg_response():
     """Decorate a flask route to return `Response` with status `200` and
-    `Content-Type: image/svg+xml`.
-    """
+    `Content-Type: image/svg+xml`."""
 
     def _svg_response(function):
 
         @wraps(function)
         def __svg_response(*args, **kwargs):
-            result = function(*args, **kwargs)
-            return Response(response=result, status=HTTPStatus.OK, mimetype='image/svg+xml')
+            svg_content = function(*args, **kwargs)
+            with tempfile.TemporaryDirectory() as directory:
+                with tempfile.NamedTemporaryFile('w+', dir=directory, suffix='.svg') as svg_file:
+                    svg_file.write(svg_content)
+                    svg_file.seek(0)
+                    fixed_svg_content = subprocess.run(
+                        ['rsvg-convert', '-f', 'svg', svg_file.name],
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.DEVNULL,
+                        check=False,
+                    ).stdout.decode('utf-8')
+            if len(fixed_svg_content) == 0:
+                raise RuntimeError("rsvg-convert conversion failed!")
+            return Response(response=fixed_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
 

@@ -119,6 +119,7 @@ RUN apt-get update -y \
        build-essential \
        pdf2svg \
        ghostscript \
+       librsvg2-bin \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
