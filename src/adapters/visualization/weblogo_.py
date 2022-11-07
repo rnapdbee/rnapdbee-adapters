@@ -26,14 +26,14 @@ class WeblogoDrawer:
 
     BASE_RULES = (
         w.SymbolColor('U', 'black', 'neutral'),
-        w.SymbolColor('M', 'black', 'neutral'),
+        w.SymbolColor('Z', 'black', 'neutral'),
         w.SymbolColor('()', 'gray', 'neutral'),
         w.SymbolColor('[]', 'green', 'neutral'),
         w.SymbolColor('{}', 'blue', 'neutral'),
         w.SymbolColor('<>', 'red', 'neutral'),
     )
 
-    ALPHABET = w.Alphabet('UM()[]{}<>', [])
+    ALPHABET = w.Alphabet('UZ()[]{}<>', [])
 
     LOGO_OPTIONS = w.LogoOptions(
         show_fineprint=False,
@@ -54,7 +54,7 @@ class WeblogoDrawer:
         return strands_structures
 
     def replace_unreadable_characters(self, fasta: str) -> str:
-        return fasta.replace('.', 'U').replace('-', 'M')
+        return fasta.replace('.', 'U').replace('-', 'Z')
 
     def generate_weblogo(self, title: str, fasta: str) -> Tuple[w.LogoData, w.LogoFormat]:
         sequence_list = w.read_seq_data(StringIO(fasta), alphabet=self.ALPHABET)
