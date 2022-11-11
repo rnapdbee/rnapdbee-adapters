@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG maxit_version=11.100
+ARG rchie_dir=/usr/local/lib/R/site-library/rchie
 
 ################################################################################
 
@@ -104,10 +105,33 @@ RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
 
 FROM ubuntu:22.04 AS r-builder
 
+ARG rchie_dir
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+        r-base \
+        libcurl4-openssl-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN echo 'options(BioC_mirror = "https://packagemanager.rstudio.com/bioconductor", repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/__linux__/jammy/2022-11-09+MToxNDMzODE3MywyOjQ1MjYyMTU7RDFFQTQ0MUE"))' > ~/.Rprofile \
+ && Rscript -e 'install.packages(c("BiocManager", "optparse", "RColorBrewer"), lib="/usr/local/lib/R/site-library")' \
+ && Rscript -e 'BiocManager::install("R4RNA", lib="/usr/local/lib/R/site-library")' \
+ && curl -L https://raw.githubusercontent.com/jujubix/r-chie/master/rchie.R -o rchie.R \
+ && mkdir ${rchie_dir} \
+ && mv rchie.R ${rchie_dir}/rchie.R \
+ && chmod 755 ${rchie_dir}/rchie.R
+
+################################################################################
+
+FROM ubuntu:22.04 AS server
+
 ARG maxit_version
+ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir} \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview
@@ -120,6 +144,7 @@ RUN apt-get update -y \
        pdf2svg \
        ghostscript \
        librsvg2-bin \
+       r-base \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
@@ -131,6 +156,8 @@ COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
 COPY --from=rnaview-builder /RNAVIEW /rnaview
 
 COPY --from=python-builder /venv /venv
+
+COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
