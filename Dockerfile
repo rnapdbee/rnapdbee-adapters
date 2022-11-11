@@ -4,7 +4,7 @@ ARG maxit_version=11.100
 
 ################################################################################
 
-FROM ubuntu:20.04 AS bpnet-builder
+FROM ubuntu:22.04 AS bpnet-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -17,7 +17,7 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 
 ################################################################################
 
-FROM ubuntu:20.04 AS maxit-builder
+FROM ubuntu:22.04 AS maxit-builder
 
 ARG maxit_version
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -44,7 +44,7 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS mc-annotate-builder
+FROM ubuntu:22.04 AS mc-annotate-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -60,7 +60,7 @@ RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o m
 
 ################################################################################
 
-FROM ubuntu:20.04 AS rnaview-builder
+FROM ubuntu:22.04 AS rnaview-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -80,7 +80,7 @@ RUN patch -p0 < rnaview.patch \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS python-builder
+FROM ubuntu:22.04 AS python-builder
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH=/venv/bin:$PATH
@@ -102,7 +102,7 @@ RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS server
+FROM ubuntu:22.04 AS r-builder
 
 ARG maxit_version
 ENV DEBIAN_FRONTEND=noninteractive \
