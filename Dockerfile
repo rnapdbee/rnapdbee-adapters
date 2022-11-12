@@ -125,13 +125,30 @@ RUN echo 'options(BioC_mirror = "https://packagemanager.rstudio.com/bioconductor
 
 ################################################################################
 
+FROM ubuntu:22.04 AS pseudoviewer-builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir pseudoviewer \
+ && curl -L https://github.com/IronLanguages/ironpython3/releases/download/v3.4.0-beta1/ironpython_3.4.0-beta1.deb > pseudoviewer/ipython.deb \
+ && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe
+
+COPY PVWrapper.py /pseudoviewer/
+
+################################################################################
+
 FROM ubuntu:22.04 AS server
 
 ARG maxit_version
 ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir} \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview
@@ -145,6 +162,11 @@ RUN apt-get update -y \
        ghostscript \
        librsvg2-bin \
        r-base \
+       gnupg \
+       ca-certificates \
+ && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+ && echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
+ && apt-get update && apt-get install -y mono-devel \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
@@ -158,6 +180,10 @@ COPY --from=rnaview-builder /RNAVIEW /rnaview
 COPY --from=python-builder /venv /venv
 
 COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
+
+COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
+
+RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
