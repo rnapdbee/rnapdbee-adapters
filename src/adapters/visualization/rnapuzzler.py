@@ -27,7 +27,7 @@ class RNAPuzzlerDrawer:
                 )
         if not os.path.isfile(self.OUTPUT_SVG):
             raise RuntimeError('SVG does not exist!')
-        with open(self.OUTPUT_SVG, 'r') as file:
+        with open(self.OUTPUT_SVG, 'r', encoding='utf-8') as file:
             svg_content = file.read()
         os.remove(self.OUTPUT_SVG)
 

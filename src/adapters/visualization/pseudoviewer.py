@@ -26,7 +26,7 @@ class PseudoViewerDrawer:
                     )
                     if not os.path.isfile(out_file):
                         raise RuntimeError('SVG does not exist!')
-                    with open(out_file, 'r') as file:
+                    with open(out_file, 'r', encoding='utf-8') as file:
                         svg_content = file.read()
         return svg_content
 

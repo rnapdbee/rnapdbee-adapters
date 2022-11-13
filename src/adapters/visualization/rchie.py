@@ -22,10 +22,10 @@ class RChieDrawer:
         '--output',
     ]
 
-    def generate_rchie_svg(self, dotBracket: str) -> str:
+    def generate_rchie_svg(self, dot_bracket: str) -> str:
         with tempfile.TemporaryDirectory() as directory:
             with tempfile.NamedTemporaryFile('w+', dir=directory, suffix='.dbn') as file:
-                file.write(dotBracket)
+                file.write(dot_bracket)
                 file.seek(0)
                 output_pdf = os.path.join(directory, 'out.pdf')
                 output_svg = os.path.join(directory, 'out.svg')
