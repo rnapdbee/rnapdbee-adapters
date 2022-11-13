@@ -62,3 +62,17 @@ def visualize_rnapuzzler():
     # input: seuquence, structure
     model = ModelMulti2D.from_dict(orjson.loads(request.data))
     return RNAPuzzlerDrawer().visualize(model)
+
+
+@server.route('/rnaglib', methods=['POST'])
+@content_type('application/json')
+@svg_response()
+def visualize_rnaglib():
+    # TODO: RNAglibDrawer
+    # -- Reminder --
+    # Input: graph from mmCIF (?)
+    # Local mmCIF requires x3dna-dssr with license (?)
+    # Cannot show and save file, matplotlib problem (?)
+    # Latex is required
+    # Package is quite heavy (CUDA, torch)
+    return NotImplementedError()

@@ -8,4 +8,5 @@ weblogo==3.7.*
 lxml==4.9.*
 svg-stack==0.1.0
 dataclasses-json==0.5.*
+rnaglib==1.0.1
 git+https://github.com/tzok/fr3d-python@7ff3382ae1eb4f6a7ae1414f67c1024cb38e1000
