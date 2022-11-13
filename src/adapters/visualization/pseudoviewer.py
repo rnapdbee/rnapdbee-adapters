@@ -20,7 +20,7 @@ class PseudoViewerDrawer:
                     out_file = os.path.join(directory, 'out.svg')
                     subprocess.run(
                         ['ipy', 'pseudoviewer/PVWrapper.py', seqeunce.name, structure.name, out_file],
-                        stderr=subprocess.DEVNULL,
+                        stdout=subprocess.DEVNULL,
                         stderr=subprocess.DEVNULL,
                         check=False,
                     )

@@ -148,7 +148,7 @@ ARG maxit_version
 ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview
@@ -184,6 +184,8 @@ COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-librar
 COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
 
 RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
+
+COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot/
 
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
