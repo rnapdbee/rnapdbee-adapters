@@ -8,7 +8,7 @@
 image="rnapdbee-adapter-server" # Docker image name
 container="rnapdbee-adapter-container" # Docker container name
 target="server" # Target in 'docker build' command
-port="8000:8000" # Port mapping in 'docker create' command
+port="8000:80" # Port mapping in 'docker create' command
 
 # Colors for echo command
 RED='\033[0;31m'

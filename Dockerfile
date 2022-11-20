@@ -187,7 +187,7 @@ RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot/
 
-EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
+EXPOSE 80
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "adapters.server:app"]
 
 COPY src/adapters /rnapdbee-adapters/src/adapters
