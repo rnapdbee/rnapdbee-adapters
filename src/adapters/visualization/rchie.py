@@ -9,18 +9,17 @@ from adapters.visualization.model import ModelMulti2D
 
 class RChieDrawer:
 
-    RCHIE_ARGS = [
-        'rchie.R',
-        'file.dbn',
-        '--format1',
-        'vienna',
-        '--rule1',
-        '6',
-        '--colour1',
-        '#808080,#8F0000,#007200,#052060,#5D005D,#3C739D,#8F7600,#D25FD2,#9FB925',
-        '--pdf',
-        '--output',
-    ]
+    # Only 8 colors are supported by RChie
+    COLORS = {
+        '()': '#808080',  # Base pair
+        '<>': '#831300',  # 3rd order
+        '[]': '#2E7012',  # 1st order
+        '{}': '#0F205F',  # 2nd order
+        'Aa': '#550B5B',  # 4th order
+        'Bb': '#4A729D',  # 5th order
+        'Cc': '#8B7605',  # 6th order
+        'Dd': '#C565CF',  # 7th order
+    }
 
     def generate_rchie_svg(self, dot_bracket: str) -> str:
         with tempfile.TemporaryDirectory() as directory:
@@ -30,7 +29,19 @@ class RChieDrawer:
                 output_pdf = os.path.join(directory, 'out.pdf')
                 output_svg = os.path.join(directory, 'out.svg')
                 subprocess.run(
-                    [self.RCHIE_ARGS[0]] + [file.name] + self.RCHIE_ARGS[2:] + [output_pdf],
+                    [
+                        'rchie.R',
+                        file.name,
+                        '--format1',
+                        'vienna',
+                        '--rule1',
+                        '6',
+                        '--colour1',
+                        ','.join(tuple(self.COLORS.values())),
+                        '--pdf',
+                        '--output',
+                        output_pdf,
+                    ],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
                     check=False,
