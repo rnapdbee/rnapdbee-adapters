@@ -24,16 +24,22 @@ from adapters.visualization.model import ModelMulti2D
 
 class WeblogoDrawer:
 
-    BASE_RULES = (
-        w.SymbolColor('U', 'black', 'neutral'),
-        w.SymbolColor('Z', 'black', 'neutral'),
-        w.SymbolColor('()', 'gray', 'neutral'),
-        w.SymbolColor('[]', 'green', 'neutral'),
-        w.SymbolColor('{}', 'blue', 'neutral'),
-        w.SymbolColor('<>', 'red', 'neutral'),
-    )
+    COLORS = {
+        'U': '#000000',  # Unpaired residue (dot in dotBracket)
+        'Z': '#000000',  # Missing residue (dash in extended dotBracket)
+        '()': '#808080',  # Base pair
+        '[]': '#2E7012',  # 1st order
+        '{}': '#0F205F',  # 2nd order
+        '<>': '#831300',  # 3rd order
+        'Aa': '#550B5B',  # 4th order
+        'Bb': '#4A729D',  # 5th order
+        'Cc': '#8B7605',  # 6th order
+        'Dd': '#C565CF',  # 7th order
+        'Ee': '#9FB925'  # 8th order
+    }
 
-    ALPHABET = w.Alphabet('UZ()[]{}<>', [])
+    BASE_RULES = tuple(w.SymbolColor(symbol, color, 'neutral') for symbol, color in COLORS.items())
+    ALPHABET = w.Alphabet(''.join(tuple(COLORS.keys())), [])
 
     LOGO_OPTIONS = w.LogoOptions(
         show_fineprint=False,
