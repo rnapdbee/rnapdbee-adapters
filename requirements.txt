@@ -8,4 +8,5 @@ weblogo==3.7.*
 lxml==4.9.*
 svg-stack==0.1.0
 dataclasses-json==0.5.*
-git+https://github.com/tzok/fr3d-python@7ff3382ae1eb4f6a7ae1414f67c1024cb38e1000
+mmcif-pdbx==2.0.1
+git+https://github.com/BGSU-RNA/fr3d-python@c70d2c3241f97491c5bd86f748630ab5df0248a8
