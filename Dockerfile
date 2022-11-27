@@ -136,7 +136,8 @@ RUN apt-get update -y \
 
 RUN mkdir pseudoviewer \
  && curl -L https://github.com/IronLanguages/ironpython3/releases/download/v3.4.0-beta1/ironpython_3.4.0-beta1.deb > pseudoviewer/ipython.deb \
- && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe
+ && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe \
+ && echo '#!/bin/bash\nipy /pseudoviewer/PVWrapper.py $@' > pseudoviewer/pseudoviewer && chmod 755 pseudoviewer/pseudoviewer
 
 COPY PVWrapper.py /pseudoviewer/
 

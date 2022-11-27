@@ -18,7 +18,7 @@ import PseudoViewer
 import PseudoViewer.PVIO
 import PseudoViewer.PVIO.Strand
 
-ASSEMBLY = Assembly.LoadFile(os.path.abspath('pseudoviewer/PseudoViewer3.exe'))
+ASSEMBLY = Assembly.LoadFile('/pseudoviewer/PseudoViewer3.exe')
 STATIC = BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public
 STATIC_NP = BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic
 
