@@ -41,7 +41,7 @@
                 {
                     "name": "B",
                     "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
-                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((....((((((((....)))))))).....))))))).))))))."
+                    "structure": "--)))))))))))..(((Cc.[[[[[[...)))..DdEe.))))...]]]]]][[[[[.((((((]]]]]....(((((((....((((((((....)))))))).....))))))).))))))."
                 }
             ]
         },
@@ -51,12 +51,12 @@
                 {
                     "name": "A",
                     "sequence": "aGCGCCuGGACUUAAAGCCAUUGCACU",
-                    "structure": "..((((..(((((((((((..------"
+                    "structure": "..((((..(((((((((((Bb------"
                 },
                 {
                     "name": "B",
                     "sequence": "CCGGCUUUAAGUUGACGAGGGCAGGGUUuAUCGAGACAUCGGCGGGUGCCCUGCGGUCUUCCUGCGACCGUUAGAGGACUGGuAAAACCACAGGCGACUGUGGCAUAGAGCAGUCCGGGCAGGAA",
-                    "structure": "--)))))))))))..(((...[[[[[[...))).......))))...]]]]]][[[[[.((((((]]]]]....(((((((...((((((((((..))))))))))....))))))).))))))."
+                    "structure": "--)))))))))))..(((...[[[[[[...)))..<>{}.)))).Aa]]]]]][[[[[.((((((]]]]]....(((((((...((((((((((..))))))))))....))))))).))))))."
                 }
             ]
         }
