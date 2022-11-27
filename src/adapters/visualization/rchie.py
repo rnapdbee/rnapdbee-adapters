@@ -3,8 +3,9 @@
 import subprocess
 import tempfile
 import os
+import sys
 
-from adapters.visualization.model import ModelMulti2D
+from adapters.visualization.model import Model2D
 
 
 class RChieDrawer:
@@ -52,17 +53,23 @@ class RChieDrawer:
                 stderr=subprocess.DEVNULL,
                 check=False,
             )
+            if not os.path.isfile(output_svg):
+                raise RuntimeError('RChie image was not generated!')
             with open(output_svg, 'r', encoding='utf-8') as svg_file:
                 svg_content = svg_file.read()
+            if 'svg' not in svg_content:
+                raise RuntimeError('Rchie image is not a valid SVG!')
         return svg_content
 
-    def visualize(self, data: ModelMulti2D):
-        structure = ''.join([strand.structure for strand in data.results[0].strands])
+    def visualize(self, data: Model2D):
+        structure = ''.join(tuple(strand.structure for strand in data.strands))
         return self.generate_rchie_svg(structure)
 
 
 def main() -> None:
-    pass
+    drawer = RChieDrawer()
+    dot_bracket = sys.stdin.read()
+    print(drawer.generate_rchie_svg(dot_bracket))
 
 
 if __name__ == '__main__':
