@@ -1,0 +1,64 @@
+{
+    "strands": [
+        {
+            "name": "A",
+            "sequence": "gCGGAUUUAgCUCAGuuGGGAGAGCgCCAGAcUgAAgAucUGGAGgUCcUGUGuuCGaUCCACAGAAUUCGCACCA",
+            "structure": "((((((([.((((]{[.[<..))))((((((((-.).)))))))...}((((((]>.)].))))))))))))..-("
+        },
+        {
+            "name": "B",
+            "sequence": "gCAA",
+            "structure": ")()."
+        }
+    ],
+    "nonCanonicalInteractions": [
+        {
+            "residueLeft": {
+                "chain": "A",
+                "number": 9,
+                "name": "A"
+            },
+            "residueRight": {
+                "chain": "A",
+                "number": 23,
+                "name": "A"
+            }
+        },
+        {
+            "residueLeft": {
+                "chain": "A",
+                "number": 10,
+                "name": "g"
+            },
+            "residueRight": {
+                "chain": "A",
+                "number": 45,
+                "name": "G"
+            }
+        },
+        {
+            "residueLeft": {
+                "chain": "A",
+                "number": 22,
+                "name": "G"
+            },
+            "residueRight": {
+                "chain": "A",
+                "number": 46,
+                "name": "g"
+            }
+        },
+        {
+            "residueLeft": {
+                "chain": "A",
+                "number": 8,
+                "name": "U"
+            },
+            "residueRight": {
+                "chain": "A",
+                "number": 21,
+                "name": "A"
+            }
+        }
+    ]
+}
