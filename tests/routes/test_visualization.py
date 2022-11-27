@@ -60,9 +60,13 @@ def visualization_test_result(request):
     'visualization_test_result',
     [
         ('modelMulti2D.json', 'weblogo.svg', '/visualization-api/v1/weblogo'),
+        ('model2D.json', 'pseudoviewer.svg', '/visualization-api/v1/pseudoviewer'),
+        ('model2D.json', 'rchie.svg', '/visualization-api/v1/rchie'),
     ],
     ids=[
         '/visualization-api/v1/weblogo',
+        '/visualization-api/v1/pseudoviewer',
+        '/visualization-api/v1/rchie',
     ],
     indirect=True,
 )
