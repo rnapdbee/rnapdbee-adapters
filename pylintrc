@@ -267,7 +267,11 @@ good-names=i,
            pdbx_PDB_model_num,
            nt,
            br,
-           x
+           x,
+           x1,
+           y1,
+           x2,
+           y2
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
