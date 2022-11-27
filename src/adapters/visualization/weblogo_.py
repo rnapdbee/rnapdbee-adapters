@@ -103,6 +103,8 @@ class WeblogoDrawer:
                 raise RuntimeError(f'File "{file_name}" does not exist - "pdf2svg" conversion failed!')
             with open(file_name, 'r', encoding='utf-8') as svg_file:
                 svg_result = svg_file.read()
+            if 'svg' not in svg_result:
+                raise RuntimeError('Weblogo image is not a valid SVG!')
 
         return svg_result
 
@@ -127,8 +129,10 @@ class WeblogoDrawer:
             output_file = os.path.join(directory, f'{str(uuid.uuid4())}.svg')
             document.save(output_file)
 
-            with open(output_file, 'r', encoding='utf-8') as file:
-                merged_svg = file.read()
+            with open(output_file, 'r', encoding='utf-8') as result_file:
+                merged_svg = result_file.read()
+            if 'svg' not in merged_svg:
+                raise RuntimeError('Weblogo merged image is not a valid SVG!')
 
         return merged_svg
 
