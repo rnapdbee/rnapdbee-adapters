@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   description: "This is API of the adapters service of RNApdbee v3.0."
-  version: "1.0.1"
+  version: "1.0.2"
   title: "RNApdbee Adapters API"
 
 tags:
@@ -386,9 +386,47 @@ paths:
     post:
       tags:
         - "Visualization API"
-      summary: "Visualize dotBracket to Multi2D using weblogo"
+      summary: "Visualize multi 2D using weblogo"
       requestBody:
         $ref: "#/components/requestBodies/ModelMulti2D"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            image/svg+xml:
+              schema:
+                $ref: "#/components/schemas/FileSVG"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /visualization-api/v1/rchie:
+    post:
+      tags:
+        - "Visualization API"
+      summary: "Visualize 2D using rchie"
+      requestBody:
+        $ref: "#/components/requestBodies/Model2D"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            image/svg+xml:
+              schema:
+                $ref: "#/components/schemas/FileSVG"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /visualization-api/v1/pseudoviewer:
+    post:
+      tags:
+        - "Visualization API"
+      summary: "Visualize 2D using pseudoviewer"
+      requestBody:
+        $ref: "#/components/requestBodies/Model2D"
       responses:
         "200":
           description: "OK"
@@ -418,6 +456,14 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ModelMulti2D"
+
+    Model2D:
+      description: "Model2D in JSON format"
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Model2D"
 
   responses:
     ServerError:
@@ -652,7 +698,7 @@ components:
           example: "aGCGCCuGGACUUAAAGCCAUUGCACU"
         structure:
           type: string
-          example: "..((((..(((((((((((..------"
+          example: "...((..))--..[]<...>..-...."
 
     ResultMulti2D:
       type: object
@@ -672,6 +718,39 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ResultMulti2D"
+
+    SimpleResidue:
+      type: object
+      properties:
+        chain:
+          type: string
+          example: "A"
+        number:
+          type: integer
+          example: 15
+        name:
+          type: string
+          example: "G"
+
+    ResiduePair:
+      type: object
+      properties:
+        residueLeft:
+          $ref: "#/components/schemas/SimpleResidue"
+        residueRight:
+          $ref: "#/components/schemas/SimpleResidue"
+
+    Model2D:
+      type: object
+      properties:
+        strands:
+          type: array
+          items:
+            $ref: "#/components/schemas/Strand"
+        nonCanonicalInteractions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResiduePair"
 
     FileCIF:
       type: string
