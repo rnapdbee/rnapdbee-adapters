@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 
 ARG maxit_version=11.100
+ARG rchie_dir=/usr/local/lib/R/site-library/rchie
 
 ################################################################################
 
-FROM ubuntu:20.04 AS bpnet-builder
+FROM ubuntu:22.04 AS bpnet-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -17,7 +18,7 @@ RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/ma
 
 ################################################################################
 
-FROM ubuntu:20.04 AS maxit-builder
+FROM ubuntu:22.04 AS maxit-builder
 
 ARG maxit_version
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -44,7 +45,7 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS mc-annotate-builder
+FROM ubuntu:22.04 AS mc-annotate-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -60,7 +61,7 @@ RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o m
 
 ################################################################################
 
-FROM ubuntu:20.04 AS rnaview-builder
+FROM ubuntu:22.04 AS rnaview-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -80,7 +81,7 @@ RUN patch -p0 < rnaview.patch \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS python-builder
+FROM ubuntu:22.04 AS python-builder
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH=/venv/bin:$PATH
@@ -102,12 +103,53 @@ RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
 
 ################################################################################
 
-FROM ubuntu:20.04 AS server
+FROM ubuntu:22.04 AS r-builder
+
+ARG rchie_dir
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+        r-base \
+        libcurl4-openssl-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN echo 'options(BioC_mirror = "https://packagemanager.rstudio.com/bioconductor", repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/__linux__/jammy/2022-11-09+MToxNDMzODE3MywyOjQ1MjYyMTU7RDFFQTQ0MUE"))' > ~/.Rprofile \
+ && Rscript -e 'install.packages(c("BiocManager", "optparse", "RColorBrewer"), lib="/usr/local/lib/R/site-library")' \
+ && Rscript -e 'BiocManager::install("R4RNA", lib="/usr/local/lib/R/site-library")' \
+ && curl -L https://raw.githubusercontent.com/jujubix/r-chie/master/rchie.R -o rchie.R \
+ && mkdir ${rchie_dir} \
+ && mv rchie.R ${rchie_dir}/rchie.R \
+ && chmod 755 ${rchie_dir}/rchie.R
+
+################################################################################
+
+FROM ubuntu:22.04 AS pseudoviewer-builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir pseudoviewer \
+ && curl -L https://github.com/IronLanguages/ironpython3/releases/download/v3.4.0-beta1/ironpython_3.4.0-beta1.deb > pseudoviewer/ipython.deb \
+ && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe \
+ && echo '#!/bin/bash\nipy /pseudoviewer/PVWrapper.py $@' > pseudoviewer/pseudoviewer && chmod 755 pseudoviewer/pseudoviewer
+
+COPY PVWrapper.py /pseudoviewer/
+
+################################################################################
+
+FROM ubuntu:22.04 AS server
 
 ARG maxit_version
+ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview
@@ -120,6 +162,12 @@ RUN apt-get update -y \
        pdf2svg \
        ghostscript \
        librsvg2-bin \
+       r-base \
+       gnupg \
+       ca-certificates \
+ && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+ && echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
+ && apt-get update && apt-get install -y mono-devel \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=bpnet-builder /bpnet-master /bpnet-master
@@ -132,7 +180,22 @@ COPY --from=rnaview-builder /RNAVIEW /rnaview
 
 COPY --from=python-builder /venv /venv
 
-EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "adapters.server:app"]
+COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
+
+COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
+
+RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
+
+COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot/
+
+EXPOSE 80
+CMD [  "gunicorn", \
+       "--worker-tmp-dir", "/dev/shm", \
+       "--workers", "2", \
+       "--threads", "2", \
+       "--worker-clas", "gthread", \
+       "--bind", "0.0.0.0:80", \
+       "adapters.server:app" \
+]
 
 COPY src/adapters /rnapdbee-adapters/src/adapters
