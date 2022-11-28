@@ -61,7 +61,7 @@ class RChieDrawer:
                 raise RuntimeError('Rchie image is not a valid SVG!')
         return svg_content
 
-    def visualize(self, data: Model2D):
+    def visualize(self, data: Model2D) -> None:
         structure = ''.join(tuple(strand.structure for strand in data.strands))
         return self.generate_rchie_svg(structure)
 

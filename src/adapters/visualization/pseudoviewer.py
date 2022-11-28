@@ -131,7 +131,7 @@ class PseudoViewerDrawer:
                 self.COLORS['NOT_REPRESENTED'],
             ))
 
-    def generate_pseudoviewer_svg(self):
+    def generate_pseudoviewer_svg(self) -> None:
         with TemporaryDirectory() as directory:
             with NamedTemporaryFile('w+', dir=directory, suffix='.seq') as seqeunce_file:
                 with NamedTemporaryFile('w+', dir=directory, suffix='.str') as structure_file:
@@ -228,7 +228,7 @@ class PseudoViewerDrawer:
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
-    def visualize(self, data: Model2D):
+    def visualize(self, data: Model2D) -> None:
         self.data = data
 
         self.preprocess()

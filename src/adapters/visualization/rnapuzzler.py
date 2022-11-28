@@ -49,7 +49,7 @@ class RNAPuzzlerDrawer:
 
         return svg_content
 
-    def visualize(self, data: Model2D):
+    def visualize(self, data: Model2D) -> None:
         joined_sequence = ''.join(tuple(strand.sequence for strand in data.strands))
         joined_structure = ''.join(tuple(strand.structure for strand in data.strands))
         clear_structure = self.remove_forbidden_symbols(joined_structure)
