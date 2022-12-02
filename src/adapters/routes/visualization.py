@@ -36,9 +36,6 @@ def visualize_rchie():
 @content_type('application/json')
 @svg_response()
 def visualize_pseudoviewer():
-    # TODO: PseudoViewerDrawer
-    # nonCanonicalInteractions handling
-    # progress: 80%
     model = Model2D.from_dict(orjson.loads(request.data))
     return PseudoViewerDrawer().visualize(model)
 
