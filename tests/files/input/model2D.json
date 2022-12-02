@@ -11,54 +11,875 @@
             "structure": ")()."
         }
     ],
-    "nonCanonicalInteractions": [
+    "residues": [
         {
-            "residueLeft": {
-                "chain": "A",
-                "number": 9,
-                "name": "A"
-            },
-            "residueRight": {
-                "chain": "A",
-                "number": 23,
-                "name": "A"
-            }
+            "chain": "A",
+            "number": -100,
+            "name": "g"
         },
         {
-            "residueLeft": {
-                "chain": "A",
-                "number": 10,
-                "name": "g"
-            },
-            "residueRight": {
-                "chain": "A",
-                "number": 45,
-                "name": "G"
-            }
+            "chain": "A",
+            "number": -98,
+            "name": "C"
         },
         {
-            "residueLeft": {
-                "chain": "A",
-                "number": 22,
-                "name": "G"
-            },
-            "residueRight": {
-                "chain": "A",
-                "number": 46,
-                "name": "g"
-            }
+            "chain": "A",
+            "number": -96,
+            "name": "G"
         },
         {
-            "residueLeft": {
-                "chain": "A",
-                "number": 8,
-                "name": "U"
-            },
-            "residueRight": {
-                "chain": "A",
-                "number": 21,
-                "name": "A"
-            }
+            "chain": "A",
+            "number": -94,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -92,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -90,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -88,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -86,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -84,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -82,
+            "name": "g"
+        },
+        {
+            "chain": "A",
+            "number": -80,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -78,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -76,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -74,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -72,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -70,
+            "name": "u"
+        },
+        {
+            "chain": "A",
+            "number": -68,
+            "name": "u"
+        },
+        {
+            "chain": "A",
+            "number": -66,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -64,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -62,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -60,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -58,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -56,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -54,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -52,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -50,
+            "name": "g"
+        },
+        {
+            "chain": "A",
+            "number": -48,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -46,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -44,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -42,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -40,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -38,
+            "name": "c"
+        },
+        {
+            "chain": "A",
+            "number": -36,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -34,
+            "name": "g"
+        },
+        {
+            "chain": "A",
+            "number": -32,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -30,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -28,
+            "name": "g"
+        },
+        {
+            "chain": "A",
+            "number": -26,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -24,
+            "name": "u"
+        },
+        {
+            "chain": "A",
+            "number": -22,
+            "name": "c"
+        },
+        {
+            "chain": "A",
+            "number": -20,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -18,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -16,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -14,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": -12,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": -10,
+            "name": "g"
+        },
+        {
+            "chain": "A",
+            "number": -8,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": -6,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": -4,
+            "name": "c"
+        },
+        {
+            "chain": "A",
+            "number": -2,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": 0,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": 2,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": 4,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": 6,
+            "name": "u"
+        },
+        {
+            "chain": "A",
+            "number": 8,
+            "name": "u"
+        },
+        {
+            "chain": "A",
+            "number": 10,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 12,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": 14,
+            "name": "a"
+        },
+        {
+            "chain": "A",
+            "number": 16,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": 18,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 20,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 22,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": 24,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 26,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": 28,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": 30,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": 32,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": 34,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": 36,
+            "name": "U"
+        },
+        {
+            "chain": "A",
+            "number": 38,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 40,
+            "name": "G"
+        },
+        {
+            "chain": "A",
+            "number": 42,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 44,
+            "name": "A"
+        },
+        {
+            "chain": "A",
+            "number": 46,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 48,
+            "name": "C"
+        },
+        {
+            "chain": "A",
+            "number": 50,
+            "name": "A"
+        },
+        {
+            "chain": "B",
+            "number": 52,
+            "name": "g"
+        },
+        {
+            "chain": "B",
+            "number": 54,
+            "name": "C"
+        },
+        {
+            "chain": "B",
+            "number": 56,
+            "name": "A"
+        },
+        {
+            "chain": "B",
+            "number": 58,
+            "name": "A"
         }
-    ]
+    ],
+    "chainsWithResidues": [
+        {
+            "name": "A",
+            "residues": [
+                {
+                    "chain": "A",
+                    "number": -100,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -98,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -96,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -94,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -92,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -90,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -88,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -86,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -84,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -82,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -80,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -78,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -76,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -74,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -72,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -70,
+                    "name": "u"
+                },
+                {
+                    "chain": "A",
+                    "number": -68,
+                    "name": "u"
+                },
+                {
+                    "chain": "A",
+                    "number": -66,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -64,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -62,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -60,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -58,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -56,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -54,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -52,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -50,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -48,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -46,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -44,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -42,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -40,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -38,
+                    "name": "c"
+                },
+                {
+                    "chain": "A",
+                    "number": -36,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -34,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -32,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -30,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -28,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -26,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -24,
+                    "name": "u"
+                },
+                {
+                    "chain": "A",
+                    "number": -22,
+                    "name": "c"
+                },
+                {
+                    "chain": "A",
+                    "number": -20,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -18,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -16,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -14,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": -12,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": -10,
+                    "name": "g"
+                },
+                {
+                    "chain": "A",
+                    "number": -8,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": -6,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": -4,
+                    "name": "c"
+                },
+                {
+                    "chain": "A",
+                    "number": -2,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": 0,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": 2,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": 4,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": 6,
+                    "name": "u"
+                },
+                {
+                    "chain": "A",
+                    "number": 8,
+                    "name": "u"
+                },
+                {
+                    "chain": "A",
+                    "number": 10,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 12,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": 14,
+                    "name": "a"
+                },
+                {
+                    "chain": "A",
+                    "number": 16,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": 18,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 20,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 22,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": 24,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 26,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": 28,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": 30,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": 32,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": 34,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": 36,
+                    "name": "U"
+                },
+                {
+                    "chain": "A",
+                    "number": 38,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 40,
+                    "name": "G"
+                },
+                {
+                    "chain": "A",
+                    "number": 42,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 44,
+                    "name": "A"
+                },
+                {
+                    "chain": "A",
+                    "number": 46,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 48,
+                    "name": "C"
+                },
+                {
+                    "chain": "A",
+                    "number": 50,
+                    "name": "A"
+                }
+            ]
+        },
+        {
+            "name": "B",
+            "residues": [
+                {
+                    "chain": "B",
+                    "number": 52,
+                    "name": "g"
+                },
+                {
+                    "chain": "B",
+                    "number": 54,
+                    "name": "C"
+                },
+                {
+                    "chain": "B",
+                    "number": 56,
+                    "name": "A"
+                },
+                {
+                    "chain": "B",
+                    "number": 58,
+                    "name": "A"
+                }
+            ]
+        }
+    ],
+    "nonCanonicalInteractions": {
+        "notRepresented": [
+            {
+                "residueLeft": {
+                    "chain": "A",
+                    "number": -84,
+                    "name": "A"
+                },
+                "residueRight": {
+                    "chain": "A",
+                    "number": -56,
+                    "name": "A"
+                },
+                "leontisWesthof": "cWW"
+            },
+            {
+                "residueLeft": {
+                    "chain": "A",
+                    "number": -82,
+                    "name": "g"
+                },
+                "residueRight": {
+                    "chain": "A",
+                    "number": -12,
+                    "name": "G"
+                },
+                "leontisWesthof": "tWW"
+            },
+            {
+                "residueLeft": {
+                    "chain": "A",
+                    "number": -58,
+                    "name": "G"
+                },
+                "residueRight": {
+                    "chain": "A",
+                    "number": -10,
+                    "name": "g"
+                },
+                "leontisWesthof": "cWS"
+            },
+            {
+                "residueLeft": {
+                    "chain": "A",
+                    "number": -86,
+                    "name": "U"
+                },
+                "residueRight": {
+                    "chain": "A",
+                    "number": -60,
+                    "name": "A"
+                },
+                "leontisWesthof": "tSH"
+            }
+        ],
+        "represented": []
+    }
 }

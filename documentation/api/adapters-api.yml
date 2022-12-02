@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   description: "This is API of the adapters service of RNApdbee v3.0."
-  version: "1.0.2"
+  version: "1.0.3"
   title: "RNApdbee Adapters API"
 
 tags:
@@ -732,13 +732,26 @@ components:
           type: string
           example: "G"
 
-    ResiduePair:
+    SimpleInteraction:
       type: object
       properties:
         residueLeft:
           $ref: "#/components/schemas/SimpleResidue"
         residueRight:
           $ref: "#/components/schemas/SimpleResidue"
+        leontisWesthof:
+          $ref: "#/components/schemas/LeontisWesthof"
+
+    ChainWithResidues:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "A"
+        residues:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimpleResidue"
 
     Model2D:
       type: object
@@ -747,10 +760,25 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Strand"
-        nonCanonicalInteractions:
+        residues:
           type: array
           items:
-            $ref: "#/components/schemas/ResiduePair"
+            $ref: "#/components/schemas/SimpleResidue"
+        chainsWithResidues:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChainWithResidues"
+        nonCanonicalInteractions:
+          type: object
+          properties:
+            notRepresented:
+              type: array
+              items:
+                $ref: "#/components/schemas/SimpleInteraction"
+            represented:
+              type: array
+              items:
+                $ref: "#/components/schemas/SimpleInteraction"
 
     FileCIF:
       type: string
