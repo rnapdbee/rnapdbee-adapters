@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from enum import Enum
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from adapters.visualization.model import Model2D, Residue, ResiduePair
+from adapters.visualization.model import Model2D, Residue
 
 
 class SymbolType(Enum):
@@ -28,7 +28,9 @@ class Symbol:
 
 
 @dataclass(frozen=True)
-class Interaction(ResiduePair):
+class PseudoviewerInteraction:
+    residue_left: Residue
+    residue_right: Residue
     color: str
 
 
@@ -75,12 +77,12 @@ class PseudoViewerDrawer:
     XML_NS = '{http://www.w3.org/2000/svg}'
 
     def __init__(self) -> None:
-        self.interactions: List[Interaction] = []
+        self.interactions: List[PseudoviewerInteraction] = []
         self.missing_residues: List[Residue] = []
-        self.modified_structure: str = ''
-        self.modified_sequence: str = ''
-        self.data: Model2D = Model2D([], [])
-        self.svg_result: str = ''
+        self.modified_structure: str
+        self.modified_sequence: str
+        self.data: Model2D
+        self.svg_result: str
         self.elements_mapping: Dict[Tuple[str, int], ET.Element] = {}
 
     def get_letter_sequence(self, ascii_offset: int, length: int) -> str:
@@ -112,7 +114,7 @@ class PseudoViewerDrawer:
                             residue_stack[char].append(Residue(strand_name, number, name))
                         else:
                             self.interactions.append(
-                                Interaction(
+                                PseudoviewerInteraction(
                                     residue_stack[symbol.sibling].pop(),
                                     Residue(strand_name, number, name),
                                     self.COLORS[char],
@@ -124,12 +126,38 @@ class PseudoViewerDrawer:
         self.modified_sequence = ''.join(modified_sequence)
 
     def append_not_represented_interactions(self) -> None:
-        for pair in self.data.nonCanonicalInteractions:
-            self.interactions.append(Interaction(
-                pair.residueLeft,
-                pair.residueRight,
-                self.COLORS['NOT_REPRESENTED'],
-            ))
+        all_residues = {}
+        for chain_with_residues in self.data.chainsWithResidues:
+            chain = chain_with_residues.name
+            residues = chain_with_residues.residues
+            all_residues[chain] = {}
+            for i, residue in enumerate(residues):
+                all_residues[chain][residue.number] = i + 1
+
+        not_represented = self.data.nonCanonicalInteractions.notRepresented
+
+        for pair in not_represented:
+            res_left = pair.residueLeft
+            res_right = pair.residueRight
+
+            res_left_mapped = Residue(
+                res_left.chain,
+                all_residues[res_left.chain][res_left.number],
+                res_left.name,
+            )
+
+            res_right_mapped = Residue(
+                res_right.chain,
+                all_residues[res_right.chain][res_right.number],
+                res_right.name,
+            )
+
+            self.interactions.append(
+                PseudoviewerInteraction(
+                    res_left_mapped,
+                    res_right_mapped,
+                    self.COLORS['NOT_REPRESENTED'],
+                ))
 
     def generate_pseudoviewer_svg(self) -> None:
         with TemporaryDirectory() as directory:
@@ -163,8 +191,8 @@ class PseudoViewerDrawer:
     def color_interactions(self, parent_container: ET.Element) -> None:
         for interaction in self.interactions:
             color = interaction.color
-            res_left = interaction.residueLeft
-            res_right = interaction.residueRight
+            res_left = interaction.residue_left
+            res_right = interaction.residue_right
             element_left = self.elements_mapping[(res_left.chain, res_left.number)]
             element_right = self.elements_mapping[(res_right.chain, res_right.number)]
 
