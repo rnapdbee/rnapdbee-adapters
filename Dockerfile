@@ -179,8 +179,6 @@ COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
 
 COPY --from=rnaview-builder /RNAVIEW /rnaview
 
-COPY --from=python-builder /venv /venv
-
 COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
 
 COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
@@ -188,6 +186,8 @@ COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
 RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot/
+
+COPY --from=python-builder /venv /venv
 
 EXPOSE 80
 CMD [  "gunicorn", \
