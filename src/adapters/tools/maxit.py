@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 import subprocess
 import sys
-import tempfile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from adapters.tools.utils import is_cif
+from adapters.cache import cache
 
 # constants defined by MAXIT
 MODE_PDB2CIF = '1'
@@ -22,24 +23,42 @@ def ensure_pdb(file_content: str) -> str:
     return file_content
 
 
+@cache.memoize()
 def pdb2cif(pdb_content):
-    pdb = tempfile.NamedTemporaryFile('w+', suffix='.pdb')
-    pdb.write(pdb_content)
-    pdb.seek(0)
-    cif = tempfile.NamedTemporaryFile('w+', suffix='.cif')
-    subprocess.run(['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF], check=False)
-    cif.seek(0)
-    return cif.read()
+    with TemporaryDirectory() as directory:
+        pdb = NamedTemporaryFile('w+', suffix='.pdb', dir=directory)
+        pdb.write(pdb_content)
+        pdb.seek(0)
+        cif = NamedTemporaryFile('w+', suffix='.cif', dir=directory)
+        subprocess.run(
+            ['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF],
+            check=False,
+            timeout=120,
+            cwd=directory,
+        )
+        cif.seek(0)
+        cif_content = cif.read()
+
+    return cif_content
 
 
+@cache.memoize()
 def cif2pdb(cif_content):
-    cif = tempfile.NamedTemporaryFile('w+', suffix='.cif')
-    cif.write(cif_content)
-    cif.seek(0)
-    pdb = tempfile.NamedTemporaryFile('w+', suffix='.pdb')
-    subprocess.run(['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB], check=False)
-    pdb.seek(0)
-    return pdb.read()
+    with TemporaryDirectory() as directory:
+        cif = NamedTemporaryFile('w+', suffix='.cif', dir=directory)
+        cif.write(cif_content)
+        cif.seek(0)
+        pdb = NamedTemporaryFile('w+', suffix='.pdb', dir=directory)
+        subprocess.run(
+            ['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB],
+            check=False,
+            timeout=120,
+            cwd=directory,
+        )
+        pdb.seek(0)
+        pdb_content = pdb.read()
+
+    return pdb_content
 
 
 def main():
