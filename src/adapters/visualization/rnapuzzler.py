@@ -4,11 +4,11 @@ import subprocess
 import os
 from tempfile import TemporaryDirectory
 from collections import deque, defaultdict
-from typing import List, Optional, DefaultDict, Deque
+from typing import List, DefaultDict, Deque
 from enum import Enum
 from dataclasses import dataclass
 
-from adapters.visualization.model import Model2D
+from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
 from adapters.tools.utils import convert_to_svg_using_inkscape
 
 
@@ -16,19 +16,6 @@ class ParseState(Enum):
     OTHER = 0
     COLORPAIR = 1
     CMARK = 2
-
-
-class SymbolType(Enum):
-    BEGIN = 0
-    END = 1
-    NONE = 2
-
-
-@dataclass(frozen=True)
-class Symbol:
-    allowed: bool
-    type: SymbolType
-    sibling: Optional[str]
 
 
 @dataclass(frozen=True)
@@ -44,28 +31,9 @@ class RNAPuzzlerDrawer:
     # This is EPS file, not PS (it makes a difference for inkscape)
     OUTPUT_EPS = 'rna.ps'
 
-    SYMBOLS = {
-        '.': Symbol(True, SymbolType.NONE, None),
-        '-': Symbol(False, SymbolType.NONE, None),
-        '(': Symbol(True, SymbolType.BEGIN, ')'),
-        ')': Symbol(True, SymbolType.END, '('),
-        '[': Symbol(False, SymbolType.BEGIN, ']'),
-        ']': Symbol(False, SymbolType.END, '['),
-        '{': Symbol(False, SymbolType.BEGIN, '}'),
-        '}': Symbol(False, SymbolType.END, '{'),
-        '<': Symbol(False, SymbolType.BEGIN, '>'),
-        '>': Symbol(False, SymbolType.END, '<'),
-        'A': Symbol(False, SymbolType.BEGIN, 'a'),
-        'a': Symbol(False, SymbolType.END, 'A'),
-        'B': Symbol(False, SymbolType.BEGIN, 'b'),
-        'b': Symbol(False, SymbolType.END, 'B'),
-        'C': Symbol(False, SymbolType.BEGIN, 'c'),
-        'c': Symbol(False, SymbolType.END, 'C'),
-        'D': Symbol(False, SymbolType.BEGIN, 'd'),
-        'd': Symbol(False, SymbolType.END, 'D'),
-        'E': Symbol(False, SymbolType.BEGIN, 'e'),
-        'e': Symbol(False, SymbolType.END, 'E'),
-    }
+    # Paths to PosctScript additional procedures
+    DASHED_PAIR_PATH = '/RNAplot/dashed_pair.ps'
+    CHAIN_END_PATH = '/RNAplot/chain_end.ps'
 
     # Normalized RGB colors
     COLORS = {
@@ -79,13 +47,13 @@ class RNAPuzzlerDrawer:
         'e': '0.624 0.725 0.145',  # 8th order
         'NOT_REPRESENTED': '0.5 0.5 0.5',  # Not represented in dotbracket
         '-': '1 0 0',  # Missing residue
-        '*': '1 0 0',  # Label for removed () pair
+        'BASE_PAIR': '0 0 0',  # Label for removed () pair
     }
 
     def __init__(self) -> None:
         self.interactions: List[RNAPuzzlerInteraction] = []
         self.missing_res_numbers: List[int] = []
-        self.removed_res_numbers: List[int] = []
+        self.chains_ends: List[int] = []
         self.modified_structure: str
         self.modified_sequence: str
         self.data: Model2D
@@ -98,7 +66,7 @@ class RNAPuzzlerDrawer:
         residue_stack: DefaultDict[str, Deque[int]] = defaultdict(deque)
 
         for i, char in enumerate(structure):
-            symbol = self.SYMBOLS[char]
+            symbol = SYMBOLS[char]
             if symbol.allowed:
                 modified_structure.append(char)
             else:
@@ -144,13 +112,34 @@ class RNAPuzzlerDrawer:
         self.modified_structure = self.modified_structure.replace('()', '..')
 
         for i, old, new in zip(range(len(structure_copy)), structure_copy, self.modified_structure):
-            if old != new:
-                self.removed_res_numbers.append(i + 1)
+            if old != new and old == '(':
+                self.interactions.append(RNAPuzzlerInteraction(
+                    i + 1,
+                    i + 2,
+                    self.COLORS['BASE_PAIR'],
+                ))
+
+    def append_chains_ends(self) -> None:
+        interactions = []
+        for interaction in self.interactions:
+            interactions.append((
+                interaction.number_left,
+                interaction.number_right,
+            ))
+        interactions_set = set(interactions)
+
+        number = 0
+        for strand in self.data.strands[:-1]:
+            number += len(strand.structure)
+            if (number, number + 1) not in interactions_set:
+                # Here we're numbering from 0 for /break
+                self.chains_ends.append(number - 1)
 
     def preprocess(self) -> None:
         self.parse_strands()
         self.append_not_represented_interactions()
         self.remove_open_close_brackets()
+        self.append_chains_ends()
 
     def generate_rnapuzzler_eps(self) -> str:
         input_dbn = f'{self.modified_sequence}\n{self.modified_structure}'
@@ -174,14 +163,19 @@ class RNAPuzzlerDrawer:
 
         self.result = eps_content
 
-    def draw_pseudoknots(self) -> List[str]:
+    def draw_interactions(self) -> List[str]:
         lines: List[str] = []
 
         for interaction in self.interactions:
             nr_left = interaction.number_left
             nr_right = interaction.number_right
             color = interaction.color
-            lines.append(f'{nr_left} {nr_right} {color} colorpair')
+            if color == self.COLORS['NOT_REPRESENTED']:
+                lines.append(f'{nr_left} {nr_right} 1.5 [3 6] 0 {self.COLORS["NOT_REPRESENTED"]} dashedpair')
+            elif color == self.COLORS['BASE_PAIR']:
+                lines.append(f'{nr_left} {nr_right} 1 [9 3.01] 9 {self.COLORS["BASE_PAIR"]} dashedpair')
+            else:
+                lines.append(f'{nr_left} {nr_right} {color} colorpair')
 
         return lines
 
@@ -193,11 +187,23 @@ class RNAPuzzlerDrawer:
 
         return lines
 
-    def draw_removed_pairs(self) -> List[str]:
+    def insert_procedures(self) -> List[str]:
         lines: List[str] = []
 
-        for number in self.removed_res_numbers:
-            lines.append(f'{number} 0 -1.5 (*) Label')
+        with open(self.CHAIN_END_PATH, encoding='utf-8') as file:
+            chain_end_procedure = file.read()
+        lines.append(chain_end_procedure)
+        with open(self.DASHED_PAIR_PATH, encoding='utf-8') as file:
+            not_represented_procedure = file.read()
+        lines.append(not_represented_procedure)
+
+        return lines
+
+    def draw_chains_ends(self) -> List[str]:
+        lines: List[str] = []
+
+        for number in self.chains_ends:
+            lines.append(f'{number} break')
 
         return lines
 
@@ -216,11 +222,7 @@ class RNAPuzzlerDrawer:
                 modified_result.append('/outlinecolor {0.75 setgray} bind def')
 
             elif trim_line.startswith('/paircolor'):
-                modified_result.append('/paircolor {0.75 setgray} bind def')
-
-            elif trim_line.startswith('/Label {'):
-                modified_result.append(line)
-                modified_result.append(f'{self.COLORS["*"]} setrgbcolor')
+                modified_result.append('/paircolor {0 setgray} bind def')
 
             elif trim_line.startswith('/colorpair'):
                 modified_result.append(line)
@@ -235,9 +237,13 @@ class RNAPuzzlerDrawer:
 
             elif trim_line.startswith('% Start Annotations'):
                 modified_result.append(line)
-                modified_result.extend(self.draw_pseudoknots())
+                modified_result.extend(self.draw_interactions())
                 modified_result.extend(self.draw_missing_residues())
-                modified_result.extend(self.draw_removed_pairs())
+                modified_result.extend(self.draw_chains_ends())
+
+            elif trim_line.startswith('%%EndProlog'):
+                modified_result.extend(self.insert_procedures())
+                modified_result.append(line)
 
             else:
                 modified_result.append(line)
