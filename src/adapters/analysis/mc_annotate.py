@@ -216,6 +216,8 @@ class MCAnnotateAdapter:
                     stdout=subprocess.PIPE,
                     stderr=subprocess.DEVNULL,
                     check=False,
+                    cwd=directory_name,
+                    timeout=120,
                 ).stdout.decode('utf-8')
         return mc_result
 

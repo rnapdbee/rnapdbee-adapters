@@ -149,7 +149,7 @@ class RNAPuzzlerDrawer:
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 check=False,
-                timeout=60,
+                timeout=120,
                 cwd=directory,
                 input=input_dbn.encode('utf-8'),
             )

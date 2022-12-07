@@ -42,7 +42,7 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
                 stderr=subprocess.DEVNULL,
                 check=False,
                 cwd=directory,
-                timeout=60,
+                timeout=120,
             ).stdout.decode('utf-8')
     if 'svg' not in fixed_svg_content:
         raise RuntimeError("rsvg-convert conversion failed!")
@@ -81,7 +81,7 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 cwd=directory,
-                timeout=60,
+                timeout=120,
             )
             if not os.path.isfile(output_file):
                 raise RuntimeError("Inkscape conversion failed: file does not exist!")

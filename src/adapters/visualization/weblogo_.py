@@ -99,6 +99,8 @@ class WeblogoDrawer:
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
                     check=False,
+                    cwd=directory_name,
+                    timeout=120,
                 )
             if not os.path.isfile(file_name):
                 raise RuntimeError(f'File "{file_name}" does not exist - "pdf2svg" conversion failed!')

@@ -137,6 +137,8 @@ class PseudoViewerDrawer:
                         stdout=subprocess.DEVNULL,
                         stderr=subprocess.DEVNULL,
                         check=False,
+                        cwd=directory,
+                        timeout=120,
                     )
                     if not os.path.isfile(output_file):
                         raise RuntimeError('PseudoViewer image was not created!')

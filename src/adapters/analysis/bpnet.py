@@ -202,7 +202,14 @@ def analyze(cif_content: str) -> Structure2D:
     file.write(cif_content)
     file.seek(0)
 
-    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+    subprocess.run(
+        ['bpnet.linux', file.name],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+        timeout=120,
+        cwd=directory.name,
+    )
 
     file.close()
 

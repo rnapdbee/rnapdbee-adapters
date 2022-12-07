@@ -46,12 +46,16 @@ class RChieDrawer:
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
                     check=False,
+                    timeout=120,
+                    cwd=directory,
                 )
             subprocess.run(
                 ['pdf2svg', output_pdf, output_svg],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 check=False,
+                timeout=120,
+                cwd=directory,
             )
             if not os.path.isfile(output_svg):
                 raise RuntimeError('RChie image was not generated!')

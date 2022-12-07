@@ -120,6 +120,8 @@ class RNAViewAdapter:
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
                     check=False,
+                    cwd=directory_name,
+                    timeout=120,
                 )
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()
