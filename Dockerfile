@@ -198,7 +198,7 @@ COPY --from=python-builder /venv /venv
 EXPOSE 80
 CMD [  "gunicorn", \
        "--worker-tmp-dir", "/dev/shm", \
-       "--workers", "4", \
+       "--workers", "2", \
        "--threads", "2", \
        "--worker-clas", "gthread", \
        "--bind", "0.0.0.0:80", \
