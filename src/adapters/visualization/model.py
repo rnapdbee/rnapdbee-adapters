@@ -1,9 +1,46 @@
 # pylint: disable=invalid-name
-from typing import List
+from typing import List, Optional
 from enum import Enum
 from dataclasses import dataclass
 
 from dataclasses_json import DataClassJsonMixin
+
+
+class SymbolType(Enum):
+    BEGIN = 0
+    END = 1
+    NONE = 2
+
+
+@dataclass(frozen=True)
+class Symbol:
+    allowed: bool
+    type: SymbolType
+    sibling: Optional[str]
+
+
+SYMBOLS = {
+    '.': Symbol(True, SymbolType.NONE, None),
+    '-': Symbol(False, SymbolType.NONE, None),
+    '(': Symbol(True, SymbolType.BEGIN, ')'),
+    ')': Symbol(True, SymbolType.END, '('),
+    '[': Symbol(False, SymbolType.BEGIN, ']'),
+    ']': Symbol(False, SymbolType.END, '['),
+    '{': Symbol(False, SymbolType.BEGIN, '}'),
+    '}': Symbol(False, SymbolType.END, '{'),
+    '<': Symbol(False, SymbolType.BEGIN, '>'),
+    '>': Symbol(False, SymbolType.END, '<'),
+    'A': Symbol(False, SymbolType.BEGIN, 'a'),
+    'a': Symbol(False, SymbolType.END, 'A'),
+    'B': Symbol(False, SymbolType.BEGIN, 'b'),
+    'b': Symbol(False, SymbolType.END, 'B'),
+    'C': Symbol(False, SymbolType.BEGIN, 'c'),
+    'c': Symbol(False, SymbolType.END, 'C'),
+    'D': Symbol(False, SymbolType.BEGIN, 'd'),
+    'd': Symbol(False, SymbolType.END, 'D'),
+    'E': Symbol(False, SymbolType.BEGIN, 'e'),
+    'e': Symbol(False, SymbolType.END, 'E'),
+}
 
 
 @dataclass(frozen=True, order=True)
