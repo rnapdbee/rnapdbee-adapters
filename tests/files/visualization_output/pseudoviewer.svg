@@ -1,6 +1,6 @@
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 299 234" overflow="scroll" width="299" height="234">
-  <ns0:title>PseudoViewer - </ns0:title>
-  <ns0:script type="text/ecmascript">function mOver(evt,str ){
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 299 234" overflow="scroll" width="299" height="234">
+  <title>PseudoViewer - </title>
+  <script type="text/ecmascript">function mOver(evt,str ){
   var txt = evt.target;
   txt.setAttribute('font-weight','bold'  );
   var px = 0;
@@ -51,320 +51,320 @@ var subsc = document.getElementById('descBack');
 subsc.setAttribute('visibility', 'hidden'); 
 var subsc = document.getElementById('desc'); 
 subsc.setAttribute('visibility', 'hidden');}
-</ns0:script>
-  <ns0:g transform="translate(243.87,132.43)">
-    <ns0:line x1="-92.78999999999999" y1="6.209999999999999" x2="-134.07999999999998" y2="62.29" stroke="gray" stroke-dasharray="5,5" /><ns0:line x1="-124.44" y1="55.52" x2="-141.31" y2="-22.119999999999997" stroke="gray" stroke-dasharray="5,5" /><ns0:line x1="-111.71" y1="19.770000000000003" x2="-145.07" y2="-10.82" stroke="gray" stroke-dasharray="5,5" /><ns0:line x1="-100.78" y1="15.040000000000001" x2="-124.19" y2="43.52" stroke="gray" stroke-dasharray="5,5" /><ns0:line x1="-103.61999999999999" y1="85.33999999999999" x2="-62.11000000000001" y2="-86.87" stroke="#2E7012" /><ns0:line x1="-134.47" y1="84.69999999999999" x2="-63.559999999999995" y2="-115.75" stroke="#831300" /><ns0:line x1="-125.08" y1="91.80999999999999" x2="-74.44999999999999" y2="-114.05000000000001" stroke="#2E7012" /><ns0:line x1="-99.72" y1="74.22" x2="-122.22" y2="-35.43" stroke="#0F205F" /><ns0:line x1="-92.78999999999999" y1="6.209999999999999" x2="-103.08999999999999" y2="62.93" stroke="#2E7012" /><ns0:g fill="none" stroke="gray" stroke-width="1" stroke-linecap="round">
-      <ns0:line x1="-17.27" y1="-15.31" x2="-18.72" y2="-27.22" />
-      <ns0:line x1="-29.19" y1="-13.87" x2="-30.63" y2="-25.78" />
-      <ns0:line x1="-41.10" y1="-12.42" x2="-42.54" y2="-24.34" />
-      <ns0:line x1="-53.01" y1="-10.98" x2="-54.46" y2="-22.90" />
-      <ns0:line x1="-64.93" y1="-9.54" x2="-66.37" y2="-21.45" />
-      <ns0:line x1="-76.84" y1="-8.10" x2="-78.28" y2="-20.01" />
-      <ns0:line x1="-88.75" y1="-6.65" x2="-90.19" y2="-18.57" />
-      <ns0:line x1="-17.27" y1="-15.31" x2="-88.75" y2="-6.65" />
-      <ns0:line x1="-90.19" y1="-18.57" x2="-18.72" y2="-27.22" />
-      <ns0:path d="M-88.75255, -6.654844 a28.09549, 28.09549 0 0 1 -22.53, 24.91" />
-      <ns0:line x1="-111.29" y1="18.25" x2="-123.28" y2="18.01" />
-      <ns0:line x1="-111.53" y1="30.25" x2="-123.53" y2="30.00" />
-      <ns0:line x1="-111.78" y1="42.25" x2="-123.77" y2="42.00" />
-      <ns0:line x1="-112.02" y1="54.24" x2="-124.02" y2="54.00" />
-      <ns0:line x1="-111.29" y1="18.25" x2="-112.02" y2="54.24" />
-      <ns0:line x1="-124.02" y1="54.00" x2="-123.28" y2="18.01" />
-      <ns0:path d="M-112.0231, 54.24474 a19.09859, 19.09859 0 1 1 -12.00, -0.25" />
-      <ns0:path d="M-123.2831, 18.00646 a28.09549, 28.09549 0 0 1 -14.00, -8.17" />
-      <ns0:line x1="-137.28" y1="9.83" x2="-143.40" y2="-0.49" />
-      <ns0:line x1="-147.61" y1="15.95" x2="-153.72" y2="5.62" />
-      <ns0:line x1="-157.94" y1="22.06" x2="-164.05" y2="11.73" />
-      <ns0:line x1="-168.26" y1="28.17" x2="-174.38" y2="17.85" />
-      <ns0:line x1="-178.59" y1="34.28" x2="-184.70" y2="23.96" />
-      <ns0:line x1="-188.92" y1="40.40" x2="-195.03" y2="30.07" />
-      <ns0:line x1="-199.24" y1="46.51" x2="-205.36" y2="36.18" />
-      <ns0:line x1="-137.28" y1="9.83" x2="-199.24" y2="46.51" />
-      <ns0:line x1="-205.36" y1="36.18" x2="-143.40" y2="-0.49" />
-      <ns0:path d="M-199.2425, 46.51028 a11.45916, 11.45916 0 0 1 -16.80, 9.95" />
-      <ns0:line x1="-216.04" y1="56.46" x2="-222.16" y2="46.13" />
-      <ns0:line x1="-216.04" y1="56.46" x2="-216.04" y2="56.46" />
-      <ns0:line x1="-222.16" y1="46.13" x2="-222.16" y2="46.13" />
-      <ns0:path d="M-216.0448, 56.45681 a9, 9 0 1 1 -6.11, -10.33" />
-      <ns0:path d="M-222.1577, 46.13052 a11.45916, 11.45916 0 0 1 16.80, -9.95" />
-      <ns0:path d="M-143.3977, -0.4934559 a28.09549, 28.09549 0 0 1 33.50, -36.07" />
-      <ns0:line x1="-109.89" y1="-36.57" x2="-99.14" y2="-31.23" />
-      <ns0:line x1="-104.56" y1="-47.31" x2="-93.81" y2="-41.98" />
-      <ns0:line x1="-99.22" y1="-58.06" x2="-88.47" y2="-52.73" />
-      <ns0:line x1="-93.89" y1="-68.81" x2="-83.14" y2="-63.48" />
-      <ns0:line x1="-88.55" y1="-79.56" x2="-77.80" y2="-74.23" />
-      <ns0:line x1="-109.89" y1="-36.57" x2="-88.55" y2="-79.56" />
-      <ns0:line x1="-77.80" y1="-74.23" x2="-99.14" y2="-31.23" />
-      <ns0:path d="M-88.55373, -79.56067 a15.27887, 15.27887 0 0 1 12.49, -25.17" />
-      <ns0:line x1="-76.06" y1="-104.73" x2="-65.31" y2="-99.40" />
-      <ns0:line x1="-76.06" y1="-104.73" x2="-76.06" y2="-104.73" />
-      <ns0:line x1="-65.31" y1="-99.40" x2="-65.31" y2="-99.40" />
-      <ns0:path d="M-76.05959, -104.7335 a9.549296, 9.549296 0 1 1 10.75, 5.34" />
-      <ns0:path d="M-65.31075, -99.39848 a15.27887, 15.27887 0 0 1 -12.49, 25.17" />
-      <ns0:path d="M-99.14497, -31.23029 a28.09549, 28.09549 0 0 1 8.95, 12.66" />
-      <ns0:path d="M-18.71694, -27.22216 a24.90455, 24.90455 0 0 1 36.20, -19.05" />
-      <ns0:line x1="17.49" y1="-46.27" x2="26.49" y2="-38.33" />
-      <ns0:line x1="17.49" y1="-46.27" x2="17.49" y2="-46.27" />
-      <ns0:line x1="26.49" y1="-38.33" x2="26.49" y2="-38.33" />
-      <ns0:g /><ns0:path d="M26.48711, -38.33133 a24.90455, 24.90455 0 0 1 4.25, 17.03" />
-      <ns0:line x1="30.74" y1="-21.30" x2="26.52" y2="-10.06" />
-      <ns0:line x1="30.74" y1="-21.30" x2="30.74" y2="-21.30" />
-      <ns0:line x1="26.52" y1="-10.06" x2="26.52" y2="-10.06" />
-      <ns0:path d="M30.73852, -21.30003 a9, 9 0 1 1 -4.21, 11.24" />
-      <ns0:path d="M26.52416, -10.06441 a24.90455, 24.90455 0 0 1 -8.87, 7.90" />
-    </ns0:g>
-    <ns0:g font-family="Tahoma" font-size="9.8" text-anchor="start">
-      <ns0:g fill="none" stroke="black" stroke-width="1" stroke-linecap="round">
-        <ns0:line x1="-20.52" y1="-8.88" x2="-23.12" y2="-3.74" />
-        <ns0:line x1="-105.38" y1="22.37" x2="-100.65" y2="25.66" />
-        <ns0:line x1="-129.35" y1="21.88" x2="-134.21" y2="24.97" />
-        <ns0:line x1="-213.54" y1="63.21" x2="-211.53" y2="68.60" />
-        <ns0:line x1="-149.89" y1="-3.61" x2="-155.08" y2="-6.11" />
-        <ns0:line x1="-113.48" y1="-42.81" x2="-116.36" y2="-47.80" />
-        <ns0:line x1="-81.39" y1="-109.57" x2="-85.66" y2="-113.44" />
-        <ns0:line x1="-92.00" y1="-32.14" x2="-86.29" y2="-32.88" />
-        <ns0:line x1="15.64" y1="-53.23" x2="14.15" y2="-58.79" />
-        <ns0:line x1="33.62" y1="-37.36" x2="39.33" y2="-36.59" />
-        <ns0:line x1="21.02" y1="4.20" x2="23.71" y2="9.30" />
-      </ns0:g>
-      <ns0:g fill="black" stroke="none">
-        <ns0:g transform="translate(-17.27,-15.31)">
-          <ns0:g transform="rotate(116.7865)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">1</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-111.29,18.25)">
-          <ns0:g transform="rotate(34.86391)">
-            <ns0:text x="15.38" y="3.92">10</ns0:text>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-123.28,18.01)">
-          <ns0:g transform="rotate(147.4838)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">25</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-216.04,56.46)">
-          <ns0:g transform="rotate(69.61184)">
-            <ns0:text x="15.38" y="3.92">33</ns0:text>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-143.40,-0.49)">
-          <ns0:g transform="rotate(205.6855)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">44</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-109.89,-36.57)">
-          <ns0:g transform="rotate(240.0868)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">49</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-76.06,-104.73)">
-          <ns0:g transform="rotate(222.2004)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">54</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(-99.14,-31.23)">
-          <ns0:g transform="rotate(352.7067)">
-            <ns0:text x="15.38" y="3.92">65</ns0:text>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(17.49,-46.27)">
-          <ns0:g transform="rotate(255.0977)">
-            <ns0:g transform="scale(-1.00,-1.00)">
-              <ns0:text x="-13.42" y="3.92" text-anchor="end">76</ns0:text>
-            </ns0:g>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(26.49,-38.33)">
-          <ns0:g transform="rotate(7.717521)">
-            <ns0:text x="15.38" y="3.92">1</ns0:text>
-          </ns0:g>
-        </ns0:g>
-        <ns0:g transform="translate(17.65,-2.16)">
-          <ns0:g transform="rotate(62.10873)">
-            <ns0:text x="15.38" y="3.92">4</ns0:text>
-          </ns0:g>
-        </ns0:g>
-      </ns0:g>
-      <ns0:g fill="LightSteelBlue" stroke="none">
-        <ns0:circle cx="-17.27" cy="-15.31" r="4.8" />
-        <ns0:circle cx="-29.19" cy="-13.87" r="4.8" />
-        <ns0:circle cx="-41.10" cy="-12.42" r="4.8" />
-        <ns0:circle cx="-53.01" cy="-10.98" r="4.8" />
-        <ns0:circle cx="-64.93" cy="-9.54" r="4.8" />
-        <ns0:circle cx="-76.84" cy="-8.10" r="4.8" />
-        <ns0:circle cx="-88.75" cy="-6.65" r="4.8" />
-        <ns0:circle cx="-111.29" cy="18.25" r="4.8" />
-        <ns0:circle cx="-111.53" cy="30.25" r="4.8" />
-        <ns0:circle cx="-111.78" cy="42.25" r="4.8" />
-        <ns0:circle cx="-112.02" cy="54.24" r="4.8" />
-        <ns0:circle cx="-124.02" cy="54.00" r="4.8" />
-        <ns0:circle cx="-123.77" cy="42.00" r="4.8" />
-        <ns0:circle cx="-123.53" cy="30.00" r="4.8" />
-        <ns0:circle cx="-123.28" cy="18.01" r="4.8" />
-        <ns0:circle cx="-137.28" cy="9.83" r="4.8" />
-        <ns0:circle cx="-147.61" cy="15.95" r="4.8" />
-        <ns0:circle cx="-157.94" cy="22.06" r="4.8" />
-        <ns0:circle cx="-168.26" cy="28.17" r="4.8" />
-        <ns0:circle cx="-178.59" cy="34.28" r="4.8" />
-        <ns0:circle cx="-188.92" cy="40.40" r="4.8" />
-        <ns0:circle cx="-199.24" cy="46.51" r="4.8" />
-        <ns0:circle cx="-216.04" cy="56.46" r="4.8" />
-        <ns0:circle cx="-222.16" cy="46.13" r="4.8" />
-        <ns0:circle cx="-205.36" cy="36.18" r="4.8" />
-        <ns0:circle cx="-195.03" cy="30.07" r="4.8" />
-        <ns0:circle cx="-184.70" cy="23.96" r="4.8" />
-        <ns0:circle cx="-174.38" cy="17.85" r="4.8" />
-        <ns0:circle cx="-164.05" cy="11.73" r="4.8" />
-        <ns0:circle cx="-153.72" cy="5.62" r="4.8" />
-        <ns0:circle cx="-143.40" cy="-0.49" r="4.8" />
-        <ns0:circle cx="-109.89" cy="-36.57" r="4.8" />
-        <ns0:circle cx="-104.56" cy="-47.31" r="4.8" />
-        <ns0:circle cx="-99.22" cy="-58.06" r="4.8" />
-        <ns0:circle cx="-93.89" cy="-68.81" r="4.8" />
-        <ns0:circle cx="-88.55" cy="-79.56" r="4.8" />
-        <ns0:circle cx="-76.06" cy="-104.73" r="4.8" />
-        <ns0:circle cx="-65.31" cy="-99.40" r="4.8" />
-        <ns0:circle cx="-77.80" cy="-74.23" r="4.8" />
-        <ns0:circle cx="-83.14" cy="-63.48" r="4.8" />
-        <ns0:circle cx="-88.47" cy="-52.73" r="4.8" />
-        <ns0:circle cx="-93.81" cy="-41.98" r="4.8" />
-        <ns0:circle cx="-99.14" cy="-31.23" r="4.8" />
-        <ns0:circle cx="-90.19" cy="-18.57" r="4.8" />
-        <ns0:circle cx="-78.28" cy="-20.01" r="4.8" />
-        <ns0:circle cx="-66.37" cy="-21.45" r="4.8" />
-        <ns0:circle cx="-54.46" cy="-22.90" r="4.8" />
-        <ns0:circle cx="-42.54" cy="-24.34" r="4.8" />
-        <ns0:circle cx="-30.63" cy="-25.78" r="4.8" />
-        <ns0:circle cx="-18.72" cy="-27.22" r="4.8" />
-        <ns0:circle cx="17.49" cy="-46.27" r="4.8" />
-        <ns0:circle cx="26.49" cy="-38.33" r="4.8" />
-        <ns0:circle cx="30.74" cy="-21.30" r="4.8" />
-        <ns0:circle cx="26.52" cy="-10.06" r="4.8" />
-      </ns0:g>
-      <ns0:g fill="gold" stroke="none">
-        <ns0:g fill="none" stroke="PaleGoldenrod" stroke-width="6" stroke-linecap="round">
-          <ns0:path d="M-92.366, 4.692714 a28.09549, 28.09549 0 0 1 -7.99, 8.83" />
-          <ns0:path d="M-102.6697, 61.40876 a19.09859, 19.09859 0 1 1 -30.99, -0.63" />
-          <ns0:path d="M-224.4938, 63.70283 a9, 9 0 0 1 -9.03, -6.51" />
-          <ns0:path d="M-144.6544, -12.33595 a28.09549, 28.09549 0 0 1 22.86, -24.61" />
-          <ns0:path d="M-74.03263, -115.5733 a9.549296, 9.549296 0 0 1 16.13, 8.01" />
-          <ns0:path d="M-61.69256, -88.38603 a15.27887, 15.27887 0 0 1 -5.15, 10.38" />
-          <ns0:path d="M-14.48882, -38.32885 a24.90455, 24.90455 0 0 1 20.43, -10.75" />
-        </ns0:g>
-      </ns0:g>
-      <ns0:g fill="PaleGoldenrod" stroke="none">
-        <ns0:circle cx="-92.37" cy="4.69" r="4" />
-        <ns0:circle cx="-100.36" cy="13.52" r="4" />
-        <ns0:circle cx="-102.67" cy="61.41" r="4" />
-        <ns0:circle cx="-133.66" cy="60.77" r="4" />
-        <ns0:circle cx="-224.49" cy="63.70" r="4" />
-        <ns0:circle cx="-233.52" cy="57.20" r="4" />
-        <ns0:circle cx="-216.54" cy="36.46" r="4" />
-        <ns0:circle cx="-144.65" cy="-12.34" r="4" />
-        <ns0:circle cx="-121.80" cy="-36.95" r="4" />
-        <ns0:circle cx="-74.03" cy="-115.57" r="4" />
-        <ns0:circle cx="-57.90" cy="-107.57" r="4" />
-        <ns0:circle cx="-61.69" cy="-88.39" r="4" />
-        <ns0:circle cx="-66.85" cy="-78.00" r="4" />
-        <ns0:circle cx="-14.49" cy="-38.33" r="4" />
-        <ns0:circle cx="5.94" cy="-49.08" r="4" />
-        <ns0:circle cx="17.65" cy="-2.16" r="4" />
-      </ns0:g>
-      <ns0:g fill="black" stroke="none">
-        <ns0:text onmouseover="mOver(evt,'a:a (1)-72')" onmouseout="mOut(evt)" x="-20.09" y="-11.39">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (2)-71')" onmouseout="mOut(evt)" x="-32.01" y="-9.95">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (3)-70')" onmouseout="mOut(evt)" x="-43.92" y="-8.50">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (4)-69')" onmouseout="mOut(evt)" x="-55.83" y="-7.06">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (5)-68')" onmouseout="mOut(evt)" x="-67.75" y="-5.62">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (6)-67')" onmouseout="mOut(evt)" x="-79.66" y="-4.18">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (7)-66')" onmouseout="mOut(evt)" x="-91.57" y="-2.73">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (10)-25')" onmouseout="mOut(evt)" x="-114.11" y="22.17">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (11)-24')" onmouseout="mOut(evt)" x="-114.35" y="34.17">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (12)-23')" onmouseout="mOut(evt)" x="-114.60" y="46.17">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (13)-22')" onmouseout="mOut(evt)" x="-114.84" y="58.16">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 13-(22)')" onmouseout="mOut(evt)" x="-126.84" y="57.92">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 12-(23)')" onmouseout="mOut(evt)" x="-126.59" y="45.92">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 11-(24)')" onmouseout="mOut(evt)" x="-126.35" y="33.92">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 10-(25)')" onmouseout="mOut(evt)" x="-126.10" y="21.93">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (26)-44')" onmouseout="mOut(evt)" x="-140.10" y="13.75">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (27)-43')" onmouseout="mOut(evt)" x="-150.43" y="19.87">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (28)-42')" onmouseout="mOut(evt)" x="-160.76" y="25.98">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (29)-41')" onmouseout="mOut(evt)" x="-171.08" y="32.09">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (30)-40')" onmouseout="mOut(evt)" x="-181.41" y="38.20">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (31)-39')" onmouseout="mOut(evt)" x="-191.74" y="44.32">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (32)-38')" onmouseout="mOut(evt)" x="-202.06" y="50.43">c</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (33)-36')" onmouseout="mOut(evt)" x="-218.86" y="60.38">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 33-(36)')" onmouseout="mOut(evt)" x="-224.98" y="50.05">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 32-(38)')" onmouseout="mOut(evt)" x="-208.18" y="40.10">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 31-(39)')" onmouseout="mOut(evt)" x="-197.85" y="33.99">u</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 30-(40)')" onmouseout="mOut(evt)" x="-187.52" y="27.88">c</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 29-(41)')" onmouseout="mOut(evt)" x="-177.20" y="21.77">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 28-(42)')" onmouseout="mOut(evt)" x="-166.87" y="15.65">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 27-(43)')" onmouseout="mOut(evt)" x="-156.54" y="9.54">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 26-(44)')" onmouseout="mOut(evt)" x="-146.22" y="3.43">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (49)-65')" onmouseout="mOut(evt)" x="-112.71" y="-32.65">c</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (50)-64')" onmouseout="mOut(evt)" x="-107.38" y="-43.39">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (51)-63')" onmouseout="mOut(evt)" x="-102.04" y="-54.14">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (52)-62')" onmouseout="mOut(evt)" x="-96.71" y="-64.89">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (53)-61')" onmouseout="mOut(evt)" x="-91.37" y="-75.64">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a (54)-58')" onmouseout="mOut(evt)" x="-78.88" y="-100.81">u</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 54-(58)')" onmouseout="mOut(evt)" x="-68.13" y="-95.48">a</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 53-(61)')" onmouseout="mOut(evt)" x="-80.62" y="-70.31">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 52-(62)')" onmouseout="mOut(evt)" x="-85.96" y="-59.56">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 51-(63)')" onmouseout="mOut(evt)" x="-91.29" y="-48.81">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 50-(64)')" onmouseout="mOut(evt)" x="-96.63" y="-38.06">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 49-(65)')" onmouseout="mOut(evt)" x="-101.96" y="-27.31">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 7-(66)')" onmouseout="mOut(evt)" x="-93.01" y="-14.65">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 6-(67)')" onmouseout="mOut(evt)" x="-81.10" y="-16.09">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 5-(68)')" onmouseout="mOut(evt)" x="-69.19" y="-17.53">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 4-(69)')" onmouseout="mOut(evt)" x="-57.28" y="-18.98">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 3-(70)')" onmouseout="mOut(evt)" x="-45.36" y="-20.42">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 2-(71)')" onmouseout="mOut(evt)" x="-33.45" y="-21.86">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:a 1-(72)')" onmouseout="mOut(evt)" x="-21.54" y="-23.30">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:b (76)-1')" onmouseout="mOut(evt)" x="14.67" y="-42.35">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'a:b 76-(1)')" onmouseout="mOut(evt)" x="23.67" y="-34.41">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'b:b (2)-3')" onmouseout="mOut(evt)" x="27.92" y="-17.38">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'b:b 2-(3)')" onmouseout="mOut(evt)" x="23.70" y="-6.14">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'8')" onmouseout="mOut(evt)" x="-95.19" y="8.61">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'9')" onmouseout="mOut(evt)" x="-103.18" y="17.44">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'14')" onmouseout="mOut(evt)" x="-105.49" y="65.33">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'15')" onmouseout="mOut(evt)" x="-102.12" y="76.62">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'16')" onmouseout="mOut(evt)" x="-106.02" y="87.74">u</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'17')" onmouseout="mOut(evt)" x="-115.70" y="94.45">u</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'18')" onmouseout="mOut(evt)" x="-127.48" y="94.21">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'19')" onmouseout="mOut(evt)" x="-136.87" y="87.10">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'20')" onmouseout="mOut(evt)" x="-140.31" y="75.84">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'21')" onmouseout="mOut(evt)" x="-136.48" y="64.69">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'34')" onmouseout="mOut(evt)" x="-227.31" y="67.62" fill="red">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'35')" onmouseout="mOut(evt)" x="-236.34" y="61.12">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'37')" onmouseout="mOut(evt)" x="-219.36" y="40.38">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'45')" onmouseout="mOut(evt)" x="-147.47" y="-8.42">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'46')" onmouseout="mOut(evt)" x="-143.71" y="-19.72">g</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'47')" onmouseout="mOut(evt)" x="-135.61" y="-28.44">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'48')" onmouseout="mOut(evt)" x="-124.62" y="-33.03">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'55')" onmouseout="mOut(evt)" x="-76.85" y="-111.65">u</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'56')" onmouseout="mOut(evt)" x="-65.96" y="-113.35">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'57')" onmouseout="mOut(evt)" x="-60.72" y="-103.65">G</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'59')" onmouseout="mOut(evt)" x="-64.51" y="-84.47">U</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'60')" onmouseout="mOut(evt)" x="-69.67" y="-74.08">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'73')" onmouseout="mOut(evt)" x="-17.31" y="-34.41">A</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'74')" onmouseout="mOut(evt)" x="-8.42" y="-42.29">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'75')" onmouseout="mOut(evt)" x="3.12" y="-45.16" fill="red">C</ns0:text>
-        <ns0:text onmouseover="mOver(evt,'4')" onmouseout="mOut(evt)" x="14.83" y="1.76">A</ns0:text>
-      </ns0:g>
-      <ns0:text id="descBack" x="0" y="0" stroke="LemonChiffon" stroke-linejoin="round" font-size="11.8" stroke-width="4.9" visibility="hidden">subs</ns0:text>
-      <ns0:text id="desc" x="0" y="0" fill="red" visibility="hidden" stroke-width="0" font-size="11.8">subs</ns0:text>
-    </ns0:g>
-  </ns0:g>
-</ns0:svg>
+</script>
+  <g transform="translate(243.87,132.43)">
+    <line x1="-92.78999999999999" y1="6.209999999999999" x2="-134.07999999999998" y2="62.29" stroke="gray" stroke-dasharray="5,5"/><line x1="-124.44" y1="55.52" x2="-141.31" y2="-22.119999999999997" stroke="gray" stroke-dasharray="5,5"/><line x1="-111.71" y1="19.770000000000003" x2="-145.07" y2="-10.82" stroke="gray" stroke-dasharray="5,5"/><line x1="-100.78" y1="15.040000000000001" x2="-124.19" y2="43.52" stroke="gray" stroke-dasharray="5,5"/><line x1="-103.61999999999999" y1="85.33999999999999" x2="-62.11000000000001" y2="-86.87" stroke="#2E7012"/><line x1="-134.47" y1="84.69999999999999" x2="-63.559999999999995" y2="-115.75" stroke="#831300"/><line x1="-125.08" y1="91.80999999999999" x2="-74.44999999999999" y2="-114.05000000000001" stroke="#2E7012"/><line x1="-99.72" y1="74.22" x2="-122.22" y2="-35.43" stroke="#0F205F"/><line x1="-92.78999999999999" y1="6.209999999999999" x2="-103.08999999999999" y2="62.93" stroke="#2E7012"/><g fill="none" stroke="gray" stroke-width="1" stroke-linecap="round">
+      <line x1="-17.27" y1="-15.31" x2="-18.72" y2="-27.22"/>
+      <line x1="-29.19" y1="-13.87" x2="-30.63" y2="-25.78"/>
+      <line x1="-41.10" y1="-12.42" x2="-42.54" y2="-24.34"/>
+      <line x1="-53.01" y1="-10.98" x2="-54.46" y2="-22.90"/>
+      <line x1="-64.93" y1="-9.54" x2="-66.37" y2="-21.45"/>
+      <line x1="-76.84" y1="-8.10" x2="-78.28" y2="-20.01"/>
+      <line x1="-88.75" y1="-6.65" x2="-90.19" y2="-18.57"/>
+      <line x1="-17.27" y1="-15.31" x2="-88.75" y2="-6.65"/>
+      <line x1="-90.19" y1="-18.57" x2="-18.72" y2="-27.22"/>
+      <path d="M-88.75255, -6.654844 a28.09549, 28.09549 0 0 1 -22.53, 24.91"/>
+      <line x1="-111.29" y1="18.25" x2="-123.28" y2="18.01"/>
+      <line x1="-111.53" y1="30.25" x2="-123.53" y2="30.00"/>
+      <line x1="-111.78" y1="42.25" x2="-123.77" y2="42.00"/>
+      <line x1="-112.02" y1="54.24" x2="-124.02" y2="54.00"/>
+      <line x1="-111.29" y1="18.25" x2="-112.02" y2="54.24"/>
+      <line x1="-124.02" y1="54.00" x2="-123.28" y2="18.01"/>
+      <path d="M-112.0231, 54.24474 a19.09859, 19.09859 0 1 1 -12.00, -0.25"/>
+      <path d="M-123.2831, 18.00646 a28.09549, 28.09549 0 0 1 -14.00, -8.17"/>
+      <line x1="-137.28" y1="9.83" x2="-143.40" y2="-0.49"/>
+      <line x1="-147.61" y1="15.95" x2="-153.72" y2="5.62"/>
+      <line x1="-157.94" y1="22.06" x2="-164.05" y2="11.73"/>
+      <line x1="-168.26" y1="28.17" x2="-174.38" y2="17.85"/>
+      <line x1="-178.59" y1="34.28" x2="-184.70" y2="23.96"/>
+      <line x1="-188.92" y1="40.40" x2="-195.03" y2="30.07"/>
+      <line x1="-199.24" y1="46.51" x2="-205.36" y2="36.18"/>
+      <line x1="-137.28" y1="9.83" x2="-199.24" y2="46.51"/>
+      <line x1="-205.36" y1="36.18" x2="-143.40" y2="-0.49"/>
+      <path d="M-199.2425, 46.51028 a11.45916, 11.45916 0 0 1 -16.80, 9.95"/>
+      <line x1="-216.04" y1="56.46" x2="-222.16" y2="46.13"/>
+      <line x1="-216.04" y1="56.46" x2="-216.04" y2="56.46"/>
+      <line x1="-222.16" y1="46.13" x2="-222.16" y2="46.13"/>
+      <path d="M-216.0448, 56.45681 a9, 9 0 1 1 -6.11, -10.33"/>
+      <path d="M-222.1577, 46.13052 a11.45916, 11.45916 0 0 1 16.80, -9.95"/>
+      <path d="M-143.3977, -0.4934559 a28.09549, 28.09549 0 0 1 33.50, -36.07"/>
+      <line x1="-109.89" y1="-36.57" x2="-99.14" y2="-31.23"/>
+      <line x1="-104.56" y1="-47.31" x2="-93.81" y2="-41.98"/>
+      <line x1="-99.22" y1="-58.06" x2="-88.47" y2="-52.73"/>
+      <line x1="-93.89" y1="-68.81" x2="-83.14" y2="-63.48"/>
+      <line x1="-88.55" y1="-79.56" x2="-77.80" y2="-74.23"/>
+      <line x1="-109.89" y1="-36.57" x2="-88.55" y2="-79.56"/>
+      <line x1="-77.80" y1="-74.23" x2="-99.14" y2="-31.23"/>
+      <path d="M-88.55373, -79.56067 a15.27887, 15.27887 0 0 1 12.49, -25.17"/>
+      <line x1="-76.06" y1="-104.73" x2="-65.31" y2="-99.40"/>
+      <line x1="-76.06" y1="-104.73" x2="-76.06" y2="-104.73"/>
+      <line x1="-65.31" y1="-99.40" x2="-65.31" y2="-99.40"/>
+      <path d="M-76.05959, -104.7335 a9.549296, 9.549296 0 1 1 10.75, 5.34"/>
+      <path d="M-65.31075, -99.39848 a15.27887, 15.27887 0 0 1 -12.49, 25.17"/>
+      <path d="M-99.14497, -31.23029 a28.09549, 28.09549 0 0 1 8.95, 12.66"/>
+      <path d="M-18.71694, -27.22216 a24.90455, 24.90455 0 0 1 36.20, -19.05"/>
+      <line x1="17.49" y1="-46.27" x2="26.49" y2="-38.33"/>
+      <line x1="17.49" y1="-46.27" x2="17.49" y2="-46.27"/>
+      <line x1="26.49" y1="-38.33" x2="26.49" y2="-38.33"/>
+      <g/><path d="M26.48711, -38.33133 a24.90455, 24.90455 0 0 1 4.25, 17.03"/>
+      <line x1="30.74" y1="-21.30" x2="26.52" y2="-10.06"/>
+      <line x1="30.74" y1="-21.30" x2="30.74" y2="-21.30"/>
+      <line x1="26.52" y1="-10.06" x2="26.52" y2="-10.06"/>
+      <path d="M30.73852, -21.30003 a9, 9 0 1 1 -4.21, 11.24"/>
+      <path d="M26.52416, -10.06441 a24.90455, 24.90455 0 0 1 -8.87, 7.90"/>
+    </g>
+    <g font-family="Tahoma" font-size="9.8" text-anchor="start">
+      <g fill="none" stroke="black" stroke-width="1" stroke-linecap="round">
+        <line x1="-20.52" y1="-8.88" x2="-23.12" y2="-3.74"/>
+        <line x1="-105.38" y1="22.37" x2="-100.65" y2="25.66"/>
+        <line x1="-129.35" y1="21.88" x2="-134.21" y2="24.97"/>
+        <line x1="-213.54" y1="63.21" x2="-211.53" y2="68.60"/>
+        <line x1="-149.89" y1="-3.61" x2="-155.08" y2="-6.11"/>
+        <line x1="-113.48" y1="-42.81" x2="-116.36" y2="-47.80"/>
+        <line x1="-81.39" y1="-109.57" x2="-85.66" y2="-113.44"/>
+        <line x1="-92.00" y1="-32.14" x2="-86.29" y2="-32.88"/>
+        <line x1="15.64" y1="-53.23" x2="14.15" y2="-58.79"/>
+        <line x1="33.62" y1="-37.36" x2="39.33" y2="-36.59"/>
+        <line x1="21.02" y1="4.20" x2="23.71" y2="9.30"/>
+      </g>
+      <g fill="black" stroke="none">
+        <g transform="translate(-17.27,-15.31)">
+          <g transform="rotate(116.7865)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">1</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(-111.29,18.25)">
+          <g transform="rotate(34.86391)">
+            <text x="15.38" y="3.92">10</text>
+          </g>
+        </g>
+        <g transform="translate(-123.28,18.01)">
+          <g transform="rotate(147.4838)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">25</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(-216.04,56.46)">
+          <g transform="rotate(69.61184)">
+            <text x="15.38" y="3.92">33</text>
+          </g>
+        </g>
+        <g transform="translate(-143.40,-0.49)">
+          <g transform="rotate(205.6855)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">44</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(-109.89,-36.57)">
+          <g transform="rotate(240.0868)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">49</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(-76.06,-104.73)">
+          <g transform="rotate(222.2004)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">54</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(-99.14,-31.23)">
+          <g transform="rotate(352.7067)">
+            <text x="15.38" y="3.92">65</text>
+          </g>
+        </g>
+        <g transform="translate(17.49,-46.27)">
+          <g transform="rotate(255.0977)">
+            <g transform="scale(-1.00,-1.00)">
+              <text x="-13.42" y="3.92" text-anchor="end">76</text>
+            </g>
+          </g>
+        </g>
+        <g transform="translate(26.49,-38.33)">
+          <g transform="rotate(7.717521)">
+            <text x="15.38" y="3.92">1</text>
+          </g>
+        </g>
+        <g transform="translate(17.65,-2.16)">
+          <g transform="rotate(62.10873)">
+            <text x="15.38" y="3.92">4</text>
+          </g>
+        </g>
+      </g>
+      <g fill="LightSteelBlue" stroke="none">
+        <circle cx="-17.27" cy="-15.31" r="4.8"/>
+        <circle cx="-29.19" cy="-13.87" r="4.8"/>
+        <circle cx="-41.10" cy="-12.42" r="4.8"/>
+        <circle cx="-53.01" cy="-10.98" r="4.8"/>
+        <circle cx="-64.93" cy="-9.54" r="4.8"/>
+        <circle cx="-76.84" cy="-8.10" r="4.8"/>
+        <circle cx="-88.75" cy="-6.65" r="4.8"/>
+        <circle cx="-111.29" cy="18.25" r="4.8"/>
+        <circle cx="-111.53" cy="30.25" r="4.8"/>
+        <circle cx="-111.78" cy="42.25" r="4.8"/>
+        <circle cx="-112.02" cy="54.24" r="4.8"/>
+        <circle cx="-124.02" cy="54.00" r="4.8"/>
+        <circle cx="-123.77" cy="42.00" r="4.8"/>
+        <circle cx="-123.53" cy="30.00" r="4.8"/>
+        <circle cx="-123.28" cy="18.01" r="4.8"/>
+        <circle cx="-137.28" cy="9.83" r="4.8"/>
+        <circle cx="-147.61" cy="15.95" r="4.8"/>
+        <circle cx="-157.94" cy="22.06" r="4.8"/>
+        <circle cx="-168.26" cy="28.17" r="4.8"/>
+        <circle cx="-178.59" cy="34.28" r="4.8"/>
+        <circle cx="-188.92" cy="40.40" r="4.8"/>
+        <circle cx="-199.24" cy="46.51" r="4.8"/>
+        <circle cx="-216.04" cy="56.46" r="4.8"/>
+        <circle cx="-222.16" cy="46.13" r="4.8"/>
+        <circle cx="-205.36" cy="36.18" r="4.8"/>
+        <circle cx="-195.03" cy="30.07" r="4.8"/>
+        <circle cx="-184.70" cy="23.96" r="4.8"/>
+        <circle cx="-174.38" cy="17.85" r="4.8"/>
+        <circle cx="-164.05" cy="11.73" r="4.8"/>
+        <circle cx="-153.72" cy="5.62" r="4.8"/>
+        <circle cx="-143.40" cy="-0.49" r="4.8"/>
+        <circle cx="-109.89" cy="-36.57" r="4.8"/>
+        <circle cx="-104.56" cy="-47.31" r="4.8"/>
+        <circle cx="-99.22" cy="-58.06" r="4.8"/>
+        <circle cx="-93.89" cy="-68.81" r="4.8"/>
+        <circle cx="-88.55" cy="-79.56" r="4.8"/>
+        <circle cx="-76.06" cy="-104.73" r="4.8"/>
+        <circle cx="-65.31" cy="-99.40" r="4.8"/>
+        <circle cx="-77.80" cy="-74.23" r="4.8"/>
+        <circle cx="-83.14" cy="-63.48" r="4.8"/>
+        <circle cx="-88.47" cy="-52.73" r="4.8"/>
+        <circle cx="-93.81" cy="-41.98" r="4.8"/>
+        <circle cx="-99.14" cy="-31.23" r="4.8"/>
+        <circle cx="-90.19" cy="-18.57" r="4.8"/>
+        <circle cx="-78.28" cy="-20.01" r="4.8"/>
+        <circle cx="-66.37" cy="-21.45" r="4.8"/>
+        <circle cx="-54.46" cy="-22.90" r="4.8"/>
+        <circle cx="-42.54" cy="-24.34" r="4.8"/>
+        <circle cx="-30.63" cy="-25.78" r="4.8"/>
+        <circle cx="-18.72" cy="-27.22" r="4.8"/>
+        <circle cx="17.49" cy="-46.27" r="4.8"/>
+        <circle cx="26.49" cy="-38.33" r="4.8"/>
+        <circle cx="30.74" cy="-21.30" r="4.8"/>
+        <circle cx="26.52" cy="-10.06" r="4.8"/>
+      </g>
+      <g fill="gold" stroke="none">
+        <g fill="none" stroke="PaleGoldenrod" stroke-width="6" stroke-linecap="round">
+          <path d="M-92.366, 4.692714 a28.09549, 28.09549 0 0 1 -7.99, 8.83"/>
+          <path d="M-102.6697, 61.40876 a19.09859, 19.09859 0 1 1 -30.99, -0.63"/>
+          <path d="M-224.4938, 63.70283 a9, 9 0 0 1 -9.03, -6.51"/>
+          <path d="M-144.6544, -12.33595 a28.09549, 28.09549 0 0 1 22.86, -24.61"/>
+          <path d="M-74.03263, -115.5733 a9.549296, 9.549296 0 0 1 16.13, 8.01"/>
+          <path d="M-61.69256, -88.38603 a15.27887, 15.27887 0 0 1 -5.15, 10.38"/>
+          <path d="M-14.48882, -38.32885 a24.90455, 24.90455 0 0 1 20.43, -10.75"/>
+        </g>
+      </g>
+      <g fill="PaleGoldenrod" stroke="none">
+        <circle cx="-92.37" cy="4.69" r="4"/>
+        <circle cx="-100.36" cy="13.52" r="4"/>
+        <circle cx="-102.67" cy="61.41" r="4"/>
+        <circle cx="-133.66" cy="60.77" r="4"/>
+        <circle cx="-224.49" cy="63.70" r="4"/>
+        <circle cx="-233.52" cy="57.20" r="4"/>
+        <circle cx="-216.54" cy="36.46" r="4"/>
+        <circle cx="-144.65" cy="-12.34" r="4"/>
+        <circle cx="-121.80" cy="-36.95" r="4"/>
+        <circle cx="-74.03" cy="-115.57" r="4"/>
+        <circle cx="-57.90" cy="-107.57" r="4"/>
+        <circle cx="-61.69" cy="-88.39" r="4"/>
+        <circle cx="-66.85" cy="-78.00" r="4"/>
+        <circle cx="-14.49" cy="-38.33" r="4"/>
+        <circle cx="5.94" cy="-49.08" r="4"/>
+        <circle cx="17.65" cy="-2.16" r="4"/>
+      </g>
+      <g fill="black" stroke="none">
+        <text onmouseover="mOver(evt,'a:a (1)-72')" onmouseout="mOut(evt)" x="-20.09" y="-11.39">g</text>
+        <text onmouseover="mOver(evt,'a:a (2)-71')" onmouseout="mOut(evt)" x="-32.01" y="-9.95">C</text>
+        <text onmouseover="mOver(evt,'a:a (3)-70')" onmouseout="mOut(evt)" x="-43.92" y="-8.50">G</text>
+        <text onmouseover="mOver(evt,'a:a (4)-69')" onmouseout="mOut(evt)" x="-55.83" y="-7.06">G</text>
+        <text onmouseover="mOver(evt,'a:a (5)-68')" onmouseout="mOut(evt)" x="-67.75" y="-5.62">A</text>
+        <text onmouseover="mOver(evt,'a:a (6)-67')" onmouseout="mOut(evt)" x="-79.66" y="-4.18">U</text>
+        <text onmouseover="mOver(evt,'a:a (7)-66')" onmouseout="mOut(evt)" x="-91.57" y="-2.73">U</text>
+        <text onmouseover="mOver(evt,'a:a (10)-25')" onmouseout="mOut(evt)" x="-114.11" y="22.17">g</text>
+        <text onmouseover="mOver(evt,'a:a (11)-24')" onmouseout="mOut(evt)" x="-114.35" y="34.17">C</text>
+        <text onmouseover="mOver(evt,'a:a (12)-23')" onmouseout="mOut(evt)" x="-114.60" y="46.17">U</text>
+        <text onmouseover="mOver(evt,'a:a (13)-22')" onmouseout="mOut(evt)" x="-114.84" y="58.16">C</text>
+        <text onmouseover="mOver(evt,'a:a 13-(22)')" onmouseout="mOut(evt)" x="-126.84" y="57.92">G</text>
+        <text onmouseover="mOver(evt,'a:a 12-(23)')" onmouseout="mOut(evt)" x="-126.59" y="45.92">A</text>
+        <text onmouseover="mOver(evt,'a:a 11-(24)')" onmouseout="mOut(evt)" x="-126.35" y="33.92">G</text>
+        <text onmouseover="mOver(evt,'a:a 10-(25)')" onmouseout="mOut(evt)" x="-126.10" y="21.93">C</text>
+        <text onmouseover="mOver(evt,'a:a (26)-44')" onmouseout="mOut(evt)" x="-140.10" y="13.75">g</text>
+        <text onmouseover="mOver(evt,'a:a (27)-43')" onmouseout="mOut(evt)" x="-150.43" y="19.87">C</text>
+        <text onmouseover="mOver(evt,'a:a (28)-42')" onmouseout="mOut(evt)" x="-160.76" y="25.98">C</text>
+        <text onmouseover="mOver(evt,'a:a (29)-41')" onmouseout="mOut(evt)" x="-171.08" y="32.09">A</text>
+        <text onmouseover="mOver(evt,'a:a (30)-40')" onmouseout="mOut(evt)" x="-181.41" y="38.20">G</text>
+        <text onmouseover="mOver(evt,'a:a (31)-39')" onmouseout="mOut(evt)" x="-191.74" y="44.32">A</text>
+        <text onmouseover="mOver(evt,'a:a (32)-38')" onmouseout="mOut(evt)" x="-202.06" y="50.43">c</text>
+        <text onmouseover="mOver(evt,'a:a (33)-36')" onmouseout="mOut(evt)" x="-218.86" y="60.38">U</text>
+        <text onmouseover="mOver(evt,'a:a 33-(36)')" onmouseout="mOut(evt)" x="-224.98" y="50.05">A</text>
+        <text onmouseover="mOver(evt,'a:a 32-(38)')" onmouseout="mOut(evt)" x="-208.18" y="40.10">A</text>
+        <text onmouseover="mOver(evt,'a:a 31-(39)')" onmouseout="mOut(evt)" x="-197.85" y="33.99">u</text>
+        <text onmouseover="mOver(evt,'a:a 30-(40)')" onmouseout="mOut(evt)" x="-187.52" y="27.88">c</text>
+        <text onmouseover="mOver(evt,'a:a 29-(41)')" onmouseout="mOut(evt)" x="-177.20" y="21.77">U</text>
+        <text onmouseover="mOver(evt,'a:a 28-(42)')" onmouseout="mOut(evt)" x="-166.87" y="15.65">G</text>
+        <text onmouseover="mOver(evt,'a:a 27-(43)')" onmouseout="mOut(evt)" x="-156.54" y="9.54">G</text>
+        <text onmouseover="mOver(evt,'a:a 26-(44)')" onmouseout="mOut(evt)" x="-146.22" y="3.43">A</text>
+        <text onmouseover="mOver(evt,'a:a (49)-65')" onmouseout="mOut(evt)" x="-112.71" y="-32.65">c</text>
+        <text onmouseover="mOver(evt,'a:a (50)-64')" onmouseout="mOut(evt)" x="-107.38" y="-43.39">U</text>
+        <text onmouseover="mOver(evt,'a:a (51)-63')" onmouseout="mOut(evt)" x="-102.04" y="-54.14">G</text>
+        <text onmouseover="mOver(evt,'a:a (52)-62')" onmouseout="mOut(evt)" x="-96.71" y="-64.89">U</text>
+        <text onmouseover="mOver(evt,'a:a (53)-61')" onmouseout="mOut(evt)" x="-91.37" y="-75.64">G</text>
+        <text onmouseover="mOver(evt,'a:a (54)-58')" onmouseout="mOut(evt)" x="-78.88" y="-100.81">u</text>
+        <text onmouseover="mOver(evt,'a:a 54-(58)')" onmouseout="mOut(evt)" x="-68.13" y="-95.48">a</text>
+        <text onmouseover="mOver(evt,'a:a 53-(61)')" onmouseout="mOut(evt)" x="-80.62" y="-70.31">C</text>
+        <text onmouseover="mOver(evt,'a:a 52-(62)')" onmouseout="mOut(evt)" x="-85.96" y="-59.56">A</text>
+        <text onmouseover="mOver(evt,'a:a 51-(63)')" onmouseout="mOut(evt)" x="-91.29" y="-48.81">C</text>
+        <text onmouseover="mOver(evt,'a:a 50-(64)')" onmouseout="mOut(evt)" x="-96.63" y="-38.06">A</text>
+        <text onmouseover="mOver(evt,'a:a 49-(65)')" onmouseout="mOut(evt)" x="-101.96" y="-27.31">G</text>
+        <text onmouseover="mOver(evt,'a:a 7-(66)')" onmouseout="mOut(evt)" x="-93.01" y="-14.65">A</text>
+        <text onmouseover="mOver(evt,'a:a 6-(67)')" onmouseout="mOut(evt)" x="-81.10" y="-16.09">A</text>
+        <text onmouseover="mOver(evt,'a:a 5-(68)')" onmouseout="mOut(evt)" x="-69.19" y="-17.53">U</text>
+        <text onmouseover="mOver(evt,'a:a 4-(69)')" onmouseout="mOut(evt)" x="-57.28" y="-18.98">U</text>
+        <text onmouseover="mOver(evt,'a:a 3-(70)')" onmouseout="mOut(evt)" x="-45.36" y="-20.42">C</text>
+        <text onmouseover="mOver(evt,'a:a 2-(71)')" onmouseout="mOut(evt)" x="-33.45" y="-21.86">G</text>
+        <text onmouseover="mOver(evt,'a:a 1-(72)')" onmouseout="mOut(evt)" x="-21.54" y="-23.30">C</text>
+        <text onmouseover="mOver(evt,'a:b (76)-1')" onmouseout="mOut(evt)" x="14.67" y="-42.35">A</text>
+        <text onmouseover="mOver(evt,'a:b 76-(1)')" onmouseout="mOut(evt)" x="23.67" y="-34.41">g</text>
+        <text onmouseover="mOver(evt,'b:b (2)-3')" onmouseout="mOut(evt)" x="27.92" y="-17.38">C</text>
+        <text onmouseover="mOver(evt,'b:b 2-(3)')" onmouseout="mOut(evt)" x="23.70" y="-6.14">A</text>
+        <text onmouseover="mOver(evt,'8')" onmouseout="mOut(evt)" x="-95.19" y="8.61">U</text>
+        <text onmouseover="mOver(evt,'9')" onmouseout="mOut(evt)" x="-103.18" y="17.44">A</text>
+        <text onmouseover="mOver(evt,'14')" onmouseout="mOut(evt)" x="-105.49" y="65.33">A</text>
+        <text onmouseover="mOver(evt,'15')" onmouseout="mOut(evt)" x="-102.12" y="76.62">G</text>
+        <text onmouseover="mOver(evt,'16')" onmouseout="mOut(evt)" x="-106.02" y="87.74">u</text>
+        <text onmouseover="mOver(evt,'17')" onmouseout="mOut(evt)" x="-115.70" y="94.45">u</text>
+        <text onmouseover="mOver(evt,'18')" onmouseout="mOut(evt)" x="-127.48" y="94.21">G</text>
+        <text onmouseover="mOver(evt,'19')" onmouseout="mOut(evt)" x="-136.87" y="87.10">G</text>
+        <text onmouseover="mOver(evt,'20')" onmouseout="mOut(evt)" x="-140.31" y="75.84">G</text>
+        <text onmouseover="mOver(evt,'21')" onmouseout="mOut(evt)" x="-136.48" y="64.69">A</text>
+        <text onmouseover="mOver(evt,'34')" onmouseout="mOut(evt)" x="-227.31" y="67.62" fill="red">g</text>
+        <text onmouseover="mOver(evt,'35')" onmouseout="mOut(evt)" x="-236.34" y="61.12">A</text>
+        <text onmouseover="mOver(evt,'37')" onmouseout="mOut(evt)" x="-219.36" y="40.38">g</text>
+        <text onmouseover="mOver(evt,'45')" onmouseout="mOut(evt)" x="-147.47" y="-8.42">G</text>
+        <text onmouseover="mOver(evt,'46')" onmouseout="mOut(evt)" x="-143.71" y="-19.72">g</text>
+        <text onmouseover="mOver(evt,'47')" onmouseout="mOut(evt)" x="-135.61" y="-28.44">U</text>
+        <text onmouseover="mOver(evt,'48')" onmouseout="mOut(evt)" x="-124.62" y="-33.03">C</text>
+        <text onmouseover="mOver(evt,'55')" onmouseout="mOut(evt)" x="-76.85" y="-111.65">u</text>
+        <text onmouseover="mOver(evt,'56')" onmouseout="mOut(evt)" x="-65.96" y="-113.35">C</text>
+        <text onmouseover="mOver(evt,'57')" onmouseout="mOut(evt)" x="-60.72" y="-103.65">G</text>
+        <text onmouseover="mOver(evt,'59')" onmouseout="mOut(evt)" x="-64.51" y="-84.47">U</text>
+        <text onmouseover="mOver(evt,'60')" onmouseout="mOut(evt)" x="-69.67" y="-74.08">C</text>
+        <text onmouseover="mOver(evt,'73')" onmouseout="mOut(evt)" x="-17.31" y="-34.41">A</text>
+        <text onmouseover="mOver(evt,'74')" onmouseout="mOut(evt)" x="-8.42" y="-42.29">C</text>
+        <text onmouseover="mOver(evt,'75')" onmouseout="mOut(evt)" x="3.12" y="-45.16" fill="red">C</text>
+        <text onmouseover="mOver(evt,'4')" onmouseout="mOut(evt)" x="14.83" y="1.76">A</text>
+      </g>
+      <text id="descBack" x="0" y="0" stroke="LemonChiffon" stroke-linejoin="round" font-size="11.8" stroke-width="4.9" visibility="hidden">subs</text>
+      <text id="desc" x="0" y="0" fill="red" visibility="hidden" stroke-width="0" font-size="11.8">subs</text>
+    </g>
+  </g>
+</svg>
