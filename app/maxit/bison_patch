@@ -1,0 +1,22 @@
+diff -ruN cifparse-obj-v7.0-org/src/CifParser.y cifparse-obj-v7.0/src/CifParser.y
+--- cifparse-obj-v7.0-org/src/CifParser.y	2020-08-25 23:12:36.000000000 +0200
++++ cifparse-obj-v7.0/src/CifParser.y	2022-12-06 14:07:27.405551959 +0100
+@@ -15,6 +15,7 @@
+ extern int cifparser_lex();
+ %}
+ 
++%define api.header.include {"CifParser.h"}
+ %union {
+ 	char *cBuf;
+ }
+diff -ruN cifparse-obj-v7.0-org/src/DICParser.y cifparse-obj-v7.0/src/DICParser.y
+--- cifparse-obj-v7.0-org/src/DICParser.y	2020-08-25 23:12:36.000000000 +0200
++++ cifparse-obj-v7.0/src/DICParser.y	2022-12-06 14:07:27.405551959 +0100
+@@ -14,6 +14,7 @@
+ extern void dicparser_error(const char*);
+ %}
+ 
++%define api.header.include {"DICParser.h"}
+ %union {
+ 	char *cBuf;
+ }

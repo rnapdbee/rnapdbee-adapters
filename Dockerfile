@@ -37,9 +37,10 @@ RUN apt-get update -y \
 
 RUN curl -L https://sw-tools.rcsb.org/apps/MAXIT/maxit-v${maxit_version}-prod-src.tar.gz | tar xz
 
+COPY app/maxit app/maxit
+
 RUN cd ${RCSBROOT} \
- && sed -i '18i %define api.header.include {"CifParser.h"}' cifparse-obj-v7.0/src/CifParser.y \
- && sed -i '17i %define api.header.include {"DICParser.h"}' cifparse-obj-v7.0/src/DICParser.y \
+ && patch -p0 < /app/maxit/bison_patch \
  && make \
  && make binary
 
@@ -73,9 +74,9 @@ RUN apt-get update -y \
 
 RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
 
-COPY rnaview.patch rnaview.patch
+COPY app/rnaview app/rnaview
 
-RUN patch -p0 < rnaview.patch \
+RUN patch -p0 < app/rnaview/patch \
  && cd RNAVIEW \
  && make
 
@@ -117,11 +118,9 @@ RUN apt-get update -y \
 
 RUN echo 'options(BioC_mirror = "https://packagemanager.rstudio.com/bioconductor", repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/__linux__/jammy/2022-11-09+MToxNDMzODE3MywyOjQ1MjYyMTU7RDFFQTQ0MUE"))' > ~/.Rprofile \
  && Rscript -e 'install.packages(c("BiocManager", "optparse", "RColorBrewer"), lib="/usr/local/lib/R/site-library")' \
- && Rscript -e 'BiocManager::install("R4RNA", lib="/usr/local/lib/R/site-library")' \
- && curl -L https://raw.githubusercontent.com/jujubix/r-chie/master/rchie.R -o rchie.R \
- && mkdir ${rchie_dir} \
- && mv rchie.R ${rchie_dir}/rchie.R \
- && chmod 755 ${rchie_dir}/rchie.R
+ && Rscript -e 'BiocManager::install("R4RNA", lib="/usr/local/lib/R/site-library")'
+
+COPY app/rchie/rchie.R ${rchie_dir}/rchie.R
 
 ################################################################################
 
@@ -136,10 +135,18 @@ RUN apt-get update -y \
 
 RUN mkdir pseudoviewer \
  && curl -L https://github.com/IronLanguages/ironpython3/releases/download/v3.4.0-beta1/ironpython_3.4.0-beta1.deb > pseudoviewer/ipython.deb \
- && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe \
- && echo '#!/bin/bash\nipy /pseudoviewer/PVWrapper.py $@' > pseudoviewer/pseudoviewer && chmod 755 pseudoviewer/pseudoviewer
+ && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe
 
-COPY PVWrapper.py /pseudoviewer/
+COPY app/pseudoviewer/ pseudoviewer/
+
+################################################################################
+
+FROM quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 AS rnapuzzler-builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY app/rnapuzzler RNAplot/
+RUN mv /usr/local/bin/RNAplot RNAplot/
 
 ################################################################################
 
@@ -182,17 +189,16 @@ COPY --from=rnaview-builder /RNAVIEW /rnaview
 COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
 
 COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
-
 RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
-COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot/
+COPY --from=rnapuzzler-builder /RNAplot /RNAplot
 
 COPY --from=python-builder /venv /venv
 
 EXPOSE 80
 CMD [  "gunicorn", \
        "--worker-tmp-dir", "/dev/shm", \
-       "--workers", "2", \
+       "--workers", "4", \
        "--threads", "2", \
        "--worker-clas", "gthread", \
        "--bind", "0.0.0.0:80", \
