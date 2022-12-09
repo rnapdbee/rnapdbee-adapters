@@ -3,17 +3,11 @@
 from flask import Flask
 
 from adapters.cache import cache
+from adapters.config import config
 from adapters.routes.analysis import server as analysis
 from adapters.routes.conversion import server as conversion
 from adapters.routes.filtering import server as filtering
 from adapters.routes.visualization import server as visualization
-
-config = {
-    "CACHE_TYPE": "FileSystemCache",
-    "CACHE_DIR": "/var/tmp/adapters_cache/",
-    "CACHE_THRESHOLD": 50,
-    "CACHE_DEFAULT_TIMEOUT": 3600,
-}
 
 app = Flask(__name__)
 app.config.from_mapping(config)

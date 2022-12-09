@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 import math
 import re
-import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass
@@ -10,6 +9,8 @@ from typing import Dict, Tuple, Optional
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Saenger, Stacking, Structure2D)
+
+from adapters.tools.utils import run_external_cmd
 
 
 class RNAViewAdapter:
@@ -115,14 +116,7 @@ class RNAViewAdapter:
             with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
                 file.write(file_content)
                 file.seek(0)
-                subprocess.run(
-                    ['rnaview', file.name],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    check=False,
-                    cwd=directory_name,
-                    timeout=120,
-                )
+                run_external_cmd(['rnaview', file.name], cwd=directory_name)
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()
         return rnaview_result

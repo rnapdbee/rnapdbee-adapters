@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 import enum
 import os.path
-import subprocess
 import sys
 import tempfile
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Stacking, Structure2D)
+
+from adapters.tools.utils import run_external_cmd
 
 
 class Element(enum.Enum):
@@ -202,14 +203,7 @@ def analyze(cif_content: str) -> Structure2D:
     file.write(cif_content)
     file.seek(0)
 
-    subprocess.run(
-        ['bpnet.linux', file.name],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        check=False,
-        timeout=120,
-        cwd=directory.name,
-    )
+    run_external_cmd(['bpnet.linux', file.name], cwd=directory.name)
 
     file.close()
 

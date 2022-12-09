@@ -1,9 +1,8 @@
 #! /usr/bin/env python
-import subprocess
 import sys
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from adapters.tools.utils import is_cif
+from adapters.tools.utils import is_cif, run_external_cmd
 from adapters.cache import cache
 
 # constants defined by MAXIT
@@ -30,10 +29,8 @@ def pdb2cif(pdb_content):
         pdb.write(pdb_content)
         pdb.seek(0)
         cif = NamedTemporaryFile('w+', suffix='.cif', dir=directory)
-        subprocess.run(
+        run_external_cmd(
             ['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF],
-            check=False,
-            timeout=120,
             cwd=directory,
         )
         cif.seek(0)
@@ -49,10 +46,8 @@ def cif2pdb(cif_content):
         cif.write(cif_content)
         cif.seek(0)
         pdb = NamedTemporaryFile('w+', suffix='.pdb', dir=directory)
-        subprocess.run(
+        run_external_cmd(
             ['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB],
-            check=False,
-            timeout=120,
             cwd=directory,
         )
         pdb.seek(0)

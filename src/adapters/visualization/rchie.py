@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 
-import subprocess
 import tempfile
 import os
 import sys
 
 from adapters.visualization.model import Model2D
+from adapters.tools.utils import run_external_cmd
 
 
 class RChieDrawer:
@@ -29,7 +29,7 @@ class RChieDrawer:
                 file.seek(0)
                 output_pdf = os.path.join(directory, 'out.pdf')
                 output_svg = os.path.join(directory, 'out.svg')
-                subprocess.run(
+                run_external_cmd(
                     [
                         'rchie.R',
                         file.name,
@@ -43,18 +43,11 @@ class RChieDrawer:
                         '--output',
                         output_pdf,
                     ],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    check=False,
-                    timeout=120,
                     cwd=directory,
                 )
-            subprocess.run(
+
+            run_external_cmd(
                 ['pdf2svg', output_pdf, output_svg],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-                timeout=120,
                 cwd=directory,
             )
             if not os.path.isfile(output_svg):

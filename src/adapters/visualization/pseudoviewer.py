@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 
-import subprocess
 import os
 import re
 import sys
@@ -12,6 +11,7 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 from lxml import etree as ET
 
 from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
+from adapters.tools.utils import run_external_cmd
 
 
 @dataclass(frozen=True)
@@ -132,13 +132,9 @@ class PseudoViewerDrawer:
                     structure_file.write(self.modified_structure)
                     structure_file.seek(0)
                     output_file = os.path.join(directory, 'out.svg')
-                    subprocess.run(
+                    run_external_cmd(
                         ['pseudoviewer', seqeunce_file.name, structure_file.name, output_file],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL,
-                        check=False,
                         cwd=directory,
-                        timeout=120,
                     )
                     if not os.path.isfile(output_file):
                         raise RuntimeError('PseudoViewer image was not created!')

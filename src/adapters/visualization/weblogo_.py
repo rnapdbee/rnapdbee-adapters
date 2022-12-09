@@ -8,7 +8,6 @@
 
 import os
 import shutil
-import subprocess
 import tempfile
 import uuid
 import sys
@@ -20,7 +19,7 @@ import weblogo as w
 import svg_stack
 
 from adapters.visualization.model import ModelMulti2D
-from adapters.tools.utils import fix_using_rsvg_convert
+from adapters.tools.utils import fix_using_rsvg_convert, run_external_cmd
 
 
 class WeblogoDrawer:
@@ -94,13 +93,9 @@ class WeblogoDrawer:
                 temp_pdf.write(pdf_bytes)
                 temp_pdf.seek(0)
                 file_name = os.path.join(directory_name, f'{str(uuid.uuid4())}.svg')
-                subprocess.run(
+                run_external_cmd(
                     [command, temp_pdf.name, file_name],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    check=False,
                     cwd=directory_name,
-                    timeout=120,
                 )
             if not os.path.isfile(file_name):
                 raise RuntimeError(f'File "{file_name}" does not exist - "pdf2svg" conversion failed!')

@@ -9,12 +9,53 @@ from os import devnull
 import orjson
 from flask import Response, request
 
+from adapters.config import config
+
 
 def is_cif(file_content: str) -> bool:
     for line in file_content.splitlines():
         if line.startswith('_atom_site'):
             return True
     return False
+
+
+def run_external_cmd(
+    args,
+    cwd,
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+    check=False,
+    timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
+    cmd_input=None,
+):
+    """Wrapper for subprocess.run()
+
+    Args:
+        args: command arguments
+        cwd (_type_): current working directory
+        stdout (_type_, optional): target of stdout. Defaults to subprocess.DEVNULL.
+        stderr (_type_, optional): target of stderr. Defaults to subprocess.DEVNULL.
+        check (bool, optional): check for exceptions. Defaults to False.
+        timeout (int, optional): timeout for command. Defaults to 120.
+        cmd_input (bytes, optional): input for command. Defaults to None.
+
+    Returns:
+        result of subprocess.run()
+    """
+
+    if cwd is None:
+        return ValueError('cwd argument must be valid directory!')
+
+    # TODO: change stderr=subprocess.PIPE and log it?
+    return subprocess.run(
+        args,
+        cwd=cwd,
+        stdout=stdout,
+        stderr=stderr,
+        check=check,
+        timeout=timeout,
+        input=cmd_input,
+    )
 
 
 def fix_using_rsvg_convert(svg_content: str) -> str:
@@ -36,13 +77,10 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
         with NamedTemporaryFile('w+', dir=directory, suffix='.svg') as svg_file:
             svg_file.write(svg_content)
             svg_file.seek(0)
-            fixed_svg_content = subprocess.run(
+            fixed_svg_content = run_external_cmd(
                 ['rsvg-convert', '-f', 'svg', svg_file.name],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.DEVNULL,
-                check=False,
                 cwd=directory,
-                timeout=120,
+                stdout=subprocess.PIPE,
             ).stdout.decode('utf-8')
     if 'svg' not in fixed_svg_content:
         raise RuntimeError("rsvg-convert conversion failed!")
@@ -68,7 +106,7 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
             file.write(file_content)
             file.seek(0)
             output_file = os.path.join(directory, 'output.svg')
-            subprocess.run(
+            run_external_cmd(
                 [
                     'inkscape',
                     '--export-plain-svg',
@@ -77,11 +115,7 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
                     output_file,
                     file.name,
                 ],
-                check=False,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
                 cwd=directory,
-                timeout=120,
             )
             if not os.path.isfile(output_file):
                 raise RuntimeError("Inkscape conversion failed: file does not exist!")

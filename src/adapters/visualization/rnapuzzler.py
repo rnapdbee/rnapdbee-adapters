@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 
-import subprocess
 import os
 from tempfile import TemporaryDirectory
 from collections import deque, defaultdict
@@ -9,7 +8,7 @@ from enum import Enum
 from dataclasses import dataclass
 
 from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
-from adapters.tools.utils import convert_to_svg_using_inkscape
+from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
 
 
 class ParseState(Enum):
@@ -144,14 +143,10 @@ class RNAPuzzlerDrawer:
     def generate_rnapuzzler_eps(self) -> str:
         input_dbn = f'{self.modified_sequence}\n{self.modified_structure}'
         with TemporaryDirectory() as directory:
-            subprocess.run(
+            run_external_cmd(
                 ['RNAplot', '-t', '4', '--post', ''],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-                timeout=120,
                 cwd=directory,
-                input=input_dbn.encode('utf-8'),
+                cmd_input=input_dbn.encode('utf-8'),
             )
             output_file = os.path.join(directory, self.OUTPUT_EPS)
             if not os.path.isfile(output_file):
