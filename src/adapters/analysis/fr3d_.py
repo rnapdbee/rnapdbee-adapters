@@ -57,7 +57,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
             name = 'tHS' if name.lower() == 'hts' else name  # typo?
             name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
             return ('base-pair', LeontisWesthof[name])
-        except Exception:
+        except KeyError:
             # TODO: add logging?
             pass  # if a three-leter name is not LW, just pass-through to return 'other'
     return ('other', None)
