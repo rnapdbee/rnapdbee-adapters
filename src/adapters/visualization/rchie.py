@@ -5,7 +5,7 @@ import os
 import sys
 
 from adapters.visualization.model import Model2D
-from adapters.tools.utils import run_external_cmd
+from adapters.tools.utils import run_external_cmd, pdf_to_svg
 
 
 class RChieDrawer:
@@ -28,7 +28,6 @@ class RChieDrawer:
                 file.write(dot_bracket)
                 file.seek(0)
                 output_pdf = os.path.join(directory, 'out.pdf')
-                output_svg = os.path.join(directory, 'out.svg')
                 run_external_cmd(
                     [
                         'rchie.R',
@@ -45,17 +44,7 @@ class RChieDrawer:
                     ],
                     cwd=directory,
                 )
-
-            run_external_cmd(
-                ['pdf2svg', output_pdf, output_svg],
-                cwd=directory,
-            )
-            if not os.path.isfile(output_svg):
-                raise RuntimeError('RChie image was not generated!')
-            with open(output_svg, 'r', encoding='utf-8') as svg_file:
-                svg_content = svg_file.read()
-            if 'svg' not in svg_content:
-                raise RuntimeError('Rchie image is not a valid SVG!')
+            svg_content = pdf_to_svg(output_pdf)
         return svg_content
 
     def visualize(self, data: Model2D) -> None:

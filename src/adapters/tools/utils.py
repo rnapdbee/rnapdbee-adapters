@@ -19,6 +19,31 @@ def is_cif(file_content: str) -> bool:
     return False
 
 
+def pdf_to_svg(pdf_path: str) -> str:
+    """Convert PDF to SVG using pdf2svg
+
+    Args:
+        pdf_path (str): path to existing PDF file
+
+    Returns:
+        str: content of SVG file
+    """
+
+    with TemporaryDirectory() as directory:
+        output_svg = os.path.join(directory, 'out.svg')
+        run_external_cmd(
+            ['pdf2svg', pdf_path, output_svg],
+            cwd=directory,
+        )
+        if not os.path.isfile(output_svg):
+            raise RuntimeError('pdf2svg: Output SVG does not exist!')
+        with open(output_svg, 'r', encoding='utf-8') as svg_file:
+            svg_content = svg_file.read()
+        if 'svg' not in svg_content:
+            raise RuntimeError('pdf2svg: Generated file is not valid SVG!')
+    return svg_content
+
+
 def run_external_cmd(
     args,
     cwd,
