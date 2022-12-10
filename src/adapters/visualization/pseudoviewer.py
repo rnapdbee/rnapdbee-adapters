@@ -79,7 +79,7 @@ class PseudoViewerDrawer:
                         else:
                             self.interactions.append(
                                 PseudoviewerInteraction(
-                                    residue_stack[symbol.sibling].pop(),
+                                    residue_stack[symbol.sibling].pop(),  # type: ignore
                                     Residue(strand_name, number, name),
                                     self.COLORS[char],
                                 ))
@@ -90,7 +90,7 @@ class PseudoViewerDrawer:
         self.modified_sequence = ''.join(modified_sequence)
 
     def append_not_represented_interactions(self) -> None:
-        all_residues = {}
+        all_residues: Dict[str, Dict[int, int]] = {}
         for chain_with_residues in self.data.chainsWithResidues:
             chain = chain_with_residues.name
             residues = chain_with_residues.residues
@@ -217,7 +217,7 @@ class PseudoViewerDrawer:
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
-    def visualize(self, data: Model2D) -> None:
+    def visualize(self, data: Model2D) -> str:
         self.data = data
 
         self.preprocess()

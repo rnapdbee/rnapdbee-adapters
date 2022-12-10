@@ -49,7 +49,7 @@ class RChieDrawer:
             svg_content = pdf_to_svg(output_pdf)
         return svg_content
 
-    def visualize(self, data: Model2D) -> None:
+    def visualize(self, data: Model2D) -> str:
         structure = ''.join(tuple(strand.structure for strand in data.strands))
         return self.generate_rchie_svg(structure)
 

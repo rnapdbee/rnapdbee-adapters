@@ -78,7 +78,7 @@ class RNAPuzzlerDrawer:
                     else:
                         self.interactions.append(
                             RNAPuzzlerInteraction(
-                                residue_stack[symbol.sibling].pop(),
+                                residue_stack[symbol.sibling].pop(),  # type: ignore
                                 i + 1,
                                 self.COLORS[char],
                             ))
@@ -140,7 +140,7 @@ class RNAPuzzlerDrawer:
         self.remove_open_close_brackets()
         self.append_chains_ends()
 
-    def generate_rnapuzzler_eps(self) -> str:
+    def generate_rnapuzzler_eps(self) -> None:
         input_dbn = f'{self.modified_sequence}\n{self.modified_structure}'
         with TemporaryDirectory() as directory:
             run_external_cmd(
