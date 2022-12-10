@@ -1,5 +1,5 @@
-import tempfile
-from typing import Callable, Dict, Iterable, List, Tuple
+from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
+from typing import Callable, Dict, Iterable, List, Tuple, Any
 
 import mmcif.io
 
@@ -7,23 +7,24 @@ from adapters.tools import maxit
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
-    cif, data = begin(file_content)
+    with NamedTemporaryFile('w+', suffix='.cif') as cif_file:
+        data = begin(cif_file, file_content)
 
-    for function, kwargs in functions_args:
-        function(data, **kwargs)
+        for function, kwargs in functions_args:
+            function(data, **kwargs)
 
-    return end(cif, data)
+        cif_content = end(cif_file, data)
+    return cif_content
 
 
-def begin(file_content: str) -> Tuple[tempfile._TemporaryFileWrapper, List]:
-    cif = tempfile.NamedTemporaryFile('w+', suffix='.cif')
+def begin(cif: _TemporaryFileWrapper, file_content: str) -> List[Any]:
     cif.write(maxit.ensure_cif(file_content))
     cif.flush()
     cif.seek(0)
-    return cif, mmcif.io.IoAdapter().readFile(cif.name)
+    return mmcif.io.IoAdapter().readFile(cif.name)
 
 
-def end(cif: tempfile._TemporaryFileWrapper, data: List) -> str:
+def end(cif: _TemporaryFileWrapper, data: List[Any]) -> str:
     cif.seek(0)
     cif.truncate(0)
     mmcif.io.IoAdapter().writeFile(cif.name, data)
@@ -67,7 +68,7 @@ def fix_occupancy(data: List, *_):
                 for _, row in enumerate(atom_site.getRowList()):  # type: ignore
                     try:
                         float(row[occupancy])
-                    except Exception:
+                    except (KeyError, ValueError):
                         row[occupancy] = '1.0'
 
 

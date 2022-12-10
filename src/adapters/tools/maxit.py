@@ -25,16 +25,16 @@ def ensure_pdb(file_content: str) -> str:
 @cache.memoize()
 def pdb2cif(pdb_content):
     with TemporaryDirectory() as directory:
-        pdb = NamedTemporaryFile('w+', suffix='.pdb', dir=directory)
-        pdb.write(pdb_content)
-        pdb.seek(0)
-        cif = NamedTemporaryFile('w+', suffix='.cif', dir=directory)
-        run_external_cmd(
-            ['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF],
-            cwd=directory,
-        )
-        cif.seek(0)
-        cif_content = cif.read()
+        with NamedTemporaryFile('w+', suffix='.pdb', dir=directory) as pdb:
+            with NamedTemporaryFile('w+', suffix='.cif', dir=directory) as cif:
+                pdb.write(pdb_content)
+                pdb.seek(0)
+                run_external_cmd(
+                    ['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF],
+                    cwd=directory,
+                )
+                cif.seek(0)
+                cif_content = cif.read()
 
     return cif_content
 
@@ -42,16 +42,16 @@ def pdb2cif(pdb_content):
 @cache.memoize()
 def cif2pdb(cif_content):
     with TemporaryDirectory() as directory:
-        cif = NamedTemporaryFile('w+', suffix='.cif', dir=directory)
-        cif.write(cif_content)
-        cif.seek(0)
-        pdb = NamedTemporaryFile('w+', suffix='.pdb', dir=directory)
-        run_external_cmd(
-            ['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB],
-            cwd=directory,
-        )
-        pdb.seek(0)
-        pdb_content = pdb.read()
+        with NamedTemporaryFile('w+', suffix='.cif', dir=directory) as cif:
+            with NamedTemporaryFile('w+', suffix='.pdb', dir=directory) as pdb:
+                cif.write(cif_content)
+                cif.seek(0)
+                run_external_cmd(
+                    ['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB],
+                    cwd=directory,
+                )
+                pdb.seek(0)
+                pdb_content = pdb.read()
 
     return pdb_content
 
