@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import os
+import sys
 from tempfile import TemporaryDirectory
 from collections import deque, defaultdict
 from typing import List, DefaultDict, Deque
@@ -256,7 +257,13 @@ class RNAPuzzlerDrawer:
 
 
 def main() -> None:
-    pass
+    drawer = RNAPuzzlerDrawer()
+    print("Read sequence:")
+    drawer.modified_sequence = sys.stdin.read()
+    print("Read structure:")
+    drawer.modified_structure = sys.stdin.read()
+    drawer.generate_rnapuzzler_eps()
+    print(convert_to_svg_using_inkscape(drawer.result, '.eps'))
 
 
 if __name__ == '__main__':
