@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 import enum
 import os.path
-import subprocess
 import sys
-import tempfile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Stacking, Structure2D)
+
+from adapters.tools.utils import run_external_cmd
 
 
 class Element(enum.Enum):
@@ -197,28 +198,26 @@ def residues_from_overlap_info(fields):
 
 
 def analyze(cif_content: str) -> Structure2D:
-    directory = tempfile.TemporaryDirectory()
-    file = tempfile.NamedTemporaryFile('w+', dir=directory.name, suffix='.cif')
-    file.write(cif_content)
-    file.seek(0)
+    with TemporaryDirectory() as directory:
+        with NamedTemporaryFile('w+', dir=directory, suffix='.cif') as file:
+            file.write(cif_content)
+            file.seek(0)
+            run_external_cmd(['bpnet.linux', file.name], cwd=directory)
 
-    subprocess.run(['bpnet.linux', file.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+            if os.path.exists(file.name.replace('.cif', '.out')):
+                with open(file.name.replace('.cif', '.out'), encoding='utf-8') as bpnet_file:
+                    bpnet_output = bpnet_file.read()
+                base_pairs = parse_base_pairs(bpnet_output)
+            else:
+                base_pairs = []
 
-    file.close()
-
-    if os.path.exists(file.name.replace('.cif', '.out')):
-        with open(file.name.replace('.cif', '.out'), encoding='utf-8') as bpnet_file:
-            bpnet_output = bpnet_file.read()
-        base_pairs = parse_base_pairs(bpnet_output)
-    else:
-        base_pairs = []
-
-    if os.path.exists(file.name.replace('.cif', '.rob')):
-        with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as bpnet_file:
-            bpnet_rob = bpnet_file.read()
-        stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(bpnet_rob)
-    else:
-        stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
+            if os.path.exists(file.name.replace('.cif', '.rob')):
+                with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as bpnet_file:
+                    bpnet_rob = bpnet_file.read()
+                stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(
+                    bpnet_rob)
+            else:
+                stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
 
     return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
 

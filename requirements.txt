@@ -1,12 +1,13 @@
-mmcif==0.79
+mmcif==0.80.1
 Flask==2.2.*
 orjson==3.8.*
 barnaba==0.1.8
 gunicorn==20.1.*
-rnapolis==0.0.7
+rnapolis==0.0.8
 weblogo==3.7.*
 lxml==4.9.*
 svg-stack==0.1.0
 dataclasses-json==0.5.*
 mmcif-pdbx==2.0.1
+Flask-Caching==2.0.* 
 git+https://github.com/BGSU-RNA/fr3d-python@c70d2c3241f97491c5bd86f748630ab5df0248a8

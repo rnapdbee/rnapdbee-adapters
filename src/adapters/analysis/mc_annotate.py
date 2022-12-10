@@ -11,6 +11,8 @@ import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
                              ResidueAuth, Saenger, Stacking, StackingTopology, Structure2D)
 
+from adapters.tools.utils import run_external_cmd
+
 
 class MCAnnotateAdapter:
 
@@ -211,11 +213,10 @@ class MCAnnotateAdapter:
             with tempfile.NamedTemporaryFile('w+', dir=directory_name, suffix='.pdb') as file:
                 file.write(pdb_content)
                 file.seek(0)
-                mc_result = subprocess.run(
+                mc_result = run_external_cmd(
                     ['mc-annotate', file.name],
+                    cwd=directory_name,
                     stdout=subprocess.PIPE,
-                    stderr=subprocess.DEVNULL,
-                    check=False,
                 ).stdout.decode('utf-8')
         return mc_result
 

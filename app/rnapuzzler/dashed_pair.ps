@@ -1,0 +1,21 @@
+/dashedpair { % i j lw [len spc] offset r g b dashedpair
+  % draw rgb dashed line between i and j
+  % meaning: pair not represented in dotbracket
+  gsave
+  newpath
+  setrgbcolor
+  setdash
+  setlinewidth
+  currentdict (cpr) known
+  {
+    exch dup
+    coor  exch 1 sub get aload pop moveto
+    exch arccoords curveto
+  }
+  { 1 sub coor exch get aload pop moveto
+    1 sub coor exch get aload pop lineto
+  } ifelse
+   stroke
+   grestore
+   % } if
+} bind def

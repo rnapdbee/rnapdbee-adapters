@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   description: "This is API of the adapters service of RNApdbee v3.0."
-  version: "1.0.3"
+  version: "1.0.4"
   title: "RNApdbee Adapters API"
 
 tags:
@@ -425,6 +425,25 @@ paths:
       tags:
         - "Visualization API"
       summary: "Visualize 2D using pseudoviewer"
+      requestBody:
+        $ref: "#/components/requestBodies/Model2D"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            image/svg+xml:
+              schema:
+                $ref: "#/components/schemas/FileSVG"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /visualization-api/v1/rnapuzzler:
+    post:
+      tags:
+        - "Visualization API"
+      summary: "Visualize 2D using RNAPuzzler"
       requestBody:
         $ref: "#/components/requestBodies/Model2D"
       responses:

@@ -1,30 +1,17 @@
 #! /usr/bin/env python
 
-import subprocess
 import os
-import xml.etree.ElementTree as ET
 import re
 import sys
 from collections import deque, defaultdict
-from typing import Tuple, List, Optional, DefaultDict, Deque, Dict
+from typing import Tuple, List, DefaultDict, Deque, Dict
 from dataclasses import dataclass
-from enum import Enum
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from adapters.visualization.model import Model2D, Residue
+from lxml import etree as ET
 
-
-class SymbolType(Enum):
-    BEGIN = 0
-    END = 1
-    NONE = 2
-
-
-@dataclass(frozen=True)
-class Symbol:
-    allowed: bool
-    type: SymbolType
-    sibling: Optional[str]
+from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
+from adapters.tools.utils import run_external_cmd
 
 
 @dataclass(frozen=True)
@@ -35,29 +22,6 @@ class PseudoviewerInteraction:
 
 
 class PseudoViewerDrawer:
-
-    SYMBOLS = {
-        '.': Symbol(True, SymbolType.NONE, None),
-        '-': Symbol(False, SymbolType.NONE, None),
-        '(': Symbol(True, SymbolType.BEGIN, ')'),
-        ')': Symbol(True, SymbolType.END, '('),
-        '[': Symbol(False, SymbolType.BEGIN, ']'),
-        ']': Symbol(False, SymbolType.END, '['),
-        '{': Symbol(False, SymbolType.BEGIN, '}'),
-        '}': Symbol(False, SymbolType.END, '{'),
-        '<': Symbol(False, SymbolType.BEGIN, '>'),
-        '>': Symbol(False, SymbolType.END, '<'),
-        'A': Symbol(False, SymbolType.BEGIN, 'a'),
-        'a': Symbol(False, SymbolType.END, 'A'),
-        'B': Symbol(False, SymbolType.BEGIN, 'b'),
-        'b': Symbol(False, SymbolType.END, 'B'),
-        'C': Symbol(False, SymbolType.BEGIN, 'c'),
-        'c': Symbol(False, SymbolType.END, 'C'),
-        'D': Symbol(False, SymbolType.BEGIN, 'd'),
-        'd': Symbol(False, SymbolType.END, 'D'),
-        'E': Symbol(False, SymbolType.BEGIN, 'e'),
-        'e': Symbol(False, SymbolType.END, 'E'),
-    }
 
     COLORS = {
         ']': '#2E7012',  # 1st order
@@ -101,7 +65,7 @@ class PseudoViewerDrawer:
             modified_sequence.append('1\n')
             modified_structure.append('1\n')
             for char, name, i in zip(structure, sequence, range(len(structure))):
-                symbol = self.SYMBOLS[char]
+                symbol = SYMBOLS[char]
                 number = i + 1
                 if symbol.allowed:
                     modified_structure.append(char)
@@ -115,7 +79,7 @@ class PseudoViewerDrawer:
                         else:
                             self.interactions.append(
                                 PseudoviewerInteraction(
-                                    residue_stack[symbol.sibling].pop(),
+                                    residue_stack[symbol.sibling].pop(),  # type: ignore
                                     Residue(strand_name, number, name),
                                     self.COLORS[char],
                                 ))
@@ -126,7 +90,7 @@ class PseudoViewerDrawer:
         self.modified_sequence = ''.join(modified_sequence)
 
     def append_not_represented_interactions(self) -> None:
-        all_residues = {}
+        all_residues: Dict[str, Dict[int, int]] = {}
         for chain_with_residues in self.data.chainsWithResidues:
             chain = chain_with_residues.name
             residues = chain_with_residues.residues
@@ -168,11 +132,9 @@ class PseudoViewerDrawer:
                     structure_file.write(self.modified_structure)
                     structure_file.seek(0)
                     output_file = os.path.join(directory, 'out.svg')
-                    subprocess.run(
+                    run_external_cmd(
                         ['pseudoviewer', seqeunce_file.name, structure_file.name, output_file],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL,
-                        check=False,
+                        cwd=directory,
                     )
                     if not os.path.isfile(output_file):
                         raise RuntimeError('PseudoViewer image was not created!')
@@ -224,8 +186,7 @@ class PseudoViewerDrawer:
         self.append_not_represented_interactions()
 
     def postprocess(self) -> None:
-        tree = ET.ElementTree(ET.fromstring(self.svg_result))
-        root = tree.getroot()
+        root = ET.XML(self.svg_result.encode('utf-8'))
 
         residues_elements = root.findall(f'.//{self.XML_NS}text[@onmouseover]')
         parent_container = root.find(f'.//{self.XML_NS}g[@transform]')
@@ -256,7 +217,7 @@ class PseudoViewerDrawer:
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
-    def visualize(self, data: Model2D) -> None:
+    def visualize(self, data: Model2D) -> str:
         self.data = data
 
         self.preprocess()

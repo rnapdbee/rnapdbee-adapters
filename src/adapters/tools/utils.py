@@ -1,5 +1,6 @@
-import tempfile
 import subprocess
+import os
+from tempfile import TemporaryDirectory, NamedTemporaryFile
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from functools import wraps
 from http import HTTPStatus
@@ -8,12 +9,146 @@ from os import devnull
 import orjson
 from flask import Response, request
 
+from adapters.config import config
+
 
 def is_cif(file_content: str) -> bool:
     for line in file_content.splitlines():
         if line.startswith('_atom_site'):
             return True
     return False
+
+
+def pdf_to_svg(pdf_path: str) -> str:
+    """Convert PDF to SVG using pdf2svg
+
+    Args:
+        pdf_path (str): path to existing PDF file
+
+    Returns:
+        str: content of SVG file
+    """
+
+    with TemporaryDirectory() as directory:
+        output_svg = os.path.join(directory, 'out.svg')
+        run_external_cmd(
+            ['pdf2svg', pdf_path, output_svg],
+            cwd=directory,
+        )
+        if not os.path.isfile(output_svg):
+            raise RuntimeError('pdf2svg: Output SVG does not exist!')
+        with open(output_svg, 'r', encoding='utf-8') as svg_file:
+            svg_content = svg_file.read()
+        if 'svg' not in svg_content:
+            raise RuntimeError('pdf2svg: Generated file is not valid SVG!')
+    return svg_content
+
+
+def run_external_cmd(
+    args,
+    cwd,
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+    check=False,
+    timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
+    cmd_input=None,
+):
+    """Wrapper for subprocess.run()
+
+    Args:
+        args: command arguments
+        cwd (_type_): current working directory
+        stdout (_type_, optional): target of stdout. Defaults to subprocess.DEVNULL.
+        stderr (_type_, optional): target of stderr. Defaults to subprocess.DEVNULL.
+        check (bool, optional): check for exceptions. Defaults to False.
+        timeout (int, optional): timeout for command. Defaults to 120.
+        cmd_input (bytes, optional): input for command. Defaults to None.
+
+    Returns:
+        result of subprocess.run()
+    """
+
+    if cwd is None:
+        return ValueError('cwd argument must be valid directory!')
+
+    # TODO: change stderr=subprocess.PIPE and log it?
+    return subprocess.run(
+        args,
+        cwd=cwd,
+        stdout=stdout,
+        stderr=stderr,
+        check=check,
+        timeout=timeout,
+        input=cmd_input,
+    )
+
+
+def fix_using_rsvg_convert(svg_content: str) -> str:
+    """Convert svg -> svg using rsvg-convert.
+    Especially add viewBox attribute to SVG.
+    Use this carefully since rsvg-convert make SVG bigger.
+
+    Args:
+        svg_content (str): SVG as string
+
+    Raises:
+        RuntimeError: Subprocess of rsvg-convert failed
+
+    Returns:
+        str: fixed SVG as string
+    """
+
+    with TemporaryDirectory() as directory:
+        with NamedTemporaryFile('w+', dir=directory, suffix='.svg') as svg_file:
+            svg_file.write(svg_content)
+            svg_file.seek(0)
+            fixed_svg_content = run_external_cmd(
+                ['rsvg-convert', '-f', 'svg', svg_file.name],
+                cwd=directory,
+                stdout=subprocess.PIPE,
+            ).stdout.decode('utf-8')
+    if 'svg' not in fixed_svg_content:
+        raise RuntimeError("rsvg-convert conversion failed!")
+    return fixed_svg_content
+
+
+def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
+    """Convert file_type -> SVG using Inkscape
+
+    Args:
+        file_content (str): content of file as string
+        file_type (str): e.g. .eps, .ps, .png, .jpg
+
+    Raises:
+        RuntimeError: Subprocess of Inkscape failed
+
+    Returns:
+        str: SVG content as string
+    """
+
+    with TemporaryDirectory() as directory:
+        with NamedTemporaryFile('w+', dir=directory, suffix=file_type) as file:
+            file.write(file_content)
+            file.seek(0)
+            output_file = os.path.join(directory, 'output.svg')
+            run_external_cmd(
+                [
+                    'inkscape',
+                    '--export-plain-svg',
+                    '--export-area-drawing',
+                    '--export-filename',
+                    output_file,
+                    file.name,
+                ],
+                cwd=directory,
+            )
+            if not os.path.isfile(output_file):
+                raise RuntimeError("Inkscape conversion failed: file does not exist!")
+            with open(output_file, encoding='utf-8') as svg_file:
+                svg_content = svg_file.read()
+    if 'svg' not in svg_content:
+        raise RuntimeError("Inkscape conversion failed: SVG not valid!")
+    return svg_content
 
 
 def content_type(mimetype: str):
@@ -81,19 +216,7 @@ def svg_response():
         @wraps(function)
         def __svg_response(*args, **kwargs):
             svg_content = function(*args, **kwargs)
-            with tempfile.TemporaryDirectory() as directory:
-                with tempfile.NamedTemporaryFile('w+', dir=directory, suffix='.svg') as svg_file:
-                    svg_file.write(svg_content)
-                    svg_file.seek(0)
-                    fixed_svg_content = subprocess.run(
-                        ['rsvg-convert', '-f', 'svg', svg_file.name],
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.DEVNULL,
-                        check=False,
-                    ).stdout.decode('utf-8')
-            if len(fixed_svg_content) == 0:
-                raise RuntimeError("rsvg-convert conversion failed!")
-            return Response(response=fixed_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
+            return Response(response=svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
 

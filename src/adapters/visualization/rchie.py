@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 
-import subprocess
 import tempfile
 import os
 import sys
 
 from adapters.visualization.model import Model2D
+from adapters.tools.utils import run_external_cmd, pdf_to_svg
 
 
 class RChieDrawer:
@@ -28,8 +28,7 @@ class RChieDrawer:
                 file.write(dot_bracket)
                 file.seek(0)
                 output_pdf = os.path.join(directory, 'out.pdf')
-                output_svg = os.path.join(directory, 'out.svg')
-                subprocess.run(
+                run_external_cmd(
                     [
                         'rchie.R',
                         file.name,
@@ -43,25 +42,14 @@ class RChieDrawer:
                         '--output',
                         output_pdf,
                     ],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    check=False,
+                    cwd=directory,
                 )
-            subprocess.run(
-                ['pdf2svg', output_pdf, output_svg],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-            )
-            if not os.path.isfile(output_svg):
-                raise RuntimeError('RChie image was not generated!')
-            with open(output_svg, 'r', encoding='utf-8') as svg_file:
-                svg_content = svg_file.read()
-            if 'svg' not in svg_content:
-                raise RuntimeError('Rchie image is not a valid SVG!')
+                if not os.path.isfile(output_pdf):
+                    raise RuntimeError('Rchie PDF was not generated!')
+            svg_content = pdf_to_svg(output_pdf)
         return svg_content
 
-    def visualize(self, data: Model2D) -> None:
+    def visualize(self, data: Model2D) -> str:
         structure = ''.join(tuple(strand.structure for strand in data.strands))
         return self.generate_rchie_svg(structure)
 

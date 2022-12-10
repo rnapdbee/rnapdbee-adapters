@@ -1,0 +1,39 @@
+newpath 0 0 moveto
+(x) true charpath flattenpath pathbbox /charheight exch def pop pop pop
+
+/break { % i break
+    dup
+    1 0 0 setrgbcolor
+
+    % get i-th coords
+    coor exch get
+
+    % get (i+1)-th coords
+    exch
+    1 add
+    coor exch get
+
+    % load array to stack
+    aload pop
+    3 2 roll
+    aload pop
+    3 2 roll
+
+    % average y
+    add 0.5 mul
+
+    % add fix for font
+    -0.5 charheight mul add
+
+    % average x
+    3 1 roll
+    add 0.5 mul
+
+    % add fix for font
+    -0.5 (x) stringwidth pop mul add
+
+    % show "x"
+    exch
+    moveto
+    (x) show
+} bind def

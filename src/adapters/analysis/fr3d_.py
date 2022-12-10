@@ -3,13 +3,23 @@
 import io
 import os
 import sys
-from typing import List, Tuple, Set, Optional
+from typing import Tuple
 
 import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Stacking, StackingTopology, Structure2D, BPh, BR)
+from rnapolis.common import (
+    BasePair,
+    BasePhosphate,
+    BaseRibose,
+    LeontisWesthof,
+    OtherInteraction,
+    Residue,
+    ResidueAuth,
+    Stacking,
+    StackingTopology,
+    Structure2D,
+)
 
 SCREEN_DISTANCE_CUTOFF = 12
 
@@ -47,7 +57,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
             name = 'tHS' if name.lower() == 'hts' else name  # typo?
             name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
             return ('base-pair', LeontisWesthof[name])
-        except:
+        except KeyError:
             # TODO: add logging?
             pass  # if a three-leter name is not LW, just pass-through to return 'other'
     return ('other', None)
@@ -61,7 +71,6 @@ def analyze(file_content: str) -> Structure2D:
         interaction_map, _, _, _ = interactions.annotate_nt_nt_in_structure(structure, {
             'stacking': [],
             'coplanar': [],
-            'stacking': []
         })
         sys.stdout = original_stdout
 
