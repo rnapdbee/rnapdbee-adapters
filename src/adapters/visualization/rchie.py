@@ -44,6 +44,8 @@ class RChieDrawer:
                     ],
                     cwd=directory,
                 )
+                if not os.path.isfile(output_pdf):
+                    raise RuntimeError('Rchie PDF was not generated!')
             svg_content = pdf_to_svg(output_pdf)
         return svg_content
 
