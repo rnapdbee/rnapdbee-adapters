@@ -1,57 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 299 234" overflow="scroll" width="299" height="234">
   <title>PseudoViewer - </title>
-  <script type="text/ecmascript">function mOver(evt,str ){
-  var txt = evt.target;
-  txt.setAttribute('font-weight','bold'  );
-  var px = 0;
-  var py = 0;
-  var endAlign= 2;
-  var startAlign = 9.8
-  if(txt.getAttribute('x') !='' &amp;&amp; txt.getAttribute('x')!=null)
-  { 
-      px =parseFloat(txt.getAttribute('x'));
-      py =parseFloat(txt.getAttribute('y'));
-  }
-  else
-  {
-      px =parseFloat(txt.getAttribute('cx'));
-      py =parseFloat(txt.getAttribute('cy'))+ 4; 
-      var endAlign= 5;
-      var startAlign = 5.8
-  }
-  var subBack = document.getElementById('descBack');
-  var subsc = document.getElementById('desc')
- if (px &gt;-93) 
-  {
-      str=str+'-&gt;';
-      subsc.setAttribute('text-anchor', 'end');
-      subBack.setAttribute('text-anchor', 'end');
-      px= px - endAlign;
-  }
-  else{  
-      str='&lt;- '+str;
-      subsc.setAttribute('text-anchor', 'start');
-      subBack.setAttribute('text-anchor', 'start');
-      px= px + startAlign;
-  }
-  subBack.firstChild.nodeValue =str;
-  subBack.setAttribute('x', px);
-  subBack.setAttribute('y', py);
-  subBack.setAttribute('visibility', 'visible');
-  subsc.firstChild.nodeValue =str;
-  subsc.setAttribute('x', px);
-  subsc.setAttribute('y', py); 
-  subsc.setAttribute('visibility', 'visible');
-  }
-function mOut(evt) {
-var txt = evt.target; 
-txt.setAttribute('fill', '');
-txt.setAttribute('font-weight','normal');
-var subsc = document.getElementById('descBack'); 
-subsc.setAttribute('visibility', 'hidden'); 
-var subsc = document.getElementById('desc'); 
-subsc.setAttribute('visibility', 'hidden');}
-</script>
   <g transform="translate(243.87,132.43)">
     <line x1="-92.78999999999999" y1="6.209999999999999" x2="-134.07999999999998" y2="62.29" stroke="gray" stroke-dasharray="5,5"/><line x1="-124.44" y1="55.52" x2="-141.31" y2="-22.119999999999997" stroke="gray" stroke-dasharray="5,5"/><line x1="-111.71" y1="19.770000000000003" x2="-145.07" y2="-10.82" stroke="gray" stroke-dasharray="5,5"/><line x1="-100.78" y1="15.040000000000001" x2="-124.19" y2="43.52" stroke="gray" stroke-dasharray="5,5"/><line x1="-103.61999999999999" y1="85.33999999999999" x2="-62.11000000000001" y2="-86.87" stroke="#2E7012"/><line x1="-134.47" y1="84.69999999999999" x2="-63.559999999999995" y2="-115.75" stroke="#831300"/><line x1="-125.08" y1="91.80999999999999" x2="-74.44999999999999" y2="-114.05000000000001" stroke="#2E7012"/><line x1="-99.72" y1="74.22" x2="-122.22" y2="-35.43" stroke="#0F205F"/><line x1="-92.78999999999999" y1="6.209999999999999" x2="-103.08999999999999" y2="62.93" stroke="#2E7012"/><g fill="none" stroke="gray" stroke-width="1" stroke-linecap="round">
       <line x1="-17.27" y1="-15.31" x2="-18.72" y2="-27.22"/>
@@ -282,86 +230,86 @@ subsc.setAttribute('visibility', 'hidden');}
         <circle cx="17.65" cy="-2.16" r="4"/>
       </g>
       <g fill="black" stroke="none">
-        <text onmouseover="mOver(evt,'a:a (1)-72')" onmouseout="mOut(evt)" x="-20.09" y="-11.39">g</text>
-        <text onmouseover="mOver(evt,'a:a (2)-71')" onmouseout="mOut(evt)" x="-32.01" y="-9.95">C</text>
-        <text onmouseover="mOver(evt,'a:a (3)-70')" onmouseout="mOut(evt)" x="-43.92" y="-8.50">G</text>
-        <text onmouseover="mOver(evt,'a:a (4)-69')" onmouseout="mOut(evt)" x="-55.83" y="-7.06">G</text>
-        <text onmouseover="mOver(evt,'a:a (5)-68')" onmouseout="mOut(evt)" x="-67.75" y="-5.62">A</text>
-        <text onmouseover="mOver(evt,'a:a (6)-67')" onmouseout="mOut(evt)" x="-79.66" y="-4.18">U</text>
-        <text onmouseover="mOver(evt,'a:a (7)-66')" onmouseout="mOut(evt)" x="-91.57" y="-2.73">U</text>
-        <text onmouseover="mOver(evt,'a:a (10)-25')" onmouseout="mOut(evt)" x="-114.11" y="22.17">g</text>
-        <text onmouseover="mOver(evt,'a:a (11)-24')" onmouseout="mOut(evt)" x="-114.35" y="34.17">C</text>
-        <text onmouseover="mOver(evt,'a:a (12)-23')" onmouseout="mOut(evt)" x="-114.60" y="46.17">U</text>
-        <text onmouseover="mOver(evt,'a:a (13)-22')" onmouseout="mOut(evt)" x="-114.84" y="58.16">C</text>
-        <text onmouseover="mOver(evt,'a:a 13-(22)')" onmouseout="mOut(evt)" x="-126.84" y="57.92">G</text>
-        <text onmouseover="mOver(evt,'a:a 12-(23)')" onmouseout="mOut(evt)" x="-126.59" y="45.92">A</text>
-        <text onmouseover="mOver(evt,'a:a 11-(24)')" onmouseout="mOut(evt)" x="-126.35" y="33.92">G</text>
-        <text onmouseover="mOver(evt,'a:a 10-(25)')" onmouseout="mOut(evt)" x="-126.10" y="21.93">C</text>
-        <text onmouseover="mOver(evt,'a:a (26)-44')" onmouseout="mOut(evt)" x="-140.10" y="13.75">g</text>
-        <text onmouseover="mOver(evt,'a:a (27)-43')" onmouseout="mOut(evt)" x="-150.43" y="19.87">C</text>
-        <text onmouseover="mOver(evt,'a:a (28)-42')" onmouseout="mOut(evt)" x="-160.76" y="25.98">C</text>
-        <text onmouseover="mOver(evt,'a:a (29)-41')" onmouseout="mOut(evt)" x="-171.08" y="32.09">A</text>
-        <text onmouseover="mOver(evt,'a:a (30)-40')" onmouseout="mOut(evt)" x="-181.41" y="38.20">G</text>
-        <text onmouseover="mOver(evt,'a:a (31)-39')" onmouseout="mOut(evt)" x="-191.74" y="44.32">A</text>
-        <text onmouseover="mOver(evt,'a:a (32)-38')" onmouseout="mOut(evt)" x="-202.06" y="50.43">c</text>
-        <text onmouseover="mOver(evt,'a:a (33)-36')" onmouseout="mOut(evt)" x="-218.86" y="60.38">U</text>
-        <text onmouseover="mOver(evt,'a:a 33-(36)')" onmouseout="mOut(evt)" x="-224.98" y="50.05">A</text>
-        <text onmouseover="mOver(evt,'a:a 32-(38)')" onmouseout="mOut(evt)" x="-208.18" y="40.10">A</text>
-        <text onmouseover="mOver(evt,'a:a 31-(39)')" onmouseout="mOut(evt)" x="-197.85" y="33.99">u</text>
-        <text onmouseover="mOver(evt,'a:a 30-(40)')" onmouseout="mOut(evt)" x="-187.52" y="27.88">c</text>
-        <text onmouseover="mOver(evt,'a:a 29-(41)')" onmouseout="mOut(evt)" x="-177.20" y="21.77">U</text>
-        <text onmouseover="mOver(evt,'a:a 28-(42)')" onmouseout="mOut(evt)" x="-166.87" y="15.65">G</text>
-        <text onmouseover="mOver(evt,'a:a 27-(43)')" onmouseout="mOut(evt)" x="-156.54" y="9.54">G</text>
-        <text onmouseover="mOver(evt,'a:a 26-(44)')" onmouseout="mOut(evt)" x="-146.22" y="3.43">A</text>
-        <text onmouseover="mOver(evt,'a:a (49)-65')" onmouseout="mOut(evt)" x="-112.71" y="-32.65">c</text>
-        <text onmouseover="mOver(evt,'a:a (50)-64')" onmouseout="mOut(evt)" x="-107.38" y="-43.39">U</text>
-        <text onmouseover="mOver(evt,'a:a (51)-63')" onmouseout="mOut(evt)" x="-102.04" y="-54.14">G</text>
-        <text onmouseover="mOver(evt,'a:a (52)-62')" onmouseout="mOut(evt)" x="-96.71" y="-64.89">U</text>
-        <text onmouseover="mOver(evt,'a:a (53)-61')" onmouseout="mOut(evt)" x="-91.37" y="-75.64">G</text>
-        <text onmouseover="mOver(evt,'a:a (54)-58')" onmouseout="mOut(evt)" x="-78.88" y="-100.81">u</text>
-        <text onmouseover="mOver(evt,'a:a 54-(58)')" onmouseout="mOut(evt)" x="-68.13" y="-95.48">a</text>
-        <text onmouseover="mOver(evt,'a:a 53-(61)')" onmouseout="mOut(evt)" x="-80.62" y="-70.31">C</text>
-        <text onmouseover="mOver(evt,'a:a 52-(62)')" onmouseout="mOut(evt)" x="-85.96" y="-59.56">A</text>
-        <text onmouseover="mOver(evt,'a:a 51-(63)')" onmouseout="mOut(evt)" x="-91.29" y="-48.81">C</text>
-        <text onmouseover="mOver(evt,'a:a 50-(64)')" onmouseout="mOut(evt)" x="-96.63" y="-38.06">A</text>
-        <text onmouseover="mOver(evt,'a:a 49-(65)')" onmouseout="mOut(evt)" x="-101.96" y="-27.31">G</text>
-        <text onmouseover="mOver(evt,'a:a 7-(66)')" onmouseout="mOut(evt)" x="-93.01" y="-14.65">A</text>
-        <text onmouseover="mOver(evt,'a:a 6-(67)')" onmouseout="mOut(evt)" x="-81.10" y="-16.09">A</text>
-        <text onmouseover="mOver(evt,'a:a 5-(68)')" onmouseout="mOut(evt)" x="-69.19" y="-17.53">U</text>
-        <text onmouseover="mOver(evt,'a:a 4-(69)')" onmouseout="mOut(evt)" x="-57.28" y="-18.98">U</text>
-        <text onmouseover="mOver(evt,'a:a 3-(70)')" onmouseout="mOut(evt)" x="-45.36" y="-20.42">C</text>
-        <text onmouseover="mOver(evt,'a:a 2-(71)')" onmouseout="mOut(evt)" x="-33.45" y="-21.86">G</text>
-        <text onmouseover="mOver(evt,'a:a 1-(72)')" onmouseout="mOut(evt)" x="-21.54" y="-23.30">C</text>
-        <text onmouseover="mOver(evt,'a:b (76)-1')" onmouseout="mOut(evt)" x="14.67" y="-42.35">A</text>
-        <text onmouseover="mOver(evt,'a:b 76-(1)')" onmouseout="mOut(evt)" x="23.67" y="-34.41">g</text>
-        <text onmouseover="mOver(evt,'b:b (2)-3')" onmouseout="mOut(evt)" x="27.92" y="-17.38">C</text>
-        <text onmouseover="mOver(evt,'b:b 2-(3)')" onmouseout="mOut(evt)" x="23.70" y="-6.14">A</text>
-        <text onmouseover="mOver(evt,'8')" onmouseout="mOut(evt)" x="-95.19" y="8.61">U</text>
-        <text onmouseover="mOver(evt,'9')" onmouseout="mOut(evt)" x="-103.18" y="17.44">A</text>
-        <text onmouseover="mOver(evt,'14')" onmouseout="mOut(evt)" x="-105.49" y="65.33">A</text>
-        <text onmouseover="mOver(evt,'15')" onmouseout="mOut(evt)" x="-102.12" y="76.62">G</text>
-        <text onmouseover="mOver(evt,'16')" onmouseout="mOut(evt)" x="-106.02" y="87.74">u</text>
-        <text onmouseover="mOver(evt,'17')" onmouseout="mOut(evt)" x="-115.70" y="94.45">u</text>
-        <text onmouseover="mOver(evt,'18')" onmouseout="mOut(evt)" x="-127.48" y="94.21">G</text>
-        <text onmouseover="mOver(evt,'19')" onmouseout="mOut(evt)" x="-136.87" y="87.10">G</text>
-        <text onmouseover="mOver(evt,'20')" onmouseout="mOut(evt)" x="-140.31" y="75.84">G</text>
-        <text onmouseover="mOver(evt,'21')" onmouseout="mOut(evt)" x="-136.48" y="64.69">A</text>
-        <text onmouseover="mOver(evt,'34')" onmouseout="mOut(evt)" x="-227.31" y="67.62" fill="red">g</text>
-        <text onmouseover="mOver(evt,'35')" onmouseout="mOut(evt)" x="-236.34" y="61.12">A</text>
-        <text onmouseover="mOver(evt,'37')" onmouseout="mOut(evt)" x="-219.36" y="40.38">g</text>
-        <text onmouseover="mOver(evt,'45')" onmouseout="mOut(evt)" x="-147.47" y="-8.42">G</text>
-        <text onmouseover="mOver(evt,'46')" onmouseout="mOut(evt)" x="-143.71" y="-19.72">g</text>
-        <text onmouseover="mOver(evt,'47')" onmouseout="mOut(evt)" x="-135.61" y="-28.44">U</text>
-        <text onmouseover="mOver(evt,'48')" onmouseout="mOut(evt)" x="-124.62" y="-33.03">C</text>
-        <text onmouseover="mOver(evt,'55')" onmouseout="mOut(evt)" x="-76.85" y="-111.65">u</text>
-        <text onmouseover="mOver(evt,'56')" onmouseout="mOut(evt)" x="-65.96" y="-113.35">C</text>
-        <text onmouseover="mOver(evt,'57')" onmouseout="mOut(evt)" x="-60.72" y="-103.65">G</text>
-        <text onmouseover="mOver(evt,'59')" onmouseout="mOut(evt)" x="-64.51" y="-84.47">U</text>
-        <text onmouseover="mOver(evt,'60')" onmouseout="mOut(evt)" x="-69.67" y="-74.08">C</text>
-        <text onmouseover="mOver(evt,'73')" onmouseout="mOut(evt)" x="-17.31" y="-34.41">A</text>
-        <text onmouseover="mOver(evt,'74')" onmouseout="mOut(evt)" x="-8.42" y="-42.29">C</text>
-        <text onmouseover="mOver(evt,'75')" onmouseout="mOut(evt)" x="3.12" y="-45.16" fill="red">C</text>
-        <text onmouseover="mOver(evt,'4')" onmouseout="mOut(evt)" x="14.83" y="1.76">A</text>
+        <text x="-20.09" y="-11.39">g</text>
+        <text x="-32.01" y="-9.95">C</text>
+        <text x="-43.92" y="-8.50">G</text>
+        <text x="-55.83" y="-7.06">G</text>
+        <text x="-67.75" y="-5.62">A</text>
+        <text x="-79.66" y="-4.18">U</text>
+        <text x="-91.57" y="-2.73">U</text>
+        <text x="-114.11" y="22.17">g</text>
+        <text x="-114.35" y="34.17">C</text>
+        <text x="-114.60" y="46.17">U</text>
+        <text x="-114.84" y="58.16">C</text>
+        <text x="-126.84" y="57.92">G</text>
+        <text x="-126.59" y="45.92">A</text>
+        <text x="-126.35" y="33.92">G</text>
+        <text x="-126.10" y="21.93">C</text>
+        <text x="-140.10" y="13.75">g</text>
+        <text x="-150.43" y="19.87">C</text>
+        <text x="-160.76" y="25.98">C</text>
+        <text x="-171.08" y="32.09">A</text>
+        <text x="-181.41" y="38.20">G</text>
+        <text x="-191.74" y="44.32">A</text>
+        <text x="-202.06" y="50.43">c</text>
+        <text x="-218.86" y="60.38">U</text>
+        <text x="-224.98" y="50.05">A</text>
+        <text x="-208.18" y="40.10">A</text>
+        <text x="-197.85" y="33.99">u</text>
+        <text x="-187.52" y="27.88">c</text>
+        <text x="-177.20" y="21.77">U</text>
+        <text x="-166.87" y="15.65">G</text>
+        <text x="-156.54" y="9.54">G</text>
+        <text x="-146.22" y="3.43">A</text>
+        <text x="-112.71" y="-32.65">c</text>
+        <text x="-107.38" y="-43.39">U</text>
+        <text x="-102.04" y="-54.14">G</text>
+        <text x="-96.71" y="-64.89">U</text>
+        <text x="-91.37" y="-75.64">G</text>
+        <text x="-78.88" y="-100.81">u</text>
+        <text x="-68.13" y="-95.48">a</text>
+        <text x="-80.62" y="-70.31">C</text>
+        <text x="-85.96" y="-59.56">A</text>
+        <text x="-91.29" y="-48.81">C</text>
+        <text x="-96.63" y="-38.06">A</text>
+        <text x="-101.96" y="-27.31">G</text>
+        <text x="-93.01" y="-14.65">A</text>
+        <text x="-81.10" y="-16.09">A</text>
+        <text x="-69.19" y="-17.53">U</text>
+        <text x="-57.28" y="-18.98">U</text>
+        <text x="-45.36" y="-20.42">C</text>
+        <text x="-33.45" y="-21.86">G</text>
+        <text x="-21.54" y="-23.30">C</text>
+        <text x="14.67" y="-42.35">A</text>
+        <text x="23.67" y="-34.41">g</text>
+        <text x="27.92" y="-17.38">C</text>
+        <text x="23.70" y="-6.14">A</text>
+        <text x="-95.19" y="8.61">U</text>
+        <text x="-103.18" y="17.44">A</text>
+        <text x="-105.49" y="65.33">A</text>
+        <text x="-102.12" y="76.62">G</text>
+        <text x="-106.02" y="87.74">u</text>
+        <text x="-115.70" y="94.45">u</text>
+        <text x="-127.48" y="94.21">G</text>
+        <text x="-136.87" y="87.10">G</text>
+        <text x="-140.31" y="75.84">G</text>
+        <text x="-136.48" y="64.69">A</text>
+        <text x="-227.31" y="67.62" fill="red">g</text>
+        <text x="-236.34" y="61.12">A</text>
+        <text x="-219.36" y="40.38">g</text>
+        <text x="-147.47" y="-8.42">G</text>
+        <text x="-143.71" y="-19.72">g</text>
+        <text x="-135.61" y="-28.44">U</text>
+        <text x="-124.62" y="-33.03">C</text>
+        <text x="-76.85" y="-111.65">u</text>
+        <text x="-65.96" y="-113.35">C</text>
+        <text x="-60.72" y="-103.65">G</text>
+        <text x="-64.51" y="-84.47">U</text>
+        <text x="-69.67" y="-74.08">C</text>
+        <text x="-17.31" y="-34.41">A</text>
+        <text x="-8.42" y="-42.29">C</text>
+        <text x="3.12" y="-45.16" fill="red">C</text>
+        <text x="14.83" y="1.76">A</text>
       </g>
       <text id="descBack" x="0" y="0" stroke="LemonChiffon" stroke-linejoin="round" font-size="11.8" stroke-width="4.9" visibility="hidden">subs</text>
       <text id="desc" x="0" y="0" fill="red" visibility="hidden" stroke-width="0" font-size="11.8">subs</text>

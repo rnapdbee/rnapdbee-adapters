@@ -181,6 +181,13 @@ class PseudoViewerDrawer:
         for dashed_line in lines:
             dashed_line.clear()
 
+    def remove_javascript(self, root: ET.Element, residues_elements: List[ET.Element]) -> None:
+        root.remove(root.find(f'.//{self.XML_NS}script'))
+
+        for residue_element in residues_elements:
+            residue_element.attrib.pop("onmouseover")
+            residue_element.attrib.pop("onmouseout")
+
     def preprocess(self) -> None:
         self.parse_strands()
         self.append_not_represented_interactions()
@@ -214,6 +221,7 @@ class PseudoViewerDrawer:
         self.remove_dashed_lines(dashed_lines)
         self.color_missing_residues()
         self.color_interactions(parent_container)
+        self.remove_javascript(root, residues_elements)
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
