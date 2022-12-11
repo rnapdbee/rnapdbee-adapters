@@ -244,7 +244,11 @@ def svg_response():
         @wraps(function)
         def __svg_response(*args, **kwargs):
             svg_content = function(*args, **kwargs)
-            clean_svg_content = clean_svg(svg_content)
+            try:
+                clean_svg_content = clean_svg(svg_content)
+            except (RuntimeError, subprocess.SubprocessError):
+                # FIXME: add loging (important!)
+                clean_svg_content = svg_content
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
