@@ -200,7 +200,7 @@ CMD [  "gunicorn", \
        "--worker-tmp-dir", "/dev/shm", \
        "--workers", "2", \
        "--threads", "2", \
-       "--worker-clas", "gthread", \
+       "--worker-class", "gthread", \
        "--bind", "0.0.0.0:80", \
        "adapters.server:app" \
 ]
