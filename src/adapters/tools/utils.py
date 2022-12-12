@@ -247,7 +247,7 @@ def svg_response():
             try:
                 clean_svg_content = clean_svg(svg_content)
             except (RuntimeError, subprocess.SubprocessError):
-                # FIXME: add loging (important!)
+                # FIXME: add logging (important!)
                 clean_svg_content = svg_content
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
