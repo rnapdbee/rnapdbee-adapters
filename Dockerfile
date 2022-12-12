@@ -99,7 +99,8 @@ RUN apt-get update -y \
 RUN python3 -m venv /venv
 
 COPY requirements.txt .
-RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
+# FIXME: SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+RUN SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True pip3 install --upgrade --no-cache-dir wheel setuptools \
  && pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################
@@ -150,13 +151,30 @@ RUN mv /usr/local/bin/RNAplot RNAplot/
 
 ################################################################################
 
+FROM ubuntu:22.04 AS svgcleaner-builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -y \
+        curl \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir svg-cleaner \
+ && cd svg-cleaner \
+ && curl -L https://github.com/RazrFalcon/svgcleaner-gui/releases/download/v0.9.5/svgcleaner_linux_x86_64_0.9.5.tar.gz > cleaner.tar.gz \
+ && tar -xf cleaner.tar.gz ./svgcleaner \
+ && rm cleaner.tar.gz
+
+################################################################################
+
 FROM ubuntu:22.04 AS server
 
 ARG maxit_version
 ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot \
+    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview
@@ -193,6 +211,8 @@ RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 COPY --from=rnapuzzler-builder /RNAplot /RNAplot
 
+COPY --from=svgcleaner-builder /svg-cleaner /svg-cleaner
+
 COPY --from=python-builder /venv /venv
 
 EXPOSE 80
@@ -200,7 +220,7 @@ CMD [  "gunicorn", \
        "--worker-tmp-dir", "/dev/shm", \
        "--workers", "2", \
        "--threads", "2", \
-       "--worker-clas", "gthread", \
+       "--worker-class", "gthread", \
        "--bind", "0.0.0.0:80", \
        "adapters.server:app" \
 ]

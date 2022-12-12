@@ -19,6 +19,34 @@ def is_cif(file_content: str) -> bool:
     return False
 
 
+def clean_svg(svg_content: str) -> str:
+    """Clean SVG using svgcleaner
+
+    Args:
+        svg_content (str): content of SVG file
+
+    Raises:
+        RuntimeError: conversion failed
+
+    Returns:
+        str: content of clean SVG file
+    """
+
+    with TemporaryDirectory() as directory:
+        with NamedTemporaryFile('w+', dir=directory, suffix='.svg') as input_svg:
+            input_svg.write(svg_content)
+            input_svg.seek(0)
+            output_svg = os.path.join(directory, 'output.svg')
+            run_external_cmd(['svgcleaner', input_svg.name, output_svg], cwd=directory)
+        if not os.path.isfile(output_svg):
+            raise RuntimeError('svgcleaner failed: SVG was not generated!')
+        with open(output_svg, 'r', encoding='utf-8') as output_svg_file:
+            clean_svg_content = output_svg_file.read()
+        if 'svg' not in clean_svg_content:
+            raise RuntimeError('svgcleaner failed: generated file is not valid SVG!')
+    return clean_svg_content
+
+
 def pdf_to_svg(pdf_path: str) -> str:
     """Convert PDF to SVG using pdf2svg
 
@@ -216,7 +244,12 @@ def svg_response():
         @wraps(function)
         def __svg_response(*args, **kwargs):
             svg_content = function(*args, **kwargs)
-            return Response(response=svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
+            try:
+                clean_svg_content = clean_svg(svg_content)
+            except (RuntimeError, subprocess.SubprocessError):
+                # FIXME: add logging (important!)
+                clean_svg_content = svg_content
+            return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
 
