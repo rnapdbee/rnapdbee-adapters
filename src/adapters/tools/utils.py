@@ -37,7 +37,7 @@ def clean_svg(svg_content: str) -> str:
             input_svg.write(svg_content)
             input_svg.seek(0)
             output_svg = os.path.join(directory, 'output.svg')
-            run_external_cmd(['svgcleaner', input_svg.name, output_svg], cwd=directory)
+            run_external_cmd(['svgcleaner', '--copy-on-error', input_svg.name, output_svg], cwd=directory)
         if not os.path.isfile(output_svg):
             raise RuntimeError('svgcleaner failed: SVG was not generated!')
         with open(output_svg, 'r', encoding='utf-8') as output_svg_file:
