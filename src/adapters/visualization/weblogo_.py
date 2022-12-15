@@ -21,7 +21,7 @@ import svg_stack
 
 from adapters.visualization.model import ModelMulti2D
 from adapters.tools.utils import fix_using_rsvg_convert, run_external_cmd
-from adapters.exceptions import ThirdPartySoftwareError, NotValidSvgError
+from adapters.exceptions import ThirdPartySoftwareError, InvalidSvgError
 
 
 class WeblogoDrawer:
@@ -104,7 +104,7 @@ class WeblogoDrawer:
             with open(file_name, 'r', encoding='utf-8') as svg_file:
                 svg_result = svg_file.read()
             if 'svg' not in svg_result:
-                raise NotValidSvgError('Weblogo image is not a valid SVG!')
+                raise InvalidSvgError('Weblogo image is not a valid SVG!')
         logging.debug(f'svg weblogo: {svg_result}')
         return svg_result
 
@@ -132,7 +132,7 @@ class WeblogoDrawer:
             with open(output_file, 'r', encoding='utf-8') as result_file:
                 merged_svg = result_file.read()
             if 'svg' not in merged_svg:
-                raise NotValidSvgError('Weblogo merged image is not a valid SVG!')
+                raise InvalidSvgError('Weblogo merged image is not a valid SVG!')
 
         return merged_svg
 

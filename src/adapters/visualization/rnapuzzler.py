@@ -11,8 +11,7 @@ from dataclasses import dataclass
 
 from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
 from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
-from adapters.exceptions import NotValidEpsError
-
+from adapters.exceptions import InvalidEpsError
 
 class ParseState(Enum):
     OTHER = 0
@@ -157,7 +156,7 @@ class RNAPuzzlerDrawer:
             with open(output_file, 'r', encoding='utf-8') as file:
                 eps_content = file.read()
             if 'RNAplot' not in eps_content:
-                raise NotValidEpsError('RNAPuzzler file is not a valid EPS!')
+                raise InvalidEpsError('RNAPuzzler file is not a valid EPS!')
         logging.debug(f'RNAPuzzler EPS {eps_content}')
         self.result = eps_content
 

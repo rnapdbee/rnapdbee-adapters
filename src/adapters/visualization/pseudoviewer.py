@@ -13,7 +13,7 @@ from lxml import etree as ET
 
 from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
 from adapters.tools.utils import run_external_cmd
-from adapters.exceptions import RegexError, NotValidSvgError
+from adapters.exceptions import RegexError, InvalidSvgError
 
 
 @dataclass(frozen=True)
@@ -143,7 +143,7 @@ class PseudoViewerDrawer:
                     with open(output_file, 'r', encoding='utf-8') as file:
                         svg_content = file.read()
                     if 'svg' not in svg_content:
-                        raise NotValidSvgError('PseudoViewer image is not a valid SVG!')
+                        raise InvalidSvgError('PseudoViewer image is not a valid SVG!')
         logging.debug(f'PseudoViewer svg: {svg_content}')
         self.svg_result = svg_content
 

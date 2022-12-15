@@ -14,9 +14,9 @@ class PdbParsingError(Exception):
     pass
 
 
-class NotValidSvgError(Exception):
+class InvalidSvgError(Exception):
     pass
 
 
-class NotValidEpsError(Exception):
+class InvalidEpsError(Exception):
     pass

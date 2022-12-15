@@ -11,7 +11,7 @@ import orjson
 from flask import Response, request
 
 from adapters.config import config
-from adapters.exceptions import NotValidSvgError
+from adapters.exceptions import InvalidSvgError
 
 
 def is_cif(file_content: str) -> bool:
@@ -29,7 +29,7 @@ def clean_svg(svg_content: str) -> str:
 
     Raises:
         FileNotFoundError: conversion failed
-        NotValidSvgError: conversion failed
+        InvalidSvgError: conversion failed
 
     Returns:
         str: content of clean SVG file
@@ -46,7 +46,7 @@ def clean_svg(svg_content: str) -> str:
         with open(output_svg, 'r', encoding='utf-8') as output_svg_file:
             clean_svg_content = output_svg_file.read()
         if 'svg' not in clean_svg_content:
-            raise NotValidSvgError('svgcleaner failed: generated file is not valid SVG!')
+            raise InvalidSvgError('svgcleaner failed: generated file is not valid SVG!')
     return clean_svg_content
 
 
@@ -58,7 +58,7 @@ def pdf_to_svg(pdf_path: str) -> str:
 
     Raises:
         FileNotFoundError: conversion failed
-        NotValidSvgError: conversion failed
+        InvalidSvgError: conversion failed
 
     Returns:
         str: content of SVG file
@@ -75,7 +75,7 @@ def pdf_to_svg(pdf_path: str) -> str:
         with open(output_svg, 'r', encoding='utf-8') as svg_file:
             svg_content = svg_file.read()
         if 'svg' not in svg_content:
-            raise NotValidSvgError('pdf2svg: Generated file is not valid SVG!')
+            raise InvalidSvgError('pdf2svg: Generated file is not valid SVG!')
     return svg_content
 
 
@@ -135,7 +135,7 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
         svg_content (str): SVG as string
 
     Raises:
-        NotValidSvg: Subprocess of rsvg-convert failed
+        InvalidSvgError: Subprocess of rsvg-convert failed
 
     Returns:
         str: fixed SVG as string
@@ -151,7 +151,7 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
                 stdout=subprocess.PIPE,
             ).stdout.decode('utf-8')
     if 'svg' not in fixed_svg_content:
-        raise NotValidSvgError("rsvg-convert conversion failed!")
+        raise InvalidSvgError("rsvg-convert conversion failed!")
     return fixed_svg_content
 
 
@@ -164,7 +164,7 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
 
     Raises:
         FileNotFoundError: Subprocess of Inkscape failed
-        NotValidSvgError: Subprocess of Inkscape failed
+        InvalidSvgError: Subprocess of Inkscape failed
 
     Returns:
         str: SVG content as string
@@ -191,7 +191,7 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
             with open(output_file, encoding='utf-8') as svg_file:
                 svg_content = svg_file.read()
     if 'svg' not in svg_content:
-        raise NotValidSvgError("Inkscape conversion failed: SVG not valid!")
+        raise InvalidSvgError("Inkscape conversion failed: SVG not valid!")
     return svg_content
 
 
@@ -262,7 +262,7 @@ def svg_response():
             svg_content = function(*args, **kwargs)
             try:
                 clean_svg_content = clean_svg(svg_content)
-            except (FileNotFoundError, NotValidSvgError, subprocess.SubprocessError):
+            except (FileNotFoundError, InvalidSvgError, subprocess.SubprocessError):
                 logging.warning('svgcleaner failed, returning non-optimized svg')
                 logging.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
