@@ -4,6 +4,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import logging
 from enum import Enum
 from typing import Any, Dict, List, Tuple, Union
 
@@ -12,6 +13,7 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
                              ResidueAuth, Saenger, Stacking, StackingTopology, Structure2D)
 
 from adapters.tools.utils import run_external_cmd
+from adapters.exceptions import PdbParsingError, RegexError
 
 
 class MCAnnotateAdapter:
@@ -83,7 +85,7 @@ class MCAnnotateAdapter:
         for edge, edges in self.EDGES.items():
             if edge_type in edges:
                 return edge
-        raise ValueError('Edge type "{type}" unknown')
+        raise PdbParsingError('Edge type "{type}" unknown')
 
     def get_resiude(self, residue_info_list: Tuple[Union[str, Any], ...]) -> Residue:
         chain = residue_info_list[0]
@@ -101,7 +103,7 @@ class MCAnnotateAdapter:
     def get_residues(self, residues_info: str) -> Tuple[Residue, Residue]:
         regex_result = re.search(self.RESIDUE_REGEX, residues_info)
         if regex_result is None:
-            raise RuntimeError(f'MC-Annotate regex failed: {residues_info}')
+            raise RegexError('MC-Annotate regex failed: {residues_info}')
         residues_info_list = regex_result.groups()
         # Expects (chain1, number1, icode1, chain2, number2, icode2)
         assert len(residues_info_list) == 6
@@ -143,7 +145,7 @@ class MCAnnotateAdapter:
         elif self.TRANS in tokens:
             cis_trans = 't'
         else:
-            raise ValueError(f'Cis/trans expected, but not present in {tokens}')
+            raise PdbParsingError(f'Cis/trans expected, but not present in {tokens}')
 
         # example saenger: XIX or XII,XIII (?)
         for potential_saenger_token in tokens:
@@ -218,6 +220,7 @@ class MCAnnotateAdapter:
                     cwd=directory_name,
                     stdout=subprocess.PIPE,
                 ).stdout.decode('utf-8')
+        logging.debug(f'MC-Annotate result: {mc_result}')
         return mc_result
 
     def append_names(self, file_content: str) -> None:

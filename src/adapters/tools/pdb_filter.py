@@ -1,6 +1,7 @@
 from typing import Callable, Dict, Iterable, Tuple
 
 from adapters.tools import maxit
+from adapters.exceptions import PdbParsingError
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
@@ -34,7 +35,7 @@ def leave_single_model(file_content: str, **kwargs) -> str:
         models_count = 1
 
     if model > models_count or model < 1:
-        raise ValueError(f'File has {models_count} model(s), number {model} passed.')
+        raise PdbParsingError(f'File has {models_count} model(s), number {model} passed.')
 
     new_content = ''.join(new_content_arr)
     return new_content

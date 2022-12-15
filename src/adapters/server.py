@@ -1,6 +1,12 @@
 #! /usr/bin/env python
 
-from flask import Flask
+import datetime
+import subprocess
+import logging
+
+from flask import Flask, Response, request
+from werkzeug.exceptions import HTTPException
+import orjson
 
 from adapters.cache import cache
 from adapters.config import config
@@ -11,6 +17,54 @@ from adapters.routes.visualization import server as visualization
 
 app = Flask(__name__)
 app.config.from_mapping(config)
+
+
+@analysis.before_request
+@conversion.before_request
+@filtering.before_request
+def log_plain_request():
+    logging.debug(request.data.decode('utf-8'))
+
+
+@visualization.before_request
+def log_json_request():
+    logging.debug(orjson.loads(request.data))
+
+
+@app.errorhandler(Exception)
+def handle_exception(exception: Exception):
+
+    if isinstance(exception, HTTPException):
+        name = exception.name
+        code = exception.code
+        description = exception.description
+    elif isinstance(exception, subprocess.TimeoutExpired):
+        name = 'Bad Request'
+        code = 400
+        description = 'Timeout (request too big)'
+        logging.warning(f'Subprocess timeout for {exception.cmd} after {exception.timeout}s')
+    else:
+        code = 500
+        name = 'Internal Server Error'
+        description = 'Unknown Error'
+        logging.error(f'{type(exception).__name__}: {exception}', exc_info=1)
+
+    result = {
+        'error': {
+            'code': code,
+            'name': name,
+            'description': description,
+            'timestamp': datetime.datetime.now(),
+            'path': request.path,
+        },
+    }
+
+    return Response(
+        response=orjson.dumps(result).decode('utf-8'),
+        status=code,
+        mimetype='application/json',
+    )
+
 
 cache.init_app(app)
 app.register_blueprint(analysis, url_prefix='/analysis-api/v1')

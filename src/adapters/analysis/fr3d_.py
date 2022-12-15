@@ -3,6 +3,7 @@
 import io
 import os
 import sys
+import logging
 from typing import Tuple
 
 import orjson
@@ -58,8 +59,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
             name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
             return ('base-pair', LeontisWesthof[name])
         except KeyError:
-            # TODO: add logging?
-            pass  # if a three-leter name is not LW, just pass-through to return 'other'
+            logging.debug(f'Fr3d unknown interaction: {fr3d_name}')
     return ('other', None)
 
 
@@ -73,6 +73,7 @@ def analyze(file_content: str) -> Structure2D:
             'coplanar': [],
         })
         sys.stdout = original_stdout
+        logging.debug(f'fr3d interaction map: {interaction_map}')
 
     base_pairs = []
     stackings = []

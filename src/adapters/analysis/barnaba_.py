@@ -4,6 +4,7 @@
 import re
 import sys
 import tempfile
+import logging
 from collections import defaultdict
 from typing import Any, DefaultDict, Dict, List, Optional, Tuple
 
@@ -13,6 +14,7 @@ from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Residue
                              StackingTopology, Structure2D)
 
 from adapters.tools.utils import suppress_stdout_stderr
+from adapters.exceptions import RegexError, ThirdPartySoftwareError
 
 
 class BarnabaAdapter:
@@ -54,10 +56,11 @@ class BarnabaAdapter:
     def get_residue(self, residue_info: str) -> Residue:
         regex_result = re.search(self.RESIDUE_REGEX, residue_info)
         if regex_result is None:
-            raise RuntimeError(f'BaRNAba regex failed for {residue_info}')
+            raise RegexError(f'BaRNAba regex failed for {residue_info}')
         residue_info_list = regex_result.groups()
         # Expects [name, number, chain_index]
-        assert len(residue_info_list) == 3
+        if len(residue_info_list) != 3:
+            raise RegexError(f'BaRNAba regex wrong result list length: {len(residue_info_list)}')
         chain = self.chains[int(residue_info_list[2])]
         name = residue_info_list[0]
         new_number = int(residue_info_list[1])
@@ -140,8 +143,9 @@ class BarnabaAdapter:
                 with suppress_stdout_stderr():
                     try:
                         barnaba_result = barnaba.annotate(file.name)
+                        logging.debug(f'BaRNAba result: {barnaba_result}')
                     except SystemExit as exception:
-                        raise RuntimeError('BaRNAba failed') from exception
+                        raise ThirdPartySoftwareError('BaRNAba failed with system exit') from exception
         return barnaba_result
 
     def analyze(self, file_content: str) -> Structure2D:

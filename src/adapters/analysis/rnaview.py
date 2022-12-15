@@ -3,6 +3,7 @@ import math
 import re
 import sys
 import tempfile
+import logging
 from dataclasses import dataclass
 from typing import Dict, Tuple, Optional
 
@@ -11,6 +12,7 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
                              ResidueAuth, Saenger, Stacking, Structure2D)
 
 from adapters.tools.utils import run_external_cmd
+from adapters.exceptions import PdbParsingError, RegexError
 
 
 class RNAViewAdapter:
@@ -119,6 +121,7 @@ class RNAViewAdapter:
                 run_external_cmd(['rnaview', file.name], cwd=directory_name)
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()
+        logging.debug(f'rnaview result: {rnaview_result}')
         return rnaview_result
 
     def append_residues_from_pdb_using_rnaview_indexing(self, pdb_content: str) -> None:
@@ -193,18 +196,18 @@ class RNAViewAdapter:
             self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, saenger))
 
         else:
-            raise RuntimeError(f'Unknown RNAView interaction: {token}')
+            raise PdbParsingError(f'Unknown RNAView interaction: {token}')
 
     def check_indexing_correctness(self, regex_result: Tuple[str, ...]) -> None:
         residue_left = self.residues_from_pdb[int(regex_result[0])]
 
         if residue_left.auth.chain != regex_result[2] or residue_left.auth.number != int(regex_result[3]):
-            raise RuntimeError(f'Wrong internal index for {residue_left}. Fix RNAView internal index mapping.')
+            raise PdbParsingError(f'Wrong internal index for {residue_left}. Fix RNAView internal index mapping.')
 
         residue_right = self.residues_from_pdb[int(regex_result[1])]
 
         if residue_right.auth.chain != regex_result[7] or residue_right.auth.number != int(regex_result[6]):
-            raise RuntimeError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
+            raise PdbParsingError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
 
     def analyze(self, file_content: str) -> Structure2D:
         self.append_residues_from_pdb_using_rnaview_indexing(file_content)
@@ -219,7 +222,7 @@ class RNAViewAdapter:
             elif base_pair_section:
                 rnaview_regex_result = re.search(self.RNAVIEW_REGEX, line)
                 if rnaview_regex_result is None:
-                    raise RuntimeError('RNAView regex failed')
+                    raise RegexError('RNAView regex failed')
                 rnaview_regex_groups = rnaview_regex_result.groups()
                 self.check_indexing_correctness(rnaview_regex_groups)
                 self.append_interaction(rnaview_regex_groups)

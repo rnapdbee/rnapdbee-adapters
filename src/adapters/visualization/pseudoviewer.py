@@ -3,6 +3,7 @@
 import os
 import re
 import sys
+import logging
 from collections import deque, defaultdict
 from typing import Tuple, List, DefaultDict, Deque, Dict
 from dataclasses import dataclass
@@ -12,6 +13,7 @@ from lxml import etree as ET
 
 from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
 from adapters.tools.utils import run_external_cmd
+from adapters.exceptions import RegexError, NotValidSvgError
 
 
 @dataclass(frozen=True)
@@ -137,11 +139,12 @@ class PseudoViewerDrawer:
                         cwd=directory,
                     )
                     if not os.path.isfile(output_file):
-                        raise RuntimeError('PseudoViewer image was not created!')
+                        raise FileNotFoundError('PseudoViewer image was not created!')
                     with open(output_file, 'r', encoding='utf-8') as file:
                         svg_content = file.read()
                     if 'svg' not in svg_content:
-                        raise RuntimeError('PseudoViewer image is not a valid SVG!')
+                        raise NotValidSvgError('PseudoViewer image is not a valid SVG!')
+        logging.debug(f'PseudoViewer svg: {svg_content}')
         self.svg_result = svg_content
 
     def color_missing_residues(self) -> None:
@@ -212,7 +215,7 @@ class PseudoViewerDrawer:
                 regex_result = re.search(self.RES_NUMBER_REGEX_2, residue_info)
 
             if regex_result is None:
-                raise RuntimeError("PseudoViewer residue number regex failed!")
+                raise RegexError("PseudoViewer residue number regex failed!")
             number = int(regex_result.groups()[0])
 
             self.elements_mapping[(chain, number)] = res_element
