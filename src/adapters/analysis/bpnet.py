@@ -51,7 +51,8 @@ class Element(enum.Enum):
 # 		z - Protonated Sugar edge.
 # 		g - Protonated Hoogsteen edge (rarely found though).
 def convert_lw(bpnet_lw) -> LeontisWesthof:
-    assert len(bpnet_lw) == 4
+    if len(bpnet_lw) != 4:
+        raise CifParsingError(f'bpnet lw invalid length: {bpnet_lw}')
     bpnet_lw = bpnet_lw.replace('+', 'W').replace('z', 'S').replace('g', 'H')
     edge5 = bpnet_lw[0].upper()
     edge3 = bpnet_lw[2].upper()

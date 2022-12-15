@@ -106,7 +106,8 @@ class MCAnnotateAdapter:
             raise RegexError('MC-Annotate regex failed: {residues_info}')
         residues_info_list = regex_result.groups()
         # Expects (chain1, number1, icode1, chain2, number2, icode2)
-        assert len(residues_info_list) == 6
+        if len(residues_info_list) != 6:
+            raise RegexError(f'MC-Annotate regex failed for {residues_info}')
         residue_left = self.get_resiude(residues_info_list[:3])
         residue_right = self.get_resiude(residues_info_list[3:])
         return residue_left, residue_right
