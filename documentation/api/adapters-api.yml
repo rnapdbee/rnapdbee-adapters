@@ -52,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -79,6 +81,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -99,6 +103,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -126,6 +132,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -146,6 +154,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -173,6 +183,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -193,6 +205,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -220,6 +234,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -240,6 +256,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -267,6 +285,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -287,6 +307,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -314,6 +336,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Structure2D"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -335,6 +359,8 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/FileCIF"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -354,6 +380,8 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/FilePDB"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -375,6 +403,8 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/FileCIF"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -396,6 +426,8 @@ paths:
             image/svg+xml:
               schema:
                 $ref: "#/components/schemas/FileSVG"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -415,6 +447,8 @@ paths:
             image/svg+xml:
               schema:
                 $ref: "#/components/schemas/FileSVG"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -434,6 +468,8 @@ paths:
             image/svg+xml:
               schema:
                 $ref: "#/components/schemas/FileSVG"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -453,6 +489,8 @@ paths:
             image/svg+xml:
               schema:
                 $ref: "#/components/schemas/FileSVG"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "415":
           $ref: "#/components/responses/UnsupportedMedia"
         "500":
@@ -489,6 +527,8 @@ components:
       description: "Internal Server Error"
     UnsupportedMedia:
       description: "Unsupported Media Type"
+    BadRequest:
+      description: "Bad Request"
 
   schemas:
     ResidueLabel:
