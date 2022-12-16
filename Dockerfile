@@ -84,9 +84,6 @@ RUN patch -p0 < app/rnaview/patch \
 
 FROM ubuntu:22.04 AS python-builder
 
-# FIXME: remove this flag when barnaba changes dependency to scikit-learn
-ARG SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
-
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH=/venv/bin:$PATH
 
@@ -102,7 +99,7 @@ RUN apt-get update -y \
 RUN python3 -m venv /venv
 
 COPY requirements.txt .
-# FIXME: SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+
 RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
  && pip3 install --no-cache-dir -r requirements.txt
 
