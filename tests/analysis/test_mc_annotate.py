@@ -5,6 +5,7 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
 
 from data import PDB_LINES, RESIDUES, STACKINGS
 from adapters.analysis.mc_annotate import MCAnnotateAdapter
+from adapters.exceptions import PdbParsingError
 
 # -------- FIXTURES --------
 
@@ -52,8 +53,8 @@ def test_classify_edge(adapter, type, edge):
 @pytest.mark.parametrize(
     'type,expected',
     [
-        ('ww', pytest.raises(ValueError)),
-        ('Ww/Ww', pytest.raises(ValueError)),
+        ('ww', pytest.raises(PdbParsingError)),
+        ('Ww/Ww', pytest.raises(PdbParsingError)),
         ('Bh', does_not_raise()),
     ],
 )

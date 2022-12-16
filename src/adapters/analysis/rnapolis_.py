@@ -3,6 +3,7 @@
 
 import tempfile
 import sys
+import logging
 
 import orjson
 import rnapolis.annotator
@@ -15,8 +16,9 @@ def analyze(file_content: str, model: int) -> Structure2D:
         cif_file.write(file_content)
         cif_file.seek(0)
         tertiary_structure = rnapolis.parser.read_3d_structure(cif_file, model)
-
-    return rnapolis.annotator.extract_secondary_structure(tertiary_structure, model)
+    secondary_structure = rnapolis.annotator.extract_secondary_structure(tertiary_structure, model)
+    logging.debug(secondary_structure)
+    return secondary_structure
 
 
 def main() -> None:

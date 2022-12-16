@@ -1,5 +1,6 @@
 import subprocess
 import os
+import logging
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from functools import wraps
@@ -10,6 +11,7 @@ import orjson
 from flask import Response, request
 
 from adapters.config import config
+from adapters.exceptions import InvalidSvgError
 
 
 def is_cif(file_content: str) -> bool:
@@ -26,7 +28,8 @@ def clean_svg(svg_content: str) -> str:
         svg_content (str): content of SVG file
 
     Raises:
-        RuntimeError: conversion failed
+        FileNotFoundError: conversion failed
+        InvalidSvgError: conversion failed
 
     Returns:
         str: content of clean SVG file
@@ -39,11 +42,11 @@ def clean_svg(svg_content: str) -> str:
             output_svg = os.path.join(directory, 'output.svg')
             run_external_cmd(['svgcleaner', '--copy-on-error', input_svg.name, output_svg], cwd=directory)
         if not os.path.isfile(output_svg):
-            raise RuntimeError('svgcleaner failed: SVG was not generated!')
+            raise FileNotFoundError('svgcleaner failed: SVG was not generated!')
         with open(output_svg, 'r', encoding='utf-8') as output_svg_file:
             clean_svg_content = output_svg_file.read()
         if 'svg' not in clean_svg_content:
-            raise RuntimeError('svgcleaner failed: generated file is not valid SVG!')
+            raise InvalidSvgError('svgcleaner failed: generated file is not valid SVG!')
     return clean_svg_content
 
 
@@ -52,6 +55,10 @@ def pdf_to_svg(pdf_path: str) -> str:
 
     Args:
         pdf_path (str): path to existing PDF file
+
+    Raises:
+        FileNotFoundError: conversion failed
+        InvalidSvgError: conversion failed
 
     Returns:
         str: content of SVG file
@@ -64,11 +71,11 @@ def pdf_to_svg(pdf_path: str) -> str:
             cwd=directory,
         )
         if not os.path.isfile(output_svg):
-            raise RuntimeError('pdf2svg: Output SVG does not exist!')
+            raise FileNotFoundError('pdf2svg: Output SVG does not exist!')
         with open(output_svg, 'r', encoding='utf-8') as svg_file:
             svg_content = svg_file.read()
         if 'svg' not in svg_content:
-            raise RuntimeError('pdf2svg: Generated file is not valid SVG!')
+            raise InvalidSvgError('pdf2svg: Generated file is not valid SVG!')
     return svg_content
 
 
@@ -76,7 +83,7 @@ def run_external_cmd(
     args,
     cwd,
     stdout=subprocess.DEVNULL,
-    stderr=subprocess.DEVNULL,
+    stderr=subprocess.PIPE,
     check=False,
     timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
     cmd_input=None,
@@ -87,10 +94,13 @@ def run_external_cmd(
         args: command arguments
         cwd (_type_): current working directory
         stdout (_type_, optional): target of stdout. Defaults to subprocess.DEVNULL.
-        stderr (_type_, optional): target of stderr. Defaults to subprocess.DEVNULL.
+        stderr (_type_, optional): target of stderr. Defaults to subprocess.PIPE.
         check (bool, optional): check for exceptions. Defaults to False.
         timeout (int, optional): timeout for command. Defaults to 120.
         cmd_input (bytes, optional): input for command. Defaults to None.
+
+    Raises:
+        ValueError: cwd is not valid directory
 
     Returns:
         result of subprocess.run()
@@ -99,8 +109,7 @@ def run_external_cmd(
     if cwd is None:
         return ValueError('cwd argument must be valid directory!')
 
-    # TODO: change stderr=subprocess.PIPE and log it?
-    return subprocess.run(
+    subprocess_result = subprocess.run(
         args,
         cwd=cwd,
         stdout=stdout,
@@ -109,6 +118,12 @@ def run_external_cmd(
         timeout=timeout,
         input=cmd_input,
     )
+
+    error_output = subprocess_result.stderr.decode('utf-8')
+    if error_output:
+        logging.debug(f'Subprocess {args} stderr: {error_output}')
+
+    return subprocess_result
 
 
 def fix_using_rsvg_convert(svg_content: str) -> str:
@@ -120,7 +135,7 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
         svg_content (str): SVG as string
 
     Raises:
-        RuntimeError: Subprocess of rsvg-convert failed
+        InvalidSvgError: Subprocess of rsvg-convert failed
 
     Returns:
         str: fixed SVG as string
@@ -136,7 +151,7 @@ def fix_using_rsvg_convert(svg_content: str) -> str:
                 stdout=subprocess.PIPE,
             ).stdout.decode('utf-8')
     if 'svg' not in fixed_svg_content:
-        raise RuntimeError("rsvg-convert conversion failed!")
+        raise InvalidSvgError("rsvg-convert conversion failed!")
     return fixed_svg_content
 
 
@@ -148,7 +163,8 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
         file_type (str): e.g. .eps, .ps, .png, .jpg
 
     Raises:
-        RuntimeError: Subprocess of Inkscape failed
+        FileNotFoundError: Subprocess of Inkscape failed
+        InvalidSvgError: Subprocess of Inkscape failed
 
     Returns:
         str: SVG content as string
@@ -171,11 +187,11 @@ def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
                 cwd=directory,
             )
             if not os.path.isfile(output_file):
-                raise RuntimeError("Inkscape conversion failed: file does not exist!")
+                raise FileNotFoundError("Inkscape conversion failed: file does not exist!")
             with open(output_file, encoding='utf-8') as svg_file:
                 svg_content = svg_file.read()
     if 'svg' not in svg_content:
-        raise RuntimeError("Inkscape conversion failed: SVG not valid!")
+        raise InvalidSvgError("Inkscape conversion failed: SVG not valid!")
     return svg_content
 
 
@@ -246,8 +262,9 @@ def svg_response():
             svg_content = function(*args, **kwargs)
             try:
                 clean_svg_content = clean_svg(svg_content)
-            except (RuntimeError, subprocess.SubprocessError):
-                # FIXME: add logging (important!)
+            except (FileNotFoundError, InvalidSvgError, subprocess.SubprocessError):
+                logging.warning('svgcleaner failed, returning non-optimized svg')
+                logging.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 

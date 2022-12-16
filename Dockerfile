@@ -99,8 +99,8 @@ RUN apt-get update -y \
 RUN python3 -m venv /venv
 
 COPY requirements.txt .
-# FIXME: SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
-RUN SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True pip3 install --upgrade --no-cache-dir wheel setuptools \
+
+RUN pip3 install --upgrade --no-cache-dir wheel setuptools \
  && pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################

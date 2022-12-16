@@ -2,6 +2,7 @@
 import enum
 import os.path
 import sys
+import logging
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 import orjson
@@ -9,6 +10,7 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
                              ResidueAuth, Stacking, Structure2D)
 
 from adapters.tools.utils import run_external_cmd
+from adapters.exceptions import CifParsingError
 
 
 class Element(enum.Enum):
@@ -49,7 +51,8 @@ class Element(enum.Enum):
 # 		z - Protonated Sugar edge.
 # 		g - Protonated Hoogsteen edge (rarely found though).
 def convert_lw(bpnet_lw) -> LeontisWesthof:
-    assert len(bpnet_lw) == 4
+    if len(bpnet_lw) != 4:
+        raise CifParsingError(f'bpnet lw invalid length: {bpnet_lw}')
     bpnet_lw = bpnet_lw.replace('+', 'W').replace('z', 'S').replace('g', 'H')
     edge5 = bpnet_lw[0].upper()
     edge3 = bpnet_lw[2].upper()
@@ -103,7 +106,7 @@ def parse_base_pairs(bpnet_output: str):
             lw = convert_lw(fields[26])
             base_pairs.append(BasePair(nt1, nt4, lw, None))
         else:
-            raise RuntimeError('Failed to parse line: ' + line)
+            raise CifParsingError('Failed to parse line: ' + line)
 
     return base_pairs
 
@@ -144,7 +147,7 @@ def parse_overlaps(bpnet_output: str):
                     nt1, nt2 = residues_from_overlap_info(fields)
                     stackings.append(Stacking(nt1, nt2, None))
             else:
-                raise RuntimeError('Failed to parse OVLP line: ' + line)
+                raise CifParsingError('Failed to parse OVLP line: ' + line)
         elif line.startswith('PROX'):
             fields = line.strip().split()
             if len(fields) == 11:
@@ -169,7 +172,7 @@ def parse_overlaps(bpnet_output: str):
                 # other
                 other_interactions.append(OtherInteraction(nt1, nt2))
             else:
-                raise RuntimeError('Failed to parse PROX line: ' + line)
+                raise CifParsingError('Failed to parse PROX line: ' + line)
 
     return stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions
 
@@ -207,6 +210,7 @@ def analyze(cif_content: str) -> Structure2D:
             if os.path.exists(file.name.replace('.cif', '.out')):
                 with open(file.name.replace('.cif', '.out'), encoding='utf-8') as bpnet_file:
                     bpnet_output = bpnet_file.read()
+                logging.debug(f'bpnet output: {bpnet_output}')
                 base_pairs = parse_base_pairs(bpnet_output)
             else:
                 base_pairs = []
@@ -214,6 +218,7 @@ def analyze(cif_content: str) -> Structure2D:
             if os.path.exists(file.name.replace('.cif', '.rob')):
                 with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as bpnet_file:
                     bpnet_rob = bpnet_file.read()
+                logging.debug(f'bpnet rob: {bpnet_rob}')
                 stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(
                     bpnet_rob)
             else:

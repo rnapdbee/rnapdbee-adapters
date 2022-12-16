@@ -2,6 +2,7 @@
 
 import os
 import sys
+import logging
 from tempfile import TemporaryDirectory
 from collections import deque, defaultdict
 from typing import List, DefaultDict, Deque
@@ -10,7 +11,7 @@ from dataclasses import dataclass
 
 from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
 from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
-
+from adapters.exceptions import InvalidEpsError
 
 class ParseState(Enum):
     OTHER = 0
@@ -151,12 +152,12 @@ class RNAPuzzlerDrawer:
             )
             output_file = os.path.join(directory, self.OUTPUT_EPS)
             if not os.path.isfile(output_file):
-                raise RuntimeError('RNAPuzzler EPS was not created!')
+                raise FileNotFoundError('RNAPuzzler EPS was not created!')
             with open(output_file, 'r', encoding='utf-8') as file:
                 eps_content = file.read()
             if 'RNAplot' not in eps_content:
-                raise RuntimeError('RNAPuzzler file is not a valid EPS!')
-
+                raise InvalidEpsError('RNAPuzzler file is not a valid EPS!')
+        logging.debug(f'RNAPuzzler EPS {eps_content}')
         self.result = eps_content
 
     def draw_interactions(self) -> List[str]:

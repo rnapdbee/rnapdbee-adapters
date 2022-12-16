@@ -11,6 +11,7 @@ import shutil
 import tempfile
 import uuid
 import sys
+import logging
 from collections import defaultdict
 from typing import DefaultDict, List, Tuple
 from io import StringIO
@@ -20,6 +21,7 @@ import svg_stack
 
 from adapters.visualization.model import ModelMulti2D
 from adapters.tools.utils import fix_using_rsvg_convert, run_external_cmd
+from adapters.exceptions import ThirdPartySoftwareError, InvalidSvgError
 
 
 class WeblogoDrawer:
@@ -86,7 +88,7 @@ class WeblogoDrawer:
 
         command = shutil.which('pdf2svg')
         if command is None:
-            raise EnvironmentError('"pdf2svg" software not found. Please install it.')
+            raise ThirdPartySoftwareError('"pdf2svg" software not found. Please install it.')
 
         with tempfile.TemporaryDirectory() as directory_name:
             with tempfile.NamedTemporaryFile('wb+', dir=directory_name, suffix='.pdf') as temp_pdf:
@@ -98,12 +100,12 @@ class WeblogoDrawer:
                     cwd=directory_name,
                 )
             if not os.path.isfile(file_name):
-                raise RuntimeError(f'File "{file_name}" does not exist - "pdf2svg" conversion failed!')
+                raise FileNotFoundError(f'File "{file_name}" does not exist - "pdf2svg" conversion failed!')
             with open(file_name, 'r', encoding='utf-8') as svg_file:
                 svg_result = svg_file.read()
             if 'svg' not in svg_result:
-                raise RuntimeError('Weblogo image is not a valid SVG!')
-
+                raise InvalidSvgError('Weblogo image is not a valid SVG!')
+        logging.debug(f'svg weblogo: {svg_result}')
         return svg_result
 
     def merge_svg_files(self, svg_contents: List[str]) -> str:
@@ -130,7 +132,7 @@ class WeblogoDrawer:
             with open(output_file, 'r', encoding='utf-8') as result_file:
                 merged_svg = result_file.read()
             if 'svg' not in merged_svg:
-                raise RuntimeError('Weblogo merged image is not a valid SVG!')
+                raise InvalidSvgError('Weblogo merged image is not a valid SVG!')
 
         return merged_svg
 
