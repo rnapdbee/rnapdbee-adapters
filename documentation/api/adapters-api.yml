@@ -532,6 +532,10 @@ components:
 
   schemas:
     ResidueLabel:
+      required:
+        - "chain"
+        - "number"
+        - "name"
       type: object
       properties:
         chain:
@@ -545,6 +549,11 @@ components:
           example: "G"
 
     ResidueAuth:
+      required:
+        - "chain"
+        - "number"
+        - "icode"
+        - "name"
       type: object
       properties:
         chain:
@@ -657,6 +666,9 @@ components:
       example: "inward"
 
     Residue:
+      required:
+        - "label"
+        - "auth"
       type: object
       properties:
         label:
@@ -669,6 +681,9 @@ components:
             - $ref: "#/components/schemas/ResidueAuth"
 
     Interaction:
+      required:
+        - "nt1"
+        - "nt2"
       type: object
       properties:
         nt1:
@@ -677,6 +692,9 @@ components:
           $ref: "#/components/schemas/Residue"
 
     BasePair:
+      required:
+        - "lw"
+        - "saenger"
       allOf:
         - $ref: "#/components/schemas/Interaction"
         - type: object
@@ -689,6 +707,8 @@ components:
                 - $ref: "#/components/schemas/Saenger"
 
     Stacking:
+      required:
+        - "topology"
       allOf:
         - $ref: "#/components/schemas/Interaction"
         - type: object
@@ -699,6 +719,8 @@ components:
                 - $ref: "#/components/schemas/StackingTopology"
 
     BaseRibose:
+      required:
+        - "br"
       allOf:
         - $ref: "#/components/schemas/Interaction"
         - type: object
@@ -709,11 +731,13 @@ components:
                 - $ref: "#/components/schemas/BR"
 
     BasePhosphate:
+      required:
+        - "bph"
       allOf:
         - $ref: "#/components/schemas/Interaction"
         - type: object
           properties:
-            br:
+            bph:
               nullable: true
               allOf:
                 - $ref: "#/components/schemas/BPh"
@@ -723,6 +747,12 @@ components:
         - $ref: "#/components/schemas/Interaction"
 
     Structure2D:
+      required:
+        - "basePair"
+        - "stackings"
+        - "baseRiboseInteractions"
+        - "basePhosphateInteractions"
+        - "otherInteractions"
       type: object
       properties:
         basePair:
@@ -747,6 +777,10 @@ components:
             $ref: "#/components/schemas/OtherInteraction"
 
     Strand:
+      required:
+        - "name"
+        - "sequence"
+        - "structure"
       type: object
       properties:
         name:
@@ -760,6 +794,9 @@ components:
           example: "...((..))--..[]<...>..-...."
 
     ResultMulti2D:
+      required:
+        - "adapter"
+        - "strands"
       type: object
       properties:
         adapter:
@@ -771,6 +808,8 @@ components:
             $ref: "#/components/schemas/Strand"
 
     ModelMulti2D:
+      required:
+        - "results"
       type: object
       properties:
         results:
@@ -779,6 +818,10 @@ components:
             $ref: "#/components/schemas/ResultMulti2D"
 
     SimpleResidue:
+      required:
+        - "chain"
+        - "number"
+        - "name"
       type: object
       properties:
         chain:
@@ -792,6 +835,9 @@ components:
           example: "G"
 
     SimpleInteraction:
+      required:
+        - "residueLeft"
+        - "residueRight"
       type: object
       properties:
         residueLeft:
@@ -799,9 +845,14 @@ components:
         residueRight:
           $ref: "#/components/schemas/SimpleResidue"
         leontisWesthof:
-          $ref: "#/components/schemas/LeontisWesthof"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/LeontisWesthof"
 
     ChainWithResidues:
+      required:
+        - "name"
+        - "residues"
       type: object
       properties:
         name:
@@ -813,6 +864,11 @@ components:
             $ref: "#/components/schemas/SimpleResidue"
 
     Model2D:
+      required:
+        - "strands"
+        - "residues"
+        - "chainsWithResidues"
+        - "nonCanonicalInteractions"
       type: object
       properties:
         strands:
@@ -828,6 +884,9 @@ components:
           items:
             $ref: "#/components/schemas/ChainWithResidues"
         nonCanonicalInteractions:
+          required:
+            - "notRepresented"
+            - "represented"
           type: object
           properties:
             notRepresented:
