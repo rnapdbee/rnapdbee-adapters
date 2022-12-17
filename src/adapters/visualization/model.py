@@ -93,7 +93,7 @@ class LeontisWesthof(Enum):
 class Interaction(DataClassJsonMixin):
     residueLeft: Residue
     residueRight: Residue
-    leontisWesthof: LeontisWesthof
+    leontisWesthof: Optional[LeontisWesthof] = None
 
 
 @dataclass(frozen=True, order=True)
