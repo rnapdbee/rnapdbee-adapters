@@ -18,6 +18,7 @@ from io import StringIO
 
 import weblogo as w
 import svg_stack
+from lxml import etree as ET
 
 from adapters.visualization.model import ModelMulti2D
 from adapters.tools.utils import clean_svg, run_external_cmd
@@ -136,6 +137,14 @@ class WeblogoDrawer:
 
         return merged_svg
 
+    def add_viewbox(self, svg_content: str) -> str:
+        root = ET.XML(svg_content.encode('utf-8'))
+        width = root.get('width')
+        height = root.get('height')
+        root.set('viewBox', f'0 0 {width} {height}')
+
+        return ET.tostring(root, encoding='unicode', method='xml')
+
     def visualize(self, data: ModelMulti2D) -> str:
         strands_in_fasta_format = self.convert_to_fasta(data)
 
@@ -148,8 +157,9 @@ class WeblogoDrawer:
 
         svg_result = self.merge_svg_files(svg_files)
         fixed_svg = clean_svg(svg_result)
+        boxed_svg = self.add_viewbox(fixed_svg)
 
-        return fixed_svg
+        return boxed_svg
 
 
 def main() -> None:
@@ -159,7 +169,8 @@ def main() -> None:
     logo_data, logo_format = drawer.generate_weblogo('', modified_fasta)
     svg_content = drawer.save_to_svg(logo_data, logo_format)
     fixed_svg = clean_svg(svg_content)
-    print(fixed_svg)
+    boxed_svg = drawer.add_viewbox(fixed_svg)
+    print(boxed_svg)
 
 
 if __name__ == '__main__':
