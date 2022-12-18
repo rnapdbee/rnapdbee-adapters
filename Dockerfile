@@ -186,7 +186,6 @@ RUN apt-get update -y \
        build-essential \
        pdf2svg \
        ghostscript \
-       librsvg2-bin \
        r-base \
        gnupg \
        ca-certificates \

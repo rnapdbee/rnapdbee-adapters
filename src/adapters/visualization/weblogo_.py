@@ -20,7 +20,7 @@ import weblogo as w
 import svg_stack
 
 from adapters.visualization.model import ModelMulti2D
-from adapters.tools.utils import fix_using_rsvg_convert, run_external_cmd
+from adapters.tools.utils import clean_svg, run_external_cmd
 from adapters.exceptions import ThirdPartySoftwareError, InvalidSvgError
 
 
@@ -147,7 +147,8 @@ class WeblogoDrawer:
             svg_files.append(svg_content)
 
         svg_result = self.merge_svg_files(svg_files)
-        fixed_svg = fix_using_rsvg_convert(svg_result)
+        fixed_svg = clean_svg(svg_result)
+
         return fixed_svg
 
 
@@ -157,7 +158,7 @@ def main() -> None:
     modified_fasta = drawer.replace_unreadable_characters(fasta)
     logo_data, logo_format = drawer.generate_weblogo('', modified_fasta)
     svg_content = drawer.save_to_svg(logo_data, logo_format)
-    fixed_svg = fix_using_rsvg_convert(svg_content)
+    fixed_svg = clean_svg(svg_content)
     print(fixed_svg)
 
 

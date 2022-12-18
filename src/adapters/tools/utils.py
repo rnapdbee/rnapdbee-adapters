@@ -21,11 +21,12 @@ def is_cif(file_content: str) -> bool:
     return False
 
 
-def clean_svg(svg_content: str) -> str:
+def clean_svg(svg_content: str, copy_on_error: bool = False) -> str:
     """Clean SVG using svgcleaner
 
     Args:
         svg_content (str): content of SVG file
+        copy_on_error(bool): whether copy original file on error. Defaults to False
 
     Raises:
         FileNotFoundError: conversion failed
@@ -40,7 +41,10 @@ def clean_svg(svg_content: str) -> str:
             input_svg.write(svg_content)
             input_svg.seek(0)
             output_svg = os.path.join(directory, 'output.svg')
-            run_external_cmd(['svgcleaner', '--copy-on-error', input_svg.name, output_svg], cwd=directory)
+            cmd_args = ['svgcleaner', input_svg.name, output_svg]
+            if copy_on_error:
+                cmd_args.append('--copy-on-error')
+            run_external_cmd(cmd_args, cwd=directory)
         if not os.path.isfile(output_svg):
             raise FileNotFoundError('svgcleaner failed: SVG was not generated!')
         with open(output_svg, 'r', encoding='utf-8') as output_svg_file:
@@ -124,35 +128,6 @@ def run_external_cmd(
         logging.debug(f'Subprocess {args} stderr: {error_output}')
 
     return subprocess_result
-
-
-def fix_using_rsvg_convert(svg_content: str) -> str:
-    """Convert svg -> svg using rsvg-convert.
-    Especially add viewBox attribute to SVG.
-    Use this carefully since rsvg-convert make SVG bigger.
-
-    Args:
-        svg_content (str): SVG as string
-
-    Raises:
-        InvalidSvgError: Subprocess of rsvg-convert failed
-
-    Returns:
-        str: fixed SVG as string
-    """
-
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile('w+', dir=directory, suffix='.svg') as svg_file:
-            svg_file.write(svg_content)
-            svg_file.seek(0)
-            fixed_svg_content = run_external_cmd(
-                ['rsvg-convert', '-f', 'svg', svg_file.name],
-                cwd=directory,
-                stdout=subprocess.PIPE,
-            ).stdout.decode('utf-8')
-    if 'svg' not in fixed_svg_content:
-        raise InvalidSvgError("rsvg-convert conversion failed!")
-    return fixed_svg_content
 
 
 def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
@@ -261,7 +236,7 @@ def svg_response():
         def __svg_response(*args, **kwargs):
             svg_content = function(*args, **kwargs)
             try:
-                clean_svg_content = clean_svg(svg_content)
+                clean_svg_content = clean_svg(svg_content, copy_on_error=True)
             except (FileNotFoundError, InvalidSvgError, subprocess.SubprocessError):
                 logging.warning('svgcleaner failed, returning non-optimized svg')
                 logging.debug(f'invalid svg for svgcleaner: {svg_content}')
