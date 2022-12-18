@@ -81,10 +81,13 @@ class BarnabaAdapter:
         return LeontisWesthof[f'{interaction[2]}{interaction[:2]}']
 
     def append_chains(self, file_content: str) -> None:
+        previous_chain: Optional[str] = None
         for line in file_content.splitlines():
             if line.startswith(self.ATOM) or line.startswith(self.HETATM):
-                if line[self.CHAIN_INDEX] not in self.chains:
-                    self.chains.append(line[self.CHAIN_INDEX])
+                chain = line[self.CHAIN_INDEX]
+                if chain != previous_chain:
+                    self.chains.append(chain)
+                    previous_chain = chain
 
     def append_interactions(self, pairings: List[Any], residues: List[Any]) -> None:
         for p, pairing in enumerate(pairings[0][0]):
