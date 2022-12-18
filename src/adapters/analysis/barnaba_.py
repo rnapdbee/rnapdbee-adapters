@@ -6,7 +6,7 @@ import sys
 import tempfile
 import logging
 from collections import defaultdict
-from typing import Any, DefaultDict, Dict, List, Optional, Tuple
+from typing import Any, DefaultDict, Dict, List, Optional, Tuple, Set
 
 import barnaba
 import orjson
@@ -117,13 +117,15 @@ class BarnabaAdapter:
         new_numbers: DefaultDict[str, int] = defaultdict(int)
         # For efficiency save content in list and use join()
         renumbered_content_list = []
+        present_residues: Set[Tuple[str, int, str]] = set()
 
         for line in file_content.splitlines(True):
             if line.startswith(self.ATOM) or line.startswith(self.HETATM):
                 old_number = int(line[self.NUMBER_INDEX].strip())
                 icode = line[self.ICODE_INDEX].strip()
                 chain = line[self.CHAIN_INDEX].strip()
-                if (old_number, icode) not in self.mapped_residues_info[chain].values():
+                if (chain, old_number, icode) not in present_residues:
+                    present_residues.add((chain, old_number, icode))
                     new_numbers[chain] += 1
                     self.mapped_residues_info[chain][new_numbers[chain]] = (old_number, icode)
                 new_line = f'{line[:22]}{str(new_numbers[chain]).rjust(4)[:4]} {line[27:]}'
