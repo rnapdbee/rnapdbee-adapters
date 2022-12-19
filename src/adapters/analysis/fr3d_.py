@@ -27,7 +27,8 @@ SCREEN_DISTANCE_CUTOFF = 12
 
 def parse_unit_id(nt: str) -> Residue:
     fields = nt.split('|')
-    auth = ResidueAuth(fields[2], int(fields[4]), fields[7] if len(fields) >= 8 else None, fields[3])
+    icode = fields[7] if len(fields) >= 8 and fields[7] != '' else None
+    auth = ResidueAuth(fields[2], int(fields[4]), icode, fields[3])
     return Residue(None, auth)
 
 
