@@ -10,4 +10,4 @@ svg-stack==0.1.0
 dataclasses-json==0.5.*
 mmcif-pdbx==2.0.1
 Flask-Caching==2.0.* 
-git+https://github.com/BGSU-RNA/fr3d-python@c70d2c3241f97491c5bd86f748630ab5df0248a8
+git+https://github.com/BGSU-RNA/fr3d-python@3c6fbedc5b106e13e8452de5a226742993786bd5
