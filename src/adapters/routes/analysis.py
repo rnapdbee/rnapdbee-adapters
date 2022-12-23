@@ -27,6 +27,7 @@ def analyze_bpnet_model(model):
     analysis_output = bpnet.analyze(cif_content)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
@@ -51,6 +52,7 @@ def analyze_fr3d_model(model):
     analysis_output = fr3d_.analyze(cif_content)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
@@ -73,6 +75,7 @@ def analyze_barnaba_model(model):
     analysis_output = BarnabaAdapter().analyze(pdb_content)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
@@ -95,6 +98,7 @@ def analyze_mc_annotate_model(model):
     analysis_output = MCAnnotateAdapter().analyze(pdb_content)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
@@ -117,6 +121,7 @@ def analyze_rnaview_model(model):
     analysis_output = RNAViewAdapter().analyze(pdb_content)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
@@ -141,6 +146,7 @@ def analyze_rnapolis_model(model):
     analysis_output = rnapolis_.analyze(cif_content, model)
     filtered_analysis_output = output_filter.apply(analysis_output, [
         (output_filter.remove_duplicate_pairs, {}),
+        (output_filter.sort_interactions_lists, {}),
     ])
     return filtered_analysis_output
 
