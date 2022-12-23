@@ -1,6 +1,14 @@
-from typing import Callable, Dict, Iterable, List, Tuple, TypeVar
+from typing import Callable, Dict, Iterable, List, Tuple, TypeVar, Type
 
-from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Stacking, StackingTopology, Structure2D)
+from rnapolis.common import (
+    BasePair,
+    LeontisWesthof,
+    OtherInteraction,
+    Stacking,
+    StackingTopology,
+    Structure2D,
+    Interaction,
+)
 
 InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
 
@@ -61,3 +69,16 @@ def remove_duplicate_pairs(analysis_output: Structure2D, *_) -> Structure2D:
         analysis_output.basePhosphateInteractions,
         filtered_other_interactions,
     )
+
+
+def sort_interactions_lists(analysis_output: Structure2D, *_) -> Structure2D:
+    interactions_list: List[Type[Interaction]]
+    for interactions_list in analysis_output.__dict__.values():
+        interactions_list.sort(key=lambda pair: (
+            pair.nt1.chain,
+            pair.nt1.number,
+            pair.nt2.chain,
+            pair.nt2.number,
+        ))
+
+    return analysis_output

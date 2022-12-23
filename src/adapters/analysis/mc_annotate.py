@@ -234,7 +234,7 @@ class MCAnnotateAdapter:
                 residue_info = f'{chain}{number}' if icode == '' else f'{chain}{number}.{icode}'
                 self.names[residue_info] = name
 
-    def analyze(self, pdb_content: str) -> Structure2D:
+    def analyze_by_mc_annotate(self, pdb_content: str, **_: Dict[str, Any]) -> Structure2D:
         self.append_names(pdb_content)
         mc_result = self.run_mc_annotate(pdb_content)
         current_state = None
@@ -268,9 +268,12 @@ class MCAnnotateAdapter:
         return self.analysis_output
 
 
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+    return MCAnnotateAdapter().analyze_by_mc_annotate(file_content, **kwargs)
+
+
 def main() -> None:
-    mc_annotate_adapter = MCAnnotateAdapter()
-    analysis_output = mc_annotate_adapter.analyze(sys.stdin.read())
+    analysis_output = analyze(sys.stdin.read())
     print(orjson.dumps(analysis_output).decode('utf-8'))
 
 

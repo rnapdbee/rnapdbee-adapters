@@ -1672,46 +1672,6 @@
             "nt1": {
                 "label": null,
                 "auth": {
-                    "chain": "Y",
-                    "number": 37,
-                    "icode": "J",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 127,
-                    "icode": "V",
-                    "name": "A"
-                }
-            }
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 53,
-                    "icode": "Z",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "Y",
-                    "number": 104,
-                    "icode": "Y",
-                    "name": "A"
-                }
-            }
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
                     "chain": "X",
                     "number": 1,
                     "icode": "B",
@@ -1785,6 +1745,46 @@
                     "number": 118,
                     "icode": "M",
                     "name": "C"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 37,
+                    "icode": "J",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 127,
+                    "icode": "V",
+                    "name": "A"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 53,
+                    "icode": "Z",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "Y",
+                    "number": 104,
+                    "icode": "Y",
+                    "name": "A"
                 }
             }
         },

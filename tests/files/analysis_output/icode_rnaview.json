@@ -6,28 +6,6 @@
                 "auth": {
                     "chain": "A",
                     "number": 1,
-                    "icode": "X",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 72,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": "XIX"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
                     "icode": "Y",
                     "name": "C"
                 }
@@ -39,6 +17,28 @@
                     "number": 71,
                     "icode": null,
                     "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 1,
+                    "icode": "X",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 72,
+                    "icode": null,
+                    "name": "C"
                 }
             },
             "lw": "cWW",
@@ -797,26 +797,6 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 32,
-                    "icode": null,
-                    "name": "OMC"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 38,
-                    "icode": null,
-                    "name": "A"
-                }
-            }
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
                     "number": 17,
                     "icode": null,
                     "name": "H2U"
@@ -849,6 +829,26 @@
                     "number": 20,
                     "icode": null,
                     "name": "G"
+                }
+            }
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 32,
+                    "icode": null,
+                    "name": "OMC"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 38,
+                    "icode": null,
+                    "name": "A"
                 }
             }
         },

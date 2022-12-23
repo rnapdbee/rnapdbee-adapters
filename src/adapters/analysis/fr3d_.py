@@ -4,7 +4,7 @@ import io
 import os
 import sys
 import logging
-from typing import Tuple
+from typing import Tuple, Dict, Any
 
 import orjson
 from fr3d.cif.reader import Cif
@@ -64,7 +64,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
     return ('other', None)
 
 
-def analyze(file_content: str) -> Structure2D:
+def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
     with open(os.devnull, 'w', encoding='utf-8') as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
