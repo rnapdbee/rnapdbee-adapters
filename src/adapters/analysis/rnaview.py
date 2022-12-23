@@ -5,7 +5,7 @@ import sys
 import tempfile
 import logging
 from dataclasses import dataclass
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Any
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
@@ -209,7 +209,7 @@ class RNAViewAdapter:
         if residue_right.auth.chain != regex_result[7] or residue_right.auth.number != int(regex_result[6]):
             raise PdbParsingError(f'Wrong internal index for {residue_right}. Fix RNAView internal index mapping.')
 
-    def analyze(self, file_content: str) -> Structure2D:
+    def analyze_by_rnaview(self, file_content: str, **_: Dict[str, Any]) -> Structure2D:
         self.append_residues_from_pdb_using_rnaview_indexing(file_content)
         rnaview_result = RNAViewAdapter.run_rnaview(file_content)
 
@@ -230,9 +230,12 @@ class RNAViewAdapter:
         return self.analysis_output
 
 
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+    return RNAViewAdapter().analyze_by_rnaview(file_content, **kwargs)
+
+
 def main() -> None:
-    rnaview_adapter = RNAViewAdapter()
-    structure = rnaview_adapter.analyze(sys.stdin.read())
+    structure = analyze(sys.stdin.read())
     print(orjson.dumps(structure).decode('utf-8'))
 
 

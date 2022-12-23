@@ -15,8 +15,7 @@ server = Blueprint('filtering', __name__)
 @content_type('text/plain')
 @plain_response()
 def filter_cif():
-    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
+    return cif_filter.apply(request.data.decode('utf-8'), [
         (remove_proteins, {}),
         (fix_occupancy, {}),
     ])
-    return cif_content

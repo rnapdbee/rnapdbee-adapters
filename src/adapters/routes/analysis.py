@@ -2,13 +2,9 @@
 
 from flask import Blueprint, request
 
-from adapters.tools import output_filter, cif_filter, pdb_filter
 from adapters.tools.utils import content_type, json_response
-from adapters.tools.cif_filter import fix_occupancy, leave_single_model, remove_proteins
-from adapters.analysis import bpnet, fr3d_, rnapolis_
-from adapters.analysis.barnaba_ import BarnabaAdapter
-from adapters.analysis.mc_annotate import MCAnnotateAdapter
-from adapters.analysis.rnaview import RNAViewAdapter
+from adapters.analysis import bpnet, fr3d_, rnapolis_, barnaba_, mc_annotate, rnaview
+from adapters import services
 
 server = Blueprint('analysis', __name__)
 
@@ -18,18 +14,12 @@ server = Blueprint('analysis', __name__)
 @server.route('/bpnet/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_bpnet_model(model):
-    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
-        (leave_single_model, {'model': model}),
-        (remove_proteins, {}),
-        (fix_occupancy, {}),
-    ])
-    analysis_output = bpnet.analyze(cif_content)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_bpnet_model(model: int):
+    return services.run_cif_adapter(
+        bpnet.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/bpnet', methods=['POST'])
@@ -43,18 +33,12 @@ def analyze_bpnet():
 @server.route('/fr3d/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_fr3d_model(model):
-    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
-        (leave_single_model, {'model': model}),
-        (remove_proteins, {}),
-        (fix_occupancy, {}),
-    ])
-    analysis_output = fr3d_.analyze(cif_content)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_fr3d_model(model: int):
+    return services.run_cif_adapter(
+        fr3d_.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/fr3d', methods=['POST'])
@@ -68,16 +52,12 @@ def analyze_fr3d():
 @server.route('/barnaba/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_barnaba_model(model):
-    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
-        (pdb_filter.leave_single_model, {'model': model}),
-    ])
-    analysis_output = BarnabaAdapter().analyze(pdb_content)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_barnaba_model(model: int):
+    return services.run_pdb_adapter(
+        barnaba_.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/barnaba', methods=['POST'])
@@ -91,16 +71,12 @@ def analyze_barnaba():
 @server.route('/mc-annotate/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_mc_annotate_model(model):
-    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
-        (pdb_filter.leave_single_model, {'model': model}),
-    ])
-    analysis_output = MCAnnotateAdapter().analyze(pdb_content)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_mc_annotate_model(model: int):
+    return services.run_pdb_adapter(
+        mc_annotate.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/mc-annotate', methods=['POST'])
@@ -114,16 +90,12 @@ def analyze_mc_annotate():
 @server.route('/rnaview/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_rnaview_model(model):
-    pdb_content = pdb_filter.apply(request.data.decode('utf-8'), [
-        (pdb_filter.leave_single_model, {'model': model}),
-    ])
-    analysis_output = RNAViewAdapter().analyze(pdb_content)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_rnaview_model(model: int):
+    return services.run_pdb_adapter(
+        rnaview.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/rnaview', methods=['POST'])
@@ -137,18 +109,12 @@ def analyze_rnaview():
 @server.route('/rnapolis/<int:model>', methods=['POST'])
 @content_type('text/plain')
 @json_response()
-def analyze_rnapolis_model(model):
-    cif_content = cif_filter.apply(request.data.decode('utf-8'), [
-        (leave_single_model, {'model': model}),
-        (remove_proteins, {}),
-        (fix_occupancy, {}),
-    ])
-    analysis_output = rnapolis_.analyze(cif_content, model)
-    filtered_analysis_output = output_filter.apply(analysis_output, [
-        (output_filter.remove_duplicate_pairs, {}),
-        (output_filter.sort_interactions_lists, {}),
-    ])
-    return filtered_analysis_output
+def analyze_rnapolis_model(model: int):
+    return services.run_cif_adapter(
+        rnapolis_.analyze,
+        request.data.decode('utf-8'),
+        model,
+    )
 
 
 @server.route('/rnapolis', methods=['POST'])

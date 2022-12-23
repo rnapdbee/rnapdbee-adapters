@@ -10,8 +10,16 @@ from typing import Any, DefaultDict, Dict, List, Optional, Tuple, Set
 
 import barnaba
 import orjson
-from rnapolis.common import (BasePair, LeontisWesthof, OtherInteraction, Residue, ResidueAuth, Stacking,
-                             StackingTopology, Structure2D)
+from rnapolis.common import (
+    BasePair,
+    LeontisWesthof,
+    OtherInteraction,
+    Residue,
+    ResidueAuth,
+    Stacking,
+    StackingTopology,
+    Structure2D,
+)
 
 from adapters.tools.utils import suppress_stdout_stderr
 from adapters.exceptions import RegexError, ThirdPartySoftwareError
@@ -153,7 +161,7 @@ class BarnabaAdapter:
                         raise ThirdPartySoftwareError('BaRNAba failed with system exit') from exception
         return barnaba_result
 
-    def analyze(self, file_content: str) -> Structure2D:
+    def analyze_by_barnaba(self, file_content: str, **_: Dict[str, Any]) -> Structure2D:
         self.append_chains(file_content)
         renumbered_pdb: str = self.renumber_pdb(file_content)
         stackings, pairings, res = self.run_barnaba(renumbered_pdb)
@@ -163,9 +171,12 @@ class BarnabaAdapter:
         return self.analysis_output
 
 
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+    return BarnabaAdapter().analyze_by_barnaba(file_content, **kwargs)
+
+
 def main() -> None:
-    barnaba_adapter = BarnabaAdapter()
-    structure = barnaba_adapter.analyze(sys.stdin.read())
+    structure = analyze(sys.stdin.read())
     print(orjson.dumps(structure).decode('utf-8'))
 
 

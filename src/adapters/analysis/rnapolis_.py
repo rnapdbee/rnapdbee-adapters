@@ -4,6 +4,7 @@
 import tempfile
 import sys
 import logging
+from typing import Dict, Any
 
 import orjson
 import rnapolis.annotator
@@ -11,7 +12,8 @@ import rnapolis.parser
 from rnapolis.common import Structure2D
 
 
-def analyze(file_content: str, model: int) -> Structure2D:
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+    model = int(kwargs.get('model'))
     with tempfile.NamedTemporaryFile('w+') as cif_file:
         cif_file.write(file_content)
         cif_file.seek(0)
@@ -22,7 +24,7 @@ def analyze(file_content: str, model: int) -> Structure2D:
 
 
 def main() -> None:
-    structure = analyze(sys.stdin.read(), 1)
+    structure = analyze(sys.stdin.read(), model=1)
     print(orjson.dumps(structure).decode('utf-8'))
 
 

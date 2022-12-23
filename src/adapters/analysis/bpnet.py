@@ -4,6 +4,7 @@ import os.path
 import sys
 import logging
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+from typing import Dict, Any
 
 import orjson
 from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
@@ -200,7 +201,7 @@ def residues_from_overlap_info(fields):
     return nt1, nt2
 
 
-def analyze(cif_content: str) -> Structure2D:
+def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
     with TemporaryDirectory() as directory:
         with NamedTemporaryFile('w+', dir=directory, suffix='.cif') as file:
             file.write(cif_content)
