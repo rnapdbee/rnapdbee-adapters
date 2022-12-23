@@ -6,28 +6,6 @@
                 "auth": {
                     "chain": "A",
                     "number": 1,
-                    "icode": "X",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 72,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
                     "icode": "Y",
                     "name": "C"
                 }
@@ -39,6 +17,28 @@
                     "number": 71,
                     "icode": null,
                     "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 1,
+                    "icode": "X",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 72,
+                    "icode": null,
+                    "name": "C"
                 }
             },
             "lw": "cWW",

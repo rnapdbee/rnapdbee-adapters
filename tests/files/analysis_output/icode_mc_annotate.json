@@ -6,28 +6,6 @@
                 "auth": {
                     "chain": "A",
                     "number": 1,
-                    "icode": "X",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 72,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "lw": "cWW",
-            "saenger": "XIX"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
                     "icode": "Y",
                     "name": "C"
                 }
@@ -39,6 +17,28 @@
                     "number": 71,
                     "icode": null,
                     "name": "G"
+                }
+            },
+            "lw": "cWW",
+            "saenger": "XIX"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 1,
+                    "icode": "X",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 72,
+                    "icode": null,
+                    "name": "C"
                 }
             },
             "lw": "cWW",
@@ -511,6 +511,27 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
+                    "number": 1,
+                    "icode": "X",
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 73,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "topology": "outward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
                     "number": 3,
                     "icode": null,
                     "name": "G"
@@ -526,6 +547,27 @@
                 }
             },
             "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 3,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 71,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "topology": "outward"
         },
         {
             "nt1": {
@@ -595,6 +637,48 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
+                    "number": 8,
+                    "icode": null,
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 13,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "topology": "inward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 9,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 45,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "topology": "inward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
                     "number": 11,
                     "icode": null,
                     "name": "C"
@@ -652,6 +736,69 @@
                 }
             },
             "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 18,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 57,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "topology": "inward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 19,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 57,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "topology": "outward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 21,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 48,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "topology": "outward"
         },
         {
             "nt1": {
@@ -757,6 +904,27 @@
                 }
             },
             "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 29,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 42,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "topology": "outward"
         },
         {
             "nt1": {
@@ -904,6 +1072,48 @@
                 }
             },
             "topology": "upward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 51,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 64,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "topology": "outward"
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 53,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 62,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "topology": "outward"
         },
         {
             "nt1": {
@@ -1198,240 +1408,9 @@
                 }
             },
             "topology": "upward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 1,
-                    "icode": "X",
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 73,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 3,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 71,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 13,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "topology": "inward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 45,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "topology": "inward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "topology": "inward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 19,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 48,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 29,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 42,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 51,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 64,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "topology": "outward"
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 53,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 62,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "topology": "outward"
         }
     ],
     "baseRiboseInteractions": [
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": null
-        },
         {
             "nt1": {
                 "label": null,
@@ -1449,27 +1428,6 @@
                     "number": 9,
                     "icode": null,
                     "name": "A"
-                }
-            },
-            "br": null
-        },
-        {
-            "nt1": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": null,
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
                 }
             },
             "br": null
@@ -1500,6 +1458,27 @@
                 "label": null,
                 "auth": {
                     "chain": "A",
+                    "number": 21,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 8,
+                    "icode": null,
+                    "name": "U"
+                }
+            },
+            "br": null
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
                     "number": 35,
                     "icode": null,
                     "name": "A"
@@ -1515,30 +1494,30 @@
                 }
             },
             "br": null
-        }
-    ],
-    "basePhosphateInteractions": [
+        },
         {
             "nt1": {
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 13,
+                    "number": 57,
                     "icode": null,
-                    "name": "C"
+                    "name": "G"
                 }
             },
             "nt2": {
                 "label": null,
                 "auth": {
                     "chain": "A",
-                    "number": 9,
+                    "number": 18,
                     "icode": null,
-                    "name": "A"
+                    "name": "G"
                 }
             },
-            "bph": null
-        },
+            "br": null
+        }
+    ],
+    "basePhosphateInteractions": [
         {
             "nt1": {
                 "label": null,
@@ -1554,6 +1533,27 @@
                 "auth": {
                     "chain": "A",
                     "number": 23,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "bph": null
+        },
+        {
+            "nt1": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 13,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": null,
+                "auth": {
+                    "chain": "A",
+                    "number": 9,
                     "icode": null,
                     "name": "A"
                 }
