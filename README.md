@@ -3,24 +3,45 @@
 
 ## Description
 
-The project contains adapters for various external tools used by RNApdbee.
+The project contains adapters for various external tools used by RNApdbee 3.0. It can be divided into three main parts described below.
 
-Currently, it supports:
+### RNA analysis tools
 
+- [baRNAba](https://github.com/srnas/barnaba)
 - [BPNET](https://github.com/computational-biology/bpnet)
 - [fr3d-python](https://github.com/BGSU-RNA/fr3d-python)
-- [baRNAba](https://github.com/srnas/barnaba)
+- [MC-Annotate](https://github.com/major-lab/MC-Annotate)
+- [RNApolis](https://github.com/tzok/rnapolis-py)
+- [RNAView](http://ndbserver.rutgers.edu/ndbmodule/services/download/rnaview.html)
+
+### File conversion tools
 - [MAXIT](https://sw-tools.rcsb.org/apps/MAXIT/index.html)
 
-Each tool has a standalone Docker image to use.
+### RNA visualization tools
+- [PseudoViewer](http://pseudoviewer.inha.ac.kr/)
+- [RChie](https://www.e-rna.org/r-chie/)
+- [RNApuzzler](https://www.tbi.univie.ac.at/RNA/RNAplot.1.html)
+- [WebLogo](https://weblogo.threeplusone.com/)
 
-There is also one image which contains an HTTP server providing these endpoints:
-
-- `POST analyze/bpnet`, accepting PDB or PDBx/mmCIF data as `text/plain` and producing `application/json` thanks to BPNET
-- `POST analyze/fr3d`, accepting PDB or PDBx/mmCIF data as `text/plain` and producing `application/json` thanks to fr3d-python
-- `POST analyze/barnaba`, accepting PDB or PDBx/mmCIF data as `text/plain` and producing application/json thanks to baRNAba
-- `POST convert/ensure-cif`, accepting PDB or PDBx/mmCIF data as `text/plain` and producing PDBx/mmCIF as `text/plain` thanks to MAXIT
-- `POST convert/ensure-pdb`, accepting PDB or PDBx/mmCIF data as `text/plain` and producing PDB as `text/plain` thanks to MAXIT
+### Other meaningful software
+- [Ubuntu 22.04](https://ubuntu.com/)
+- [Python 3.10](https://www.python.org/)
+- [R](https://www.r-project.org/)
+- [IronPython](https://ironpython.net/)
+- [Docker](https://ironpython.net/)
+- [svgcleaner](https://github.com/RazrFalcon/svgcleaner)
+- [pdf2svg](https://manpages.ubuntu.com/manpages/impish/man1/pdf2svg.1.html)
+- [Ghostscript](https://www.ghostscript.com/)
+- [Inkscape](https://inkscape.org/)
+- [Mono](https://www.mono-project.com/)
+- [gunicorn](https://gunicorn.org/)
+- [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+- [svg-stack](https://github.com/astraw/svg_stack)
+- [mmcif](https://pypi.org/project/mmcif/)
+- [mmcif-pdbx](https://pypi.org/project/mmcif-pdbx/)
+- [lxml](https://pypi.org/project/lxml/)
+- [orjson](https://pypi.org/project/orjson/)
+- [dataclasses-json](https://pypi.org/project/dataclasses-json/)
 
 ## Building
 
