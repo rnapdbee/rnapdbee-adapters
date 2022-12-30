@@ -5,19 +5,6 @@ ARG rchie_dir=/usr/local/lib/R/site-library/rchie
 
 ################################################################################
 
-FROM ubuntu:22.04 AS bpnet-builder
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y \
- && apt-get install -y \
-        curl \
- && rm -rf /var/lib/apt/lists/*
-
-RUN curl -L https://github.com/computational-biology/bpnet/archive/refs/heads/master.tar.gz | tar xz
-
-################################################################################
-
 FROM ubuntu:22.04 AS maxit-builder
 
 ARG maxit_version
@@ -46,22 +33,6 @@ RUN cd ${RCSBROOT} \
 
 ################################################################################
 
-FROM ubuntu:22.04 AS mc-annotate-builder
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y \
- && apt-get install -y \
-        curl \
-        unzip \
- && rm -rf /var/lib/apt/lists/*
-
-RUN curl -L https://major.iric.ca/MajorLabEn/MC-Tools_files/MC-Annotate.zip -o mc-annotate.zip \
- && unzip mc-annotate.zip \
- && mv MC-Annotate mc-annotate
-
-################################################################################
-
 FROM ubuntu:22.04 AS rnaview-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -72,9 +43,9 @@ RUN apt-get update -y \
         curl \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -L http://ndbserver.rutgers.edu/ndbmodule/services/download/RNAVIEW.tar.gz | tar xz
-
 COPY app/rnaview app/rnaview
+
+RUN tar -xf app/rnaview/RNAVIEW.tar.gz
 
 RUN patch -p0 < app/rnaview/patch \
  && cd RNAVIEW \
@@ -125,49 +96,6 @@ COPY app/rchie/rchie.R ${rchie_dir}/rchie.R
 
 ################################################################################
 
-FROM ubuntu:22.04 AS pseudoviewer-builder
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y \
- && apt-get install -y \
-        curl \
- && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir pseudoviewer \
- && curl -L https://github.com/IronLanguages/ironpython3/releases/download/v3.4.0-beta1/ironpython_3.4.0-beta1.deb > pseudoviewer/ipython.deb \
- && curl -L http://pseudoviewer.inha.ac.kr/download.asp?file=PseudoViewer3.exe > pseudoviewer/PseudoViewer3.exe
-
-COPY app/pseudoviewer/ pseudoviewer/
-
-################################################################################
-
-FROM quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 AS rnapuzzler-builder
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-COPY app/rnapuzzler RNAplot/
-RUN mv /usr/local/bin/RNAplot RNAplot/
-
-################################################################################
-
-FROM ubuntu:22.04 AS svgcleaner-builder
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y \
- && apt-get install -y \
-        curl \
- && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir svg-cleaner \
- && cd svg-cleaner \
- && curl -L https://github.com/RazrFalcon/svgcleaner-gui/releases/download/v0.9.5/svgcleaner_linux_x86_64_0.9.5.tar.gz > cleaner.tar.gz \
- && tar -xf cleaner.tar.gz ./svgcleaner \
- && rm cleaner.tar.gz
-
-################################################################################
-
 FROM ubuntu:22.04 AS server
 
 ARG maxit_version
@@ -195,24 +123,37 @@ RUN apt-get update -y \
  && apt-get update && apt-get install -y mono-devel \
  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=bpnet-builder /bpnet-master /bpnet-master
-
+# MAXIT build
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
-COPY --from=mc-annotate-builder /mc-annotate /mc-annotate/
-
-COPY --from=rnaview-builder /RNAVIEW /rnaview
-
+# R build (with RChie build)
 COPY --from=r-builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
 
-COPY --from=pseudoviewer-builder /pseudoviewer /pseudoviewer
+# RNAView build
+COPY --from=rnaview-builder /RNAVIEW /rnaview
+
+# Python build
+COPY --from=python-builder /venv /venv
+
+# bpnet build
+COPY app/bpnet/bpnet-master.tar.gz /bpnet-master.tar.gz
+RUN tar -xf bpnet-master.tar.gz && rm bpnet-master.tar.gz
+
+# MC-Annotate build
+COPY app/mc-annotate/mc-annotate.tar.gz /mc-annotate.tar.gz
+RUN mkdir mc-annotate && tar -xf mc-annotate.tar.gz -C mc-annotate/ && rm mc-annotate.tar.gz
+
+# PseudoViewer build
+COPY app/pseudoviewer/ pseudoviewer/
 RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
-COPY --from=rnapuzzler-builder /RNAplot /RNAplot
+# RNApuzzler build
+COPY app/rnapuzzler /RNAplot
+COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot
 
-COPY --from=svgcleaner-builder /svg-cleaner /svg-cleaner
-
-COPY --from=python-builder /venv /venv
+# svgcleaner build
+COPY app/svg-cleaner/svgcleaner.tar.gz /svgcleaner.tar.gz
+RUN mkdir svg-cleaner && tar -xf svgcleaner.tar.gz -C svg-cleaner && rm svgcleaner.tar.gz
 
 EXPOSE 80
 CMD [  "gunicorn", \
