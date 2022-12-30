@@ -40,7 +40,7 @@ DOCKER_BUILDKIT=1 docker build --target server --tag rnapdbee-adapters-image:lat
 Finally create and start docker container:
 
 ```
-docker run -p 8000:80 --name rnapdbee-adapters-container rnapdbee-adapters-image:latest
+docker run -p 8000:80 --name rnapdbee-adapters-container --env-file .env rnapdbee-adapters-image:latest
 ```
 
 Now API should be available trough:
