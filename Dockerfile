@@ -105,7 +105,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
-    RNAVIEW=/rnaview
+    RNAVIEW=/rnaview \
+    ADAPTERS_WORKERS=2 \
+    ADAPTERS_THREADS=2 \
+    ADAPTERS_GUNICORN_LOG_LEVEL=info
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -156,13 +159,13 @@ COPY app/svg-cleaner/svgcleaner.tar.gz /svgcleaner.tar.gz
 RUN mkdir svg-cleaner && tar -xf svgcleaner.tar.gz -C svg-cleaner && rm svgcleaner.tar.gz
 
 EXPOSE 80
-CMD [  "gunicorn", \
-       "--worker-tmp-dir", "/dev/shm", \
-       "--workers", "2", \
-       "--threads", "2", \
-       "--worker-class", "gthread", \
-       "--bind", "0.0.0.0:80", \
-       "adapters.server:app" \
-]
+CMD gunicorn \
+    --worker-tmp-dir /dev/shm \
+    --workers ${ADAPTERS_WORKERS} \ 
+    --threads ${ADAPTERS_THREADS} \
+    --worker-class gthread \
+    --log-level ${ADAPTERS_GUNICORN_LOG_LEVEL} \
+    --bind 0.0.0.0:80 \
+    adapters.server:app
 
 COPY src/adapters /rnapdbee-adapters/src/adapters

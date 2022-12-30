@@ -1,14 +1,15 @@
 import logging
+from os import environ
 
 config = {
-    "CACHE_TYPE": "FileSystemCache",
-    "CACHE_DIR": "/var/tmp/adapters_cache/",
-    "CACHE_THRESHOLD": 50,
-    "CACHE_DEFAULT_TIMEOUT": 3600,
-    "SUBPROCESS_DEFAULT_TIMEOUT": 120,
+    'CACHE_TYPE': 'FileSystemCache',
+    'CACHE_DIR': environ.get('ADAPTERS_CACHE_DIR', '/var/tmp/adapters_cache/'),
+    'CACHE_THRESHOLD': int(environ.get('ADAPTERS_CACHE_THRESHOLD', '50')),
+    'CACHE_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_CACHE_TIMEOUT', '3600')),
+    'SUBPROCESS_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_SUBPROCESS_TIMEOUT', '120')),
 }
 
 logging.basicConfig(
     format='[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s',
-    level='WARNING',
+    level=environ.get('ADAPTERS_FLASK_LOG_LEVEL', 'WARNING'),
 )
