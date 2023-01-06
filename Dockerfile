@@ -138,25 +138,22 @@ COPY --from=rnaview-builder /RNAVIEW /rnaview
 # Python build
 COPY --from=python-builder /venv /venv
 
-# bpnet build
-COPY app/bpnet/bpnet-master.tar.gz /bpnet-master.tar.gz
-RUN tar -xf bpnet-master.tar.gz && rm bpnet-master.tar.gz
-
-# MC-Annotate build
-COPY app/mc-annotate/mc-annotate.tar.gz /mc-annotate.tar.gz
-RUN mkdir mc-annotate && tar -xf mc-annotate.tar.gz -C mc-annotate/ && rm mc-annotate.tar.gz
-
-# PseudoViewer build
-COPY app/pseudoviewer/ pseudoviewer/
-RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
-
-# RNApuzzler build
+# RNApuzzler copy
 COPY app/rnapuzzler /RNAplot
 COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot
 
-# svgcleaner build
-COPY app/svg-cleaner/svgcleaner.tar.gz /svgcleaner.tar.gz
-RUN mkdir svg-cleaner && tar -xf svgcleaner.tar.gz -C svg-cleaner && rm svgcleaner.tar.gz
+# PseudoViewer copy
+COPY app/pseudoviewer/ pseudoviewer/
+RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
+
+# bpnet copy
+ADD app/bpnet/bpnet-master.tar.gz /
+
+# MC-Annotate copy
+ADD app/mc-annotate/mc-annotate.tar.gz /mc-annotate/
+
+# svgcleaner copy
+ADD app/svg-cleaner/svgcleaner.tar.gz /svg-cleaner/
 
 EXPOSE 80
 CMD gunicorn \
