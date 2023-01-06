@@ -103,9 +103,10 @@ class RNAViewAdapter:
     X_INTERACTION = 'X/X'  # For us - cWW
     ONE_HBOND = '!1H(b_b)'  # For us - OtherInteraction
     DOUBLE_SAENGER = ('XIV,XV', 'XII,XIII')
+    UNKNOWN_LW_CHARS = ('.', '?')
 
     # Roman numerals used by Saenger
-    # both in our model and MC-Annotate
+    # both in our model and RNAView
     ROMAN_NUMERALS = ('I', 'V', 'X')
 
     def __init__(self) -> None:
@@ -161,8 +162,10 @@ class RNAViewAdapter:
                 self.residues_from_pdb[counter] = potential_residue.residue
                 counter += 1
 
-    def get_leontis_westhof(self, lw_info: str, trans_cis_info: str) -> LeontisWesthof:
+    def get_leontis_westhof(self, lw_info: str, trans_cis_info: str) -> Optional[LeontisWesthof]:
         trans_cis = trans_cis_info[0]
+        if any(char in lw_info for char in self.UNKNOWN_LW_CHARS):
+            return None
         if lw_info in (self.PLUS_INTERACTION, self.MINUS_INTERACTION, self.X_INTERACTION):
             return LeontisWesthof[f'{trans_cis}WW']
         return LeontisWesthof[f'{trans_cis}{lw_info[0].upper()}{lw_info[2].upper()}']
