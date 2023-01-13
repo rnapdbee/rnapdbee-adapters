@@ -23,11 +23,13 @@ app.config.from_mapping(config)
 @conversion.before_request
 @filtering.before_request
 def log_plain_request():
+    logging.info(f'Request (text/plain) received, path: {request.path}')
     logging.debug(request.data.decode('utf-8'))
 
 
 @visualization.before_request
 def log_json_request():
+    logging.info(f'Request (application/json) received, path: {request.path}')
     logging.debug(orjson.loads(request.data))
 
 
