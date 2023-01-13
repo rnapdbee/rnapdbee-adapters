@@ -160,7 +160,6 @@ CMD gunicorn \
     --worker-tmp-dir /dev/shm \
     --workers ${ADAPTERS_WORKERS} \ 
     --threads ${ADAPTERS_THREADS} \
-    --worker-class gthread \
     --log-level ${ADAPTERS_GUNICORN_LOG_LEVEL} \
     --bind 0.0.0.0:80 \
     adapters.server:app
