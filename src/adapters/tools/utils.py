@@ -9,6 +9,7 @@ from os import devnull
 
 import orjson
 from flask import Response, request
+from werkzeug.exceptions import UnsupportedMediaType
 
 from adapters.config import config
 from adapters.exceptions import InvalidSvgError
@@ -183,7 +184,7 @@ def content_type(mimetype: str):
         @wraps(function)
         def __content_type(*args, **kwargs):
             if 'Content-Type' not in request.headers or request.headers['Content-Type'] != mimetype:
-                return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+                raise UnsupportedMediaType()
             result = function(*args, **kwargs)
             return result
 
