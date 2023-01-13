@@ -108,7 +108,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RNAVIEW=/rnaview \
     ADAPTERS_WORKERS=2 \
     ADAPTERS_THREADS=2 \
-    ADAPTERS_GUNICORN_LOG_LEVEL=info
+    ADAPTERS_GUNICORN_LOG_LEVEL=info \
+    ADAPTERS_WORKER_TIMEOUT=1200
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -160,7 +161,7 @@ CMD gunicorn \
     --worker-tmp-dir /dev/shm \
     --workers ${ADAPTERS_WORKERS} \ 
     --threads ${ADAPTERS_THREADS} \
-    --worker-class gthread \
+    --timeout ${ADAPTERS_WORKER_TIMEOUT} \
     --log-level ${ADAPTERS_GUNICORN_LOG_LEVEL} \
     --bind 0.0.0.0:80 \
     adapters.server:app
