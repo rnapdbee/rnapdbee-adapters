@@ -11,6 +11,8 @@ import rnapolis.annotator
 import rnapolis.parser
 from rnapolis.common import Structure2D
 
+logger = logging.getLogger(__name__)
+
 
 def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
     model = int(kwargs.get('model'))
@@ -19,7 +21,7 @@ def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
         cif_file.seek(0)
         tertiary_structure = rnapolis.parser.read_3d_structure(cif_file, model)
     secondary_structure = rnapolis.annotator.extract_secondary_structure(tertiary_structure, model)
-    logging.debug(secondary_structure)
+    logger.debug(secondary_structure)
     return secondary_structure
 
 

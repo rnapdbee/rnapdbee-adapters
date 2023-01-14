@@ -15,6 +15,8 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
 from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import PdbParsingError, RegexError
 
+logger = logging.getLogger(__name__)
+
 
 class MCAnnotateAdapter:
 
@@ -221,7 +223,7 @@ class MCAnnotateAdapter:
                     cwd=directory_name,
                     stdout=subprocess.PIPE,
                 ).stdout.decode('utf-8')
-        logging.debug(f'MC-Annotate result: {mc_result}')
+        logger.debug(f'MC-Annotate result: {mc_result}')
         return mc_result
 
     def append_names(self, file_content: str) -> None:

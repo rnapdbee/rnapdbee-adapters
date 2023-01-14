@@ -24,6 +24,8 @@ from rnapolis.common import (
 from adapters.tools.utils import suppress_stdout_stderr
 from adapters.exceptions import RegexError, ThirdPartySoftwareError
 
+logger = logging.getLogger(__name__)
+
 
 class BarnabaAdapter:
 
@@ -156,7 +158,7 @@ class BarnabaAdapter:
                 with suppress_stdout_stderr():
                     try:
                         barnaba_result = barnaba.annotate(file.name)
-                        logging.debug(f'BaRNAba result: {barnaba_result}')
+                        logger.debug(f'BaRNAba result: {barnaba_result}')
                     except SystemExit as exception:
                         raise ThirdPartySoftwareError('BaRNAba failed with system exit') from exception
         return barnaba_result

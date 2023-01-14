@@ -9,7 +9,5 @@ config = {
     'SUBPROCESS_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_SUBPROCESS_TIMEOUT', '120')),
 }
 
-logging.basicConfig(
-    format='[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s',
-    level=environ.get('ADAPTERS_FLASK_LOG_LEVEL', 'WARNING'),
-)
+logging.basicConfig(format='[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s')
+logging.getLogger(__name__.split('.', maxsplit=1)[0]).setLevel(environ.get('ADAPTERS_FLASK_LOG_LEVEL', 'WARNING'))

@@ -14,6 +14,8 @@ from werkzeug.exceptions import UnsupportedMediaType
 from adapters.config import config
 from adapters.exceptions import InvalidSvgError
 
+logger = logging.getLogger(__name__)
+
 
 def is_cif(file_content: str) -> bool:
     for line in file_content.splitlines():
@@ -126,7 +128,7 @@ def run_external_cmd(
 
     error_output = subprocess_result.stderr.decode('utf-8')
     if error_output:
-        logging.debug(f'Subprocess {args} stderr: {error_output}')
+        logger.debug(f'Subprocess {args} stderr: {error_output}')
 
     return subprocess_result
 
@@ -239,8 +241,8 @@ def svg_response():
             try:
                 clean_svg_content = clean_svg(svg_content, copy_on_error=True)
             except (FileNotFoundError, InvalidSvgError, subprocess.SubprocessError):
-                logging.warning('svgcleaner failed, returning non-optimized svg')
-                logging.debug(f'invalid svg for svgcleaner: {svg_content}')
+                logger.warning('svgcleaner failed, returning non-optimized svg')
+                logger.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 

@@ -22,6 +22,8 @@ from rnapolis.common import (
     Structure2D,
 )
 
+logger = logging.getLogger(__name__)
+
 SCREEN_DISTANCE_CUTOFF = 12
 
 
@@ -60,7 +62,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
             name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
             return ('base-pair', LeontisWesthof[name])
         except KeyError:
-            logging.debug(f'Fr3d unknown interaction: {fr3d_name}')
+            logger.debug(f'Fr3d unknown interaction: {fr3d_name}')
     return ('other', None)
 
 
@@ -74,7 +76,7 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
             'coplanar': [],
         })
         sys.stdout = original_stdout
-        logging.debug(f'fr3d interaction map: {interaction_map}')
+        logger.debug(f'fr3d interaction map: {interaction_map}')
 
     base_pairs = []
     stackings = []

@@ -24,6 +24,8 @@ from adapters.visualization.model import ModelMulti2D
 from adapters.tools.utils import clean_svg, run_external_cmd
 from adapters.exceptions import ThirdPartySoftwareError, InvalidSvgError
 
+logger = logging.getLogger(__name__)
+
 
 class WeblogoDrawer:
 
@@ -106,7 +108,7 @@ class WeblogoDrawer:
                 svg_result = svg_file.read()
             if 'svg' not in svg_result:
                 raise InvalidSvgError('Weblogo image is not a valid SVG!')
-        logging.debug(f'svg weblogo: {svg_result}')
+        logger.debug(f'svg weblogo: {svg_result}')
         return svg_result
 
     def merge_svg_files(self, svg_contents: List[str]) -> str:

@@ -15,6 +15,8 @@ from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
 from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import RegexError, InvalidSvgError
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass(frozen=True)
 class PseudoviewerInteraction:
@@ -144,7 +146,7 @@ class PseudoViewerDrawer:
                         svg_content = file.read()
                     if 'svg' not in svg_content:
                         raise InvalidSvgError('PseudoViewer image is not a valid SVG!')
-        logging.debug(f'PseudoViewer svg: {svg_content}')
+        logger.debug(f'PseudoViewer svg: {svg_content}')
         self.svg_result = svg_content
 
     def color_missing_residues(self) -> None:

@@ -14,6 +14,8 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
 from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import PdbParsingError, RegexError
 
+logger = logging.getLogger(__name__)
+
 
 class RNAViewAdapter:
 
@@ -122,7 +124,7 @@ class RNAViewAdapter:
                 run_external_cmd(['rnaview', file.name], cwd=directory_name)
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()
-        logging.debug(f'rnaview result: {rnaview_result}')
+        logger.debug(f'rnaview result: {rnaview_result}')
         return rnaview_result
 
     def append_residues_from_pdb_using_rnaview_indexing(self, pdb_content: str) -> None:
@@ -191,12 +193,18 @@ class RNAViewAdapter:
 
         elif token == self.SAENGER_UNKNOWN:
             leontis_westhof = self.get_leontis_westhof(rnaview_regex_result[10], rnaview_regex_result[11])
-            self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, None))
+            if leontis_westhof is None:
+                self.analysis_output.otherInteractions.append(OtherInteraction(residue_left, residue_right))
+            else:
+                self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, None))
 
         elif all(char in self.ROMAN_NUMERALS for char in token) or token in self.DOUBLE_SAENGER:
             leontis_westhof = self.get_leontis_westhof(rnaview_regex_result[10], rnaview_regex_result[11])
-            saenger = Saenger[token.split(',', 1)[0]] if token in self.DOUBLE_SAENGER else Saenger[token]
-            self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, saenger))
+            if leontis_westhof is None:
+                self.analysis_output.otherInteractions.append(OtherInteraction(residue_left, residue_right))
+            else:
+                saenger = Saenger[token.split(',', 1)[0]] if token in self.DOUBLE_SAENGER else Saenger[token]
+                self.analysis_output.basePairs.append(BasePair(residue_left, residue_right, leontis_westhof, saenger))
 
         else:
             raise PdbParsingError(f'Unknown RNAView interaction: {token}')
