@@ -14,6 +14,8 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
 from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import PdbParsingError, RegexError
 
+logger = logging.getLogger(__name__)
+
 
 class RNAViewAdapter:
 
@@ -122,7 +124,7 @@ class RNAViewAdapter:
                 run_external_cmd(['rnaview', file.name], cwd=directory_name)
                 with open(f'{file.name}.out', encoding='utf-8') as rnaview_file:
                     rnaview_result = rnaview_file.read()
-        logging.debug(f'rnaview result: {rnaview_result}')
+        logger.debug(f'rnaview result: {rnaview_result}')
         return rnaview_result
 
     def append_residues_from_pdb_using_rnaview_indexing(self, pdb_content: str) -> None:

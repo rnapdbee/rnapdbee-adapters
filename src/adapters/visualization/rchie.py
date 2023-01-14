@@ -8,6 +8,8 @@ import logging
 from adapters.visualization.model import Model2D
 from adapters.tools.utils import run_external_cmd, pdf_to_svg
 
+logger = logging.getLogger(__name__)
+
 
 class RChieDrawer:
 
@@ -48,7 +50,7 @@ class RChieDrawer:
                 if not os.path.isfile(output_pdf):
                     raise FileNotFoundError('Rchie PDF was not generated!')
             svg_content = pdf_to_svg(output_pdf)
-        logging.debug(f'Rchie svg: {svg_content}')
+        logger.debug(f'Rchie svg: {svg_content}')
         return svg_content
 
     def visualize(self, data: Model2D) -> str:

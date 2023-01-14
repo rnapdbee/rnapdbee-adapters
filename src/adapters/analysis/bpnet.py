@@ -13,6 +13,8 @@ from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof
 from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import CifParsingError
 
+logger = logging.getLogger(__name__)
+
 
 class Element(enum.Enum):
     PHOSPHATE = enum.auto()
@@ -211,7 +213,7 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
             if os.path.exists(file.name.replace('.cif', '.out')):
                 with open(file.name.replace('.cif', '.out'), encoding='utf-8') as bpnet_file:
                     bpnet_output = bpnet_file.read()
-                logging.debug(f'bpnet output: {bpnet_output}')
+                logger.debug(f'bpnet output: {bpnet_output}')
                 base_pairs = parse_base_pairs(bpnet_output)
             else:
                 base_pairs = []
@@ -219,7 +221,7 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
             if os.path.exists(file.name.replace('.cif', '.rob')):
                 with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as bpnet_file:
                     bpnet_rob = bpnet_file.read()
-                logging.debug(f'bpnet rob: {bpnet_rob}')
+                logger.debug(f'bpnet rob: {bpnet_rob}')
                 stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(
                     bpnet_rob)
             else:

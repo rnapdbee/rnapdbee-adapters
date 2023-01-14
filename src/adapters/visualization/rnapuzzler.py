@@ -13,6 +13,9 @@ from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
 from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
 from adapters.exceptions import InvalidEpsError
 
+logger = logging.getLogger(__name__)
+
+
 class ParseState(Enum):
     OTHER = 0
     COLORPAIR = 1
@@ -157,7 +160,7 @@ class RNAPuzzlerDrawer:
                 eps_content = file.read()
             if 'RNAplot' not in eps_content:
                 raise InvalidEpsError('RNAPuzzler file is not a valid EPS!')
-        logging.debug(f'RNAPuzzler EPS {eps_content}')
+        logger.debug(f'RNAPuzzler EPS {eps_content}')
         self.result = eps_content
 
     def draw_interactions(self) -> List[str]:
