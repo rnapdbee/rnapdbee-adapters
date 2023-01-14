@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 from adapters.visualization.model import Model2D, SYMBOLS, SymbolType
 from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
-from adapters.exceptions import InvalidEpsError
+from adapters.exceptions import InvalidEpsError, ThirdPartySoftwareError
 
 logger = logging.getLogger(__name__)
 
@@ -53,6 +53,9 @@ class RNAPuzzlerDrawer:
         '-': '1 0 0',  # Missing residue
         'BASE_PAIR': '0 0 0',  # Label for removed () pair
     }
+
+    # RNAPuzzler limitation
+    MAX_STRUCTURE_LENGTH = 32767
 
     def __init__(self) -> None:
         self.interactions: List[RNAPuzzlerInteraction] = []
@@ -147,6 +150,11 @@ class RNAPuzzlerDrawer:
 
     def generate_rnapuzzler_eps(self) -> None:
         input_dbn = f'{self.modified_sequence}\n{self.modified_structure}'
+
+        if (len(input_dbn) - 1) / 2 > self.MAX_STRUCTURE_LENGTH:
+            raise ThirdPartySoftwareError(
+                f'Maximum structure length ({self.MAX_STRUCTURE_LENGTH}) for RNAPuzzler exceeded')
+
         with TemporaryDirectory() as directory:
             run_external_cmd(
                 ['RNAplot', '-t', '4', '--post', ''],

@@ -13,7 +13,7 @@ from lxml import etree as ET
 
 from adapters.visualization.model import Model2D, Residue, SYMBOLS, SymbolType
 from adapters.tools.utils import run_external_cmd
-from adapters.exceptions import RegexError, InvalidSvgError
+from adapters.exceptions import RegexError, InvalidSvgError, ThirdPartySoftwareError
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +59,12 @@ class PseudoViewerDrawer:
     def get_ascii_offset(self, text: str) -> int:
         return ord(text) - 97
 
+    def has_no_pairs(self, structure: str) -> bool:
+        unique_chars = set(structure)
+        if len(unique_chars) == 1 or unique_chars == {'.', '-'}:
+            return True
+        return False
+
     def parse_strands(self) -> None:
         modified_structure: List[str] = []
         modified_sequence: List[str] = []
@@ -66,6 +72,8 @@ class PseudoViewerDrawer:
 
         for strand_index, strand in enumerate(self.data.strands):
             strand_name, structure, sequence = strand.name, strand.structure, strand.sequence
+            if self.has_no_pairs(structure):
+                raise ThirdPartySoftwareError(f'No pairs in strand {strand_name}, PseudoViewer image cannot be drawn')
             modified_sequence.append('1\n')
             modified_structure.append('1\n')
             for char, name, i in zip(structure, sequence, range(len(structure))):
