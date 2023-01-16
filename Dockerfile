@@ -141,7 +141,6 @@ COPY --from=python-builder /venv /venv
 
 # RNApuzzler copy
 COPY app/rnapuzzler /RNAplot
-COPY --from=quay.io/biocontainers/viennarna:2.5.1--py310pl5321hc8f18ef_0 /usr/local/bin/RNAplot /RNAplot
 
 # PseudoViewer copy
 COPY app/pseudoviewer/ pseudoviewer/
