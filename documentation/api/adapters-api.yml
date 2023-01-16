@@ -748,14 +748,14 @@ components:
 
     Structure2D:
       required:
-        - "basePair"
+        - "basePairs"
         - "stackings"
         - "baseRiboseInteractions"
         - "basePhosphateInteractions"
         - "otherInteractions"
       type: object
       properties:
-        basePair:
+        basePairs:
           type: array
           items:
             $ref: "#/components/schemas/BasePair"
