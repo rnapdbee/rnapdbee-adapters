@@ -6,8 +6,8 @@ config = {
     'CACHE_DIR': environ.get('ADAPTERS_CACHE_DIR', '/var/tmp/adapters_cache/'),
     'CACHE_THRESHOLD': int(environ.get('ADAPTERS_CACHE_THRESHOLD', '50')),
     'CACHE_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_CACHE_TIMEOUT', '3600')),
-    'SUBPROCESS_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_SUBPROCESS_TIMEOUT', '120')),
+    'SUBPROCESS_DEFAULT_TIMEOUT': int(environ.get('ADAPTERS_SUBPROCESS_TIMEOUT', '600')),
 }
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s')
-logging.getLogger(__name__.split('.', maxsplit=1)[0]).setLevel(environ.get('ADAPTERS_FLASK_LOG_LEVEL', 'WARNING'))
+logging.getLogger(__name__.split('.', maxsplit=1)[0]).setLevel(environ.get('ADAPTERS_FLASK_LOG_LEVEL', 'INFO'))
