@@ -41,7 +41,7 @@ class PseudoViewerDrawer:
     }
 
     # Timeout for PseudoViewer in seconds
-    TIMEOUT = 40
+    TIMEOUT = int(os.getenv('ADAPTERS_PSEUDOVIEWER_TIMEOUT', '40'))
 
     RES_NUMBER_REGEX_1 = re.compile(r'mOver\(evt,.*\(([0-9]+)\).*')
     RES_NUMBER_REGEX_2 = re.compile(r"mOver\(evt,'([0-9]+)'.*")
