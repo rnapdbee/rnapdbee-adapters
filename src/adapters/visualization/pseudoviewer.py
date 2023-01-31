@@ -205,6 +205,10 @@ class PseudoViewerDrawer:
             residue_element.attrib.pop("onmouseover")
             residue_element.attrib.pop("onmouseout")
 
+    def remove_subs_label(self, root: ET.Element) -> None:
+        for label in root.iterfind(f".//{self.XML_NS}text[.='subs']"):
+            label.getparent().remove(label)
+
     def preprocess(self) -> None:
         self.parse_strands()
         self.append_not_represented_interactions()
@@ -239,6 +243,7 @@ class PseudoViewerDrawer:
         self.color_missing_residues()
         self.color_interactions(parent_container)
         self.remove_javascript(root, residues_elements)
+        self.remove_subs_label(root)
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
