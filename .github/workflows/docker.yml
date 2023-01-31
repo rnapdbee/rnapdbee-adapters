@@ -24,7 +24,7 @@ jobs:
 
       - name: Create the docker container
         run: |
-          docker create --name $DOCKER_CONTAINER --env-file .env $DOCKER_IMAGE
+          docker create --name $DOCKER_CONTAINER --env-file .env_ci $DOCKER_IMAGE
 
       - name: Start the docker container
         run: docker start $DOCKER_CONTAINER

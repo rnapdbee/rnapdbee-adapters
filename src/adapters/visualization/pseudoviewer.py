@@ -40,6 +40,9 @@ class PseudoViewerDrawer:
         'NOT_REPRESENTED': 'gray'  # Not represented in dotbracket
     }
 
+    # Timeout for PseudoViewer in seconds
+    TIMEOUT = int(os.getenv('ADAPTERS_PSEUDOVIEWER_TIMEOUT', '40'))
+
     RES_NUMBER_REGEX_1 = re.compile(r'mOver\(evt,.*\(([0-9]+)\).*')
     RES_NUMBER_REGEX_2 = re.compile(r"mOver\(evt,'([0-9]+)'.*")
     XML_NS = '{http://www.w3.org/2000/svg}'
@@ -147,6 +150,7 @@ class PseudoViewerDrawer:
                     run_external_cmd(
                         ['pseudoviewer', seqeunce_file.name, structure_file.name, output_file],
                         cwd=directory,
+                        timeout=self.TIMEOUT,
                     )
                     if not os.path.isfile(output_file):
                         raise FileNotFoundError('PseudoViewer image was not created!')
@@ -201,6 +205,10 @@ class PseudoViewerDrawer:
             residue_element.attrib.pop("onmouseover")
             residue_element.attrib.pop("onmouseout")
 
+    def remove_subs_label(self, root: ET.Element) -> None:
+        for label in root.iterfind(f".//{self.XML_NS}text[.='subs']"):
+            label.getparent().remove(label)
+
     def preprocess(self) -> None:
         self.parse_strands()
         self.append_not_represented_interactions()
@@ -235,6 +243,7 @@ class PseudoViewerDrawer:
         self.color_missing_residues()
         self.color_interactions(parent_container)
         self.remove_javascript(root, residues_elements)
+        self.remove_subs_label(root)
 
         self.svg_result = ET.tostring(root, encoding='unicode', method='xml')
 
