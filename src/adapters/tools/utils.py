@@ -244,6 +244,7 @@ def json_response():
         @wraps(function)
         def __json_response(*args, **kwargs):
             result = function(*args, **kwargs)
+            logger.info(f'Response application/json sent (path: {request.path})')
             return Response(response=orjson.dumps(result).decode('utf-8'),
                             status=HTTPStatus.OK,
                             mimetype='application/json')
@@ -262,6 +263,7 @@ def plain_response():
         @wraps(function)
         def __plain_response(*args, **kwargs):
             result = function(*args, **kwargs)
+            logger.info(f'Response text/plain sent (path: {request.path})')
             return Response(response=result, status=HTTPStatus.OK, mimetype='text/plain')
 
         return __plain_response
@@ -284,6 +286,7 @@ def svg_response():
                 logger.warning('svgcleaner failed, returning non-optimized svg')
                 logger.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
+            logger.info(f'Response image/svg_xml sent (path: {request.path})')
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
