@@ -40,6 +40,9 @@ class PseudoViewerDrawer:
         'NOT_REPRESENTED': 'gray'  # Not represented in dotbracket
     }
 
+    # Timeout for PseudoViewer in seconds
+    TIMEOUT = 40
+
     RES_NUMBER_REGEX_1 = re.compile(r'mOver\(evt,.*\(([0-9]+)\).*')
     RES_NUMBER_REGEX_2 = re.compile(r"mOver\(evt,'([0-9]+)'.*")
     XML_NS = '{http://www.w3.org/2000/svg}'
@@ -147,6 +150,7 @@ class PseudoViewerDrawer:
                     run_external_cmd(
                         ['pseudoviewer', seqeunce_file.name, structure_file.name, output_file],
                         cwd=directory,
+                        timeout=self.TIMEOUT,
                     )
                     if not os.path.isfile(output_file):
                         raise FileNotFoundError('PseudoViewer image was not created!')
