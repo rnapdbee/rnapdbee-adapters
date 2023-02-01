@@ -244,6 +244,66 @@
             "nt1": {
                 "label": {
                     "chain": "A",
+                    "number": 8,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 8,
+                    "icode": null,
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 21,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 21,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "lw": "tSW",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 9,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 9,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 11,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 11,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "lw": "cSH",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
                     "number": 9,
                     "name": "A"
                 },
@@ -449,6 +509,36 @@
             },
             "lw": "tWW",
             "saenger": "XXVII"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 18,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 18,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 57,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 57,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "lw": "cSW",
+            "saenger": null
         },
         {
             "nt1": {
@@ -664,6 +754,36 @@
             "nt1": {
                 "label": {
                     "chain": "A",
+                    "number": 33,
+                    "name": "U"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 33,
+                    "icode": null,
+                    "name": "U"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 35,
+                    "name": "A"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 35,
+                    "icode": null,
+                    "name": "A"
+                }
+            },
+            "lw": "tSH",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
                     "number": 49,
                     "name": "5MC"
                 },
@@ -839,6 +959,66 @@
             },
             "lw": "tWH",
             "saenger": "XXIV"
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 55,
+                    "name": "PSU"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 55,
+                    "icode": null,
+                    "name": "PSU"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 57,
+                    "name": "G"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 57,
+                    "icode": null,
+                    "name": "G"
+                }
+            },
+            "lw": "tSH",
+            "saenger": null
+        },
+        {
+            "nt1": {
+                "label": {
+                    "chain": "A",
+                    "number": 60,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 60,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "nt2": {
+                "label": {
+                    "chain": "A",
+                    "number": 61,
+                    "name": "C"
+                },
+                "auth": {
+                    "chain": "A",
+                    "number": 61,
+                    "icode": null,
+                    "name": "C"
+                }
+            },
+            "lw": "cSH",
+            "saenger": null
         }
     ],
     "stackings": [
@@ -2878,64 +3058,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 10,
-                    "name": "2MG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 10,
-                    "icode": null,
-                    "name": "2MG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 10,
-                    "name": "2MG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 10,
-                    "icode": null,
-                    "name": "2MG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 11,
                     "name": "C"
                 },
@@ -2960,64 +3082,6 @@
                 }
             },
             "br": "7BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 11,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 11,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "9BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 11,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 11,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "8BR"
         },
         {
             "nt1": {
@@ -3133,215 +3197,12 @@
                     "name": "A"
                 }
             },
-            "br": "3BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 20,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 20,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
             "br": "5BR"
         },
         {
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 20,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 20,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "4BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 20,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 20,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 22,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 22,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "br": "3BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 8,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "2BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 8,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "2BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 8,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "6BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 21,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 21,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 8,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "6BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 21,
                     "name": "A"
                 },
@@ -3392,180 +3253,6 @@
                     "number": 33,
                     "icode": null,
                     "name": "U"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 34,
-                    "name": "OMG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 34,
-                    "icode": null,
-                    "name": "OMG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "7BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "7BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 37,
-                    "name": "YYG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 37,
-                    "icode": null,
-                    "name": "YYG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 36,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 36,
-                    "icode": null,
-                    "name": "A"
                 }
             },
             "br": "0BR"
@@ -3632,64 +3319,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 46,
-                    "name": "7MG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 46,
-                    "icode": null,
-                    "name": "7MG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 8,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 8,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "1BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 46,
-                    "name": "7MG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 46,
-                    "icode": null,
-                    "name": "7MG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "br": "1BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 48,
                     "name": "C"
                 },
@@ -3748,64 +3377,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 48,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 48,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 59,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 59,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "9BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 49,
-                    "name": "5MC"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 49,
-                    "icode": null,
-                    "name": "5MC"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 7,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 7,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 49,
                     "name": "5MC"
                 },
@@ -3859,122 +3430,6 @@
                 }
             },
             "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 56,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 56,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 56,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 56,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "br": "9BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 56,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 56,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "br": "9BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 18,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "br": "3BR"
         },
         {
             "nt1": {
@@ -4009,180 +3464,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 18,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "br": "4BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 19,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 19,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "br": "1BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 58,
-                    "name": "1MA"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 58,
-                    "icode": null,
-                    "name": "1MA"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 18,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "br": "2BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 58,
-                    "name": "1MA"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 58,
-                    "icode": null,
-                    "name": "1MA"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 60,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 60,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "br": "2BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 58,
                     "name": "1MA"
                 },
@@ -4236,93 +3517,6 @@
                 }
             },
             "br": "7BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 61,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 58,
-                    "name": "1MA"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 58,
-                    "icode": null,
-                    "name": "1MA"
-                }
-            },
-            "br": "7BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 61,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 60,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 60,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "br": "0BR"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 61,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 60,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 60,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "br": "0BR"
         }
     ],
     "basePhosphateInteractions": [
@@ -4417,35 +3611,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 18,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 58,
-                    "name": "1MA"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 58,
-                    "icode": null,
-                    "name": "1MA"
-                }
-            },
-            "bph": "1BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 20,
                     "name": "G"
                 },
@@ -4467,35 +3632,6 @@
                     "number": 21,
                     "icode": null,
                     "name": "A"
-                }
-            },
-            "bph": "1BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 20,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 20,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 22,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 22,
-                    "icode": null,
-                    "name": "G"
                 }
             },
             "bph": "1BPh"
@@ -4533,151 +3669,6 @@
             "nt1": {
                 "label": {
                     "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 35,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 35,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "bph": "9BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 33,
-                    "name": "U"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 33,
-                    "icode": null,
-                    "name": "U"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 36,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 36,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 46,
-                    "name": "7MG"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 46,
-                    "icode": null,
-                    "name": "7MG"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 9,
-                    "name": "A"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 9,
-                    "icode": null,
-                    "name": "A"
-                }
-            },
-            "bph": "1BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
                     "number": 55,
                     "name": "PSU"
                 },
@@ -4702,151 +3693,6 @@
                 }
             },
             "bph": "0BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "bph": "9BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 55,
-                    "name": "PSU"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 55,
-                    "icode": null,
-                    "name": "PSU"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 58,
-                    "name": "1MA"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 58,
-                    "icode": null,
-                    "name": "1MA"
-                }
-            },
-            "bph": "5BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 57,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 57,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 18,
-                    "name": "G"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 18,
-                    "icode": null,
-                    "name": "G"
-                }
-            },
-            "bph": "3BPh"
         },
         {
             "nt1": {
@@ -4933,65 +3779,7 @@
                     "name": "C"
                 }
             },
-            "bph": "7BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 61,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 60,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 60,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
             "bph": "9BPh"
-        },
-        {
-            "nt1": {
-                "label": {
-                    "chain": "A",
-                    "number": 61,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 61,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "nt2": {
-                "label": {
-                    "chain": "A",
-                    "number": 60,
-                    "name": "C"
-                },
-                "auth": {
-                    "chain": "A",
-                    "number": 60,
-                    "icode": null,
-                    "name": "C"
-                }
-            },
-            "bph": "8BPh"
         }
     ],
     "otherInteractions": []

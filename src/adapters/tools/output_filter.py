@@ -8,6 +8,11 @@ from rnapolis.common import (
     StackingTopology,
     Structure2D,
     Interaction,
+    Residue,
+    ResidueAuth,
+    ResidueLabel,
+    BasePhosphate,
+    BaseRibose,
 )
 
 InteractionTypeT = TypeVar('InteractionTypeT', BasePair, Stacking, OtherInteraction)
@@ -82,3 +87,78 @@ def sort_interactions_lists(analysis_output: Structure2D, *_) -> Structure2D:
         ))
 
     return analysis_output
+
+
+def restore_chains(analysis_output: Structure2D, **kwargs) -> Structure2D:
+
+    def map_residue(res: Residue, mapped_chains: Dict[str, str]):
+        if res.label is None:
+            label = None
+        else:
+            label = ResidueLabel(
+                mapped_chains[res.label.chain],
+                res.label.number,
+                res.label.name,
+            )
+
+        if res.auth is None:
+            auth = None
+        else:
+            auth = ResidueAuth(
+                mapped_chains[res.auth.chain],
+                res.auth.number,
+                res.auth.icode,
+                res.auth.name,
+            )
+
+        return Residue(label, auth)
+
+    mapped_chains: Dict[str, str] = kwargs.get('mapped_chains')
+
+    base_pairs: List[BasePair] = []
+    stackings: List[Stacking] = []
+    base_riboses: List[BaseRibose] = []
+    base_phosphates: List[BasePhosphate] = []
+    other_interactions: List[OtherInteraction] = []
+
+    for base_pair in analysis_output.basePairs:
+        base_pairs.append(
+            BasePair(
+                map_residue(base_pair.nt1, mapped_chains),
+                map_residue(base_pair.nt2, mapped_chains),
+                base_pair.lw,
+                base_pair.saenger,
+            ))
+
+    for stacking in analysis_output.stackings:
+        stackings.append(
+            Stacking(
+                map_residue(stacking.nt1, mapped_chains),
+                map_residue(stacking.nt2, mapped_chains),
+                stacking.topology,
+            ))
+
+    for base_ribose in analysis_output.baseRiboseInteractions:
+        base_riboses.append(
+            BaseRibose(
+                map_residue(base_ribose.nt1, mapped_chains),
+                map_residue(base_ribose.nt2, mapped_chains),
+                base_ribose.br,
+            ))
+
+    for base_phosphate in analysis_output.basePhosphateInteractions:
+        base_phosphates.append(
+            BasePhosphate(
+                map_residue(base_phosphate.nt1, mapped_chains),
+                map_residue(base_phosphate.nt2, mapped_chains),
+                base_phosphate.bph,
+            ))
+
+    for other_interaction in analysis_output.otherInteractions:
+        other_interactions.append(
+            OtherInteraction(
+                map_residue(other_interaction.nt1, mapped_chains),
+                map_residue(other_interaction.nt2, mapped_chains),
+            ))
+
+    return Structure2D(base_pairs, stackings, base_riboses, base_phosphates, other_interactions)

@@ -109,7 +109,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ADAPTERS_WORKERS=3 \
     ADAPTERS_THREADS=1 \
     ADAPTERS_GUNICORN_LOG_LEVEL=info \
-    ADAPTERS_WORKER_TIMEOUT=1200
+    ADAPTERS_WORKER_TIMEOUT=1200 \
+    ADAPTERS_MAX_REQUESTS=10
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -162,6 +163,7 @@ CMD gunicorn \
     --threads ${ADAPTERS_THREADS} \
     --timeout ${ADAPTERS_WORKER_TIMEOUT} \
     --log-level ${ADAPTERS_GUNICORN_LOG_LEVEL} \
+    --max-requests ${ADAPTERS_MAX_REQUESTS} \
     --bind 0.0.0.0:80 \
     adapters.server:app
 
