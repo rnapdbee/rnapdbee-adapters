@@ -1,6 +1,7 @@
 import subprocess
 import os
 import logging
+import signal
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from functools import wraps
@@ -95,7 +96,7 @@ def run_external_cmd(
     timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
     cmd_input=None,
 ):
-    """Wrapper for subprocess.run()
+    """Wrapper for subprocess.Popen()
 
     Args:
         args: command arguments
@@ -110,13 +111,13 @@ def run_external_cmd(
         ValueError: cwd is not valid directory
 
     Returns:
-        result of subprocess.run()
+        result of subprocess.Popen()
     """
 
     if cwd is None:
         return ValueError('cwd argument must be valid directory!')
 
-    subprocess_result = subprocess.run(
+    subprocess_result = wrapped_popen(
         args,
         cwd=cwd,
         stdout=stdout,
@@ -131,6 +132,45 @@ def run_external_cmd(
         logger.debug(f'Subprocess {args} stderr: {error_output}')
 
     return subprocess_result
+
+
+def wrapped_popen(
+    *popenargs,
+    input=None,
+    capture_output=False,
+    timeout=None,
+    check=False,
+    **kwargs,
+) -> subprocess.CompletedProcess:
+    """Wrapper for subprocess.popen() (POSIX only)"""
+    if input is not None:
+        if kwargs.get('stdin') is not None:
+            raise ValueError('stdin and input arguments may not both be used.')
+        kwargs['stdin'] = subprocess.PIPE
+
+    if capture_output:
+        if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+            raise ValueError('stdout and stderr arguments may not be used '
+                             'with capture_output.')
+        kwargs['stdout'] = subprocess.PIPE
+        kwargs['stderr'] = subprocess.PIPE
+
+    with subprocess.Popen(*popenargs, **kwargs, start_new_session=True) as process:
+        try:
+            stdout, stderr = process.communicate(input, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            os.killpg(os.getpgid(process.pid), signal.SIGKILL)
+            process.wait()
+            raise
+        except:  # noqa (Including KeyboardInterrupt, communicate handled that.)
+            os.killpg(os.getpgid(process.pid), signal.SIGKILL)
+            # We don't call process.wait() as .__exit__ does that for us.
+            raise
+        retcode = process.poll()
+        if check and retcode:
+            raise subprocess.CalledProcessError(retcode, process.args, output=stdout, stderr=stderr)
+
+    return subprocess.CompletedProcess(process.args, retcode, stdout, stderr)
 
 
 def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
@@ -204,6 +244,7 @@ def json_response():
         @wraps(function)
         def __json_response(*args, **kwargs):
             result = function(*args, **kwargs)
+            logger.info(f'Response application/json sent (path: {request.path})')
             return Response(response=orjson.dumps(result).decode('utf-8'),
                             status=HTTPStatus.OK,
                             mimetype='application/json')
@@ -222,6 +263,7 @@ def plain_response():
         @wraps(function)
         def __plain_response(*args, **kwargs):
             result = function(*args, **kwargs)
+            logger.info(f'Response text/plain sent (path: {request.path})')
             return Response(response=result, status=HTTPStatus.OK, mimetype='text/plain')
 
         return __plain_response
@@ -244,6 +286,7 @@ def svg_response():
                 logger.warning('svgcleaner failed, returning non-optimized svg')
                 logger.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
+            logger.info(f'Response image/svg_xml sent (path: {request.path})')
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response
