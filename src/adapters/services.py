@@ -25,9 +25,12 @@ def run_pdb_adapter(analyze: Callable[..., Structure2D], data: str, model: int) 
         (pdb_filter.leave_single_model, {'model': model}),
     ])
 
-    analysis_output = analyze(pdb_content, model=model)
+    mapped_content, mapped_chains = pdb_filter.replace_chains(pdb_content)
+
+    analysis_output = analyze(mapped_content, model=model)
 
     return output_filter.apply(analysis_output, [
+        (output_filter.restore_chains, {'mapped_chains': mapped_chains}),
         (output_filter.remove_duplicate_pairs, {}),
         (output_filter.sort_interactions_lists, {}),
     ])
