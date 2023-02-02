@@ -1,0 +1,36 @@
+/drawoutline {
+  gsave outlinecolor newpath
+  coor 0 get aload pop moveto
+  /i 0 def
+  coor {
+    /flag 0 def
+
+    0 strands {
+      add
+      dup
+      i eq {
+        pop aload pop moveto
+        /flag 1 def
+      } if
+    } forall
+
+    flag 0 eq {
+      /p coor i get def
+      /a arcs i get def
+      /l a length def
+
+      l 0 eq {
+        p 0 2 getinterval aload pop lineto
+      } {
+        /clockwise a 5 get def
+        clockwise 0 gt {
+          a 0 5 getinterval aload pop arcn
+        } {
+          a 0 5 getinterval aload pop arc
+        } ifelse
+      } ifelse
+    } if
+    /i i 1 add def
+  } forall
+  stroke grestore
+} bind def
