@@ -111,24 +111,22 @@ class PseudoViewerDrawer:
             residues = chain_with_residues.residues
             all_residues[chain] = {}
             for i, residue in enumerate(residues):
-                all_residues[chain][(residue.number, residue.icode)] = i + 1
+                all_residues[chain][str(residue)] = i + 1
 
-        not_represented = self.data.nonCanonicalInteractions.notRepresented
-
-        for pair in not_represented:
+        for pair in self.data.nonCanonicalInteractions.notRepresented:
             res_left = pair.residueLeft
             res_right = pair.residueRight
 
             res_left_mapped = Residue(
                 res_left.chain,
-                all_residues[res_left.chain][(res_left.number, res_left.icode)],
+                all_residues[res_left.chain][str(res_left)],
                 res_left.name,
                 None,
             )
 
             res_right_mapped = Residue(
                 res_right.chain,
-                all_residues[res_right.chain][(res_right.number, res_left.icode)],
+                all_residues[res_right.chain][str(res_right)],
                 res_right.name,
                 None,
             )
