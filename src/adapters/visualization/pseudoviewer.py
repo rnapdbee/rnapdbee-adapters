@@ -87,15 +87,15 @@ class PseudoViewerDrawer:
                 else:
                     modified_structure.append('.')
                     if char == '-':
-                        self.missing_residues.append(Residue(strand_name, number, name))
+                        self.missing_residues.append(Residue(strand_name, number, name, None))
                     else:
                         if symbol.type == SymbolType.BEGIN:
-                            residue_stack[char].append(Residue(strand_name, number, name))
+                            residue_stack[char].append(Residue(strand_name, number, name, None))
                         else:
                             self.interactions.append(
                                 PseudoviewerInteraction(
                                     residue_stack[symbol.sibling].pop(),  # type: ignore
-                                    Residue(strand_name, number, name),
+                                    Residue(strand_name, number, name, None),
                                     self.COLORS[char],
                                 ))
             modified_sequence.append(f'{self.get_letter_sequence(strand_index, len(sequence))}\n')
@@ -111,7 +111,7 @@ class PseudoViewerDrawer:
             residues = chain_with_residues.residues
             all_residues[chain] = {}
             for i, residue in enumerate(residues):
-                all_residues[chain][residue.number] = i + 1
+                all_residues[chain][(residue.number, residue.icode)] = i + 1
 
         not_represented = self.data.nonCanonicalInteractions.notRepresented
 
@@ -121,14 +121,16 @@ class PseudoViewerDrawer:
 
             res_left_mapped = Residue(
                 res_left.chain,
-                all_residues[res_left.chain][res_left.number],
+                all_residues[res_left.chain][(res_left.number, res_left.icode)],
                 res_left.name,
+                None,
             )
 
             res_right_mapped = Residue(
                 res_right.chain,
-                all_residues[res_right.chain][res_right.number],
+                all_residues[res_right.chain][(res_right.number, res_left.icode)],
                 res_right.name,
+                None,
             )
 
             self.interactions.append(
