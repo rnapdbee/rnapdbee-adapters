@@ -833,6 +833,10 @@ components:
         name:
           type: string
           example: "G"
+        icode:
+          type: string
+          example: "X"
+          nullable: true
 
     SimpleInteraction:
       required:
