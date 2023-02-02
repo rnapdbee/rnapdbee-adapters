@@ -286,7 +286,7 @@ def svg_response():
                 logger.warning('svgcleaner failed, returning non-optimized svg')
                 logger.debug(f'invalid svg for svgcleaner: {svg_content}')
                 clean_svg_content = svg_content
-            logger.info(f'Response image/svg_xml sent (path: {request.path})')
+            logger.info(f'Response image/svg+xml sent (path: {request.path})')
             return Response(response=clean_svg_content, status=HTTPStatus.OK, mimetype='image/svg+xml')
 
         return __svg_response

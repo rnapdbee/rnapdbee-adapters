@@ -37,7 +37,7 @@ class RNAPuzzlerDrawer:
 
     # Paths to PosctScript additional procedures
     DASHED_PAIR_PATH = '/RNAplot/dashed_pair.ps'
-    CHAIN_END_PATH = '/RNAplot/chain_end.ps'
+    MULTIPLE_STRANDS_PATH = '/RNAplot/multiple_strands.ps'
 
     # Normalized RGB colors
     COLORS = {
@@ -60,7 +60,6 @@ class RNAPuzzlerDrawer:
     def __init__(self) -> None:
         self.interactions: List[RNAPuzzlerInteraction] = []
         self.missing_res_numbers: List[int] = []
-        self.chains_ends: List[int] = []
         self.modified_structure: str
         self.modified_sequence: str
         self.data: Model2D
@@ -126,27 +125,10 @@ class RNAPuzzlerDrawer:
                     self.COLORS['BASE_PAIR'],
                 ))
 
-    def append_chains_ends(self) -> None:
-        interactions = []
-        for interaction in self.interactions:
-            interactions.append((
-                interaction.number_left,
-                interaction.number_right,
-            ))
-        interactions_set = set(interactions)
-
-        number = 0
-        for strand in self.data.strands[:-1]:
-            number += len(strand.structure)
-            if (number, number + 1) not in interactions_set:
-                # Here we're numbering from 0 for /break
-                self.chains_ends.append(number - 1)
-
     def preprocess(self) -> None:
         self.parse_strands()
         self.append_not_represented_interactions()
         self.remove_open_close_brackets()
-        self.append_chains_ends()
 
     def generate_rnapuzzler_eps(self) -> None:
         input_dbn = f'{self.modified_sequence}\n{self.modified_structure}'
@@ -196,28 +178,25 @@ class RNAPuzzlerDrawer:
         return lines
 
     def insert_procedures(self) -> List[str]:
-        lines: List[str] = []
-
-        with open(self.CHAIN_END_PATH, encoding='utf-8') as file:
-            chain_end_procedure = file.read()
-        lines.append(chain_end_procedure)
         with open(self.DASHED_PAIR_PATH, encoding='utf-8') as file:
-            not_represented_procedure = file.read()
-        lines.append(not_represented_procedure)
+            lines = file.read().splitlines()
 
         return lines
 
-    def draw_chains_ends(self) -> List[str]:
-        lines: List[str] = []
-
-        for number in self.chains_ends:
-            lines.append(f'{number} break')
+    def read_muliple_strands_procedure(self) -> List[str]:
+        with open(self.MULTIPLE_STRANDS_PATH, encoding='utf-8') as file:
+            lines = file.read().splitlines()
 
         return lines
+
+    def insert_strands_array(self) -> str:
+        chains_lengths = [str(len(strand.sequence)) for strand in self.data.strands]
+        return f'/strands [{" ".join(chains_lengths)}] def'
 
     def postprocess(self) -> None:
         modified_result: List[str] = []
         in_colorpair = False
+        in_draw_outline = False
 
         for line in self.result.splitlines():
             trim_line = line.strip()
@@ -225,6 +204,19 @@ class RNAPuzzlerDrawer:
             if trim_line.startswith('/cmark'):
                 modified_result.append(line)
                 modified_result.append(f'{self.COLORS["-"]} setrgbcolor')
+
+            elif trim_line.startswith('/drawoutline'):
+                strands_procedure = self.read_muliple_strands_procedure()
+                strands_array = self.insert_strands_array()
+                modified_result.append(strands_array)
+                modified_result.extend(strands_procedure)
+                in_draw_outline = True
+
+            elif in_draw_outline and trim_line.startswith('} bind def'):
+                in_draw_outline = False
+
+            elif in_draw_outline and not trim_line.startswith('} bind def'):
+                pass
 
             elif trim_line.startswith('/outlinecolor'):
                 modified_result.append('/outlinecolor {0.75 setgray} bind def')
@@ -247,7 +239,6 @@ class RNAPuzzlerDrawer:
                 modified_result.append(line)
                 modified_result.extend(self.draw_interactions())
                 modified_result.extend(self.draw_missing_residues())
-                modified_result.extend(self.draw_chains_ends())
 
             elif trim_line.startswith('%%EndProlog'):
                 modified_result.extend(self.insert_procedures())
