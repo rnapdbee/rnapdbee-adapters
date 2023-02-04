@@ -94,17 +94,15 @@ class RNAPuzzlerDrawer:
 
     def append_not_represented_interactions(self) -> None:
         all_residues = {}
-        for i, residue in enumerate(self.data.residues):
-            all_residues[residue.number] = i + 1
+        for i, res in enumerate(self.data.residues):
+            all_residues[str(res)] = i + 1
 
-        not_represented = self.data.nonCanonicalInteractions.notRepresented
+        for pair in self.data.nonCanonicalInteractions.notRepresented:
+            left = pair.residueLeft
+            right = pair.residueRight
 
-        for pair in not_represented:
-            number_left = pair.residueLeft.number
-            number_right = pair.residueRight.number
-
-            number_left_mapped = all_residues[number_left]
-            number_right_mapped = all_residues[number_right]
+            number_left_mapped = all_residues[str(left)]
+            number_right_mapped = all_residues[str(right)]
 
             self.interactions.append(
                 RNAPuzzlerInteraction(

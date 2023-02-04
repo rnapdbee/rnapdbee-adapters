@@ -1,0 +1,232 @@
+{
+    "strands": [
+        {
+            "name": "strand_A",
+            "sequence": "GGGG",
+            "structure": ".(.."
+        },
+        {
+            "name": "strand_A",
+            "sequence": "GGGG",
+            "structure": ".).."
+        },
+        {
+            "name": "strand_B",
+            "sequence": "CCCC",
+            "structure": "(..)"
+        }
+    ],
+    "residues": [
+        {
+            "chain": "strand_A",
+            "number": -1,
+            "icode": "X",
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -1,
+            "icode": "Y",
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -1,
+            "icode": null,
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -1,
+            "icode": "Z",
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -10,
+            "icode": "X",
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -10,
+            "icode": "Y",
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -10,
+            "icode": null,
+            "name": "G"
+        },
+        {
+            "chain": "strand_A",
+            "number": -10,
+            "icode": "Z",
+            "name": "G"
+        },
+        {
+            "chain": "strand_B",
+            "number": 100,
+            "icode": null,
+            "name": "C"
+        },
+        {
+            "chain": "strand_B",
+            "number": 101,
+            "icode": null,
+            "name": "C"
+        },
+        {
+            "chain": "strand_B",
+            "number": 102,
+            "icode": null,
+            "name": "C"
+        },
+        {
+            "chain": "strand_B",
+            "number": 103,
+            "icode": null,
+            "name": "C"
+        }
+    ],
+    "chainsWithResidues": [
+        {
+            "name": "strand_A",
+            "residues": [
+                {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "X",
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "Y",
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": null,
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "Z",
+                    "name": "G"
+                }
+            ]
+        },
+        {
+            "name": "strand_A",
+            "residues": [
+                {
+                    "chain": "strand_A",
+                    "number": -10,
+                    "icode": "X",
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -10,
+                    "icode": "Y",
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -10,
+                    "icode": null,
+                    "name": "G"
+                },
+                {
+                    "chain": "strand_A",
+                    "number": -10,
+                    "icode": "Z",
+                    "name": "G"
+                }
+            ]
+        },
+        {
+            "name": "strand_B",
+            "residues": [
+                {
+                    "chain": "strand_B",
+                    "number": 100,
+                    "icode": null,
+                    "name": "C"
+                },
+                {
+                    "chain": "strand_B",
+                    "number": 101,
+                    "icode": null,
+                    "name": "C"
+                },
+                {
+                    "chain": "strand_B",
+                    "number": 102,
+                    "icode": null,
+                    "name": "C"
+                },
+                {
+                    "chain": "strand_B",
+                    "number": 103,
+                    "icode": null,
+                    "name": "C"
+                }
+            ]
+        }
+    ],
+    "nonCanonicalInteractions": {
+        "notRepresented": [
+            {
+                "residueLeft": {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "X",
+                    "name": "G"
+                },
+                "residueRight": {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "Z",
+                    "name": "G"
+                },
+                "leontisWesthof": "cWW"
+            },
+            {
+                "residueLeft": {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "X",
+                    "name": "G"
+                },
+                "residueRight": {
+                    "chain": "strand_A",
+                    "number": -10,
+                    "icode": "Z",
+                    "name": "G"
+                },
+                "leontisWesthof": "tWW"
+            },
+            {
+                "residueLeft": {
+                    "chain": "strand_A",
+                    "number": -1,
+                    "icode": "X",
+                    "name": "G"
+                },
+                "residueRight": {
+                    "chain": "strand_B",
+                    "number": 103,
+                    "icode": null,
+                    "name": "C"
+                },
+                "leontisWesthof": "cWS"
+            }
+        ],
+        "represented": []
+    }
+}

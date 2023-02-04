@@ -1,0 +1,44 @@
+{
+    "results": [
+        {
+            "adapter": "MC_ANNOTATE",
+            "strands": [
+                {
+                    "name": "ABC",
+                    "sequence": "GGGG",
+                    "structure": "...."
+                },
+                {
+                    "name": "ABC",
+                    "sequence": "GGGG",
+                    "structure": "...."
+                },
+                {
+                    "name": "BBB",
+                    "sequence": "CCCC",
+                    "structure": "...."
+                }
+            ]
+        },
+        {
+            "adapter": "BARNABA",
+            "strands": [
+                {
+                    "name": "ABC",
+                    "sequence": "GGGG",
+                    "structure": "(..)"
+                },
+                {
+                    "name": "ABC",
+                    "sequence": "GGGG",
+                    "structure": "...."
+                },
+                {
+                    "name": "BBB",
+                    "sequence": "CCCC",
+                    "structure": ".-.."
+                }
+            ]
+        }
+    ]
+}

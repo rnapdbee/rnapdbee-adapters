@@ -66,6 +66,7 @@ class Residue(DataClassJsonMixin):
     chain: str
     number: int
     name: str
+    icode: Optional[str] = None
 
 
 class LeontisWesthof(Enum):

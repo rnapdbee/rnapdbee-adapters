@@ -72,6 +72,28 @@ def visualization_test_result(request):
     ],
     indirect=True,
 )
-def test_analysis(visualization_test_result):
+def test_visualization(visualization_test_result):
+    assert visualization_test_result.status_code == 200
+    assert visualization_test_result.response == visualization_test_result.expected
+
+
+# Parameters: (json, expected_image, route)
+@pytest.mark.parametrize(
+    'visualization_test_result',
+    [
+        ('modelMulti2D_duplicated.json', 'weblogo_duplicated.svg', '/visualization-api/v1/weblogo'),
+        ('model2D_duplicated.json', 'pseudoviewer_duplicated.svg', '/visualization-api/v1/pseudoviewer'),
+        ('model2D_duplicated.json', 'rchie_duplicated.svg', '/visualization-api/v1/rchie'),
+        ('model2D_duplicated.json', 'rnapuzzler_duplicated.svg', '/visualization-api/v1/rnapuzzler'),
+    ],
+    ids=[
+        '/visualization-api/v1/weblogo',
+        '/visualization-api/v1/pseudoviewer',
+        '/visualization-api/v1/rchie',
+        '/visualization-api/v1/rnapuzzler',
+    ],
+    indirect=True,
+)
+def test_duplicated_strands(visualization_test_result):
     assert visualization_test_result.status_code == 200
     assert visualization_test_result.response == visualization_test_result.expected
