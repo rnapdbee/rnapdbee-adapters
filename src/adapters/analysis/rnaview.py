@@ -1,18 +1,28 @@
 #! /usr/bin/env python
+import logging
 import math
 import re
 import sys
 import tempfile
-import logging
 from dataclasses import dataclass
-from typing import Dict, Tuple, Optional, Any
+from typing import Any, Dict, Optional, Tuple
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Saenger, Stacking, Structure2D)
+from rnapolis.common import (
+    BasePair,
+    BasePhosphate,
+    BaseRibose,
+    LeontisWesthof,
+    OtherInteraction,
+    Residue,
+    ResidueAuth,
+    Saenger,
+    Stacking,
+    Structure2D,
+)
 
-from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import PdbParsingError, RegexError
+from adapters.tools.utils import run_external_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -113,7 +123,7 @@ class RNAViewAdapter:
 
     def __init__(self) -> None:
         self.residues_from_pdb: Dict[int, Residue] = {}
-        self.analysis_output = Structure2D([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [], None, None, None, [], [], [], [])
 
     @classmethod
     def run_rnaview(cls, file_content: str) -> str:

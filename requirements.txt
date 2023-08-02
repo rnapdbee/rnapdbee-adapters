@@ -3,7 +3,7 @@ Flask==2.2.*
 orjson==3.8.*
 barnaba==0.1.9
 gunicorn==20.1.*
-rnapolis==0.0.14
+rnapolis==0.1.1
 weblogo==3.7.*
 lxml==4.9.*
 svg-stack==0.1.0

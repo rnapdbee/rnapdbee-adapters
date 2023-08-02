@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named rnapolis.py, because it imports from "rnapolis", and Python complains about that
 
-import tempfile
-import sys
 import logging
-from typing import Dict, Any
+import sys
+import tempfile
+from typing import Any, Dict
 
 import orjson
 import rnapolis.annotator
