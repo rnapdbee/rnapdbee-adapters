@@ -99,7 +99,8 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
             if x == 'other':
                 other_interactions.append(OtherInteraction(nt1, nt2))
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions, None, None, None, [], [], [], [])
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions,
+                       None, None, None, [], [], [], [])
 
 
 def main():

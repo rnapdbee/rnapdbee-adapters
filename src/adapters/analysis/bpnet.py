@@ -236,7 +236,9 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
             else:
                 stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions, None, None, None, [], [], [], [])
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions,
+                       None, None, None, [], [], [], [])
+
 
 def main():
     structure = analyze(sys.stdin.read())
