@@ -1,17 +1,26 @@
 #! /usr/bin/env python
 import enum
+import logging
 import os.path
 import sys
-import logging
 from tempfile import NamedTemporaryFile, TemporaryDirectory
-from typing import Dict, Any
+from typing import Any, Dict
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Stacking, Structure2D)
+from rnapolis.common import (
+    BasePair,
+    BasePhosphate,
+    BaseRibose,
+    LeontisWesthof,
+    OtherInteraction,
+    Residue,
+    ResidueAuth,
+    Stacking,
+    Structure2D,
+)
 
-from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import CifParsingError
+from adapters.tools.utils import run_external_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -227,8 +236,7 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
             else:
                 stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
-
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions, None, None, None, [], [], [], [])
 
 def main():
     structure = analyze(sys.stdin.read())

@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named fr3d.py, because it imports from "fr3d", and Python complains about that
 import io
+import logging
 import os
 import sys
-import logging
-from typing import Tuple, Dict, Any
+from typing import Any, Dict, Tuple
 
 import orjson
 from fr3d.cif.reader import Cif
@@ -99,7 +99,7 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
             if x == 'other':
                 other_interactions.append(OtherInteraction(nt1, nt2))
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions)
+    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions, None, None, None, [], [], [], [])
 
 
 def main():

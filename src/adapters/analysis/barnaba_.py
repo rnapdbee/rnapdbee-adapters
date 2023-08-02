@@ -1,12 +1,12 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named barnaba.py, because it imports from "barnaba", and Python complains about that
 
+import logging
 import re
 import sys
 import tempfile
-import logging
 from collections import defaultdict
-from typing import Any, DefaultDict, Dict, List, Optional, Tuple, Set
+from typing import Any, DefaultDict, Dict, List, Optional, Set, Tuple
 
 import barnaba
 import orjson
@@ -21,8 +21,8 @@ from rnapolis.common import (
     Structure2D,
 )
 
-from adapters.tools.utils import suppress_stdout_stderr
 from adapters.exceptions import RegexError, ThirdPartySoftwareError
+from adapters.tools.utils import suppress_stdout_stderr
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,7 @@ class BarnabaAdapter:
     def __init__(self) -> None:
         # In the case of BaRNAba BasePhosphateIneractions
         # and BaseRiboseInteractions are always empty
-        self.analysis_output = Structure2D([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [], None, None, None, [], [], [], [])
         # BaRNAba replaces chain identifiers with numbers
         # so we need to remember them before processing
         self.chains: List[str] = []

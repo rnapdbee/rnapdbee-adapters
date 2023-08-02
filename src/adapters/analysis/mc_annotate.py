@@ -1,19 +1,30 @@
 #! /usr/bin/env python
 
+import logging
 import re
 import subprocess
 import sys
 import tempfile
-import logging
 from enum import Enum
 from typing import Any, Dict, List, Tuple, Union
 
 import orjson
-from rnapolis.common import (BasePair, BasePhosphate, BaseRibose, LeontisWesthof, OtherInteraction, Residue,
-                             ResidueAuth, Saenger, Stacking, StackingTopology, Structure2D)
+from rnapolis.common import (
+    BasePair,
+    BasePhosphate,
+    BaseRibose,
+    LeontisWesthof,
+    OtherInteraction,
+    Residue,
+    ResidueAuth,
+    Saenger,
+    Stacking,
+    StackingTopology,
+    Structure2D,
+)
 
-from adapters.tools.utils import run_external_cmd
 from adapters.exceptions import PdbParsingError, RegexError
+from adapters.tools.utils import run_external_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +89,7 @@ class MCAnnotateAdapter:
     NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
-        self.analysis_output = Structure2D([], [], [], [], [])
+        self.analysis_output = Structure2D([], [], [], [], [], None, None, None, [], [], [], [])
         # Since names are not present in adjacent and non-adjacent stackings
         # we need save these values eariler
         self.names: Dict[str, str] = {}
