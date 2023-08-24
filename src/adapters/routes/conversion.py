@@ -7,7 +7,7 @@ from adapters.tools import maxit
 from adapters.tools.utils import content_type, plain_response
 
 server = Blueprint('conversion', __name__)
-
+ 
 # MAXIT tool routes
 
 

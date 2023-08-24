@@ -7,10 +7,12 @@ import pytest
     [
         ('2z_74.pdb', '2z_74.cif', '/conversion-api/v1/ensure-cif'),
         ('2z_74.cif', '2z_74_out.pdb', '/conversion-api/v1/ensure-pdb'),
+        ('1ddy.bpseq', '1ddy.dbn', '/conversion-api/v1/bpseq2dbn'),
     ],
     ids=[
         '/conversion-api/v1/ensure-cif',
         '/conversion-api/v1/ensure-pdb',
+        '/conversion-api/v1/bpseq2dbn',
     ],
     indirect=True,
 )
