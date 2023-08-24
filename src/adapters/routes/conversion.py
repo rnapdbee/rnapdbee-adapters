@@ -1,5 +1,3 @@
-from tempfile import NamedTemporaryFile
-
 from flask import Blueprint, request
 from rnapolis.common import BpSeq
 
