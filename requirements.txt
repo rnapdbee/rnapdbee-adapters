@@ -9,5 +9,5 @@ lxml==4.9.*
 svg-stack==0.1.0
 dataclasses-json==0.6.*
 mmcif-pdbx==2.0.1
-Flask-Caching==2.0.* 
+Flask-Caching==2.1.* 
 git+https://github.com/BGSU-RNA/fr3d-python@3c6fbedc5b106e13e8452de5a226742993786bd5
