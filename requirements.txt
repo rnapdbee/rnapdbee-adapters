@@ -1,5 +1,5 @@
 mmcif==0.81
-Flask==2.3.*
+Flask==3.0.*
 orjson==3.9.*
 barnaba==0.1.9
 gunicorn==21.2.*
