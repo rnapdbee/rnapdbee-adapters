@@ -117,6 +117,21 @@ def parse_base_pairs(bpnet_output: str):
             nt4 = residue_from_pair(fields[22:26])
             lw = convert_lw(fields[26])
             base_pairs.append(BasePair(nt1, nt4, lw, None))
+        elif len(fields) == 37:
+            # quintuple
+            nt1 = residue_from_pair(fields[1:5])
+            nt2 = residue_from_pair(fields[6:10])
+            lw = convert_lw(fields[10])
+            base_pairs.append(BasePair(nt1, nt2, lw, None))
+            nt3 = residue_from_pair(fields[14:18])
+            lw = convert_lw(fields[18])
+            base_pairs.append(BasePair(nt1, nt3, lw, None))
+            nt4 = residue_from_pair(fields[22:26])
+            lw = convert_lw(fields[26])
+            base_pairs.append(BasePair(nt1, nt4, lw, None))
+            nt5 = residue_from_pair(fields[30:34])
+            lw = convert_lw(fields[34])
+            base_pairs.append(BasePair(nt1, nt5, lw, None))
         else:
             raise CifParsingError('Failed to parse line: ' + line)
 
