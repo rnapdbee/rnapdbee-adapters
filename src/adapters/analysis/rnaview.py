@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional, Tuple
 
 import orjson
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     BasePhosphate,
     BaseRibose,
@@ -18,7 +19,6 @@ from rnapolis.common import (
     ResidueAuth,
     Saenger,
     Stacking,
-    Structure2D,
 )
 
 from adapters.exceptions import PdbParsingError, RegexError
@@ -132,9 +132,7 @@ class RNAViewAdapter:
 
     def __init__(self) -> None:
         self.residues_from_pdb: Dict[int, Residue] = {}
-        self.analysis_output = Structure2D(
-            [], [], [], [], [], None, None, None, [], [], [], []
-        )
+        self.analysis_output = BaseInteractions([], [], [], [], [])
 
     @classmethod
     def run_rnaview(cls, file_content: str) -> str:
@@ -290,7 +288,9 @@ class RNAViewAdapter:
                 f"Wrong internal index for {residue_right}. Fix RNAView internal index mapping."
             )
 
-    def analyze_by_rnaview(self, file_content: str, **_: Dict[str, Any]) -> Structure2D:
+    def analyze_by_rnaview(
+        self, file_content: str, **_: Dict[str, Any]
+    ) -> BaseInteractions:
         self.append_residues_from_pdb_using_rnaview_indexing(file_content)
         rnaview_result = RNAViewAdapter.run_rnaview(file_content)
 
@@ -311,7 +311,7 @@ class RNAViewAdapter:
         return self.analysis_output
 
 
-def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> BaseInteractions:
     return RNAViewAdapter().analyze_by_rnaview(file_content, **kwargs)
 
 

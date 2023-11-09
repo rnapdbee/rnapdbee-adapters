@@ -1,6 +1,7 @@
 from typing import Callable, Dict, Iterable, List, Tuple, Type, TypeVar
 
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     BasePhosphate,
     BaseRibose,
@@ -12,15 +13,14 @@ from rnapolis.common import (
     ResidueLabel,
     Stacking,
     StackingTopology,
-    Structure2D,
 )
 
 InteractionTypeT = TypeVar("InteractionTypeT", BasePair, Stacking, OtherInteraction)
 
 
 def apply(
-    analysis_output: Structure2D, functions_args: Iterable[Tuple[Callable, Dict]]
-) -> Structure2D:
+    analysis_output: BaseInteractions, functions_args: Iterable[Tuple[Callable, Dict]]
+) -> BaseInteractions:
     for function, kwargs in functions_args:
         analysis_output = function(analysis_output, **kwargs)
 
@@ -33,7 +33,7 @@ def apply(
     }
 
 
-def remove_duplicate_pairs(analysis_output: Structure2D, *_) -> Structure2D:
+def remove_duplicate_pairs(analysis_output: BaseInteractions, *_) -> BaseInteractions:
     stacking_topology_mapping = {
         StackingTopology.upward: StackingTopology.downward,
         StackingTopology.downward: StackingTopology.upward,
@@ -78,23 +78,16 @@ def remove_duplicate_pairs(analysis_output: Structure2D, *_) -> Structure2D:
         reverse_other_interaction,
     )
 
-    return Structure2D(
+    return BaseInteractions(
         filtered_base_pairs,
         filtered_stackings,
         analysis_output.baseRiboseInteractions,
         analysis_output.basePhosphateInteractions,
         filtered_other_interactions,
-        None,
-        None,
-        None,
-        [],
-        [],
-        [],
-        [],
     )
 
 
-def sort_interactions_lists(analysis_output: Structure2D, *_) -> Structure2D:
+def sort_interactions_lists(analysis_output: BaseInteractions, *_) -> BaseInteractions:
     interactions_list: List[Type[Interaction]]
     for interactions_list in [
         analysis_output.basePairs,
@@ -115,7 +108,7 @@ def sort_interactions_lists(analysis_output: Structure2D, *_) -> Structure2D:
     return analysis_output
 
 
-def restore_chains(analysis_output: Structure2D, **kwargs) -> Structure2D:
+def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteractions:
     def map_residue(res: Residue, mapped_chains: Dict[str, str]):
         if res.label is None:
             label = None
@@ -191,17 +184,10 @@ def restore_chains(analysis_output: Structure2D, **kwargs) -> Structure2D:
             )
         )
 
-    return Structure2D(
+    return BaseInteractions(
         base_pairs,
         stackings,
         base_riboses,
         base_phosphates,
-        other_interactions,
-        None,
-        None,
-        None,
-        [],
-        [],
-        [],
-        [],
+        other_interactions
     )

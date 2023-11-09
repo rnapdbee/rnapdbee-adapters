@@ -1,16 +1,12 @@
 # pylint: skip-file
 # flake8: noqa
 # type: ignore
-import os
-import os.path
 import sys
-import tempfile
-import uuid
 
 import clr
 from System import Activator, Array
 from System.IO import StringWriter
-from System.Reflection import Assembly, BindingFlags, TargetInvocationException
+from System.Reflection import Assembly, BindingFlags
 
 clr.AddReference("PseudoViewer3.exe")
 import PseudoViewer

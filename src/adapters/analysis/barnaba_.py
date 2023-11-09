@@ -11,6 +11,7 @@ from typing import Any, DefaultDict, Dict, List, Optional, Set, Tuple
 import barnaba
 import orjson
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     LeontisWesthof,
     OtherInteraction,
@@ -18,7 +19,6 @@ from rnapolis.common import (
     ResidueAuth,
     Stacking,
     StackingTopology,
-    Structure2D,
 )
 
 from adapters.exceptions import RegexError, ThirdPartySoftwareError
@@ -52,9 +52,7 @@ class BarnabaAdapter:
     def __init__(self) -> None:
         # In the case of BaRNAba BasePhosphateIneractions
         # and BaseRiboseInteractions are always empty
-        self.analysis_output = Structure2D(
-            [], [], [], [], [], None, None, None, [], [], [], []
-        )
+        self.analysis_output = BaseInteractions([], [], [], [], [])
         # BaRNAba replaces chain identifiers with numbers
         # so we need to remember them before processing
         self.chains: List[str] = []
@@ -187,7 +185,9 @@ class BarnabaAdapter:
                         ) from exception
         return barnaba_result
 
-    def analyze_by_barnaba(self, file_content: str, **_: Dict[str, Any]) -> Structure2D:
+    def analyze_by_barnaba(
+        self, file_content: str, **_: Dict[str, Any]
+    ) -> BaseInteractions:
         self.append_chains(file_content)
         renumbered_pdb: str = self.renumber_pdb(file_content)
         stackings, pairings, res = self.run_barnaba(renumbered_pdb)
@@ -197,7 +197,7 @@ class BarnabaAdapter:
         return self.analysis_output
 
 
-def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> BaseInteractions:
     return BarnabaAdapter().analyze_by_barnaba(file_content, **kwargs)
 
 

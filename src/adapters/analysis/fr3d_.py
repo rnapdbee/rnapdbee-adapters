@@ -10,6 +10,7 @@ import orjson
 from fr3d.cif.reader import Cif
 from fr3d.classifiers import NA_pairwise_interactions as interactions
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     BasePhosphate,
     BaseRibose,
@@ -19,7 +20,6 @@ from rnapolis.common import (
     ResidueAuth,
     Stacking,
     StackingTopology,
-    Structure2D,
 )
 
 logger = logging.getLogger(__name__)
@@ -66,7 +66,7 @@ def unify_classification(fr3d_name: str) -> Tuple:
     return ("other", None)
 
 
-def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
+def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     with open(os.devnull, "w", encoding="utf-8") as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
@@ -104,19 +104,13 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
             if x == "other":
                 other_interactions.append(OtherInteraction(nt1, nt2))
 
-    return Structure2D(
+    return BaseInteractions(
         base_pairs,
         stackings,
         base_ribose_interactions,
         base_phosphate_interactions,
-        other_interactions,
-        None,
-        None,
-        None,
-        [],
-        [],
-        [],
-        [],
+        other_interactions
+
     )
 
 
