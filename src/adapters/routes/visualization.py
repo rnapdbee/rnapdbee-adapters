@@ -3,19 +3,19 @@
 from __future__ import annotations
 
 from flask import Blueprint, request
-from adapters.visualization.rnapuzzler import RNAPuzzlerDrawer
 
-from adapters.visualization.weblogo_ import WeblogoDrawer
-from adapters.visualization.rchie import RChieDrawer
-from adapters.visualization.pseudoviewer import PseudoViewerDrawer
+from adapters.services import run_multi_visualization_adapter, run_visualization_adapter
 from adapters.tools.utils import content_type, svg_response
-from adapters.services import run_visualization_adapter, run_multi_visualization_adapter
+from adapters.visualization.pseudoviewer import PseudoViewerDrawer
+from adapters.visualization.rchie import RChieDrawer
+from adapters.visualization.rnapuzzler import RNAPuzzlerDrawer
+from adapters.visualization.weblogo_ import WeblogoDrawer
 
-server = Blueprint('visualization', __name__)
+server = Blueprint("visualization", __name__)
 
 
-@server.route('/weblogo', methods=['POST'])
-@content_type('application/json')
+@server.route("/weblogo", methods=["POST"])
+@content_type("application/json")
 @svg_response()
 def visualize_weblogo():
     return run_multi_visualization_adapter(
@@ -24,8 +24,8 @@ def visualize_weblogo():
     )
 
 
-@server.route('/rchie', methods=['POST'])
-@content_type('application/json')
+@server.route("/rchie", methods=["POST"])
+@content_type("application/json")
 @svg_response()
 def visualize_rchie():
     return run_visualization_adapter(
@@ -34,8 +34,8 @@ def visualize_rchie():
     )
 
 
-@server.route('/pseudoviewer', methods=['POST'])
-@content_type('application/json')
+@server.route("/pseudoviewer", methods=["POST"])
+@content_type("application/json")
 @svg_response()
 def visualize_pseudoviewer():
     return run_visualization_adapter(
@@ -44,8 +44,8 @@ def visualize_pseudoviewer():
     )
 
 
-@server.route('/rnapuzzler', methods=['POST'])
-@content_type('application/json')
+@server.route("/rnapuzzler", methods=["POST"])
+@content_type("application/json")
 @svg_response()
 def visualize_rnapuzzler():
     return run_visualization_adapter(

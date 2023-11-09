@@ -3,16 +3,16 @@ import pytest
 
 # Parameters: (pdb_or_cif, expected_pdb_or_cif, route)
 @pytest.mark.parametrize(
-    'tool_test_result',
+    "tool_test_result",
     [
-        ('2z_74.pdb', '2z_74.cif', '/conversion-api/v1/ensure-cif'),
-        ('2z_74.cif', '2z_74_out.pdb', '/conversion-api/v1/ensure-pdb'),
-        ('1ddy.bpseq', '1ddy.dbn', '/conversion-api/v1/bpseq2dbn'),
+        ("2z_74.pdb", "2z_74.cif", "/conversion-api/v1/ensure-cif"),
+        ("2z_74.cif", "2z_74_out.pdb", "/conversion-api/v1/ensure-pdb"),
+        ("1ddy.bpseq", "1ddy.dbn", "/conversion-api/v1/bpseq2dbn"),
     ],
     ids=[
-        '/conversion-api/v1/ensure-cif',
-        '/conversion-api/v1/ensure-pdb',
-        '/conversion-api/v1/bpseq2dbn',
+        "/conversion-api/v1/ensure-cif",
+        "/conversion-api/v1/ensure-pdb",
+        "/conversion-api/v1/bpseq2dbn",
     ],
     indirect=True,
 )

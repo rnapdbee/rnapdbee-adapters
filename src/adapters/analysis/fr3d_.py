@@ -28,8 +28,8 @@ SCREEN_DISTANCE_CUTOFF = 12
 
 
 def parse_unit_id(nt: str) -> Residue:
-    fields = nt.split('|')
-    icode = fields[7] if len(fields) >= 8 and fields[7] != '' else None
+    fields = nt.split("|")
+    icode = fields[7] if len(fields) >= 8 and fields[7] != "" else None
     auth = ResidueAuth(fields[2], int(fields[4]), icode, fields[3])
     return Residue(None, auth)
 
@@ -40,43 +40,46 @@ def parse_unit_ids(pair: Tuple) -> Tuple[Residue, Residue]:
 
 
 def unify_classification(fr3d_name: str) -> Tuple:
-    name = fr3d_name.replace('_exp', '')
-    name = name[1:] if name.startswith('n') else name
-    name = name[1:] if name.startswith('a') else name
+    name = fr3d_name.replace("_exp", "")
+    name = name[1:] if name.startswith("n") else name
+    name = name[1:] if name.startswith("a") else name
 
-    if name == 's33':
-        return ('stacking', StackingTopology.downward)
-    if name == 's55':
-        return ('stacking', StackingTopology.upward)
-    if name == 's35':
-        return ('stacking', StackingTopology.outward)
-    if name == 's53':
-        return ('stacking', StackingTopology.inward)
+    if name == "s33":
+        return ("stacking", StackingTopology.downward)
+    if name == "s55":
+        return ("stacking", StackingTopology.upward)
+    if name == "s35":
+        return ("stacking", StackingTopology.outward)
+    if name == "s53":
+        return ("stacking", StackingTopology.inward)
     if name in ("s3O2'", "s3O3'", "s3O4'"):
-        return ('base-ribose', None)
+        return ("base-ribose", None)
     if name in ("s3O5'", "s3OP1", "s3OP2"):
-        return ('base-phosphate', None)
+        return ("base-phosphate", None)
     if len(name) == 3:
         try:
-            name = 'tHS' if name.lower() == 'hts' else name  # typo?
-            name = f'{name[0].lower()}{name[1].upper()}{name[2].upper()}'
-            return ('base-pair', LeontisWesthof[name])
+            name = "tHS" if name.lower() == "hts" else name  # typo?
+            name = f"{name[0].lower()}{name[1].upper()}{name[2].upper()}"
+            return ("base-pair", LeontisWesthof[name])
         except KeyError:
-            logger.debug(f'Fr3d unknown interaction: {fr3d_name}')
-    return ('other', None)
+            logger.debug(f"Fr3d unknown interaction: {fr3d_name}")
+    return ("other", None)
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
-    with open(os.devnull, 'w', encoding='utf-8') as devnull:
+    with open(os.devnull, "w", encoding="utf-8") as devnull:
         original_stdout = sys.stdout
         sys.stdout = devnull
         structure = Cif(io.StringIO(file_content)).structure()
-        interaction_map, _, _, _ = interactions.annotate_nt_nt_in_structure(structure, {
-            'stacking': [],
-            'coplanar': [],
-        })
+        interaction_map, _, _, _ = interactions.annotate_nt_nt_in_structure(
+            structure,
+            {
+                "stacking": [],
+                "coplanar": [],
+            },
+        )
         sys.stdout = original_stdout
-        logger.debug(f'fr3d interaction map: {interaction_map}')
+        logger.debug(f"fr3d interaction map: {interaction_map}")
 
     base_pairs = []
     stackings = []
@@ -88,25 +91,39 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> Structure2D:
         for value in value_list:
             nt1, nt2 = parse_unit_ids(value)
             x, classification = unify_classification(key)
-            if x == 'base-pair':
+            if x == "base-pair":
                 base_pairs.append(BasePair(nt1, nt2, classification, None))
-            if x == 'stacking':
+            if x == "stacking":
                 stackings.append(Stacking(nt1, nt2, classification))
-            if x == 'base-ribose':
+            if x == "base-ribose":
                 base_ribose_interactions.append(BaseRibose(nt1, nt2, classification))
-            if x == 'base-phosphate':
-                base_phosphate_interactions.append(BasePhosphate(nt1, nt2, classification))
-            if x == 'other':
+            if x == "base-phosphate":
+                base_phosphate_interactions.append(
+                    BasePhosphate(nt1, nt2, classification)
+                )
+            if x == "other":
                 other_interactions.append(OtherInteraction(nt1, nt2))
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions,
-                       None, None, None, [], [], [], [])
+    return Structure2D(
+        base_pairs,
+        stackings,
+        base_ribose_interactions,
+        base_phosphate_interactions,
+        other_interactions,
+        None,
+        None,
+        None,
+        [],
+        [],
+        [],
+        [],
+    )
 
 
 def main():
     result = analyze(sys.stdin.read())
-    print(orjson.dumps(result).decode('utf-8'))
+    print(orjson.dumps(result).decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

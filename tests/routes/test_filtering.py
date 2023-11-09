@@ -3,12 +3,12 @@ import pytest
 
 # Parameters: (pdb_or_cif, expected_pdb_or_cif, route)
 @pytest.mark.parametrize(
-    'tool_test_result',
+    "tool_test_result",
     [
-        ('2z_74.pdb', '2z_74_filter.cif', '/filtering-api/v1/filter'),
+        ("2z_74.pdb", "2z_74_filter.cif", "/filtering-api/v1/filter"),
     ],
     ids=[
-        '/filtering-api/v1/filter',
+        "/filtering-api/v1/filter",
     ],
     indirect=True,
 )

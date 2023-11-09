@@ -43,11 +43,45 @@ class Element(enum.Enum):
 
     def atoms(self):
         if self == Element.PHOSPHATE:
-            return frozenset(("P", "OP1", "OP2", "O5'", "C5'", "C4'", "C3'", "O3'", "O5*", "C5*", "C4*", "C3*", "O3*"))
+            return frozenset(
+                (
+                    "P",
+                    "OP1",
+                    "OP2",
+                    "O5'",
+                    "C5'",
+                    "C4'",
+                    "C3'",
+                    "O3'",
+                    "O5*",
+                    "C5*",
+                    "C4*",
+                    "C3*",
+                    "O3*",
+                )
+            )
         if self == Element.RIBOSE:
             return frozenset(("C1'", "C2'", "O2'", "O4'", "C1*", "C2*", "O2*", "O4*"))
         if self == Element.BASE:
-            return frozenset(("C2", "C4", "C5", "C6", "C8", "N1", "N2", "N3", "N4", "N6", "N7", "N9", "O2", "O4", "O6"))
+            return frozenset(
+                (
+                    "C2",
+                    "C4",
+                    "C5",
+                    "C6",
+                    "C8",
+                    "N1",
+                    "N2",
+                    "N3",
+                    "N4",
+                    "N6",
+                    "N7",
+                    "N9",
+                    "O2",
+                    "O4",
+                    "O6",
+                )
+            )
         raise NotImplementedError()
 
 
@@ -64,12 +98,12 @@ class Element(enum.Enum):
 # 		g - Protonated Hoogsteen edge (rarely found though).
 def convert_lw(bpnet_lw) -> LeontisWesthof:
     if len(bpnet_lw) != 4:
-        raise CifParsingError(f'bpnet lw invalid length: {bpnet_lw}')
-    bpnet_lw = bpnet_lw.replace('+', 'W').replace('z', 'S').replace('g', 'H')
+        raise CifParsingError(f"bpnet lw invalid length: {bpnet_lw}")
+    bpnet_lw = bpnet_lw.replace("+", "W").replace("z", "S").replace("g", "H")
     edge5 = bpnet_lw[0].upper()
     edge3 = bpnet_lw[2].upper()
     stericity = bpnet_lw[3].lower()
-    return LeontisWesthof[f'{stericity}{edge5}{edge3}']
+    return LeontisWesthof[f"{stericity}{edge5}{edge3}"]
 
 
 # Example lines:
@@ -82,7 +116,7 @@ def parse_base_pairs(bpnet_output: str):
     base_pairs = []
 
     for line in bpnet_output.splitlines():
-        if line.startswith('#'):
+        if line.startswith("#"):
             continue
 
         fields = line.strip().split()
@@ -141,7 +175,7 @@ def parse_base_pairs(bpnet_output: str):
             lw = convert_lw(fields[34])
             base_pairs.append(BasePair(nt1, nt5, lw, None))
         else:
-            raise CifParsingError('Failed to parse line: ' + line)
+            raise CifParsingError("Failed to parse line: " + line)
 
     return base_pairs
 
@@ -153,7 +187,7 @@ def parse_base_pairs(bpnet_output: str):
 #     ^------- residue name
 # ^----------- residue number
 def residue_from_pair(resinfo):
-    icode = None if resinfo[2] in ' ?' else resinfo[2]
+    icode = None if resinfo[2] in " ?" else resinfo[2]
     auth = ResidueAuth(resinfo[3], int(resinfo[0]), icode, resinfo[1])
     return Residue(None, auth)
 
@@ -169,7 +203,7 @@ def parse_overlaps(bpnet_output: str):
     other_interactions = []
 
     for line in bpnet_output.splitlines():
-        if line.startswith('OVLP'):
+        if line.startswith("OVLP"):
             fields = line.strip().split()
             if len(fields) == 13:
                 # ABVR      ASTK means Adjacent Stacking.
@@ -177,17 +211,17 @@ def parse_overlaps(bpnet_output: str):
                 # ABVR      ADJA means Adjacent contact but not proper stacking.
                 # ABVR      CROS means Cross overlap between BP and the opposite Diagonal.
                 # ABVR      CLOS means Otherwise overlap between any two bases.
-                if fields[7] in ['ASTK', 'OSTK', 'ADJA']:
+                if fields[7] in ["ASTK", "OSTK", "ADJA"]:
                     # TODO: below you can infer StackingTopology from the fields
                     nt1, nt2 = residues_from_overlap_info(fields)
                     stackings.append(Stacking(nt1, nt2, None))
             else:
-                raise CifParsingError('Failed to parse OVLP line: ' + line)
-        elif line.startswith('PROX'):
+                raise CifParsingError("Failed to parse OVLP line: " + line)
+        elif line.startswith("PROX"):
             fields = line.strip().split()
             if len(fields) == 11:
                 nt1, nt2 = residues_from_overlap_info(fields)
-                atom1, atom2 = fields[7].split(':')
+                atom1, atom2 = fields[7].split(":")
                 element1, element2 = Element.assign(atom1), Element.assign(atom2)
 
                 # TODO: below you can infer the BR classification from atom names
@@ -207,9 +241,14 @@ def parse_overlaps(bpnet_output: str):
                 # other
                 other_interactions.append(OtherInteraction(nt1, nt2))
             else:
-                raise CifParsingError('Failed to parse PROX line: ' + line)
+                raise CifParsingError("Failed to parse PROX line: " + line)
 
-    return stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions
+    return (
+        stackings,
+        base_ribose_interactions,
+        base_phosphate_interactions,
+        other_interactions,
+    )
 
 
 # Example:
@@ -220,14 +259,14 @@ def parse_overlaps(bpnet_output: str):
 #                                ^---------------------------- residue numbers
 #                        ^------------------------------------ insertion code (lhs)
 def residues_from_overlap_info(fields):
-    chain1, chain2 = fields[6].split('-')
-    number1, number2 = map(int, fields[3].split(':'))
+    chain1, chain2 = fields[6].split("-")
+    number1, number2 = map(int, fields[3].split(":"))
     icode1, icode2 = fields[2], fields[4]
-    name1, name2 = fields[5].split(':')
+    name1, name2 = fields[5].split(":")
 
-    if icode1 in ' ?':
+    if icode1 in " ?":
         icode1 = None
-    if icode2 in ' ?':
+    if icode2 in " ?":
         icode2 = None
 
     nt1 = Residue(None, ResidueAuth(chain1, number1, icode1, name1))
@@ -237,36 +276,61 @@ def residues_from_overlap_info(fields):
 
 def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
     with TemporaryDirectory() as directory:
-        with NamedTemporaryFile('w+', dir=directory, suffix='.cif') as file:
+        with NamedTemporaryFile("w+", dir=directory, suffix=".cif") as file:
             file.write(cif_content)
             file.seek(0)
-            run_external_cmd(['bpnet.linux', file.name], cwd=directory)
+            run_external_cmd(["bpnet.linux", file.name], cwd=directory)
 
-            if os.path.exists(file.name.replace('.cif', '.out')):
-                with open(file.name.replace('.cif', '.out'), encoding='utf-8') as bpnet_file:
+            if os.path.exists(file.name.replace(".cif", ".out")):
+                with open(
+                    file.name.replace(".cif", ".out"), encoding="utf-8"
+                ) as bpnet_file:
                     bpnet_output = bpnet_file.read()
-                logger.debug(f'bpnet output: {bpnet_output}')
+                logger.debug(f"bpnet output: {bpnet_output}")
                 base_pairs = parse_base_pairs(bpnet_output)
             else:
                 base_pairs = []
 
-            if os.path.exists(file.name.replace('.cif', '.rob')):
-                with open(file.name.replace('.cif', '.rob'), encoding='utf-8') as bpnet_file:
+            if os.path.exists(file.name.replace(".cif", ".rob")):
+                with open(
+                    file.name.replace(".cif", ".rob"), encoding="utf-8"
+                ) as bpnet_file:
                     bpnet_rob = bpnet_file.read()
-                logger.debug(f'bpnet rob: {bpnet_rob}')
-                stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = parse_overlaps(
-                    bpnet_rob)
+                logger.debug(f"bpnet rob: {bpnet_rob}")
+                (
+                    stackings,
+                    base_ribose_interactions,
+                    base_phosphate_interactions,
+                    other_interactions,
+                ) = parse_overlaps(bpnet_rob)
             else:
-                stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions = [], [], [], []
+                (
+                    stackings,
+                    base_ribose_interactions,
+                    base_phosphate_interactions,
+                    other_interactions,
+                ) = ([], [], [], [])
 
-    return Structure2D(base_pairs, stackings, base_ribose_interactions, base_phosphate_interactions, other_interactions,
-                       None, None, None, [], [], [], [])
+    return Structure2D(
+        base_pairs,
+        stackings,
+        base_ribose_interactions,
+        base_phosphate_interactions,
+        other_interactions,
+        None,
+        None,
+        None,
+        [],
+        [],
+        [],
+        [],
+    )
 
 
 def main():
     structure = analyze(sys.stdin.read())
-    print(orjson.dumps(structure).decode('utf-8'))
+    print(orjson.dumps(structure).decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
