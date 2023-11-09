@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Tuple, Union
 
 import orjson
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     BasePhosphate,
     BaseRibose,
@@ -20,7 +21,6 @@ from rnapolis.common import (
     Saenger,
     Stacking,
     StackingTopology,
-    Structure2D,
 )
 
 from adapters.exceptions import PdbParsingError, RegexError
@@ -90,9 +90,7 @@ class MCAnnotateAdapter:
     NAME_INDEX = slice(17, 20)
 
     def __init__(self) -> None:
-        self.analysis_output = Structure2D(
-            [], [], [], [], [], None, None, None, [], [], [], []
-        )
+        self.analysis_output = BaseInteractions([], [], [], [], [])
         # Since names are not present in adjacent and non-adjacent stackings
         # we need save these values eariler
         self.names: Dict[str, str] = {}
@@ -276,7 +274,7 @@ class MCAnnotateAdapter:
 
     def analyze_by_mc_annotate(
         self, pdb_content: str, **_: Dict[str, Any]
-    ) -> Structure2D:
+    ) -> BaseInteractions:
         self.append_names(pdb_content)
         mc_result = self.run_mc_annotate(pdb_content)
         current_state = None
@@ -309,7 +307,7 @@ class MCAnnotateAdapter:
         return self.analysis_output
 
 
-def analyze(file_content: str, **kwargs: Dict[str, Any]) -> Structure2D:
+def analyze(file_content: str, **kwargs: Dict[str, Any]) -> BaseInteractions:
     return MCAnnotateAdapter().analyze_by_mc_annotate(file_content, **kwargs)
 
 

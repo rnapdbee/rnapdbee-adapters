@@ -8,6 +8,7 @@ from typing import Any, Dict
 
 import orjson
 from rnapolis.common import (
+    BaseInteractions,
     BasePair,
     BasePhosphate,
     BaseRibose,
@@ -16,7 +17,6 @@ from rnapolis.common import (
     Residue,
     ResidueAuth,
     Stacking,
-    Structure2D,
 )
 
 from adapters.exceptions import CifParsingError
@@ -217,7 +217,7 @@ def residues_from_overlap_info(fields):
     return nt1, nt2
 
 
-def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
+def analyze(cif_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     with TemporaryDirectory() as directory:
         with NamedTemporaryFile("w+", dir=directory, suffix=".cif") as file:
             file.write(cif_content)
@@ -255,19 +255,12 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
                     other_interactions,
                 ) = ([], [], [], [])
 
-    return Structure2D(
+    return BaseInteractions(
         base_pairs,
         stackings,
         base_ribose_interactions,
         base_phosphate_interactions,
-        other_interactions,
-        None,
-        None,
-        None,
-        [],
-        [],
-        [],
-        [],
+        other_interactions
     )
 
 

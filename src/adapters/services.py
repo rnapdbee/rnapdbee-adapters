@@ -1,15 +1,15 @@
 from typing import Callable
 
 import orjson
-from rnapolis.common import Structure2D
+from rnapolis.common import BaseInteractions
 
 from adapters.tools import cif_filter, output_filter, pdb_filter, visualization_utils
 from adapters.visualization.model import Model2D, ModelMulti2D
 
 
 def run_cif_adapter(
-    analyze: Callable[..., Structure2D], data: str, model: int
-) -> Structure2D:
+    analyze: Callable[..., BaseInteractions], data: str, model: int
+) -> BaseInteractions:
     cif_content = cif_filter.apply(
         data,
         [
@@ -31,8 +31,8 @@ def run_cif_adapter(
 
 
 def run_pdb_adapter(
-    analyze: Callable[..., Structure2D], data: str, model: int
-) -> Structure2D:
+    analyze: Callable[..., BaseInteractions], data: str, model: int
+) -> BaseInteractions:
     pdb_content = pdb_filter.apply(
         data,
         [
