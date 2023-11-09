@@ -96,6 +96,14 @@ def parse_base_pairs(bpnet_output: str):
             nt2 = residue_from_pair(fields[6:10])
             lw = convert_lw(fields[10])
             base_pairs.append(BasePair(nt1, nt2, lw, None))
+        elif len(fields) == 16:
+            # bifurcated pair
+            nt1 = residue_from_pair(fields[1:5])
+            nt2 = residue_from_pair(fields[9:13])
+            lw1 = convert_lw(fields[5])
+            lw2 = convert_lw(fields[13])
+            base_pairs.append(BasePair(nt1, nt2, lw1, None))
+            base_pairs.append(BasePair(nt1, nt2, lw2, None))
         elif len(fields) == 21:
             # triple
             nt1 = residue_from_pair(fields[1:5])
