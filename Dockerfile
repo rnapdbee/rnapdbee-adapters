@@ -102,7 +102,7 @@ ARG maxit_version
 ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
-    PATH=${PATH}:/bpnet-master/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
+    PATH=${PATH}:/bpnet-master/bin:/metbp-MetBPv1.2.4/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
     PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview \
@@ -149,6 +149,8 @@ RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 # bpnet copy
 ADD app/bpnet/bpnet-master.tar.gz /
+ADD app/bpnet/metbp-MetBPv1.2.4.tar.gz /
+RUN cd /metbp-MetBPv1.2.4 && make
 
 # MC-Annotate copy
 ADD app/mc-annotate/mc-annotate.tar.gz /mc-annotate/
