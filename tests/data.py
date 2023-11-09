@@ -10,48 +10,48 @@ from rnapolis.common import Residue, ResidueAuth, Stacking, StackingTopology
 TEST_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 RESIDUES = [
-    Residue(None, ResidueAuth('X', -1, 'A', 'res')),  # 0
-    Residue(None, ResidueAuth('Y', 65, 'L', '123')),  # 1
-    Residue(None, ResidueAuth('X', 2, 'C', 'aBc')),  # 2
-    Residue(None, ResidueAuth('Y', 64, 'K', 'G')),  # 3
-    Residue(None, ResidueAuth('A', 4, None, 'U')),  # 4
-    Residue(None, ResidueAuth('A', 14, None, 'T')),  # 5
-    Residue(None, ResidueAuth('A', 1, 'Y', 'C')),  # 6
-    Residue(None, ResidueAuth('A', 71, None, 'aaa')),  # 7
-    Residue(None, ResidueAuth('A', -122, 'Y', 'u')),  # 8
-    Residue(None, ResidueAuth('A', -122, None, 'B')),  # 9
-    Residue(None, ResidueAuth('.', -100, None, 'C')),  # 10
-    Residue(None, ResidueAuth('-', -1, None, 'K')),  # 11
-    Residue(None, ResidueAuth('.', -100, 'A', 'C')),  # 12
-    Residue(None, ResidueAuth('-', -1, 'a', 'U')),  # 13
-    Residue(None, ResidueAuth('-', -12, 'C', 'D')),  # 14
-    Residue(None, ResidueAuth('-', 0, None, 'd')),  # 15
-    Residue(None, ResidueAuth('.', 111, 'Z', 'aby')),  # 16
-    Residue(None, ResidueAuth('.', 2, 'X', 'I')),  # 17
-    Residue(None, ResidueAuth('9', 2, 'X', 'I')),  # 18
-    Residue(None, ResidueAuth("'", 2, 'X', 'I')),  # 19
+    Residue(None, ResidueAuth("X", -1, "A", "res")),  # 0
+    Residue(None, ResidueAuth("Y", 65, "L", "123")),  # 1
+    Residue(None, ResidueAuth("X", 2, "C", "aBc")),  # 2
+    Residue(None, ResidueAuth("Y", 64, "K", "G")),  # 3
+    Residue(None, ResidueAuth("A", 4, None, "U")),  # 4
+    Residue(None, ResidueAuth("A", 14, None, "T")),  # 5
+    Residue(None, ResidueAuth("A", 1, "Y", "C")),  # 6
+    Residue(None, ResidueAuth("A", 71, None, "aaa")),  # 7
+    Residue(None, ResidueAuth("A", -122, "Y", "u")),  # 8
+    Residue(None, ResidueAuth("A", -122, None, "B")),  # 9
+    Residue(None, ResidueAuth(".", -100, None, "C")),  # 10
+    Residue(None, ResidueAuth("-", -1, None, "K")),  # 11
+    Residue(None, ResidueAuth(".", -100, "A", "C")),  # 12
+    Residue(None, ResidueAuth("-", -1, "a", "U")),  # 13
+    Residue(None, ResidueAuth("-", -12, "C", "D")),  # 14
+    Residue(None, ResidueAuth("-", 0, None, "d")),  # 15
+    Residue(None, ResidueAuth(".", 111, "Z", "aby")),  # 16
+    Residue(None, ResidueAuth(".", 2, "X", "I")),  # 17
+    Residue(None, ResidueAuth("9", 2, "X", "I")),  # 18
+    Residue(None, ResidueAuth("'", 2, "X", "I")),  # 19
 ]
 
 STACKINGS = [
     Stacking(
         RESIDUES[0],
         RESIDUES[1],
-        StackingTopology['upward'],
+        StackingTopology["upward"],
     ),
     Stacking(
         RESIDUES[12],
         RESIDUES[13],
-        StackingTopology['outward'],
+        StackingTopology["outward"],
     ),
     Stacking(
         RESIDUES[6],
         RESIDUES[7],
-        StackingTopology['inward'],
+        StackingTopology["inward"],
     ),
     Stacking(
         RESIDUES[18],
         RESIDUES[19],
-        StackingTopology['inward'],
+        StackingTopology["inward"],
     ),
 ]
 
@@ -80,10 +80,10 @@ PDB_LINES_RENUMBERED = [
 ]
 
 MAPPED_VALUES = {
-    'X': {1: (-1, 'A'), 2: (1, 'B'), 3: (403, 'X')},
-    '-': {1: (-1, 'A')},
-    '.': {1: (-1, 'A')},
-    '_': {1: (-1, '')},
-    '9': {1: (2, 'X')},
-    "'": {1: (2, 'X')},
+    "X": {1: (-1, "A"), 2: (1, "B"), 3: (403, "X")},
+    "-": {1: (-1, "A")},
+    ".": {1: (-1, "A")},
+    "_": {1: (-1, "")},
+    "9": {1: (2, "X")},
+    "'": {1: (2, "X")},
 }

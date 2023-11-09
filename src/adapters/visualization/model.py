@@ -1,7 +1,7 @@
 # pylint: disable=invalid-name
-from typing import List, Optional
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
+from typing import List, Optional
 
 from dataclasses_json import DataClassJsonMixin
 
@@ -20,26 +20,26 @@ class Symbol:
 
 
 SYMBOLS = {
-    '.': Symbol(True, SymbolType.NONE, None),
-    '-': Symbol(False, SymbolType.NONE, None),
-    '(': Symbol(True, SymbolType.BEGIN, ')'),
-    ')': Symbol(True, SymbolType.END, '('),
-    '[': Symbol(False, SymbolType.BEGIN, ']'),
-    ']': Symbol(False, SymbolType.END, '['),
-    '{': Symbol(False, SymbolType.BEGIN, '}'),
-    '}': Symbol(False, SymbolType.END, '{'),
-    '<': Symbol(False, SymbolType.BEGIN, '>'),
-    '>': Symbol(False, SymbolType.END, '<'),
-    'A': Symbol(False, SymbolType.BEGIN, 'a'),
-    'a': Symbol(False, SymbolType.END, 'A'),
-    'B': Symbol(False, SymbolType.BEGIN, 'b'),
-    'b': Symbol(False, SymbolType.END, 'B'),
-    'C': Symbol(False, SymbolType.BEGIN, 'c'),
-    'c': Symbol(False, SymbolType.END, 'C'),
-    'D': Symbol(False, SymbolType.BEGIN, 'd'),
-    'd': Symbol(False, SymbolType.END, 'D'),
-    'E': Symbol(False, SymbolType.BEGIN, 'e'),
-    'e': Symbol(False, SymbolType.END, 'E'),
+    ".": Symbol(True, SymbolType.NONE, None),
+    "-": Symbol(False, SymbolType.NONE, None),
+    "(": Symbol(True, SymbolType.BEGIN, ")"),
+    ")": Symbol(True, SymbolType.END, "("),
+    "[": Symbol(False, SymbolType.BEGIN, "]"),
+    "]": Symbol(False, SymbolType.END, "["),
+    "{": Symbol(False, SymbolType.BEGIN, "}"),
+    "}": Symbol(False, SymbolType.END, "{"),
+    "<": Symbol(False, SymbolType.BEGIN, ">"),
+    ">": Symbol(False, SymbolType.END, "<"),
+    "A": Symbol(False, SymbolType.BEGIN, "a"),
+    "a": Symbol(False, SymbolType.END, "A"),
+    "B": Symbol(False, SymbolType.BEGIN, "b"),
+    "b": Symbol(False, SymbolType.END, "B"),
+    "C": Symbol(False, SymbolType.BEGIN, "c"),
+    "c": Symbol(False, SymbolType.END, "C"),
+    "D": Symbol(False, SymbolType.BEGIN, "d"),
+    "d": Symbol(False, SymbolType.END, "D"),
+    "E": Symbol(False, SymbolType.BEGIN, "e"),
+    "e": Symbol(False, SymbolType.END, "E"),
 }
 
 

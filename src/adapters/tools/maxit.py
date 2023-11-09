@@ -2,12 +2,12 @@
 import sys
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from adapters.tools.utils import is_cif, run_external_cmd
 from adapters.cache import cache
+from adapters.tools.utils import is_cif, run_external_cmd
 
 # constants defined by MAXIT
-MODE_PDB2CIF = '1'
-MODE_CIF2PDB = '2'
+MODE_PDB2CIF = "1"
+MODE_CIF2PDB = "2"
 
 
 def ensure_cif(file_content: str) -> str:
@@ -25,12 +25,20 @@ def ensure_pdb(file_content: str) -> str:
 @cache.memoize()
 def pdb2cif(pdb_content):
     with TemporaryDirectory() as directory:
-        with NamedTemporaryFile('w+', suffix='.pdb', dir=directory) as pdb:
-            with NamedTemporaryFile('w+', suffix='.cif', dir=directory) as cif:
+        with NamedTemporaryFile("w+", suffix=".pdb", dir=directory) as pdb:
+            with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
                 pdb.write(pdb_content)
                 pdb.seek(0)
                 run_external_cmd(
-                    ['maxit', '-input', pdb.name, '-output', cif.name, '-o', MODE_PDB2CIF],
+                    [
+                        "maxit",
+                        "-input",
+                        pdb.name,
+                        "-output",
+                        cif.name,
+                        "-o",
+                        MODE_PDB2CIF,
+                    ],
                     cwd=directory,
                 )
                 cif.seek(0)
@@ -42,12 +50,20 @@ def pdb2cif(pdb_content):
 @cache.memoize()
 def cif2pdb(cif_content):
     with TemporaryDirectory() as directory:
-        with NamedTemporaryFile('w+', suffix='.cif', dir=directory) as cif:
-            with NamedTemporaryFile('w+', suffix='.pdb', dir=directory) as pdb:
+        with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
+            with NamedTemporaryFile("w+", suffix=".pdb", dir=directory) as pdb:
                 cif.write(cif_content)
                 cif.seek(0)
                 run_external_cmd(
-                    ['maxit', '-input', cif.name, '-output', pdb.name, '-o', MODE_CIF2PDB],
+                    [
+                        "maxit",
+                        "-input",
+                        cif.name,
+                        "-output",
+                        pdb.name,
+                        "-o",
+                        MODE_CIF2PDB,
+                    ],
                     cwd=directory,
                 )
                 pdb.seek(0)
@@ -60,5 +76,5 @@ def main():
     print(ensure_cif(sys.stdin.read()))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
