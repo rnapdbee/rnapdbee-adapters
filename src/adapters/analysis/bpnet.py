@@ -114,82 +114,25 @@ def convert_lw(bpnet_lw) -> LeontisWesthof:
 #      4     4   G ? A    W:HC TP 1.31
 def parse_base_pairs(bpnet_output: str):
     base_pairs = []
+    data = orjson.loads(bpnet_output)
 
-    for line in bpnet_output.splitlines():
-        if line.startswith("#"):
-            continue
-
-        fields = line.strip().split()
-
-        if len(fields) == 5:
-            # unpaired residue
-            pass
-        elif len(fields) == 13:
-            # pair
-            nt1 = residue_from_pair(fields[1:5])
-            nt2 = residue_from_pair(fields[6:10])
-            lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw, None))
-        elif len(fields) == 16:
-            # bifurcated pair
-            nt1 = residue_from_pair(fields[1:5])
-            nt2 = residue_from_pair(fields[9:13])
-            lw1 = convert_lw(fields[5])
-            lw2 = convert_lw(fields[13])
-            base_pairs.append(BasePair(nt1, nt2, lw1, None))
-            base_pairs.append(BasePair(nt1, nt2, lw2, None))
-        elif len(fields) == 21:
-            # triple
-            nt1 = residue_from_pair(fields[1:5])
-            nt2 = residue_from_pair(fields[6:10])
-            lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw, None))
-            nt3 = residue_from_pair(fields[14:18])
-            lw = convert_lw(fields[18])
-            base_pairs.append(BasePair(nt1, nt3, lw, None))
-        elif len(fields) == 29:
-            # quadruple
-            nt1 = residue_from_pair(fields[1:5])
-            nt2 = residue_from_pair(fields[6:10])
-            lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw, None))
-            nt3 = residue_from_pair(fields[14:18])
-            lw = convert_lw(fields[18])
-            base_pairs.append(BasePair(nt1, nt3, lw, None))
-            nt4 = residue_from_pair(fields[22:26])
-            lw = convert_lw(fields[26])
-            base_pairs.append(BasePair(nt1, nt4, lw, None))
-        elif len(fields) == 37:
-            # quintuple
-            nt1 = residue_from_pair(fields[1:5])
-            nt2 = residue_from_pair(fields[6:10])
-            lw = convert_lw(fields[10])
-            base_pairs.append(BasePair(nt1, nt2, lw, None))
-            nt3 = residue_from_pair(fields[14:18])
-            lw = convert_lw(fields[18])
-            base_pairs.append(BasePair(nt1, nt3, lw, None))
-            nt4 = residue_from_pair(fields[22:26])
-            lw = convert_lw(fields[26])
-            base_pairs.append(BasePair(nt1, nt4, lw, None))
-            nt5 = residue_from_pair(fields[30:34])
-            lw = convert_lw(fields[34])
-            base_pairs.append(BasePair(nt1, nt5, lw, None))
-        else:
-            raise CifParsingError("Failed to parse line: " + line)
+    for entry in data["basepairs"]:
+        nt1 = Residue(
+            None,
+            ResidueAuth(
+                entry["chain1"], entry["resnum1"], entry["ins1"], entry["resname1"]
+            ),
+        )
+        nt2 = Residue(
+            None,
+            ResidueAuth(
+                entry["chain2"], entry["resnum2"], entry["ins2"], entry["resname2"]
+            ),
+        )
+        lw = convert_lw(entry["basepair"])
+        base_pairs.append(BasePair(nt1, nt2, lw, None))
 
     return base_pairs
-
-
-# Examples:
-# 2   G ? A
-#         ^--- chain name
-#       ^----- insertion code
-#     ^------- residue name
-# ^----------- residue number
-def residue_from_pair(resinfo):
-    icode = None if resinfo[2] in " ?" else resinfo[2]
-    auth = ResidueAuth(resinfo[3], int(resinfo[0]), icode, resinfo[1])
-    return Residue(None, auth)
 
 
 # Example lines:
@@ -280,11 +223,12 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> Structure2D:
             file.write(cif_content)
             file.seek(0)
             run_external_cmd(["bpnet.linux", file.name], cwd=directory)
+            run_external_cmd(["metbp.linux", "-mode=dev", file.name], cwd=directory)
 
-            if os.path.exists(file.name.replace(".cif", ".out")):
-                with open(
-                    file.name.replace(".cif", ".out"), encoding="utf-8"
-                ) as bpnet_file:
+            basepair_json = file.name.replace(".cif", "_basepair.json")
+
+            if os.path.exists(basepair_json):
+                with open(basepair_json, encoding="utf-8") as bpnet_file:
                     bpnet_output = bpnet_file.read()
                 logger.debug(f"bpnet output: {bpnet_output}")
                 base_pairs = parse_base_pairs(bpnet_output)
