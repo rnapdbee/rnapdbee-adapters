@@ -6,7 +6,7 @@ barnaba==0.1.9
 gunicorn==21.2.*
 rnapolis==0.3.2
 weblogo==3.7.*
-lxml==4.9.*
+lxml==5.0.*
 svg-stack==0.1.0
 dataclasses-json==0.6.*
 mmcif-pdbx==2.0.1
