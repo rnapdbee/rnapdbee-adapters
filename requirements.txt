@@ -1,4 +1,4 @@
-graphviz==0.20.1
+graphviz==0.20.2
 mmcif==0.86.0
 Flask==3.0.*
 orjson==3.9.*
