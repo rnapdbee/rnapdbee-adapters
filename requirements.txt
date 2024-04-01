@@ -1,7 +1,7 @@
 graphviz==0.20.3
 mmcif==0.86.0
 Flask==3.0.*
-orjson==3.9.*
+orjson==3.10.*
 barnaba==0.1.9
 gunicorn==21.2.*
 rnapolis==0.3.10
