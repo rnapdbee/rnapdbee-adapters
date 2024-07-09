@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import logging
 import sys
-from tempfile import NamedTemporaryFile, TemporaryDirectory
+from tempfile import NamedTemporaryFile
 from typing import Any, Dict, List, Optional, Tuple
 
 import orjson
@@ -17,8 +17,7 @@ from rnapolis.common import (
 )
 from rnapolis.metareader import read_metadata
 
-from adapters.tools.maxit import MODE_CIF2MMCIF, ensure_cif
-from adapters.tools.utils import run_external_cmd
+from adapters.tools.maxit import ensure_mmcif
 
 logger = logging.getLogger(__name__)
 
@@ -113,40 +112,13 @@ def parse_base_pairs(ndb_struct_na_base_pair: List[Dict]) -> Tuple[List, List]:
     return base_pairs, other
 
 
-def generate_mmcif(file_content: str) -> str:
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
-            with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as mmcif:
-                cif.write(file_content)
-                cif.seek(0)
-                run_external_cmd(
-                    [
-                        "maxit",
-                        "-input",
-                        cif.name,
-                        "-output",
-                        mmcif.name,
-                        "-o",
-                        MODE_CIF2MMCIF,
-                    ],
-                    cwd=directory,
-                )
-                mmcif.seek(0)
-                cif_content = mmcif.read()
-
-    return cif_content
-
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
-    cif_content = ensure_cif(file_content)
-    mmcif_content = generate_mmcif(cif_content)
-
     with NamedTemporaryFile("w+", suffix=".cif") as mmcif:
-        mmcif.write(mmcif_content)
+        mmcif.write(file_content)
         mmcif.seek(0)
         metadata = read_metadata(mmcif, ["ndb_struct_na_base_pair"])
 
     base_pairs, other_interactions = parse_base_pairs(metadata["ndb_struct_na_base_pair"])
-
     return BaseInteractions(base_pairs, [], [], [], other_interactions)
 
 

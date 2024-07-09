@@ -137,7 +137,7 @@ def analyze_rnapolis():
 @content_type("text/plain")
 @json_response()
 def analyze_maxit_model(model: int):
-    return services.run_pdb_adapter(
+    return services.run_cif_adapter(
         maxit.analyze,
         request.data.decode("utf-8"),
         model,
