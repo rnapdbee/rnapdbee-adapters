@@ -343,6 +343,57 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
+  /analysis-api/v1/maxit:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform first model analysis using MAXIT"
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BaseInteractions"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /analysis-api/v1/maxit/{model}:
+    post:
+      tags:
+        - "Analysis API"
+      summary: "Perform chosen model analysis using MAXIT"
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: integer
+          example: 1
+      description: ""
+      requestBody:
+        $ref: "#/components/requestBodies/fileWithStructure"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BaseInteractions"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "415":
+          $ref: "#/components/responses/UnsupportedMedia"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
   # ---------- Conversion API ---------- #
 
   /conversion-api/v1/ensure-cif:
