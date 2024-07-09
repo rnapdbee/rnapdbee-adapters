@@ -68,6 +68,7 @@ Use `Content-Type: text/plain` and send `PDB` or `PDBx/mmCIF` with RNA structure
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/barnaba
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/bpnet
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/fr3d
+$ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/maxit
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/mc-annotate
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/rnapolis
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/rnaview
