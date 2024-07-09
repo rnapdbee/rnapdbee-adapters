@@ -3,7 +3,15 @@
 from flask import Blueprint, request
 
 from adapters import services
-from adapters.analysis import barnaba_, bpnet, fr3d_, mc_annotate, rnapolis_, rnaview
+from adapters.analysis import (
+    barnaba_,
+    bpnet,
+    fr3d_,
+    maxit,
+    mc_annotate,
+    rnapolis_,
+    rnaview,
+)
 from adapters.tools.utils import content_type, json_response
 
 server = Blueprint("analysis", __name__)
@@ -120,3 +128,22 @@ def analyze_rnapolis_model(model: int):
 @server.route("/rnapolis", methods=["POST"])
 def analyze_rnapolis():
     return analyze_rnapolis_model(1)
+
+
+# MAXIT adapter routes
+
+
+@server.route("/maxit/<int:model>", methods=["POST"])
+@content_type("text/plain")
+@json_response()
+def analyze_maxit_model(model: int):
+    return services.run_pdb_adapter(
+        maxit.analyze,
+        request.data.decode("utf-8"),
+        model,
+    )
+
+
+@server.route("/maxit", methods=["POST"])
+def analyze_maxit():
+    return analyze_maxit_model(1)

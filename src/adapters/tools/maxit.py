@@ -8,6 +8,7 @@ from adapters.tools.utils import is_cif, run_external_cmd
 # constants defined by MAXIT
 MODE_PDB2CIF = "1"
 MODE_CIF2PDB = "2"
+MODE_CIF2MMCIF = "8"
 
 
 def ensure_cif(file_content: str) -> str:
