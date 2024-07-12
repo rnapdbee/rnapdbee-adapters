@@ -36,17 +36,32 @@ jobs:
 
       - name: Install test requirements
         run: |
-          docker exec $DOCKER_CONTAINER bin/bash -c "
-            (time pip3 install -v -r test_requirements.txt) 2>&1 | tee pip_output.log || true
-            dmesg | tail -n 50 > dmesg_output.log
-            ps aux > ps_output.log
-          "
-          docker cp $DOCKER_CONTAINER:pip_output.log .
-          docker cp $DOCKER_CONTAINER:dmesg_output.log .
-          docker cp $DOCKER_CONTAINER:ps_output.log .
-          cat pip_output.log
-          cat dmesg_output.log
-          cat ps_output.log
+          # Attempt pip install and capture host dmesg before and after
+          dmesg > dmesg_before.log
+          { docker exec $DOCKER_CONTAINER /bin/bash -c "pip3 install -v -r test_requirements.txt"; } || true
+          dmesg > dmesg_after.log
+
+          # Capture host system information
+          free -m > memory_info.log
+          df -h > disk_info.log
+          ps aux > process_info.log
+
+          # Try to get any logs from inside the container
+          docker logs test_container > container_logs.log 2>&1 || true
+
+          # Display captured information
+          echo "dmesg before:"
+          cat dmesg_before.log
+          echo "dmesg after:"
+          cat dmesg_after.log
+          echo "Memory info:"
+          cat memory_info.log
+          echo "Disk info:"
+          cat disk_info.log
+          echo "Process info:"
+          cat process_info.log
+          echo "Container logs:"
+          cat container_logs.log
           false
 
       - name: Run test
