@@ -47,7 +47,7 @@ jobs:
           ps aux > process_info.log
 
           # Try to get any logs from inside the container
-          docker logs test_container > container_logs.log 2>&1 || true
+          docker logs $DOCKER_CONTAINER > container_logs.log 2>&1 || true
 
           # Display captured information
           echo "dmesg before:"
