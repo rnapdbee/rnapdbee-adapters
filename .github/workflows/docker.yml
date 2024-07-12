@@ -31,7 +31,19 @@ jobs:
           docker cp test_requirements.txt $DOCKER_CONTAINER:/
 
       - name: Install test requirements
-        run: docker start $DOCKER_CONTAINER && docker stats --no-stream $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install -v -r test_requirements.txt"
+        run: |
+          docker exec $DOCKER_CONTAINER bin/bash -c "
+            (time pip3 install -v -r test_requirements.txt) 2>&1 | tee pip_output.log || true
+            dmesg | tail -n 50 > dmesg_output.log
+            ps aux > ps_output.log
+          "
+          docker cp $DOCKER_CONTAINER:pip_output.log .
+          docker cp $DOCKER_CONTAINER:dmesg_output.log .
+          docker cp $DOCKER_CONTAINER:ps_output.log .
+          cat pip_output.log
+          cat dmesg_output.log
+          cat ps_output.log
+          false
 
       - name: Run test
         run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
