@@ -26,7 +26,8 @@ jobs:
           docker create --name $DOCKER_CONTAINER --env-file .env_ci $DOCKER_IMAGE
 
       - name: Start the docker container
-        run: docker start $DOCKER_CONTAINER
+        run: |
+          docker start $DOCKER_CONTAINER
 
       - name: Copy files
         run: |
@@ -34,11 +35,14 @@ jobs:
           docker cp test_requirements.txt $DOCKER_CONTAINER:/
 
       - name: Install test requirements
-        run: docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install -r test_requirements.txt"
+        run: |
+          { docker exec $DOCKER_CONTAINER /bin/bash -c "pip3 install -v -r test_requirements.txt"; } || true
+          exit_code=$?
+          docker logs $DOCKER_CONTAINER 2>&1 || true
+          exit ${exit_code}
 
       - name: Run test
-        run: |
-          docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
+        run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
 
   lint:
     runs-on: ubuntu-22.04

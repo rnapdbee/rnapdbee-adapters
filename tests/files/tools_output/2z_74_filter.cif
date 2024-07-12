@@ -432,8 +432,8 @@ _struct_ref.pdbx_db_isoform
 _struct_ref.entity_id 
 _struct_ref.pdbx_seq_one_letter_code 
 _struct_ref.pdbx_align_begin 
-1 PDB 2Z74     ? ? . ? ? 
-2 GB  AE013165 ? ? . ? ? 
+1 PDB 2Z74     ? ? 7 ? ? 
+2 GB  AE013165 ? ? 7 ? ? 
 # 
 loop_
 _struct_ref_seq.align_id 
@@ -489,6 +489,203 @@ MG  non-polymer                   . 'MAGNESIUM ION'                      ?      
 U   'RNA linking'                 y "URIDINE-5'-MONOPHOSPHATE"           ?                                                                                                            'C9 H13 N2 O9 P'  324.181 
 # 
 loop_
+_struct_conn.id 
+_struct_conn.conn_type_id 
+_struct_conn.pdbx_leaving_atom_flag 
+_struct_conn.pdbx_PDB_id 
+_struct_conn.ptnr1_label_asym_id 
+_struct_conn.ptnr1_label_comp_id 
+_struct_conn.ptnr1_label_seq_id 
+_struct_conn.ptnr1_label_atom_id 
+_struct_conn.pdbx_ptnr1_label_alt_id 
+_struct_conn.pdbx_ptnr1_PDB_ins_code 
+_struct_conn.pdbx_ptnr1_standard_comp_id 
+_struct_conn.ptnr1_symmetry 
+_struct_conn.ptnr2_label_asym_id 
+_struct_conn.ptnr2_label_comp_id 
+_struct_conn.ptnr2_label_seq_id 
+_struct_conn.ptnr2_label_atom_id 
+_struct_conn.pdbx_ptnr2_label_alt_id 
+_struct_conn.pdbx_ptnr2_PDB_ins_code 
+_struct_conn.ptnr1_auth_asym_id 
+_struct_conn.ptnr1_auth_comp_id 
+_struct_conn.ptnr1_auth_seq_id 
+_struct_conn.ptnr2_auth_asym_id 
+_struct_conn.ptnr2_auth_comp_id 
+_struct_conn.ptnr2_auth_seq_id 
+_struct_conn.ptnr2_symmetry 
+_struct_conn.pdbx_ptnr3_label_atom_id 
+_struct_conn.pdbx_ptnr3_label_seq_id 
+_struct_conn.pdbx_ptnr3_label_comp_id 
+_struct_conn.pdbx_ptnr3_label_asym_id 
+_struct_conn.pdbx_ptnr3_label_alt_id 
+_struct_conn.pdbx_ptnr3_PDB_ins_code 
+_struct_conn.details 
+_struct_conn.pdbx_dist_value 
+_struct_conn.pdbx_value_order 
+_struct_conn.pdbx_role 
+metalc1   metalc ? ? A C   3  OP2 ? C ? 1_555 F MG  .   MG ? ? X C   2   Y MG  301 1_555 ? ? ? ? ? ? ?                       2.484 ? ? 
+metalc2   metalc ? ? E G6P .  O2P ? ? ? 1_555 K MG  .   MG ? ? X G6P 201 Y MG  306 1_555 ? ? ? ? ? ? ?                       2.629 ? ? 
+metalc3   metalc ? ? E G6P .  O3P ? ? ? 1_555 K MG  .   MG ? ? X G6P 201 Y MG  306 1_555 ? ? ? ? ? ? ?                       2.556 ? ? 
+metalc4   metalc ? ? N HOH .  O   ? ? ? 1_555 K MG  .   MG ? ? X HOH 307 Y MG  306 1_555 ? ? ? ? ? ? ?                       2.483 ? ? 
+metalc5   metalc ? ? B C   14 OP2 ? I ? 1_555 F MG  .   MG ? ? Y C   36  Y MG  301 1_555 ? ? ? ? ? ? ?                       2.712 ? ? 
+metalc6   metalc ? ? B U   57 O2  ? Z ? 1_555 H MG  .   MG ? ? Y U   79  Y MG  303 1_555 ? ? ? ? ? ? ?                       2.923 ? ? 
+metalc7   metalc ? ? F MG  .  MG  ? ? ? 1_555 O HOH .   O  ? ? Y MG  301 Y HOH 411 1_555 ? ? ? ? ? ? ?                       2.070 ? ? 
+metalc8   metalc ? ? F MG  .  MG  ? ? ? 1_555 O HOH .   O  ? ? Y MG  301 Y HOH 416 1_555 ? ? ? ? ? ? ?                       1.747 ? ? 
+metalc9   metalc ? ? I MG  .  MG  ? ? ? 1_555 O HOH .   O  ? ? Y MG  304 Y HOH 402 1_555 ? ? ? ? ? ? ?                       2.272 ? ? 
+metalc10  metalc ? ? I MG  .  MG  ? ? ? 1_555 O HOH .   O  ? ? Y MG  304 Y HOH 449 1_555 ? ? ? ? ? ? ?                       2.084 ? ? 
+hydrog1   hydrog ? ? A DA  1  N3  ? A ? 1_555 B G   43  N2 ? L X DA  -1  Y G   65  1_555 ? ? ? ? ? ? 'DA-G MISPAIR'          ?     ? ? 
+hydrog2   hydrog ? ? A C   3  N3  ? C ? 1_555 B G   42  N1 ? K X C   2   Y G   64  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog3   hydrog ? ? A C   3  N4  ? C ? 1_555 B G   42  O6 ? K X C   2   Y G   64  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog4   hydrog ? ? A C   3  O2  ? C ? 1_555 B G   42  N2 ? K X C   2   Y G   64  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog5   hydrog ? ? A G   4  N1  ? D ? 1_555 B C   41  N3 ? J X G   3   Y C   63  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog6   hydrog ? ? A G   4  N2  ? D ? 1_555 B C   41  O2 ? J X G   3   Y C   63  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog7   hydrog ? ? A G   4  O6  ? D ? 1_555 B C   41  N4 ? J X G   3   Y C   63  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog8   hydrog ? ? A C   5  N3  ? E ? 1_555 B G   40  N1 ? I X C   4   Y G   62  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog9   hydrog ? ? A C   5  N4  ? E ? 1_555 B G   40  O6 ? I X C   4   Y G   62  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog10  hydrog ? ? A C   5  O2  ? E ? 1_555 B G   40  N2 ? I X C   4   Y G   62  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog11  hydrog ? ? A C   6  N3  ? F ? 1_555 B G   39  N1 ? H X C   5   Y G   61  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog12  hydrog ? ? A C   6  N4  ? F ? 1_555 B G   39  O6 ? H X C   5   Y G   61  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog13  hydrog ? ? A C   6  O2  ? F ? 1_555 B G   39  N2 ? H X C   5   Y G   61  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog14  hydrog ? ? A G   8  O6  ? H ? 1_555 B G   12  N2 ? G X G   7   Y G   34  1_555 ? ? ? ? ? ? 'G-G MISPAIR'           ?     ? ? 
+hydrog15  hydrog ? ? A G   8  N1  ? H ? 1_555 B C   38  N3 ? G X G   7   Y C   60  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog16  hydrog ? ? A G   8  N2  ? H ? 1_555 B C   38  O2 ? G X G   7   Y C   60  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog17  hydrog ? ? A G   8  O6  ? H ? 1_555 B C   38  N4 ? G X G   7   Y C   60  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog18  hydrog ? ? A G   9  N1  ? I ? 1_555 B U   11  O2 ? F X G   8   Y U   33  1_555 ? ? ? ? ? ? TYPE_28_PAIR            ?     ? ? 
+hydrog19  hydrog ? ? A G   9  O6  ? I ? 1_555 B U   11  N3 ? F X G   8   Y U   33  1_555 ? ? ? ? ? ? TYPE_28_PAIR            ?     ? ? 
+hydrog20  hydrog ? ? A G   9  N2  ? I ? 1_555 B A   36  N3 ? E X G   8   Y A   58  1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog21  hydrog ? ? A A   10 N1  ? J ? 1_555 B U   10  N3 ? E X A   9   Y U   32  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog22  hydrog ? ? A A   10 N6  ? J ? 1_555 B U   10  O4 ? E X A   9   Y U   32  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog23  hydrog ? ? A C   11 N3  ? K ? 1_555 B G   9   N1 ? D X C   10  Y G   31  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog24  hydrog ? ? A C   11 N4  ? K ? 1_555 B G   9   O6 ? D X C   10  Y G   31  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog25  hydrog ? ? A C   11 O2  ? K ? 1_555 B G   9   N2 ? D X C   10  Y G   31  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog26  hydrog ? ? A U   12 N3  ? L ? 1_555 B A   8   N1 ? C X U   11  Y A   30  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog27  hydrog ? ? A U   12 O4  ? L ? 1_555 B A   8   N6 ? C X U   11  Y A   30  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog28  hydrog ? ? A U   12 O2  ? L ? 1_555 B G   94  N2 ? K X U   11  Y G   116 1_555 ? ? ? ? ? ? 'U-G MISPAIR'           ?     ? ? 
+hydrog29  hydrog ? ? A U   13 N3  ? M ? 1_555 B A   7   N1 ? B X U   12  Y A   29  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog30  hydrog ? ? A U   13 O4  ? M ? 1_555 B A   7   N6 ? B X U   12  Y A   29  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog31  hydrog ? ? A A   14 N1  ? N ? 1_555 B U   6   N3 ? A X A   13  Y U   28  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog32  hydrog ? ? A A   14 N6  ? N ? 1_555 B U   6   O4 ? A X A   13  Y U   28  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog33  hydrog ? ? A A   15 N1  ? O ? 1_555 B U   5   N3 ? Z X A   14  Y U   27  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog34  hydrog ? ? A A   15 N6  ? O ? 1_555 B U   5   O4 ? Z X A   14  Y U   27  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog35  hydrog ? ? A A   16 N1  ? P ? 1_555 B U   4   N3 ? Y X A   15  Y U   26  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog36  hydrog ? ? A A   16 N6  ? P ? 1_555 B U   4   O4 ? Y X A   15  Y U   26  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog37  hydrog ? ? A G   17 N1  ? Q ? 1_555 B C   3   N3 ? X X G   16  Y C   25  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog38  hydrog ? ? A G   17 N2  ? Q ? 1_555 B C   3   O2 ? X X G   16  Y C   25  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog39  hydrog ? ? A G   17 O6  ? Q ? 1_555 B C   3   N4 ? X X G   16  Y C   25  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog40  hydrog ? ? A C   18 N3  ? R ? 1_555 B G   2   N1 ? W X C   17  Y G   24  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog41  hydrog ? ? A C   18 N4  ? R ? 1_555 B G   2   O6 ? W X C   17  Y G   24  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog42  hydrog ? ? A C   18 O2  ? R ? 1_555 B G   2   N2 ? W X C   17  Y G   24  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog43  hydrog ? ? A C   19 N3  ? S ? 1_555 B G   1   N1 ? V X C   18  Y G   23  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog44  hydrog ? ? A C   19 N4  ? S ? 1_555 B G   1   O6 ? V X C   18  Y G   23  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog45  hydrog ? ? A C   19 O2  ? S ? 1_555 B G   1   N2 ? V X C   18  Y G   23  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog46  hydrog ? ? B G   9  N2  ? D ? 1_555 B A   95  N3 ? L Y G   31  Y A   117 1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog47  hydrog ? ? B C   14 N3  ? I ? 1_555 B G   31  N1 ? Z Y C   36  Y G   53  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog48  hydrog ? ? B C   14 N4  ? I ? 1_555 B G   31  O6 ? Z Y C   36  Y G   53  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog49  hydrog ? ? B C   14 O2  ? I ? 1_555 B G   31  N2 ? Z Y C   36  Y G   53  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog50  hydrog ? ? B G   15 N1  ? J ? 1_555 B C   30  N3 ? Y Y G   37  Y C   52  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog51  hydrog ? ? B G   15 N2  ? J ? 1_555 B C   30  O2 ? Y Y G   37  Y C   52  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog52  hydrog ? ? B G   15 O6  ? J ? 1_555 B C   30  N4 ? Y Y G   37  Y C   52  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog53  hydrog ? ? B G   15 N2  ? J ? 1_555 B A   105 N1 ? V Y G   37  Y A   127 1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog54  hydrog ? ? B A   16 N1  ? K ? 1_555 B U   29  N3 ? X Y A   38  Y U   51  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog55  hydrog ? ? B A   16 N6  ? K ? 1_555 B U   29  O4 ? X Y A   38  Y U   51  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog56  hydrog ? ? B A   16 N3  ? K ? 1_555 B G   106 N2 ? W Y A   38  Y G   128 1_555 ? ? ? ? ? ? 'A-G MISPAIR'           ?     ? ? 
+hydrog57  hydrog ? ? B C   20 N3  ? O ? 1_555 B G   51  N1 ? T Y C   42  Y G   73  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog58  hydrog ? ? B C   20 N4  ? O ? 1_555 B G   51  O6 ? T Y C   42  Y G   73  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog59  hydrog ? ? B C   20 O2  ? O ? 1_555 B G   51  N2 ? T Y C   42  Y G   73  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog60  hydrog ? ? B A   21 N1  ? P ? 1_555 B U   50  N3 ? S Y A   43  Y U   72  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog61  hydrog ? ? B A   21 N6  ? P ? 1_555 B U   50  O4 ? S Y A   43  Y U   72  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog62  hydrog ? ? B G   22 N1  ? Q ? 1_555 B C   49  N3 ? R Y G   44  Y C   71  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog63  hydrog ? ? B G   22 N2  ? Q ? 1_555 B C   49  O2 ? R Y G   44  Y C   71  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog64  hydrog ? ? B G   22 O6  ? Q ? 1_555 B C   49  N4 ? R Y G   44  Y C   71  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog65  hydrog ? ? B G   23 N1  ? R ? 1_555 B C   48  N3 ? Q Y G   45  Y C   70  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog66  hydrog ? ? B G   23 N2  ? R ? 1_555 B C   48  O2 ? Q Y G   45  Y C   70  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog67  hydrog ? ? B G   23 O6  ? R ? 1_555 B C   48  N4 ? Q Y G   45  Y C   70  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog68  hydrog ? ? B G   24 N1  ? S ? 1_555 B C   47  N3 ? P Y G   46  Y C   69  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog69  hydrog ? ? B G   24 N2  ? S ? 1_555 B C   47  O2 ? P Y G   46  Y C   69  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog70  hydrog ? ? B G   24 O6  ? S ? 1_555 B C   47  N4 ? P Y G   46  Y C   69  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog71  hydrog ? ? B U   25 N3  ? T ? 1_555 B G   46  O6 ? O Y U   47  Y G   68  1_555 ? ? ? ? ? ? TYPE_28_PAIR            ?     ? ? 
+hydrog72  hydrog ? ? B U   25 O2  ? T ? 1_555 B G   46  N1 ? O Y U   47  Y G   68  1_555 ? ? ? ? ? ? TYPE_28_PAIR            ?     ? ? 
+hydrog73  hydrog ? ? B U   26 N3  ? U ? 1_555 B A   28  N7 ? W Y U   48  Y A   50  1_555 ? ? ? ? ? ? 'U-A PAIR'              ?     ? ? 
+hydrog74  hydrog ? ? B G   31 N2  ? Z ? 1_555 B A   82  N1 ? Y Y G   53  Y A   104 1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog75  hydrog ? ? B A   32 N1  ? A ? 1_555 B U   37  N3 ? F Y A   54  Y U   59  1_555 ? ? ? ? ? ? 'REVERSED WATSON-CRICK' ?     ? ? 
+hydrog76  hydrog ? ? B A   32 N6  ? A ? 1_555 B U   37  O2 ? F Y A   54  Y U   59  1_555 ? ? ? ? ? ? 'REVERSED WATSON-CRICK' ?     ? ? 
+hydrog77  hydrog ? ? B C   52 N3  ? U ? 1_555 B G   68  N1 ? K Y C   74  Y G   90  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog78  hydrog ? ? B C   52 N4  ? U ? 1_555 B G   68  O6 ? K Y C   74  Y G   90  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog79  hydrog ? ? B C   52 O2  ? U ? 1_555 B G   68  N2 ? K Y C   74  Y G   90  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog80  hydrog ? ? B G   53 N1  ? V ? 1_555 B C   67  N3 ? J Y G   75  Y C   89  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog81  hydrog ? ? B G   53 N2  ? V ? 1_555 B C   67  O2 ? J Y G   75  Y C   89  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog82  hydrog ? ? B G   53 O6  ? V ? 1_555 B C   67  N4 ? J Y G   75  Y C   89  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog83  hydrog ? ? B G   53 N2  ? V ? 1_555 B A   71  N3 ? N Y G   75  Y A   93  1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog84  hydrog ? ? B G   54 N1  ? W ? 1_555 B C   66  N3 ? I Y G   76  Y C   88  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog85  hydrog ? ? B G   54 N2  ? W ? 1_555 B C   66  O2 ? I Y G   76  Y C   88  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog86  hydrog ? ? B G   54 O6  ? W ? 1_555 B C   66  N4 ? I Y G   76  Y C   88  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog87  hydrog ? ? B U   55 N3  ? X ? 1_555 B A   65  N1 ? H Y U   77  Y A   87  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog88  hydrog ? ? B U   55 O4  ? X ? 1_555 B A   65  N6 ? H Y U   77  Y A   87  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog89  hydrog ? ? B C   56 N3  ? Y ? 1_555 B G   64  N1 ? G Y C   78  Y G   86  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog90  hydrog ? ? B C   56 N4  ? Y ? 1_555 B G   64  O6 ? G Y C   78  Y G   86  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog91  hydrog ? ? B C   56 O2  ? Y ? 1_555 B G   64  N2 ? G Y C   78  Y G   86  1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog92  hydrog ? ? B U   57 O2  ? Z ? 1_555 B C   59  N4 ? B Y U   79  Y C   81  1_555 ? ? ? ? ? ? 'U-C MISPAIR'           ?     ? ? 
+hydrog93  hydrog ? ? B U   58 N3  ? A ? 1_555 B A   122 N1 ? M Y U   80  Y A   144 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog94  hydrog ? ? B U   58 O4  ? A ? 1_555 B A   122 N6 ? M Y U   80  Y A   144 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog95  hydrog ? ? B C   59 N3  ? B ? 1_555 B G   121 N1 ? L Y C   81  Y G   143 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog96  hydrog ? ? B C   59 N4  ? B ? 1_555 B G   121 O6 ? L Y C   81  Y G   143 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog97  hydrog ? ? B C   59 O2  ? B ? 1_555 B G   121 N2 ? L Y C   81  Y G   143 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog98  hydrog ? ? B C   60 N3  ? C ? 1_555 B G   120 N1 ? K Y C   82  Y G   142 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog99  hydrog ? ? B C   60 N4  ? C ? 1_555 B G   120 O6 ? K Y C   82  Y G   142 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog100 hydrog ? ? B C   60 O2  ? C ? 1_555 B G   120 N2 ? K Y C   82  Y G   142 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog101 hydrog ? ? B U   61 N3  ? D ? 1_555 B A   119 N1 ? J Y U   83  Y A   141 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog102 hydrog ? ? B U   61 O4  ? D ? 1_555 B A   119 N6 ? J Y U   83  Y A   141 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog103 hydrog ? ? B G   62 N1  ? E ? 1_555 B C   118 N3 ? I Y G   84  Y C   140 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog104 hydrog ? ? B G   62 N2  ? E ? 1_555 B C   118 O2 ? I Y G   84  Y C   140 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog105 hydrog ? ? B G   62 O6  ? E ? 1_555 B C   118 N4 ? I Y G   84  Y C   140 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog106 hydrog ? ? B C   63 N3  ? F ? 1_555 B G   117 N1 ? H Y C   85  Y G   139 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog107 hydrog ? ? B C   63 N4  ? F ? 1_555 B G   117 O6 ? H Y C   85  Y G   139 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog108 hydrog ? ? B C   63 O2  ? F ? 1_555 B G   117 N2 ? H Y C   85  Y G   139 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog109 hydrog ? ? B A   73 N6  ? P ? 1_555 B G   115 N3 ? F Y A   95  Y G   137 1_555 ? ? ? ? ? ? TYPE_11_PAIR            ?     ? ? 
+hydrog110 hydrog ? ? B A   73 N7  ? P ? 1_555 B G   115 N2 ? F Y A   95  Y G   137 1_555 ? ? ? ? ? ? TYPE_11_PAIR            ?     ? ? 
+hydrog111 hydrog ? ? B G   74 N1  ? Q ? 1_555 B C   114 N3 ? E Y G   96  Y C   136 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog112 hydrog ? ? B G   74 N2  ? Q ? 1_555 B C   114 O2 ? E Y G   96  Y C   136 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog113 hydrog ? ? B G   74 O6  ? Q ? 1_555 B C   114 N4 ? E Y G   96  Y C   136 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog114 hydrog ? ? B G   75 N1  ? R ? 1_555 B C   113 N3 ? D Y G   97  Y C   135 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog115 hydrog ? ? B G   75 N2  ? R ? 1_555 B C   113 O2 ? D Y G   97  Y C   135 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog116 hydrog ? ? B G   75 O6  ? R ? 1_555 B C   113 N4 ? D Y G   97  Y C   135 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog117 hydrog ? ? B A   76 N1  ? S ? 1_555 B U   112 N3 ? C Y A   98  Y U   134 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog118 hydrog ? ? B A   76 N6  ? S ? 1_555 B U   112 O4 ? C Y A   98  Y U   134 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog119 hydrog ? ? B C   77 N3  ? T ? 1_555 B G   111 N1 ? B Y C   99  Y G   133 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog120 hydrog ? ? B C   77 N4  ? T ? 1_555 B G   111 O6 ? B Y C   99  Y G   133 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog121 hydrog ? ? B C   77 O2  ? T ? 1_555 B G   111 N2 ? B Y C   99  Y G   133 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog122 hydrog ? ? B U   78 N3  ? U ? 1_555 B A   110 N1 ? A Y U   100 Y A   132 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog123 hydrog ? ? B U   78 O4  ? U ? 1_555 B A   110 N6 ? A Y U   100 Y A   132 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog124 hydrog ? ? B G   79 N1  ? V ? 1_555 B C   109 N3 ? Z Y G   101 Y C   131 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog125 hydrog ? ? B G   79 N2  ? V ? 1_555 B C   109 O2 ? Z Y G   101 Y C   131 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog126 hydrog ? ? B G   79 O6  ? V ? 1_555 B C   109 N4 ? Z Y G   101 Y C   131 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog127 hydrog ? ? B G   80 N2  ? W ? 1_555 B A   107 N7 ? X Y G   102 Y A   129 1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+hydrog128 hydrog ? ? B A   83 N6  ? Z ? 1_555 B U   104 O2 ? U Y A   105 Y U   126 1_555 ? ? ? ? ? ? 'REVERSED HOOGSTEEN'    ?     ? ? 
+hydrog129 hydrog ? ? B A   83 N7  ? Z ? 1_555 B U   104 N3 ? U Y A   105 Y U   126 1_555 ? ? ? ? ? ? 'REVERSED HOOGSTEEN'    ?     ? ? 
+hydrog130 hydrog ? ? B A   84 N6  ? A ? 1_555 B A   103 N1 ? T Y A   106 Y A   125 1_555 ? ? ? ? ? ? TYPE_5_PAIR             ?     ? ? 
+hydrog131 hydrog ? ? B A   84 N7  ? A ? 1_555 B A   103 N6 ? T Y A   106 Y A   125 1_555 ? ? ? ? ? ? TYPE_5_PAIR             ?     ? ? 
+hydrog132 hydrog ? ? B A   85 N6  ? B ? 1_555 B C   102 N3 ? S Y A   107 Y C   124 1_555 ? ? ? ? ? ? TYPE_25_PAIR            ?     ? ? 
+hydrog133 hydrog ? ? B A   85 N7  ? B ? 1_555 B C   102 N4 ? S Y A   107 Y C   124 1_555 ? ? ? ? ? ? TYPE_25_PAIR            ?     ? ? 
+hydrog134 hydrog ? ? B C   86 N3  ? C ? 1_555 B G   101 N1 ? R Y C   108 Y G   123 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog135 hydrog ? ? B C   86 N4  ? C ? 1_555 B G   101 O6 ? R Y C   108 Y G   123 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog136 hydrog ? ? B C   86 O2  ? C ? 1_555 B G   101 N2 ? R Y C   108 Y G   123 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog137 hydrog ? ? B C   87 N3  ? D ? 1_555 B G   100 N1 ? Q Y C   109 Y G   122 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog138 hydrog ? ? B C   87 N4  ? D ? 1_555 B G   100 O6 ? Q Y C   109 Y G   122 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog139 hydrog ? ? B C   87 O2  ? D ? 1_555 B G   100 N2 ? Q Y C   109 Y G   122 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog140 hydrog ? ? B A   88 N1  ? E ? 1_555 B U   99  N3 ? P Y A   110 Y U   121 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog141 hydrog ? ? B A   88 N6  ? E ? 1_555 B U   99  O4 ? P Y A   110 Y U   121 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog142 hydrog ? ? B C   89 N3  ? F ? 1_555 B G   98  N1 ? O Y C   111 Y G   120 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog143 hydrog ? ? B C   89 N4  ? F ? 1_555 B G   98  O6 ? O Y C   111 Y G   120 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog144 hydrog ? ? B C   89 O2  ? F ? 1_555 B G   98  N2 ? O Y C   111 Y G   120 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog145 hydrog ? ? B A   90 N1  ? G ? 1_555 B U   97  N3 ? N Y A   112 Y U   119 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog146 hydrog ? ? B A   90 N6  ? G ? 1_555 B U   97  O4 ? N Y A   112 Y U   119 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog147 hydrog ? ? B G   91 N1  ? H ? 1_555 B C   96  N3 ? M Y G   113 Y C   118 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog148 hydrog ? ? B G   91 N2  ? H ? 1_555 B C   96  O2 ? M Y G   113 Y C   118 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog149 hydrog ? ? B G   91 O6  ? H ? 1_555 B C   96  N4 ? M Y G   113 Y C   118 1_555 ? ? ? ? ? ? WATSON-CRICK            ?     ? ? 
+hydrog150 hydrog ? ? B G   92 N2  ? I ? 1_555 B A   95  N7 ? L Y G   114 Y A   117 1_555 ? ? ? ? ? ? 'G-A MISPAIR'           ?     ? ? 
+# 
+loop_
 _struct_asym.id 
 _struct_asym.pdbx_blank_PDB_chainid_flag 
 _struct_asym.pdbx_modified 
@@ -513,8 +710,8 @@ O N N 7 ?
 _pdbx_struct_assembly.id                   1 
 _pdbx_struct_assembly.details              author_and_software_defined_assembly 
 _pdbx_struct_assembly.method_details       PISA 
-_pdbx_struct_assembly.oligomeric_details   DIMERIC 
-_pdbx_struct_assembly.oligomeric_count     ? 
+_pdbx_struct_assembly.oligomeric_details   dimeric 
+_pdbx_struct_assembly.oligomeric_count     2 
 # 
 _pdbx_struct_assembly_gen.assembly_id       1 
 _pdbx_struct_assembly_gen.oper_expression   1 
@@ -590,7 +787,7 @@ _symmetry.entry_id                         2Z74
 _symmetry.space_group_name_H-M             'P 21 21 2' 
 _symmetry.pdbx_full_space_group_name_H-M   ? 
 _symmetry.cell_setting                     ? 
-_symmetry.Int_Tables_number                ? 
+_symmetry.Int_Tables_number                18 
 # 
 _atom_sites.entry_id                    2Z74 
 _atom_sites.fract_transf_matrix[1][1]   0.005522 
@@ -793,8 +990,8 @@ _pdbx_validate_close_contact.label_alt_id_1   ?
 _pdbx_validate_close_contact.auth_atom_id_2   O 
 _pdbx_validate_close_contact.auth_asym_id_2   Y 
 _pdbx_validate_close_contact.auth_comp_id_2   HOH 
-_pdbx_validate_close_contact.auth_seq_id_2    410 
-_pdbx_validate_close_contact.PDB_ins_code_2   L 
+_pdbx_validate_close_contact.auth_seq_id_2    401 
+_pdbx_validate_close_contact.PDB_ins_code_2   ? 
 _pdbx_validate_close_contact.label_alt_id_2   ? 
 _pdbx_validate_close_contact.dist             2.13 
 # 
@@ -1088,6 +1285,197 @@ _database_PDB_matrix.origx_vector[3]   0.00000
 # 
 _entry.id   2Z74 
 # 
+loop_
+_ndb_struct_conf_na.entry_id 
+_ndb_struct_conf_na.feature 
+2Z74 'double helix'         
+2Z74 'a-form double helix'  
+2Z74 'hairpin loop'         
+2Z74 'mismatched base pair' 
+2Z74 'internal loop'        
+# 
+loop_
+_ndb_struct_na_base_pair.model_number 
+_ndb_struct_na_base_pair.i_label_asym_id 
+_ndb_struct_na_base_pair.i_label_comp_id 
+_ndb_struct_na_base_pair.i_label_seq_id 
+_ndb_struct_na_base_pair.i_symmetry 
+_ndb_struct_na_base_pair.j_label_asym_id 
+_ndb_struct_na_base_pair.j_label_comp_id 
+_ndb_struct_na_base_pair.j_label_seq_id 
+_ndb_struct_na_base_pair.j_symmetry 
+_ndb_struct_na_base_pair.shear 
+_ndb_struct_na_base_pair.stretch 
+_ndb_struct_na_base_pair.stagger 
+_ndb_struct_na_base_pair.buckle 
+_ndb_struct_na_base_pair.propeller 
+_ndb_struct_na_base_pair.opening 
+_ndb_struct_na_base_pair.pair_number 
+_ndb_struct_na_base_pair.pair_name 
+_ndb_struct_na_base_pair.i_auth_asym_id 
+_ndb_struct_na_base_pair.i_auth_seq_id 
+_ndb_struct_na_base_pair.i_PDB_ins_code 
+_ndb_struct_na_base_pair.j_auth_asym_id 
+_ndb_struct_na_base_pair.j_auth_seq_id 
+_ndb_struct_na_base_pair.j_PDB_ins_code 
+_ndb_struct_na_base_pair.hbond_type_28 
+_ndb_struct_na_base_pair.hbond_type_12 
+1 B G 1   1_555 A C  19  1_555 -1.337 -0.115 0.006  3.673   -0.060  5.347    1  Y_G23V:C18S_X   Y 23  V X 18  S 19 1  
+1 B G 2   1_555 A C  18  1_555 -0.862 0.048  -0.173 3.006   -15.516 4.435    2  Y_G24W:C17R_X   Y 24  W X 17  R 19 1  
+1 B C 3   1_555 A G  17  1_555 0.219  0.066  -0.064 0.485   -9.333  4.148    3  Y_C25X:G16Q_X   Y 25  X X 16  Q 19 1  
+1 B U 4   1_555 A A  16  1_555 -0.006 -0.111 -0.012 -8.102  -11.837 -2.030   4  Y_U26Y:A15P_X   Y 26  Y X 15  P 20 1  
+1 B U 5   1_555 A A  15  1_555 -0.211 -0.140 0.331  -13.271 -15.332 0.364    5  Y_U27Z:A14O_X   Y 27  Z X 14  O 20 1  
+1 B U 6   1_555 A A  14  1_555 -0.722 0.000  0.231  -1.912  -14.172 0.997    6  Y_U28A:A13N_X   Y 28  A X 13  N 20 1  
+1 B A 7   1_555 A U  13  1_555 -0.115 -0.321 -0.193 -5.458  -11.928 -1.008   7  Y_A29B:U12M_X   Y 29  B X 12  M 20 1  
+1 B A 8   1_555 A U  12  1_555 0.090  -0.066 0.021  4.290   -18.315 3.608    8  Y_A30C:U11L_X   Y 30  C X 11  L 20 1  
+1 B G 9   1_555 A C  11  1_555 -0.258 -0.167 -0.058 -6.082  -22.844 3.740    9  Y_G31D:C10K_X   Y 31  D X 10  K 19 1  
+1 B U 10  1_555 A A  10  1_555 -0.361 -0.241 0.247  -14.219 -17.907 -1.238   10 Y_U32E:A9J_X    Y 32  E X 9   J 20 1  
+1 B U 11  1_555 A G  9   1_555 2.086  -0.151 0.414  -24.957 -12.782 -18.156  11 Y_U33F:G8I_X    Y 33  F X 8   I 28 1  
+1 B C 38  1_555 A G  8   1_555 0.291  -0.061 -0.189 4.953   -5.398  2.727    12 Y_C60G:G7H_X    Y 60  G X 7   H 19 1  
+1 B G 39  1_555 A C  6   1_555 -0.254 -0.085 -0.220 -2.669  1.035   0.773    13 Y_G61H:C5F_X    Y 61  H X 5   F 19 1  
+1 B G 40  1_555 A C  5   1_555 -0.266 -0.183 -0.078 -1.562  -8.626  1.869    14 Y_G62I:C4E_X    Y 62  I X 4   E 19 1  
+1 B C 41  1_555 A G  4   1_555 0.466  -0.081 0.030  -2.047  -7.758  1.520    15 Y_C63J:G3D_X    Y 63  J X 3   D 19 1  
+1 B G 42  1_555 A C  3   1_555 -0.405 0.005  -0.156 -4.080  -8.792  4.550    16 Y_G64K:C2C_X    Y 64  K X 2   C 19 1  
+1 B G 43  1_555 A DA 1   1_555 -2.816 -7.220 1.195  -35.635 -0.904  -155.862 17 Y_G65L:DA-1A_X  Y 65  L X -1  A ?  6  
+1 B U 26  1_555 B A  28  1_555 1.840  3.783  -0.075 4.769   1.574   -43.010  18 Y_U48U:A50W_Y   Y 48  U Y 50  W ?  ?  
+1 B G 46  1_555 B U  25  1_555 -2.306 -0.510 0.044  11.186  -11.182 -5.974   19 Y_G68O:U47T_Y   Y 68  O Y 47  T 28 1  
+1 B C 47  1_555 B G  24  1_555 0.256  -0.130 -0.181 20.114  -22.376 5.877    20 Y_C69P:G46S_Y   Y 69  P Y 46  S 19 1  
+1 B C 48  1_555 B G  23  1_555 0.039  -0.312 0.005  5.185   -15.326 -2.379   21 Y_C70Q:G45R_Y   Y 70  Q Y 45  R 19 1  
+1 B C 49  1_555 B G  22  1_555 0.103  -0.171 -0.139 4.215   -13.427 0.069    22 Y_C71R:G44Q_Y   Y 71  R Y 44  Q 19 1  
+1 B U 50  1_555 B A  21  1_555 0.031  -0.129 -0.056 6.279   -9.934  2.593    23 Y_U72S:A43P_Y   Y 72  S Y 43  P 20 1  
+1 B G 51  1_555 B C  20  1_555 -0.177 -0.121 0.177  2.409   -11.618 -0.540   24 Y_G73T:C42O_Y   Y 73  T Y 42  O 19 1  
+1 B C 52  1_555 B G  68  1_555 0.125  -0.241 -0.024 3.924   -12.781 -1.727   25 Y_C74U:G90K_Y   Y 74  U Y 90  K 19 1  
+1 B G 53  1_555 B C  67  1_555 -0.308 -0.101 0.146  -7.765  -25.291 2.710    26 Y_G75V:C89J_Y   Y 75  V Y 89  J 19 1  
+1 B G 54  1_555 B C  66  1_555 -0.165 -0.168 0.358  -2.083  -10.955 -1.341   27 Y_G76W:C88I_Y   Y 76  W Y 88  I 19 1  
+1 B U 55  1_555 B A  65  1_555 0.038  -0.100 0.299  -2.184  -13.368 -1.149   28 Y_U77X:A87H_Y   Y 77  X Y 87  H 20 1  
+1 B C 56  1_555 B G  64  1_555 0.325  -0.174 0.241  6.412   -12.757 0.484    29 Y_C78Y:G86G_Y   Y 78  Y Y 86  G 19 1  
+1 B G 117 1_555 B C  63  1_555 -0.031 -0.065 -0.028 -7.436  -12.339 7.293    30 Y_G139H:C85F_Y  Y 139 H Y 85  F 19 1  
+1 B C 118 1_555 B G  62  1_555 -0.007 -0.324 0.209  -1.384  -9.540  -0.856   31 Y_C140I:G84E_Y  Y 140 I Y 84  E 19 1  
+1 B A 119 1_555 B U  61  1_555 0.272  -0.079 0.172  -1.583  -10.935 -0.713   32 Y_A141J:U83D_Y  Y 141 J Y 83  D 20 1  
+1 B G 120 1_555 B C  60  1_555 -0.272 -0.201 0.149  -1.901  -11.955 3.011    33 Y_G142K:C82C_Y  Y 142 K Y 82  C 19 1  
+1 B G 121 1_555 B C  59  1_555 -0.145 -0.189 0.041  -9.545  -15.793 4.979    34 Y_G143L:C81B_Y  Y 143 L Y 81  B 19 1  
+1 B A 122 1_555 B U  58  1_555 -0.055 -0.028 0.257  -10.957 -13.609 -2.945   35 Y_A144M:U80A_Y  Y 144 M Y 80  A 20 1  
+1 B U 29  1_555 B A  16  1_555 0.095  -0.287 0.295  -4.130  -12.122 5.002    36 Y_U51X:A38K_Y   Y 51  X Y 38  K 20 1  
+1 B C 30  1_555 B G  15  1_555 0.134  -0.252 0.366  -8.389  -6.224  0.149    37 Y_C52Y:G37J_Y   Y 52  Y Y 37  J 19 1  
+1 B G 31  1_555 B C  14  1_555 -0.258 -0.140 0.399  12.724  2.458   1.376    38 Y_G53Z:C36I_Y   Y 53  Z Y 36  I 19 1  
+1 B A 32  1_555 B U  37  1_555 -0.002 0.907  -0.103 -2.080  12.319  172.198  39 Y_A54A:U59F_Y   Y 54  A Y 59  F 21 2  
+1 B A 73  1_555 B G  115 1_555 -6.713 -3.947 -0.159 1.278   -10.777 -7.493   40 Y_A95P:G137F_Y  Y 95  P Y 137 F 11 10 
+1 B G 74  1_555 B C  114 1_555 -0.187 0.130  0.215  3.363   -8.417  4.281    41 Y_G96Q:C136E_Y  Y 96  Q Y 136 E 19 1  
+1 B G 75  1_555 B C  113 1_555 -0.534 -0.267 -0.035 -4.727  -8.364  0.363    42 Y_G97R:C135D_Y  Y 97  R Y 135 D 19 1  
+1 B A 76  1_555 B U  112 1_555 -0.200 -0.078 0.255  3.283   -11.413 1.608    43 Y_A98S:U134C_Y  Y 98  S Y 134 C 20 1  
+1 B C 77  1_555 B G  111 1_555 0.201  -0.052 0.462  -3.710  -9.615  1.464    44 Y_C99T:G133B_Y  Y 99  T Y 133 B 19 1  
+1 B U 78  1_555 B A  110 1_555 0.135  -0.057 0.384  -7.042  -13.256 5.890    45 Y_U100U:A132A_Y Y 100 U Y 132 A 20 1  
+1 B G 79  1_555 B C  109 1_555 -0.076 0.046  0.071  -11.816 -17.250 1.928    46 Y_G101V:C131Z_Y Y 101 V Y 131 Z 19 1  
+1 B G 80  1_555 B A  107 1_555 7.896  -5.430 0.037  -2.558  -13.690 -53.603  47 Y_G102W:A129X_Y Y 102 W Y 129 X ?  ?  
+1 B A 83  1_555 B U  104 1_555 -4.227 -1.932 -0.050 0.584   -5.866  -92.414  48 Y_A105Z:U126U_Y Y 105 Z Y 126 U 24 4  
+1 B A 84  1_555 B A  103 1_555 -4.476 1.257  -0.047 12.181  -8.951  -111.695 49 Y_A106A:A125T_Y Y 106 A Y 125 T 5  4  
+1 B A 85  1_555 B C  102 1_555 -2.841 -0.538 -1.582 6.168   -39.090 -83.138  50 Y_A107B:C124S_Y Y 107 B Y 124 S 25 4  
+1 B C 86  1_555 B G  101 1_555 -0.024 -0.064 -0.145 10.088  -16.700 0.337    51 Y_C108C:G123R_Y Y 108 C Y 123 R 19 1  
+1 B C 87  1_555 B G  100 1_555 0.339  -0.217 0.128  1.732   -10.556 -2.254   52 Y_C109D:G122Q_Y Y 109 D Y 122 Q 19 1  
+1 B A 88  1_555 B U  99  1_555 0.169  -0.201 0.046  -0.101  -16.888 -2.938   53 Y_A110E:U121P_Y Y 110 E Y 121 P 20 1  
+1 B C 89  1_555 B G  98  1_555 0.191  -0.181 -0.097 5.496   -13.853 -0.660   54 Y_C111F:G120O_Y Y 111 F Y 120 O 19 1  
+1 B A 90  1_555 B U  97  1_555 0.023  -0.130 0.046  -2.143  -11.080 5.737    55 Y_A112G:U119N_Y Y 112 G Y 119 N 20 1  
+1 B G 91  1_555 B C  96  1_555 -0.137 -0.058 -0.265 -3.053  -0.513  0.260    56 Y_G113H:C118M_Y Y 113 H Y 118 M 19 1  
+1 B G 92  1_555 B A  95  1_555 7.805  -5.220 0.667  0.154   -18.216 -41.641  57 Y_G114I:A117L_Y Y 114 I Y 117 L ?  ?  
+# 
+loop_
+_ndb_struct_na_base_pair_step.model_number 
+_ndb_struct_na_base_pair_step.i_label_asym_id_1 
+_ndb_struct_na_base_pair_step.i_label_comp_id_1 
+_ndb_struct_na_base_pair_step.i_label_seq_id_1 
+_ndb_struct_na_base_pair_step.i_symmetry_1 
+_ndb_struct_na_base_pair_step.j_label_asym_id_1 
+_ndb_struct_na_base_pair_step.j_label_comp_id_1 
+_ndb_struct_na_base_pair_step.j_label_seq_id_1 
+_ndb_struct_na_base_pair_step.j_symmetry_1 
+_ndb_struct_na_base_pair_step.i_label_asym_id_2 
+_ndb_struct_na_base_pair_step.i_label_comp_id_2 
+_ndb_struct_na_base_pair_step.i_label_seq_id_2 
+_ndb_struct_na_base_pair_step.i_symmetry_2 
+_ndb_struct_na_base_pair_step.j_label_asym_id_2 
+_ndb_struct_na_base_pair_step.j_label_comp_id_2 
+_ndb_struct_na_base_pair_step.j_label_seq_id_2 
+_ndb_struct_na_base_pair_step.j_symmetry_2 
+_ndb_struct_na_base_pair_step.shift 
+_ndb_struct_na_base_pair_step.slide 
+_ndb_struct_na_base_pair_step.rise 
+_ndb_struct_na_base_pair_step.tilt 
+_ndb_struct_na_base_pair_step.roll 
+_ndb_struct_na_base_pair_step.twist 
+_ndb_struct_na_base_pair_step.x_displacement 
+_ndb_struct_na_base_pair_step.y_displacement 
+_ndb_struct_na_base_pair_step.helical_rise 
+_ndb_struct_na_base_pair_step.inclination 
+_ndb_struct_na_base_pair_step.tip 
+_ndb_struct_na_base_pair_step.helical_twist 
+_ndb_struct_na_base_pair_step.step_number 
+_ndb_struct_na_base_pair_step.step_name 
+_ndb_struct_na_base_pair_step.i_auth_asym_id_1 
+_ndb_struct_na_base_pair_step.i_auth_seq_id_1 
+_ndb_struct_na_base_pair_step.i_PDB_ins_code_1 
+_ndb_struct_na_base_pair_step.j_auth_asym_id_1 
+_ndb_struct_na_base_pair_step.j_auth_seq_id_1 
+_ndb_struct_na_base_pair_step.j_PDB_ins_code_1 
+_ndb_struct_na_base_pair_step.i_auth_asym_id_2 
+_ndb_struct_na_base_pair_step.i_auth_seq_id_2 
+_ndb_struct_na_base_pair_step.i_PDB_ins_code_2 
+_ndb_struct_na_base_pair_step.j_auth_asym_id_2 
+_ndb_struct_na_base_pair_step.j_auth_seq_id_2 
+_ndb_struct_na_base_pair_step.j_PDB_ins_code_2 
+1 B G 1   1_555 A C  19  1_555 B G 2   1_555 A C  18  1_555 -0.321 -1.856 3.136  1.289   5.186   35.270  -3.720 0.695  2.830  8.498   -2.112  35.660  1  YY_G23VG24W:C17RC18S_XX     Y 23  V X 18  S Y 24  W X 17  R 
+1 B G 2   1_555 A C  18  1_555 B C 3   1_555 A G  17  1_555 -0.021 -1.307 3.275  -1.739  4.229   36.638  -2.624 -0.197 3.108  6.695   2.753   36.912  2  YY_G24WC25X:G16QC17R_XX     Y 24  W X 17  R Y 25  X X 16  Q 
+1 B C 3   1_555 A G  17  1_555 B U 4   1_555 A A  16  1_555 -0.723 -1.526 3.342  -1.723  10.555  30.405  -4.548 1.011  2.710  19.386  3.165   32.189  3  YY_C25XU26Y:A15PG16Q_XX     Y 25  X X 16  Q Y 26  Y X 15  P 
+1 B U 4   1_555 A A  16  1_555 B U 5   1_555 A A  15  1_555 -0.284 -1.225 3.412  -2.575  10.713  30.764  -4.017 0.064  2.851  19.428  4.671   32.632  4  YY_U26YU27Z:A14OA15P_XX     Y 26  Y X 15  P Y 27  Z X 14  O 
+1 B U 5   1_555 A A  15  1_555 B U 6   1_555 A A  14  1_555 0.010  -0.938 2.927  -2.643  7.895   30.862  -2.937 -0.431 2.604  14.507  4.857   31.939  5  YY_U27ZU28A:A13NA14O_XX     Y 27  Z X 14  O Y 28  A X 13  N 
+1 B U 6   1_555 A A  14  1_555 B A 7   1_555 A U  13  1_555 -0.003 -1.065 3.316  0.392   11.274  34.454  -3.246 0.058  2.840  18.431  -0.642  36.200  6  YY_U28AA29B:U12MA13N_XX     Y 28  A X 13  N Y 29  B X 12  M 
+1 B A 7   1_555 A U  13  1_555 B A 8   1_555 A U  12  1_555 0.390  -0.898 3.044  1.978   2.590   33.209  -1.960 -0.376 2.985  4.519   -3.451  33.364  7  YY_A29BA30C:U11LU12M_XX     Y 29  B X 12  M Y 30  C X 11  L 
+1 B A 8   1_555 A U  12  1_555 B G 9   1_555 A C  11  1_555 0.921  -2.286 3.543  1.738   12.179  25.676  -7.286 -1.500 2.298  25.614  -3.656  28.427  8  YY_A30CG31D:C10KU11L_XX     Y 30  C X 11  L Y 31  D X 10  K 
+1 B G 9   1_555 A C  11  1_555 B U 10  1_555 A A  10  1_555 -0.593 -1.820 3.358  -3.810  4.692   34.600  -3.719 0.413  3.137  7.815   6.346   35.108  9  YY_G31DU32E:A9JC10K_XX      Y 31  D X 10  K Y 32  E X 9   J 
+1 B U 10  1_555 A A  10  1_555 B U 11  1_555 A G  9   1_555 -0.547 -1.481 3.498  2.158   5.186   44.771  -2.415 0.915  3.287  6.777   -2.820  45.104  10 YY_U32EU33F:G8IA9J_XX       Y 32  E X 9   J Y 33  F X 8   I 
+1 B U 11  1_555 A G  9   1_555 B C 38  1_555 A G  8   1_555 -3.365 -1.339 2.812  17.856  -2.335  63.728  -1.160 3.629  1.954  -2.166  -16.567 65.965  11 YY_U33FC60G:G7HG8I_XX       Y 33  F X 8   I Y 60  G X 7   H 
+1 B C 38  1_555 A G  8   1_555 B G 39  1_555 A C  6   1_555 2.862  -1.548 3.486  -0.747  6.125   49.960  -2.273 -3.422 3.247  7.220   0.881   50.316  12 YY_C60GG61H:C5FG7H_XX       Y 60  G X 7   H Y 61  H X 5   F 
+1 B G 39  1_555 A C  6   1_555 B G 40  1_555 A C  5   1_555 0.095  -1.919 3.212  -3.011  11.366  31.580  -4.954 -0.599 2.380  20.036  5.308   33.646  13 YY_G61HG62I:C4EC5F_XX       Y 61  H X 5   F Y 62  I X 4   E 
+1 B G 40  1_555 A C  5   1_555 B C 41  1_555 A G  4   1_555 -0.125 -1.693 3.322  -0.382  1.961   36.258  -2.991 0.147  3.230  3.149   0.614   36.311  14 YY_G62IC63J:G3DC4E_XX       Y 62  I X 4   E Y 63  J X 3   D 
+1 B C 41  1_555 A G  4   1_555 B G 42  1_555 A C  3   1_555 0.994  -2.056 3.338  4.462   6.492   26.737  -5.782 -1.026 2.892  13.666  -9.393  27.853  15 YY_C63JG64K:C2CG3D_XX       Y 63  J X 3   D Y 64  K X 2   C 
+1 B G 42  1_555 A C  3   1_555 B G 43  1_555 A DA 1   1_555 -3.055 1.084  3.290  11.091  18.225  112.304 0.443  1.949  3.183  10.916  -6.643  113.627 16 YY_G64KG65L:DA-1AC2C_XX     Y 64  K X 2   C Y 65  L X -1  A 
+1 B G 43  1_555 A DA 1   1_555 B U 26  1_555 B A  28  1_555 -2.074 6.694  1.820  169.174 34.919  12.917  3.231  1.631  -0.469 18.111  -87.742 172.787 17 YY_G65LU48U:A50WDA-1A_YX    Y 65  L X -1  A Y 48  U Y 50  W 
+1 B U 26  1_555 B A  28  1_555 B G 46  1_555 B U  25  1_555 1.232  -3.454 -1.094 159.570 -53.420 105.807 -1.763 -0.714 0.487  -27.085 -80.905 172.936 18 YY_U48UG68O:U47TA50W_YY     Y 48  U Y 50  W Y 68  O Y 47  T 
+1 B G 46  1_555 B U  25  1_555 B C 47  1_555 B G  24  1_555 0.164  -0.958 3.024  -2.060  7.777   42.846  -1.965 -0.400 2.806  10.535  2.790   43.560  19 YY_G68OC69P:G46SU47T_YY     Y 68  O Y 47  T Y 69  P Y 46  S 
+1 B C 47  1_555 B G  24  1_555 B C 48  1_555 B G  23  1_555 -0.751 -1.557 3.596  -5.424  12.216  34.184  -4.223 0.419  2.968  19.866  8.820   36.632  20 YY_C69PC70Q:G45RG46S_YY     Y 69  P Y 46  S Y 70  Q Y 45  R 
+1 B C 48  1_555 B G  23  1_555 B C 49  1_555 B G  22  1_555 -0.343 -1.566 3.147  0.285   12.275  30.790  -4.561 0.645  2.364  22.049  -0.512  33.093  21 YY_C70QC71R:G44QG45R_YY     Y 70  Q Y 45  R Y 71  R Y 44  Q 
+1 B C 49  1_555 B G  22  1_555 B U 50  1_555 B A  21  1_555 0.301  -1.392 3.237  -0.824  9.140   31.241  -3.971 -0.671 2.723  16.531  1.489   32.529  22 YY_C71RU72S:A43PG44Q_YY     Y 71  R Y 44  Q Y 72  S Y 43  P 
+1 B U 50  1_555 B A  21  1_555 B G 51  1_555 B C  20  1_555 0.035  -1.692 3.157  -3.455  10.486  34.874  -3.993 -0.482 2.545  16.977  5.595   36.528  23 YY_U72SG73T:C42OA43P_YY     Y 72  S Y 43  P Y 73  T Y 42  O 
+1 B G 51  1_555 B C  20  1_555 B C 52  1_555 B G  68  1_555 0.764  -1.278 3.164  1.952   4.074   39.316  -2.344 -0.910 3.055  6.031   -2.890  39.564  24 YY_G73TC74U:G90KC42O_YY     Y 73  T Y 42  O Y 74  U Y 90  K 
+1 B C 52  1_555 B G  68  1_555 B G 53  1_555 B C  67  1_555 0.700  -1.549 3.201  0.743   18.603  33.905  -4.349 -0.980 2.115  29.320  -1.172  38.548  25 YY_C74UG75V:C89JG90K_YY     Y 74  U Y 90  K Y 75  V Y 89  J 
+1 B G 53  1_555 B C  67  1_555 B G 54  1_555 B C  66  1_555 -0.854 -1.672 2.980  -4.991  7.047   28.669  -4.514 0.751  2.612  13.840  9.803   29.915  26 YY_G75VG76W:C88IC89J_YY     Y 75  V Y 89  J Y 76  W Y 88  I 
+1 B G 54  1_555 B C  66  1_555 B U 55  1_555 B A  65  1_555 0.006  -1.227 3.276  -0.967  8.126   33.029  -3.342 -0.158 2.900  14.027  1.669   34.000  27 YY_G76WU77X:A87HC88I_YY     Y 76  W Y 88  I Y 77  X Y 87  H 
+1 B U 55  1_555 B A  65  1_555 B C 56  1_555 B G  64  1_555 0.347  -1.527 2.969  0.458   5.762   33.799  -3.378 -0.526 2.684  9.821   -0.780  34.275  28 YY_U77XC78Y:G86GA87H_YY     Y 77  X Y 87  H Y 78  Y Y 86  G 
+1 B C 56  1_555 B G  64  1_555 B G 117 1_555 B C  63  1_555 -0.816 -1.583 3.235  -0.726  15.283  38.967  -3.680 1.076  2.485  21.911  1.041   41.754  29 YY_C78YG139H:C85FG86G_YY    Y 78  Y Y 86  G Y 139 H Y 85  F 
+1 B G 117 1_555 B C  63  1_555 B C 118 1_555 B G  62  1_555 -0.625 -1.389 3.112  -1.511  5.167   30.930  -3.463 0.894  2.874  9.598   2.806   31.384  30 YY_G139HC140I:G84EC85F_YY   Y 139 H Y 85  F Y 140 I Y 84  E 
+1 B C 118 1_555 B G  62  1_555 B A 119 1_555 B U  61  1_555 0.273  -1.496 3.040  1.946   12.648  32.737  -4.096 -0.204 2.332  21.447  -3.299  35.086  31 YY_C140IA141J:U83DG84E_YY   Y 140 I Y 84  E Y 141 J Y 83  D 
+1 B A 119 1_555 B U  61  1_555 B G 120 1_555 B C  60  1_555 0.455  -1.675 3.175  1.962   10.943  30.500  -4.715 -0.508 2.467  19.986  -3.584  32.418  32 YY_A141JG142K:C82CU83D_YY   Y 141 J Y 83  D Y 142 K Y 82  C 
+1 B G 120 1_555 B C  60  1_555 B G 121 1_555 B C  59  1_555 0.508  -1.582 3.390  2.375   6.949   31.378  -4.081 -0.496 3.009  12.632  -4.317  32.204  33 YY_G142KG143L:C81BC82C_YY   Y 142 K Y 82  C Y 143 L Y 81  B 
+1 B G 121 1_555 B C  59  1_555 B A 122 1_555 B U  58  1_555 -0.286 -1.775 3.098  0.684   3.339   35.263  -3.369 0.563  2.917  5.495   -1.125  35.422  34 YY_G143LA144M:U80AC81B_YY   Y 143 L Y 81  B Y 144 M Y 80  A 
+1 B U 29  1_555 B A  16  1_555 B C 30  1_555 B G  15  1_555 0.134  -1.714 3.349  2.496   -0.575  34.992  -2.754 0.162  3.377  -0.954  -4.144  35.082  35 YY_U51XC52Y:G37JA38K_YY     Y 51  X Y 38  K Y 52  Y Y 37  J 
+1 B C 30  1_555 B G  15  1_555 B G 31  1_555 B C  14  1_555 0.292  -1.206 2.878  -1.104  3.596   20.898  -4.531 -1.178 2.616  9.811   3.013   21.230  36 YY_C52YG53Z:C36IG37J_YY     Y 52  Y Y 37  J Y 53  Z Y 36  I 
+1 B G 31  1_555 B C  14  1_555 B A 32  1_555 B U  37  1_555 1.195  -2.504 3.292  -2.579  1.059   -49.617 2.901  1.228  3.395  -1.260  -3.071  -49.690 37 YY_G53ZA54A:U59FC36I_YY     Y 53  Z Y 36  I Y 54  A Y 59  F 
+1 B A 73  1_555 B G  115 1_555 B G 74  1_555 B C  114 1_555 0.556  -0.755 3.480  -5.628  3.414   62.825  -0.880 -0.794 3.383  3.265   5.383   63.133  38 YY_A95PG96Q:C136EG137F_YY   Y 95  P Y 137 F Y 96  Q Y 136 E 
+1 B G 74  1_555 B C  114 1_555 B G 75  1_555 B C  113 1_555 -0.078 -2.192 3.256  1.701   10.809  29.689  -5.792 0.421  2.327  20.249  -3.187  31.599  39 YY_G96QG97R:C135DC136E_YY   Y 96  Q Y 136 E Y 97  R Y 135 D 
+1 B G 75  1_555 B C  113 1_555 B A 76  1_555 B U  112 1_555 -0.020 -1.734 3.017  -0.265  2.442   30.751  -3.688 -0.009 2.874  4.596   0.500   30.846  40 YY_G97RA98S:U134CC135D_YY   Y 97  R Y 135 D Y 98  S Y 134 C 
+1 B A 76  1_555 B U  112 1_555 B C 77  1_555 B G  111 1_555 0.024  -1.412 3.354  -2.008  10.829  34.218  -3.784 -0.315 2.788  17.841  3.308   35.896  41 YY_A98SC99T:G133BU134C_YY   Y 98  S Y 134 C Y 99  T Y 133 B 
+1 B C 77  1_555 B G  111 1_555 B U 78  1_555 B A  110 1_555 0.309  -1.429 3.238  1.607   5.866   33.136  -3.380 -0.283 2.960  10.179  -2.789  33.674  42 YY_C99TU100U:A132AG133B_YY  Y 99  T Y 133 B Y 100 U Y 132 A 
+1 B U 78  1_555 B A  110 1_555 B G 79  1_555 B C  109 1_555 0.652  -2.124 3.202  5.201   7.549   29.968  -5.245 -0.306 2.673  14.187  -9.775  31.308  43 YY_U100UG101V:C131ZA132A_YY Y 100 U Y 132 A Y 101 V Y 131 Z 
+1 B G 79  1_555 B C  109 1_555 B G 80  1_555 B A  107 1_555 -1.440 -1.408 3.226  1.148   1.048   91.241  -1.005 1.030  3.199  0.733   -0.803  91.251  44 YY_G101VG102W:A129XC131Z_YY Y 101 V Y 131 Z Y 102 W Y 129 X 
+1 B A 83  1_555 B U  104 1_555 B A 84  1_555 B A  103 1_555 -0.550 -1.657 3.088  3.568   -5.612  34.927  -1.916 1.410  3.237  -9.247  -5.879  35.535  45 YY_A105ZA106A:A125TU126U_YY Y 105 Z Y 126 U Y 106 A Y 125 T 
+1 B A 84  1_555 B A  103 1_555 B A 85  1_555 B C  102 1_555 2.195  -3.365 3.954  -3.343  17.240  51.988  -4.745 -2.599 2.662  19.059  3.695   54.677  46 YY_A106AA107B:C124SA125T_YY Y 106 A Y 125 T Y 107 B Y 124 S 
+1 B A 85  1_555 B C  102 1_555 B C 86  1_555 B G  101 1_555 3.878  -2.853 3.306  0.541   17.996  50.517  -4.175 -4.283 2.277  20.360  -0.612  53.431  47 YY_A107BC108C:G123RC124S_YY Y 107 B Y 124 S Y 108 C Y 123 R 
+1 B C 86  1_555 B G  101 1_555 B C 87  1_555 B G  100 1_555 -0.448 -1.343 3.491  -3.641  7.621   33.944  -3.423 0.179  3.155  12.809  6.120   34.949  48 YY_C108CC109D:G122QG123R_YY Y 108 C Y 123 R Y 109 D Y 122 Q 
+1 B C 87  1_555 B G  100 1_555 B A 88  1_555 B U  99  1_555 0.120  -1.492 3.223  1.635   9.278   35.871  -3.508 0.015  2.768  14.753  -2.600  37.048  49 YY_C109DA110E:U121PG122Q_YY Y 109 D Y 122 Q Y 110 E Y 121 P 
+1 B A 88  1_555 B U  99  1_555 B C 89  1_555 B G  98  1_555 -0.149 -1.106 3.125  -0.608  4.421   30.491  -2.886 0.171  2.942  8.351   1.148   30.808  50 YY_A110EC111F:G120OU121P_YY Y 110 E Y 121 P Y 111 F Y 120 O 
+1 B C 89  1_555 B G  98  1_555 B A 90  1_555 B U  97  1_555 0.780  -1.718 3.340  -0.460  12.440  32.856  -4.584 -1.358 2.533  21.074  0.780   35.074  51 YY_C111FA112G:U119NG120O_YY Y 111 F Y 120 O Y 112 G Y 119 N 
+1 B A 90  1_555 B U  97  1_555 B G 91  1_555 B C  96  1_555 0.108  -2.163 3.310  2.602   10.223  28.493  -5.990 0.267  2.408  19.927  -5.072  30.345  52 YY_A112GG113H:C118MU119N_YY Y 112 G Y 119 N Y 113 H Y 118 M 
+1 B G 91  1_555 B C  96  1_555 B G 92  1_555 B A  95  1_555 -4.242 -1.440 3.401  0.908   15.872  52.612  -2.491 4.662  2.822  17.460  -0.999  54.797  53 YY_G113HG114I:A117LC118M_YY Y 113 H Y 118 M Y 114 I Y 117 L 
+# 
 _pdbx_chem_comp_identifier.comp_id           G6P 
 _pdbx_chem_comp_identifier.type              'IUPAC CARBOHYDRATE SYMBOL' 
 _pdbx_chem_comp_identifier.program           PDB-CARE 
@@ -1101,6 +1489,13 @@ _pdbx_entity_nonpoly.comp_id
 5 6-O-phosphono-alpha-D-glucopyranose G6P 
 6 'MAGNESIUM ION'                     MG  
 7 water                               HOH 
+# 
+loop_
+_struct_conn_type.id 
+_struct_conn_type.criteria 
+_struct_conn_type.reference 
+metalc ? ? 
+hydrog ? ? 
 # 
 loop_
 _pdbx_poly_seq_scheme.asym_id 
@@ -1423,78 +1818,78 @@ _pdbx_nonpoly_scheme.pdb_mon_id
 _pdbx_nonpoly_scheme.auth_mon_id 
 _pdbx_nonpoly_scheme.pdb_strand_id 
 _pdbx_nonpoly_scheme.pdb_ins_code 
-E 5 G6P 1  201 201 G6P G6P X O 
-F 6 MG  1  301 301 MG  MG  Y P 
-G 6 MG  1  302 302 MG  MG  Y Q 
-H 6 MG  1  303 303 MG  MG  Y R 
-I 6 MG  1  304 304 MG  MG  Y S 
-J 6 MG  1  305 305 MG  MG  Y T 
-K 6 MG  1  306 306 MG  MG  Y U 
-L 6 MG  1  307 307 MG  MG  Y V 
-M 6 MG  1  308 308 MG  MG  Y W 
-N 7 HOH 1  403 403 HOH HOH X X 
-N 7 HOH 2  404 404 HOH HOH X Y 
-N 7 HOH 3  405 405 HOH HOH X Z 
-N 7 HOH 4  418 418 HOH HOH X A 
-N 7 HOH 5  420 420 HOH HOH X B 
-N 7 HOH 6  422 422 HOH HOH X C 
-N 7 HOH 7  462 462 HOH HOH X D 
-N 7 HOH 8  463 463 HOH HOH X E 
-O 7 HOH 1  401 401 HOH HOH Y F 
-O 7 HOH 2  402 402 HOH HOH Y G 
-O 7 HOH 3  406 406 HOH HOH Y H 
-O 7 HOH 4  407 407 HOH HOH Y I 
-O 7 HOH 5  408 408 HOH HOH Y J 
-O 7 HOH 6  409 409 HOH HOH Y K 
-O 7 HOH 7  410 410 HOH HOH Y L 
-O 7 HOH 8  411 411 HOH HOH Y M 
-O 7 HOH 9  412 412 HOH HOH Y N 
-O 7 HOH 10 413 413 HOH HOH Y O 
-O 7 HOH 11 414 414 HOH HOH Y P 
-O 7 HOH 12 415 415 HOH HOH Y Q 
-O 7 HOH 13 416 416 HOH HOH Y R 
-O 7 HOH 14 417 417 HOH HOH Y S 
-O 7 HOH 15 419 419 HOH HOH Y T 
-O 7 HOH 16 421 421 HOH HOH Y U 
-O 7 HOH 17 423 423 HOH HOH Y V 
-O 7 HOH 18 424 424 HOH HOH Y W 
-O 7 HOH 19 425 425 HOH HOH Y X 
-O 7 HOH 20 426 426 HOH HOH Y Y 
-O 7 HOH 21 427 427 HOH HOH Y Z 
-O 7 HOH 22 428 428 HOH HOH Y A 
-O 7 HOH 23 429 429 HOH HOH Y B 
-O 7 HOH 24 430 430 HOH HOH Y C 
-O 7 HOH 25 431 431 HOH HOH Y D 
-O 7 HOH 26 432 432 HOH HOH Y E 
-O 7 HOH 27 433 433 HOH HOH Y F 
-O 7 HOH 28 434 434 HOH HOH Y G 
-O 7 HOH 29 435 435 HOH HOH Y H 
-O 7 HOH 30 436 436 HOH HOH Y I 
-O 7 HOH 31 437 437 HOH HOH Y J 
-O 7 HOH 32 438 438 HOH HOH Y K 
-O 7 HOH 33 439 439 HOH HOH Y L 
-O 7 HOH 34 440 440 HOH HOH Y M 
-O 7 HOH 35 441 441 HOH HOH Y N 
-O 7 HOH 36 442 442 HOH HOH Y O 
-O 7 HOH 37 443 443 HOH HOH Y P 
-O 7 HOH 38 444 444 HOH HOH Y Q 
-O 7 HOH 39 445 445 HOH HOH Y R 
-O 7 HOH 40 446 446 HOH HOH Y S 
-O 7 HOH 41 447 447 HOH HOH Y T 
-O 7 HOH 42 448 448 HOH HOH Y U 
-O 7 HOH 43 449 449 HOH HOH Y V 
-O 7 HOH 44 450 450 HOH HOH Y W 
-O 7 HOH 45 451 451 HOH HOH Y X 
-O 7 HOH 46 452 452 HOH HOH Y Y 
-O 7 HOH 47 453 453 HOH HOH Y Z 
-O 7 HOH 48 454 454 HOH HOH Y A 
-O 7 HOH 49 455 455 HOH HOH Y B 
-O 7 HOH 50 456 456 HOH HOH Y C 
-O 7 HOH 51 457 457 HOH HOH Y D 
-O 7 HOH 52 458 458 HOH HOH Y E 
-O 7 HOH 53 459 459 HOH HOH Y F 
-O 7 HOH 54 460 460 HOH HOH Y G 
-O 7 HOH 55 461 461 HOH HOH Y H 
+E 5 G6P 1  201 201 G6P G6P X . 
+F 6 MG  1  301 301 MG  MG  Y . 
+G 6 MG  1  302 302 MG  MG  Y . 
+H 6 MG  1  303 303 MG  MG  Y . 
+I 6 MG  1  304 304 MG  MG  Y . 
+J 6 MG  1  305 305 MG  MG  Y . 
+K 6 MG  1  306 306 MG  MG  Y . 
+L 6 MG  1  307 307 MG  MG  Y . 
+M 6 MG  1  308 308 MG  MG  Y . 
+N 7 HOH 1  301 463 HOH HOH X . 
+N 7 HOH 2  302 418 HOH HOH X . 
+N 7 HOH 3  303 404 HOH HOH X . 
+N 7 HOH 4  304 403 HOH HOH X . 
+N 7 HOH 5  305 420 HOH HOH X . 
+N 7 HOH 6  306 405 HOH HOH X . 
+N 7 HOH 7  307 422 HOH HOH X . 
+N 7 HOH 8  308 462 HOH HOH X . 
+O 7 HOH 1  401 410 HOH HOH Y . 
+O 7 HOH 2  402 439 HOH HOH Y . 
+O 7 HOH 3  403 431 HOH HOH Y . 
+O 7 HOH 4  404 412 HOH HOH Y . 
+O 7 HOH 5  405 445 HOH HOH Y . 
+O 7 HOH 6  406 425 HOH HOH Y . 
+O 7 HOH 7  407 454 HOH HOH Y . 
+O 7 HOH 8  408 460 HOH HOH Y . 
+O 7 HOH 9  409 411 HOH HOH Y . 
+O 7 HOH 10 410 406 HOH HOH Y . 
+O 7 HOH 11 411 401 HOH HOH Y . 
+O 7 HOH 12 412 447 HOH HOH Y . 
+O 7 HOH 13 413 417 HOH HOH Y . 
+O 7 HOH 14 414 440 HOH HOH Y . 
+O 7 HOH 15 415 415 HOH HOH Y . 
+O 7 HOH 16 416 402 HOH HOH Y . 
+O 7 HOH 17 417 414 HOH HOH Y . 
+O 7 HOH 18 418 450 HOH HOH Y . 
+O 7 HOH 19 419 461 HOH HOH Y . 
+O 7 HOH 20 420 430 HOH HOH Y . 
+O 7 HOH 21 421 437 HOH HOH Y . 
+O 7 HOH 22 422 426 HOH HOH Y . 
+O 7 HOH 23 423 435 HOH HOH Y . 
+O 7 HOH 24 424 458 HOH HOH Y . 
+O 7 HOH 25 425 449 HOH HOH Y . 
+O 7 HOH 26 426 441 HOH HOH Y . 
+O 7 HOH 27 427 459 HOH HOH Y . 
+O 7 HOH 28 428 433 HOH HOH Y . 
+O 7 HOH 29 429 451 HOH HOH Y . 
+O 7 HOH 30 430 448 HOH HOH Y . 
+O 7 HOH 31 431 429 HOH HOH Y . 
+O 7 HOH 32 432 423 HOH HOH Y . 
+O 7 HOH 33 433 419 HOH HOH Y . 
+O 7 HOH 34 434 427 HOH HOH Y . 
+O 7 HOH 35 435 443 HOH HOH Y . 
+O 7 HOH 36 436 436 HOH HOH Y . 
+O 7 HOH 37 437 434 HOH HOH Y . 
+O 7 HOH 38 438 428 HOH HOH Y . 
+O 7 HOH 39 439 446 HOH HOH Y . 
+O 7 HOH 40 440 413 HOH HOH Y . 
+O 7 HOH 41 441 457 HOH HOH Y . 
+O 7 HOH 42 442 456 HOH HOH Y . 
+O 7 HOH 43 443 421 HOH HOH Y . 
+O 7 HOH 44 444 442 HOH HOH Y . 
+O 7 HOH 45 445 444 HOH HOH Y . 
+O 7 HOH 46 446 424 HOH HOH Y . 
+O 7 HOH 47 447 452 HOH HOH Y . 
+O 7 HOH 48 448 409 HOH HOH Y . 
+O 7 HOH 49 449 455 HOH HOH Y . 
+O 7 HOH 50 450 438 HOH HOH Y . 
+O 7 HOH 51 451 408 HOH HOH Y . 
+O 7 HOH 52 452 416 HOH HOH Y . 
+O 7 HOH 53 453 453 HOH HOH Y . 
+O 7 HOH 54 454 407 HOH HOH Y . 
+O 7 HOH 55 455 432 HOH HOH Y . 
 # 
 loop_
 _atom_site.group_PDB 
@@ -4583,91 +4978,91 @@ ATOM   3062 N  N1    . A   B 2 123 N -2.365 -3.400  -2.319  1.00 43.71  ? 145 A 
 ATOM   3063 C  C2    . A   B 2 123 N -2.227 -3.957  -1.112  1.00 47.81  ? 145 A   Y C2    1 
 ATOM   3064 N  N3    . A   B 2 123 N -2.300 -5.240  -0.762  1.00 49.96  ? 145 A   Y N3    1 
 ATOM   3065 C  C4    . A   B 2 123 N -2.548 -6.010  -1.835  1.00 50.31  ? 145 A   Y C4    1 
-HETATM 3066 C  C1    . G6P E 5 .   O 44.830 11.036  14.132  1.00 47.46  ? 201 G6P X C1    1 
-HETATM 3067 C  C2    . G6P E 5 .   O 44.011 12.193  13.515  1.00 47.55  ? 201 G6P X C2    1 
-HETATM 3068 C  C3    . G6P E 5 .   O 44.075 12.096  11.979  1.00 46.64  ? 201 G6P X C3    1 
-HETATM 3069 C  C4    . G6P E 5 .   O 45.559 12.187  11.558  1.00 48.29  ? 201 G6P X C4    1 
-HETATM 3070 C  C5    . G6P E 5 .   O 46.311 10.994  12.217  1.00 49.41  ? 201 G6P X C5    1 
-HETATM 3071 C  C6    . G6P E 5 .   O 47.802 11.009  11.845  1.00 50.35  ? 201 G6P X C6    1 
-HETATM 3072 O  O1    . G6P E 5 .   O 44.261 9.759   13.817  1.00 49.15  ? 201 G6P X O1    1 
-HETATM 3073 O  O2    . G6P E 5 .   O 42.615 12.109  13.983  1.00 39.91  ? 201 G6P X O2    1 
-HETATM 3074 O  O3    . G6P E 5 .   O 43.333 13.172  11.398  1.00 45.70  ? 201 G6P X O3    1 
-HETATM 3075 O  O4    . G6P E 5 .   O 45.658 12.095  10.128  1.00 52.60  ? 201 G6P X O4    1 
-HETATM 3076 O  O5    . G6P E 5 .   O 46.213 11.078  13.668  1.00 48.04  ? 201 G6P X O5    1 
-HETATM 3077 O  O6    . G6P E 5 .   O 48.418 12.217  12.293  1.00 53.70  ? 201 G6P X O6    1 
-HETATM 3078 P  P     . G6P E 5 .   O 49.861 12.367  11.585  1.00 51.97  ? 201 G6P X P     1 
-HETATM 3079 O  O1P   . G6P E 5 .   O 50.165 13.805  11.450  1.00 55.47  ? 201 G6P X O1P   1 
-HETATM 3080 O  O2P   . G6P E 5 .   O 50.983 11.666  12.493  1.00 54.83  ? 201 G6P X O2P   1 
-HETATM 3081 O  O3P   . G6P E 5 .   O 49.868 11.692  10.113  1.00 55.64  ? 201 G6P X O3P   1 
-HETATM 3082 MG MG    . MG  F 6 .   P 46.113 13.058  23.669  1.00 62.08  ? 301 MG  Y MG    1 
-HETATM 3083 MG MG    . MG  G 6 .   Q 52.809 22.806  20.071  1.00 37.41  ? 302 MG  Y MG    1 
-HETATM 3084 MG MG    . MG  H 6 .   R 7.502  -0.903  -2.262  1.00 28.91  ? 303 MG  Y MG    1 
-HETATM 3085 MG MG    . MG  I 6 .   S 25.191 26.991  13.876  1.00 57.19  ? 304 MG  Y MG    1 
-HETATM 3086 MG MG    . MG  J 6 .   T 42.700 23.410  44.444  1.00 36.35  ? 305 MG  Y MG    1 
-HETATM 3087 MG MG    . MG  K 6 .   U 50.863 9.509   10.994  1.00 47.66  ? 306 MG  Y MG    1 
-HETATM 3088 MG MG    . MG  L 6 .   V 16.705 7.849   -6.559  1.00 40.37  ? 307 MG  Y MG    1 
-HETATM 3089 MG MG    . MG  M 6 .   W 8.489  -11.443 -9.220  1.00 48.51  ? 308 MG  Y MG    1 
-HETATM 3090 O  O     . HOH N 7 .   X 41.301 7.203   14.005  1.00 26.45  ? 403 HOH X O     1 
-HETATM 3091 O  O     . HOH N 7 .   Y 40.734 10.316  13.180  1.00 33.68  ? 404 HOH X O     1 
-HETATM 3092 O  O     . HOH N 7 .   Z 48.042 14.682  9.729   1.00 46.39  ? 405 HOH X O     1 
-HETATM 3093 O  O     . HOH N 7 .   A 64.634 13.010  20.257  1.00 36.98  ? 418 HOH X O     1 
-HETATM 3094 O  O     . HOH N 7 .   B 55.443 11.031  20.725  1.00 33.80  ? 420 HOH X O     1 
-HETATM 3095 O  O     . HOH N 7 .   C 53.214 10.291  11.154  1.00 25.32  ? 422 HOH X O     1 
-HETATM 3096 O  O     . HOH N 7 .   D 55.811 9.264   23.036  1.00 42.69  ? 462 HOH X O     1 
-HETATM 3097 O  O     . HOH N 7 .   E 39.619 12.647  22.499  1.00 41.92  ? 463 HOH X O     1 
-HETATM 3098 O  O     . HOH O 7 .   F 45.521 14.776  22.678  1.00 26.02  ? 401 HOH Y O     1 
-HETATM 3099 O  O     . HOH O 7 .   G 45.839 12.862  25.383  1.00 37.72  ? 402 HOH Y O     1 
-HETATM 3100 O  O     . HOH O 7 .   H 45.009 9.461   8.755   1.00 52.69  ? 406 HOH Y O     1 
-HETATM 3101 O  O     . HOH O 7 .   I 4.414  -11.108 -3.197  1.00 40.33  ? 407 HOH Y O     1 
-HETATM 3102 O  O     . HOH O 7 .   J 27.017 -9.735  7.494   1.00 39.61  ? 408 HOH Y O     1 
-HETATM 3103 O  O     . HOH O 7 .   K 15.242 14.807  -2.394  1.00 37.25  ? 409 HOH Y O     1 
-HETATM 3104 O  O     . HOH O 7 .   L 43.139 3.913   7.293   1.00 34.88  ? 410 HOH Y O     1 
-HETATM 3105 O  O     . HOH O 7 .   M 37.003 33.093  29.015  1.00 34.95  ? 411 HOH Y O     1 
-HETATM 3106 O  O     . HOH O 7 .   N 42.548 28.869  36.792  1.00 41.63  ? 412 HOH Y O     1 
-HETATM 3107 O  O     . HOH O 7 .   O 45.023 19.136  35.053  1.00 22.58  ? 413 HOH Y O     1 
-HETATM 3108 O  O     . HOH O 7 .   P 43.175 16.306  29.508  1.00 29.60  ? 414 HOH Y O     1 
-HETATM 3109 O  O     . HOH O 7 .   Q 47.127 22.608  24.516  1.00 30.35  ? 415 HOH Y O     1 
-HETATM 3110 O  O     . HOH O 7 .   R 63.337 10.369  12.355  1.00 33.12  ? 416 HOH Y O     1 
-HETATM 3111 O  O     . HOH O 7 .   S 47.370 19.689  33.356  1.00 36.23  ? 417 HOH Y O     1 
-HETATM 3112 O  O     . HOH O 7 .   T 69.239 13.790  32.880  1.00 45.56  ? 419 HOH Y O     1 
-HETATM 3113 O  O     . HOH O 7 .   U 52.443 14.393  14.564  1.00 28.84  ? 421 HOH Y O     1 
-HETATM 3114 O  O     . HOH O 7 .   V 48.852 22.724  34.357  1.00 30.97  ? 423 HOH Y O     1 
-HETATM 3115 O  O     . HOH O 7 .   W 57.419 24.159  36.800  1.00 38.00  ? 424 HOH Y O     1 
-HETATM 3116 O  O     . HOH O 7 .   X 43.612 17.184  32.643  1.00 35.73  ? 425 HOH Y O     1 
-HETATM 3117 O  O     . HOH O 7 .   Y 42.169 18.903  35.404  1.00 30.26  ? 426 HOH Y O     1 
-HETATM 3118 O  O     . HOH O 7 .   Z 37.216 23.667  32.374  1.00 38.23  ? 427 HOH Y O     1 
-HETATM 3119 O  O     . HOH O 7 .   A 37.464 27.302  23.423  1.00 22.13  ? 428 HOH Y O     1 
-HETATM 3120 O  O     . HOH O 7 .   B 35.079 26.108  25.625  1.00 42.23  ? 429 HOH Y O     1 
-HETATM 3121 O  O     . HOH O 7 .   C 35.917 31.713  23.159  1.00 28.36  ? 430 HOH Y O     1 
-HETATM 3122 O  O     . HOH O 7 .   D 45.524 30.574  19.562  1.00 62.83  ? 431 HOH Y O     1 
-HETATM 3123 O  O     . HOH O 7 .   E 34.739 10.714  11.336  1.00 31.98  ? 432 HOH Y O     1 
-HETATM 3124 O  O     . HOH O 7 .   F 32.059 5.743   17.499  1.00 24.00  ? 433 HOH Y O     1 
-HETATM 3125 O  O     . HOH O 7 .   G 34.277 9.031   20.607  1.00 40.20  ? 434 HOH Y O     1 
-HETATM 3126 O  O     . HOH O 7 .   H 37.155 11.927  22.610  1.00 31.90  ? 435 HOH Y O     1 
-HETATM 3127 O  O     . HOH O 7 .   I 28.824 21.024  19.656  1.00 34.04  ? 436 HOH Y O     1 
-HETATM 3128 O  O     . HOH O 7 .   J 28.386 19.104  23.514  1.00 50.14  ? 437 HOH Y O     1 
-HETATM 3129 O  O     . HOH O 7 .   K 32.246 19.168  24.409  1.00 41.91  ? 438 HOH Y O     1 
-HETATM 3130 O  O     . HOH O 7 .   L 26.394 25.231  14.663  1.00 36.76  ? 439 HOH Y O     1 
-HETATM 3131 O  O     . HOH O 7 .   M 22.801 28.588  19.094  1.00 48.46  ? 440 HOH Y O     1 
-HETATM 3132 O  O     . HOH O 7 .   N 31.901 22.211  24.579  1.00 33.20  ? 441 HOH Y O     1 
-HETATM 3133 O  O     . HOH O 7 .   O 28.026 7.135   11.545  1.00 40.79  ? 442 HOH Y O     1 
-HETATM 3134 O  O     . HOH O 7 .   P 28.112 4.070   10.984  1.00 40.24  ? 443 HOH Y O     1 
-HETATM 3135 O  O     . HOH O 7 .   Q 16.412 12.763  7.547   1.00 46.42  ? 444 HOH Y O     1 
-HETATM 3136 O  O     . HOH O 7 .   R 16.109 3.567   7.776   1.00 40.67  ? 445 HOH Y O     1 
-HETATM 3137 O  O     . HOH O 7 .   S 39.136 0.522   18.535  1.00 47.88  ? 446 HOH Y O     1 
-HETATM 3138 O  O     . HOH O 7 .   T 59.539 13.090  39.187  1.00 31.55  ? 447 HOH Y O     1 
-HETATM 3139 O  O     . HOH O 7 .   U 20.211 -2.032  -0.215  1.00 45.81  ? 448 HOH Y O     1 
-HETATM 3140 O  O     . HOH O 7 .   V 40.340 -2.840  5.969   1.00 45.61  ? 449 HOH Y O     1 
-HETATM 3141 O  O     . HOH O 7 .   W 37.173 8.966   21.040  1.00 52.12  ? 450 HOH Y O     1 
-HETATM 3142 O  O     . HOH O 7 .   X 43.011 12.936  34.516  1.00 26.26  ? 451 HOH Y O     1 
-HETATM 3143 O  O     . HOH O 7 .   Y 44.566 16.241  35.730  1.00 33.21  ? 452 HOH Y O     1 
-HETATM 3144 O  O     . HOH O 7 .   Z 37.360 29.756  21.752  1.00 37.56  ? 453 HOH Y O     1 
-HETATM 3145 O  O     . HOH O 7 .   A 45.366 25.335  15.194  1.00 40.60  ? 454 HOH Y O     1 
-HETATM 3146 O  O     . HOH O 7 .   B 26.671 27.191  12.423  1.00 35.19  ? 455 HOH Y O     1 
-HETATM 3147 O  O     . HOH O 7 .   C 44.443 14.245  43.645  1.00 37.54  ? 456 HOH Y O     1 
-HETATM 3148 O  O     . HOH O 7 .   D 54.821 21.462  42.458  1.00 39.37  ? 457 HOH Y O     1 
-HETATM 3149 O  O     . HOH O 7 .   E 59.855 20.021  43.039  1.00 52.88  ? 458 HOH Y O     1 
-HETATM 3150 O  O     . HOH O 7 .   F 60.700 10.648  43.361  1.00 30.56  ? 459 HOH Y O     1 
-HETATM 3151 O  O     . HOH O 7 .   G 57.100 12.342  48.450  1.00 36.79  ? 460 HOH Y O     1 
-HETATM 3152 O  O     . HOH O 7 .   H 53.360 20.238  22.183  1.00 34.74  ? 461 HOH Y O     1 
+HETATM 3066 C  C1    . G6P E 5 .   ? 44.830 11.036  14.132  1.00 47.46  ? 201 G6P X C1    1 
+HETATM 3067 C  C2    . G6P E 5 .   ? 44.011 12.193  13.515  1.00 47.55  ? 201 G6P X C2    1 
+HETATM 3068 C  C3    . G6P E 5 .   ? 44.075 12.096  11.979  1.00 46.64  ? 201 G6P X C3    1 
+HETATM 3069 C  C4    . G6P E 5 .   ? 45.559 12.187  11.558  1.00 48.29  ? 201 G6P X C4    1 
+HETATM 3070 C  C5    . G6P E 5 .   ? 46.311 10.994  12.217  1.00 49.41  ? 201 G6P X C5    1 
+HETATM 3071 C  C6    . G6P E 5 .   ? 47.802 11.009  11.845  1.00 50.35  ? 201 G6P X C6    1 
+HETATM 3072 O  O1    . G6P E 5 .   ? 44.261 9.759   13.817  1.00 49.15  ? 201 G6P X O1    1 
+HETATM 3073 O  O2    . G6P E 5 .   ? 42.615 12.109  13.983  1.00 39.91  ? 201 G6P X O2    1 
+HETATM 3074 O  O3    . G6P E 5 .   ? 43.333 13.172  11.398  1.00 45.70  ? 201 G6P X O3    1 
+HETATM 3075 O  O4    . G6P E 5 .   ? 45.658 12.095  10.128  1.00 52.60  ? 201 G6P X O4    1 
+HETATM 3076 O  O5    . G6P E 5 .   ? 46.213 11.078  13.668  1.00 48.04  ? 201 G6P X O5    1 
+HETATM 3077 O  O6    . G6P E 5 .   ? 48.418 12.217  12.293  1.00 53.70  ? 201 G6P X O6    1 
+HETATM 3078 P  P     . G6P E 5 .   ? 49.861 12.367  11.585  1.00 51.97  ? 201 G6P X P     1 
+HETATM 3079 O  O1P   . G6P E 5 .   ? 50.165 13.805  11.450  1.00 55.47  ? 201 G6P X O1P   1 
+HETATM 3080 O  O2P   . G6P E 5 .   ? 50.983 11.666  12.493  1.00 54.83  ? 201 G6P X O2P   1 
+HETATM 3081 O  O3P   . G6P E 5 .   ? 49.868 11.692  10.113  1.00 55.64  ? 201 G6P X O3P   1 
+HETATM 3082 MG MG    . MG  F 6 .   ? 46.113 13.058  23.669  1.00 62.08  ? 301 MG  Y MG    1 
+HETATM 3083 MG MG    . MG  G 6 .   ? 52.809 22.806  20.071  1.00 37.41  ? 302 MG  Y MG    1 
+HETATM 3084 MG MG    . MG  H 6 .   ? 7.502  -0.903  -2.262  1.00 28.91  ? 303 MG  Y MG    1 
+HETATM 3085 MG MG    . MG  I 6 .   ? 25.191 26.991  13.876  1.00 57.19  ? 304 MG  Y MG    1 
+HETATM 3086 MG MG    . MG  J 6 .   ? 42.700 23.410  44.444  1.00 36.35  ? 305 MG  Y MG    1 
+HETATM 3087 MG MG    . MG  K 6 .   ? 50.863 9.509   10.994  1.00 47.66  ? 306 MG  Y MG    1 
+HETATM 3088 MG MG    . MG  L 6 .   ? 16.705 7.849   -6.559  1.00 40.37  ? 307 MG  Y MG    1 
+HETATM 3089 MG MG    . MG  M 6 .   ? 8.489  -11.443 -9.220  1.00 48.51  ? 308 MG  Y MG    1 
+HETATM 3090 O  O     . HOH N 7 .   ? 39.619 12.647  22.499  1.00 41.92  ? 301 HOH X O     1 
+HETATM 3091 O  O     . HOH N 7 .   ? 64.634 13.010  20.257  1.00 36.98  ? 302 HOH X O     1 
+HETATM 3092 O  O     . HOH N 7 .   ? 40.734 10.316  13.180  1.00 33.68  ? 303 HOH X O     1 
+HETATM 3093 O  O     . HOH N 7 .   ? 41.301 7.203   14.005  1.00 26.45  ? 304 HOH X O     1 
+HETATM 3094 O  O     . HOH N 7 .   ? 55.443 11.031  20.725  1.00 33.80  ? 305 HOH X O     1 
+HETATM 3095 O  O     . HOH N 7 .   ? 48.042 14.682  9.729   1.00 46.39  ? 306 HOH X O     1 
+HETATM 3096 O  O     . HOH N 7 .   ? 53.214 10.291  11.154  1.00 25.32  ? 307 HOH X O     1 
+HETATM 3097 O  O     . HOH N 7 .   ? 55.811 9.264   23.036  1.00 42.69  ? 308 HOH X O     1 
+HETATM 3098 O  O     . HOH O 7 .   ? 43.139 3.913   7.293   1.00 34.88  ? 401 HOH Y O     1 
+HETATM 3099 O  O     . HOH O 7 .   ? 26.394 25.231  14.663  1.00 36.76  ? 402 HOH Y O     1 
+HETATM 3100 O  O     . HOH O 7 .   ? 45.524 30.574  19.562  1.00 62.83  ? 403 HOH Y O     1 
+HETATM 3101 O  O     . HOH O 7 .   ? 48.007 8.839   33.488  1.00 41.63  ? 404 HOH Y O     1 
+HETATM 3102 O  O     . HOH O 7 .   ? 16.109 3.567   7.776   1.00 40.67  ? 405 HOH Y O     1 
+HETATM 3103 O  O     . HOH O 7 .   ? 43.612 17.184  32.643  1.00 35.73  ? 406 HOH Y O     1 
+HETATM 3104 O  O     . HOH O 7 .   ? 45.366 25.335  15.194  1.00 40.60  ? 407 HOH Y O     1 
+HETATM 3105 O  O     . HOH O 7 .   ? 57.100 12.342  48.450  1.00 36.79  ? 408 HOH Y O     1 
+HETATM 3106 O  O     . HOH O 7 .   ? 53.552 13.063  41.265  1.00 34.95  ? 409 HOH Y O     1 
+HETATM 3107 O  O     . HOH O 7 .   ? 45.009 9.461   8.755   1.00 52.69  ? 410 HOH Y O     1 
+HETATM 3108 O  O     . HOH O 7 .   ? 45.521 14.776  22.678  1.00 26.02  ? 411 HOH Y O     1 
+HETATM 3109 O  O     . HOH O 7 .   ? 59.539 13.090  39.187  1.00 31.55  ? 412 HOH Y O     1 
+HETATM 3110 O  O     . HOH O 7 .   ? 47.370 19.689  33.356  1.00 36.23  ? 413 HOH Y O     1 
+HETATM 3111 O  O     . HOH O 7 .   ? 22.801 28.588  19.094  1.00 48.46  ? 414 HOH Y O     1 
+HETATM 3112 O  O     . HOH O 7 .   ? 47.127 22.608  24.516  1.00 30.35  ? 415 HOH Y O     1 
+HETATM 3113 O  O     . HOH O 7 .   ? 45.839 12.862  25.383  1.00 37.72  ? 416 HOH Y O     1 
+HETATM 3114 O  O     . HOH O 7 .   ? 43.175 16.306  29.508  1.00 29.60  ? 417 HOH Y O     1 
+HETATM 3115 O  O     . HOH O 7 .   ? 37.173 8.966   21.040  1.00 52.12  ? 418 HOH Y O     1 
+HETATM 3116 O  O     . HOH O 7 .   ? 53.360 20.238  22.183  1.00 34.74  ? 419 HOH Y O     1 
+HETATM 3117 O  O     . HOH O 7 .   ? 35.917 31.713  23.159  1.00 28.36  ? 420 HOH Y O     1 
+HETATM 3118 O  O     . HOH O 7 .   ? 28.386 19.104  23.514  1.00 50.14  ? 421 HOH Y O     1 
+HETATM 3119 O  O     . HOH O 7 .   ? 42.169 18.903  35.404  1.00 30.26  ? 422 HOH Y O     1 
+HETATM 3120 O  O     . HOH O 7 .   ? 37.155 11.927  22.610  1.00 31.90  ? 423 HOH Y O     1 
+HETATM 3121 O  O     . HOH O 7 .   ? 59.855 20.021  43.039  1.00 52.88  ? 424 HOH Y O     1 
+HETATM 3122 O  O     . HOH O 7 .   ? 40.340 -2.840  5.969   1.00 45.61  ? 425 HOH Y O     1 
+HETATM 3123 O  O     . HOH O 7 .   ? 31.901 22.211  24.579  1.00 33.20  ? 426 HOH Y O     1 
+HETATM 3124 O  O     . HOH O 7 .   ? 60.700 10.648  43.361  1.00 30.56  ? 427 HOH Y O     1 
+HETATM 3125 O  O     . HOH O 7 .   ? 32.059 5.743   17.499  1.00 24.00  ? 428 HOH Y O     1 
+HETATM 3126 O  O     . HOH O 7 .   ? 43.011 12.936  34.516  1.00 26.26  ? 429 HOH Y O     1 
+HETATM 3127 O  O     . HOH O 7 .   ? 20.211 -2.032  -0.215  1.00 45.81  ? 430 HOH Y O     1 
+HETATM 3128 O  O     . HOH O 7 .   ? 35.079 26.108  25.625  1.00 42.23  ? 431 HOH Y O     1 
+HETATM 3129 O  O     . HOH O 7 .   ? 48.852 22.724  34.357  1.00 30.97  ? 432 HOH Y O     1 
+HETATM 3130 O  O     . HOH O 7 .   ? 69.239 13.790  32.880  1.00 45.56  ? 433 HOH Y O     1 
+HETATM 3131 O  O     . HOH O 7 .   ? 37.216 23.667  32.374  1.00 38.23  ? 434 HOH Y O     1 
+HETATM 3132 O  O     . HOH O 7 .   ? 28.112 4.070   10.984  1.00 40.24  ? 435 HOH Y O     1 
+HETATM 3133 O  O     . HOH O 7 .   ? 28.824 21.024  19.656  1.00 34.04  ? 436 HOH Y O     1 
+HETATM 3134 O  O     . HOH O 7 .   ? 34.277 9.031   20.607  1.00 40.20  ? 437 HOH Y O     1 
+HETATM 3135 O  O     . HOH O 7 .   ? 37.464 27.302  23.423  1.00 22.13  ? 438 HOH Y O     1 
+HETATM 3136 O  O     . HOH O 7 .   ? 39.136 0.522   18.535  1.00 47.88  ? 439 HOH Y O     1 
+HETATM 3137 O  O     . HOH O 7 .   ? 45.023 19.136  35.053  1.00 22.58  ? 440 HOH Y O     1 
+HETATM 3138 O  O     . HOH O 7 .   ? 54.821 21.462  42.458  1.00 39.37  ? 441 HOH Y O     1 
+HETATM 3139 O  O     . HOH O 7 .   ? 44.443 14.245  43.645  1.00 37.54  ? 442 HOH Y O     1 
+HETATM 3140 O  O     . HOH O 7 .   ? 52.443 14.393  14.564  1.00 28.84  ? 443 HOH Y O     1 
+HETATM 3141 O  O     . HOH O 7 .   ? 28.026 7.135   11.545  1.00 40.79  ? 444 HOH Y O     1 
+HETATM 3142 O  O     . HOH O 7 .   ? 16.412 12.763  7.547   1.00 46.42  ? 445 HOH Y O     1 
+HETATM 3143 O  O     . HOH O 7 .   ? 57.419 24.159  36.800  1.00 38.00  ? 446 HOH Y O     1 
+HETATM 3144 O  O     . HOH O 7 .   ? 44.566 16.241  35.730  1.00 33.21  ? 447 HOH Y O     1 
+HETATM 3145 O  O     . HOH O 7 .   ? 15.242 14.807  -2.394  1.00 37.25  ? 448 HOH Y O     1 
+HETATM 3146 O  O     . HOH O 7 .   ? 26.671 27.191  12.423  1.00 35.19  ? 449 HOH Y O     1 
+HETATM 3147 O  O     . HOH O 7 .   ? 32.246 19.168  24.409  1.00 41.91  ? 450 HOH Y O     1 
+HETATM 3148 O  O     . HOH O 7 .   ? 27.017 -9.735  7.494   1.00 39.61  ? 451 HOH Y O     1 
+HETATM 3149 O  O     . HOH O 7 .   ? 63.337 10.369  12.355  1.00 33.12  ? 452 HOH Y O     1 
+HETATM 3150 O  O     . HOH O 7 .   ? 37.360 29.756  21.752  1.00 37.56  ? 453 HOH Y O     1 
+HETATM 3151 O  O     . HOH O 7 .   ? 4.414  -11.108 -3.197  1.00 40.33  ? 454 HOH Y O     1 
+HETATM 3152 O  O     . HOH O 7 .   ? 34.739 10.714  11.336  1.00 31.98  ? 455 HOH Y O     1 
 # 

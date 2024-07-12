@@ -18,7 +18,7 @@ def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) ->
 
 
 def begin(cif: _TemporaryFileWrapper, file_content: str) -> List[Any]:
-    cif.write(maxit.ensure_cif(file_content))
+    cif.write(maxit.ensure_mmcif(file_content))
     cif.flush()
     cif.seek(0)
     return mmcif.io.IoAdapter().readFile(cif.name)

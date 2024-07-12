@@ -8,6 +8,7 @@ from adapters.tools.utils import is_cif, run_external_cmd
 # constants defined by MAXIT
 MODE_PDB2CIF = "1"
 MODE_CIF2PDB = "2"
+MODE_CIF2MMCIF = "8"
 
 
 def ensure_cif(file_content: str) -> str:
@@ -20,6 +21,10 @@ def ensure_pdb(file_content: str) -> str:
     if is_cif(file_content):
         return cif2pdb(file_content)
     return file_content
+
+
+def ensure_mmcif(file_content: str) -> str:
+    return cif2mmcif(ensure_cif(file_content))
 
 
 @cache.memoize()
@@ -70,6 +75,31 @@ def cif2pdb(cif_content):
                 pdb_content = pdb.read()
 
     return pdb_content
+
+
+@cache.memoize()
+def cif2mmcif(cif_content: str) -> str:
+    with TemporaryDirectory() as directory:
+        with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
+            with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as mmcif:
+                cif.write(cif_content)
+                cif.seek(0)
+                run_external_cmd(
+                    [
+                        "maxit",
+                        "-input",
+                        cif.name,
+                        "-output",
+                        mmcif.name,
+                        "-o",
+                        MODE_CIF2MMCIF,
+                    ],
+                    cwd=directory,
+                )
+                mmcif.seek(0)
+                cif_content = mmcif.read()
+
+    return cif_content
 
 
 def main():

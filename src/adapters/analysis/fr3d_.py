@@ -110,7 +110,6 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
         base_ribose_interactions,
         base_phosphate_interactions,
         other_interactions
-
     )
 
 
