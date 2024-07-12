@@ -31,7 +31,7 @@ jobs:
           docker cp test_requirements.txt $DOCKER_CONTAINER:/
 
       - name: Install test requirements
-        run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install -v -r test_requirements.txt"
+        run: docker start $DOCKER_CONTAINER && docker stats --no-stream $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "pip3 install -v -r test_requirements.txt"
 
       - name: Run test
         run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
