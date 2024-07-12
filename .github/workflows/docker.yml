@@ -37,9 +37,9 @@ jobs:
       - name: Install test requirements
         run: |
           # Attempt pip install and capture host dmesg before and after
-          dmesg > dmesg_before.log
+          sudo dmesg > dmesg_before.log
           { docker exec $DOCKER_CONTAINER /bin/bash -c "pip3 install -v -r test_requirements.txt"; } || true
-          dmesg > dmesg_after.log
+          sudo dmesg > dmesg_after.log
 
           # Capture host system information
           free -m > memory_info.log
