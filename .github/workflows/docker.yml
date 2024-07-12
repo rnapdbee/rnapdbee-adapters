@@ -36,33 +36,10 @@ jobs:
 
       - name: Install test requirements
         run: |
-          # Attempt pip install and capture host dmesg before and after
-          sudo dmesg > dmesg_before.log
           { docker exec $DOCKER_CONTAINER /bin/bash -c "pip3 install -v -r test_requirements.txt"; } || true
-          sudo dmesg > dmesg_after.log
-
-          # Capture host system information
-          free -m > memory_info.log
-          df -h > disk_info.log
-          ps aux > process_info.log
-
-          # Try to get any logs from inside the container
-          docker logs $DOCKER_CONTAINER > container_logs.log 2>&1 || true
-
-          # Display captured information
-          echo "dmesg before:"
-          cat dmesg_before.log
-          echo "dmesg after:"
-          cat dmesg_after.log
-          echo "Memory info:"
-          cat memory_info.log
-          echo "Disk info:"
-          cat disk_info.log
-          echo "Process info:"
-          cat process_info.log
-          echo "Container logs:"
-          cat container_logs.log
-          false
+          exit_code=$?
+          docker logs $DOCKER_CONTAINER 2>&1 || true
+          exit ${exit_code}
 
       - name: Run test
         run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
