@@ -25,6 +25,10 @@ jobs:
         run: |
           docker create --name $DOCKER_CONTAINER --env-file .env_ci $DOCKER_IMAGE
 
+      - name: Start the docker container
+        run: |
+          docker start $DOCKER_CONTAINER
+
       - name: Copy files
         run: |
           docker cp tests/ $DOCKER_CONTAINER:rnapdbee-adapters/src/
