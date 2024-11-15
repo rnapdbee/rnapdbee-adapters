@@ -1,0 +1,20 @@
+--- src/include/overlap.h.orig	2024-11-15 12:40:22.189652581 +0100
++++ src/include/overlap.h	2024-11-15 12:53:28.729050968 +0100
+@@ -643,7 +643,7 @@
+ 
+       }
+       void fprint(FILE* fp){
+-            fprintf(fp,"OVLP    %6d:%-6d  %c %6d:%-6d %c   %3s:%-3s   %3s-%-3s  %4s  %2s  : %8.2lf  %8.2lf %8.2lf",
++            fprintf(fp,"OVLP    %6d:%-6d  %c %6d:%-6d %c   %3s:%-3s   %3s^%-3s  %4s  %2s  : %8.2lf  %8.2lf %8.2lf",
+                     base1,
+                     base2,
+ 		    base1_ins,
+@@ -2410,7 +2410,7 @@
+ 			 * is essential*/
+ 			resiptr2 = residue_bases[j];
+ 			if(resiptr1->is_in_proximity(resiptr2, dist, atom1, atom2, &actdist) == true){
+-			      fprintf(fp, "PROX    %6d:%-6d  %c %6d:%-6d %c   %3s:%-3s   %3s-%-3s %4s:%-4s PX  :   %5.2lf\n",
++			      fprintf(fp, "PROX    %6d:%-6d  %c %6d:%-6d %c   %3s:%-3s   %3s^%-3s %4s:%-4s PX  :   %5.2lf\n",
+ 					  mOutArray->mOutFileRowArray[i]->get_cor_serial(),
+ 					  mOutArray->mOutFileRowArray[j]->get_cor_serial(),
+ 					  mOutArray->mOutFileRowArray[i]->get_ins(),
