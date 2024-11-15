@@ -1,6 +1,4 @@
-import pytest
 from src.adapters.analysis.bpnet import analyze
-from src.adapters.exceptions import ThirdPartySoftwareError
 
 
 def test_analyze_200d_assembly1():
@@ -8,5 +6,4 @@ def test_analyze_200d_assembly1():
     with open("tests/files/input/200d-assembly1.cif") as f:
         content = f.read()
 
-    with pytest.raises(ThirdPartySoftwareError):
-        analyze(content)
+    analyze(content)
