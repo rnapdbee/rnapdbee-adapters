@@ -202,7 +202,7 @@ def parse_overlaps(bpnet_output: str):
 #                                ^---------------------------- residue numbers
 #                        ^------------------------------------ insertion code (lhs)
 def residues_from_overlap_info(fields):
-    chain1, chain2 = fields[6].split("-")
+    chain1, chain2 = fields[6].split("^")
     number1, number2 = map(int, fields[3].split(":"))
     icode1, icode2 = fields[2], fields[4]
     name1, name2 = fields[5].split(":")

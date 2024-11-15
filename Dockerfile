@@ -149,6 +149,12 @@ RUN dpkg -i pseudoviewer/ipython.deb && rm pseudoviewer/ipython.deb
 
 # bpnet copy
 ADD app/bpnet/bpnet-master.tar.gz /
+ADD app/bpnet/001-change-chain-separatator.patch /
+RUN cd /bpnet-master \
+ && patch -p0 < /001-change-chain-separatator.patch \
+ && cd src \
+ && make \
+ && cp bpnet.linux ../bin/
 ADD app/bpnet/metbp-MetBPv1.2.4.tar.gz /
 RUN cd /metbp-MetBPv1.2.4 && make
 
