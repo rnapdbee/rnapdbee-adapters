@@ -128,6 +128,9 @@ RUN apt-get update -y \
  && apt-get update && apt-get install -y mono-devel \
  && rm -rf /var/lib/apt/lists/*
 
+# Install HiGHS
+ADD app/highs/HiGHSstatic.v1.8.1.x86_64-linux-gnu-cxx11.tar.gz /usr/local
+
 # MAXIT build
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
 
