@@ -33,16 +33,14 @@ def run_cif_adapter(
 def run_pdb_adapter(
     analyze: Callable[..., BaseInteractions], data: str, model: int
 ) -> BaseInteractions:
-    pdb_content = pdb_filter.apply(
+    pdb_content, mapped_chains = pdb_filter.apply(
         data,
         [
             (pdb_filter.leave_single_model, {"model": model}),
         ],
     )
 
-    mapped_content, mapped_chains = pdb_filter.replace_chains(pdb_content)
-
-    analysis_output = analyze(mapped_content, model=model)
+    analysis_output = analyze(pdb_content, model=model)
 
     return output_filter.apply(
         analysis_output,

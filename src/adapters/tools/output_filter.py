@@ -185,9 +185,5 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
         )
 
     return BaseInteractions(
-        base_pairs,
-        stackings,
-        base_riboses,
-        base_phosphates,
-        other_interactions
+        base_pairs, stackings, base_riboses, base_phosphates, other_interactions
     )
