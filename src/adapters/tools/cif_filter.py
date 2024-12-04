@@ -1,7 +1,9 @@
+import re
 from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
 from typing import Any, Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
+from rnapolis.molecule_filter import filter_by_poly_types
 
 from adapters.tools import maxit
 
@@ -14,6 +16,19 @@ def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) ->
             function(data, **kwargs)
 
         cif_content = end(cif_file, data)
+
+    filtered_content = filter_by_poly_types(
+        cif_content,
+        [
+            "polydeoxyribonucleotide",
+            "polydeoxyribonucleotide/polyribonucleotide hybrid",
+            "polyribonucleotide",
+        ], ["chem_comp"]
+    )
+
+    # check if filtering left any atoms, if not return original content
+    if re.search(r"^_atom_site", filtered_content, re.MULTILINE):
+        return filtered_content
     return cif_content
 
 
