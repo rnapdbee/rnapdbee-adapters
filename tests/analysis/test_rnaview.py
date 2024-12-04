@@ -15,5 +15,3 @@ def test_4gqj():
         expected_base_interactions = orjson.loads(f.read())
 
     assert actual_base_interactions == expected_base_interactions
-    
-    
