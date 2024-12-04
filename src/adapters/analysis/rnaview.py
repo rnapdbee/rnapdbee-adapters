@@ -77,6 +77,7 @@ class RNAViewAdapter:
         position_c2: Optional[Tuple[float, float, float]]
         position_c6: Optional[Tuple[float, float, float]]
         position_n1: Optional[Tuple[float, float, float]]
+        position_n9: Optional[Tuple[float, float, float]]
 
         def is_correct_according_to_rnaview(self) -> bool:
             if any(
@@ -90,9 +91,14 @@ class RNAViewAdapter:
             distance_c2_c6 = math.dist(self.position_c2, self.position_c6)  # type: ignore
             distance_n1_c6 = math.dist(self.position_n1, self.position_c6)  # type: ignore
             distance_n1_c2 = math.dist(self.position_n1, self.position_c2)  # type: ignore
-            return all(
+            if all(
                 (distance_c2_c6 <= 3.0, distance_n1_c6 <= 2.0, distance_n1_c2 <= 2.0)
-            )
+            ):
+                if self.position_n9 is not None:
+                    distance_n1_n9 = math.dist(self.position_n1, self.position_n9)  # type: ignore
+                    return 3.5 <= distance_n1_n9 <= 4.5
+                return True
+            return False
 
     # Positions of resiudes info in PDB files
     ATOM_NAME_INDEX = slice(12, 16)
@@ -108,6 +114,7 @@ class RNAViewAdapter:
     ATOM_C6 = "C6"
     ATOM_C2 = "C2"
     ATOM_N1 = "N1"
+    ATOM_N9 = "N9"
 
     # Groups of RNAVIEW_REGEX
 
@@ -168,7 +175,7 @@ class RNAViewAdapter:
 
                 if str(residue) not in potential_residues:
                     potential_residues[str(residue)] = RNAViewAdapter.PotentialResidue(
-                        residue, None, None, None
+                        residue, None, None, None, None
                     )
                 potential_residue = potential_residues[str(residue)]
 
@@ -184,6 +191,8 @@ class RNAViewAdapter:
                     potential_residue.position_c2 = atom_position
                 elif atom_name == self.ATOM_N1:
                     potential_residue.position_n1 = atom_position
+                elif atom_name == self.ATOM_N9:
+                    potential_residue.position_n9 = atom_position
 
         counter = 1
         for potential_residue in potential_residues.values():

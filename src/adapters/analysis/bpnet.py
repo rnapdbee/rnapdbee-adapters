@@ -260,7 +260,7 @@ def analyze(cif_content: str, **_: Dict[str, Any]) -> BaseInteractions:
         stackings,
         base_ribose_interactions,
         base_phosphate_interactions,
-        other_interactions
+        other_interactions,
     )
 
 

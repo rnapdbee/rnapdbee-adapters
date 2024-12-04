@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 def convert_saenger(hbond_type_28: str) -> Optional[Saenger]:
     if hbond_type_28 == "?":
         return None
-    
+
     try:
         index = int(hbond_type_28)
         if 1 <= index <= 28:
@@ -33,13 +33,13 @@ def convert_saenger(hbond_type_28: str) -> Optional[Saenger]:
     except ValueError:
         pass
 
-    return None    
+    return None
 
 
 def convert_lw(hbond_type_12) -> Optional[LeontisWesthof]:
     if hbond_type_12 == "?":
         return None
-    
+
     try:
         index = int(hbond_type_12)
 
@@ -80,13 +80,17 @@ def parse_base_pairs(ndb_struct_na_base_pair: List[Dict]) -> Tuple[List, List]:
     for entry in ndb_struct_na_base_pair:
         auth_chain_i = entry["i_auth_asym_id"]
         auth_number_i = int(entry["i_auth_seq_id"])
-        auth_icode_i = entry["i_PDB_ins_code"] if entry["i_PDB_ins_code"] != "?" else None
+        auth_icode_i = (
+            entry["i_PDB_ins_code"] if entry["i_PDB_ins_code"] != "?" else None
+        )
         name_i = entry["i_label_comp_id"]
         auth_i = ResidueAuth(auth_chain_i, auth_number_i, auth_icode_i, name_i)
 
         auth_chain_j = entry["j_auth_asym_id"]
         auth_number_j = int(entry["j_auth_seq_id"])
-        auth_icode_j = entry["j_PDB_ins_code"] if entry["j_PDB_ins_code"] != "?" else None
+        auth_icode_j = (
+            entry["j_PDB_ins_code"] if entry["j_PDB_ins_code"] != "?" else None
+        )
         name_j = entry["j_label_comp_id"]
         auth_j = ResidueAuth(auth_chain_j, auth_number_j, auth_icode_j, name_j)
 
@@ -118,7 +122,9 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
         mmcif.seek(0)
         metadata = read_metadata(mmcif, ["ndb_struct_na_base_pair"])
 
-    base_pairs, other_interactions = parse_base_pairs(metadata["ndb_struct_na_base_pair"])
+    base_pairs, other_interactions = parse_base_pairs(
+        metadata["ndb_struct_na_base_pair"]
+    )
     return BaseInteractions(base_pairs, [], [], [], other_interactions)
 
 
