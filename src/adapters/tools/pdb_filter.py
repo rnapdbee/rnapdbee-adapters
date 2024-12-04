@@ -2,6 +2,7 @@ import re
 from collections import defaultdict
 from typing import Callable, Dict, Iterable, Tuple
 
+from rnapolis.molecule_filter import filter_by_poly_types
 from rnapolis.transformer import replace_value
 
 from adapters.exceptions import PdbParsingError
@@ -18,6 +19,17 @@ def apply(
 ) -> Tuple[str, Dict[str, str]]:
     # replace chains with one letter names if the input is an mmCIF file
     if re.search(r"^_atom_site", file_content, re.MULTILINE):
+        filtered_content = filter_by_poly_types(
+            file_content,
+            [
+                "polydeoxyribonucleotide",
+                "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                "polyribonucleotide",
+            ], ["chem_comp"]
+        )
+        # check if filtering left any atoms, if so use it as the new content, otherwise use the original content
+        if re.search(r"^_atom_site", filtered_content, re.MULTILINE):
+            file_content = filtered_content
         pdb_content, mapping = replace_value(file_content, "atom_site", "auth_asym_id")
         mapping = {v: k for k, v in mapping.items()}
     else:
