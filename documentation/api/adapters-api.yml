@@ -12,9 +12,6 @@ tags:
   - name: "Conversion API"
     description: "RNApdbee adapters API which is able to perform pdb &#8594; cif or cif &#8594; pdb conversion"
 
-  - name: "Filtering API"
-    description: "RNApdbee adapters API which is able to perform structure filtering"
-
   - name: "Visualization API"
     description: "RNApdbee adapters API which is able to perform structure visualization"
 
@@ -452,29 +449,6 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/FileDBN"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "415":
-          $ref: "#/components/responses/UnsupportedMedia"
-        "500":
-          $ref: "#/components/responses/ServerError"
-
-  # ---------- Filtering API ---------- #
-
-  /filtering-api/v1/filter:
-    post:
-      tags:
-        - "Filtering API"
-      summary: "Remove proteins, fix occupancy and return cif"
-      requestBody:
-        $ref: "#/components/requestBodies/fileWithStructure"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/FileCIF"
         "400":
           $ref: "#/components/responses/BadRequest"
         "415":

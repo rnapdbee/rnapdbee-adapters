@@ -103,7 +103,7 @@ ARG rchie_dir
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/metbp-MetBPv1.2.4/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
-    PYTHONPATH=${PYTHONPATH}:/rnapdbee-adapters/src \
+    PYTHONPATH=/rnapdbee-adapters/src \
     RCSBROOT=/maxit \
     RNAVIEW=/rnaview \
     ADAPTERS_WORKERS=3 \

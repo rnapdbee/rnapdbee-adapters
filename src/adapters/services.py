@@ -14,7 +14,6 @@ def run_cif_adapter(
         data,
         [
             (cif_filter.leave_single_model, {"model": model}),
-            (cif_filter.remove_proteins, {}),
             (cif_filter.fix_occupancy, {}),
         ],
     )
@@ -36,7 +35,8 @@ def run_pdb_adapter(
     pdb_content, mapped_chains = pdb_filter.apply(
         data,
         [
-            (pdb_filter.leave_single_model, {"model": model}),
+            (cif_filter.leave_single_model, {"model": model}),
+            (cif_filter.fix_occupancy, {}),
         ],
     )
 
@@ -45,8 +45,8 @@ def run_pdb_adapter(
     return output_filter.apply(
         analysis_output,
         [
-            (output_filter.restore_chains, {"mapped_chains": mapped_chains}),
             (output_filter.remove_duplicate_pairs, {}),
+            (output_filter.restore_chains, {"mapped_chains": mapped_chains}),
             (output_filter.sort_interactions_lists, {}),
         ],
     )
