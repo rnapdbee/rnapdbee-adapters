@@ -168,11 +168,11 @@ class RNAPuzzlerDrawer:
             color = interaction.color
             if color == self.COLORS["NOT_REPRESENTED"]:
                 lines.append(
-                    f'{nr_left} {nr_right} 1.5 [3 6] 0 {self.COLORS["NOT_REPRESENTED"]} dashedpair'
+                    f"{nr_left} {nr_right} 1.5 [3 6] 0 {self.COLORS['NOT_REPRESENTED']} dashedpair"
                 )
             elif color == self.COLORS["BASE_PAIR"]:
                 lines.append(
-                    f'{nr_left} {nr_right} 1 [9 3.01] 9 {self.COLORS["BASE_PAIR"]} dashedpair'
+                    f"{nr_left} {nr_right} 1 [9 3.01] 9 {self.COLORS['BASE_PAIR']} dashedpair"
                 )
             else:
                 lines.append(f"{nr_left} {nr_right} {color} colorpair")
@@ -201,7 +201,7 @@ class RNAPuzzlerDrawer:
 
     def insert_strands_array(self) -> str:
         chains_lengths = [str(len(strand.sequence)) for strand in self.data.strands]
-        return f'/strands [{" ".join(chains_lengths)}] def'
+        return f"/strands [{' '.join(chains_lengths)}] def"
 
     def postprocess(self) -> None:
         modified_result: List[str] = []
@@ -213,7 +213,7 @@ class RNAPuzzlerDrawer:
 
             if trim_line.startswith("/cmark"):
                 modified_result.append(line)
-                modified_result.append(f'{self.COLORS["-"]} setrgbcolor')
+                modified_result.append(f"{self.COLORS['-']} setrgbcolor")
 
             elif trim_line.startswith("/drawoutline"):
                 strands_procedure = self.read_muliple_strands_procedure()

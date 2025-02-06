@@ -18,6 +18,7 @@ def test_4gqj():
 
     assert actual_base_interactions == expected_base_interactions
 
+
 def test_279d():
     with gzip.open("files/input/279d-assembly1.cif.gz", "rt") as f:
         file_content = f.read()

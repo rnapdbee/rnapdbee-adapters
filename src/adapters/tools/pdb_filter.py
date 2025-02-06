@@ -18,7 +18,15 @@ def apply(
     cif_content = cif_filter.apply(file_content, functions_args)
 
     # rename chains to printable, single characters
-    cif_content, mapping = replace_value(cif_content, "atom_site", "auth_asym_id")
+    cif_content, mapping = replace_value(
+        cif_content,
+        "atom_site",
+        "auth_asym_id",
+        string.ascii_uppercase
+        + string.digits
+        + string.ascii_lowercase
+        + string.punctuation,
+    )
     mapping = {v: k for k, v in mapping.items()}
 
     # convert back to PDB
