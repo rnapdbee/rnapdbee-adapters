@@ -1,3 +1,5 @@
+import gzip
+
 import orjson
 
 from adapters.analysis import rnaview
@@ -12,6 +14,18 @@ def test_4gqj():
     actual_base_interactions = orjson.loads(orjson.dumps(actual_base_interactions))
 
     with open("files/analysis_output/4gqj-assembly1-rnaview.json") as f:
+        expected_base_interactions = orjson.loads(f.read())
+
+    assert actual_base_interactions == expected_base_interactions
+
+def test_279d():
+    with gzip.open("files/input/279d-assembly1.cif.gz", "rt") as f:
+        file_content = f.read()
+
+    actual_base_interactions = run_pdb_adapter(rnaview.analyze, file_content, 1)
+    actual_base_interactions = orjson.loads(orjson.dumps(actual_base_interactions))
+
+    with open("files/analysis_output/279d-assembly1-rnaview.json") as f:
         expected_base_interactions = orjson.loads(f.read())
 
     assert actual_base_interactions == expected_base_interactions
