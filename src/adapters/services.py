@@ -32,7 +32,7 @@ def run_cif_adapter(
 def run_pdb_adapter(
     analyze: Callable[..., BaseInteractions], data: str, model: int
 ) -> BaseInteractions:
-    pdb_content, mapped_chains = pdb_filter.apply(
+    result = pdb_filter.apply(
         data,
         [
             (cif_filter.leave_single_model, {"model": model}),
@@ -40,6 +40,11 @@ def run_pdb_adapter(
         ],
     )
 
+    # If the result is None, it means that the input data is not representable as a valid PDB file
+    if result is None:
+        return BaseInteractions([], [], [], [], [])
+
+    pdb_content, mapped_chains = result
     analysis_output = analyze(pdb_content, model=model)
 
     return output_filter.apply(
