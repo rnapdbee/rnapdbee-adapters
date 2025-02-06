@@ -12,7 +12,6 @@ from adapters.cache import cache
 from adapters.config import config
 from adapters.routes.analysis import server as analysis
 from adapters.routes.conversion import server as conversion
-from adapters.routes.filtering import server as filtering
 from adapters.routes.visualization import server as visualization
 
 app = Flask(__name__)
@@ -23,7 +22,6 @@ logger = logging.getLogger(__name__)
 
 @analysis.before_request
 @conversion.before_request
-@filtering.before_request
 def log_plain_request():
     logger.info(f"Request (text/plain) received, path: {request.path}")
     logger.debug(request.data.decode("utf-8"))
@@ -74,7 +72,6 @@ def handle_exception(exception: Exception):
 cache.init_app(app)
 app.register_blueprint(analysis, url_prefix="/analysis-api/v1")
 app.register_blueprint(conversion, url_prefix="/conversion-api/v1")
-app.register_blueprint(filtering, url_prefix="/filtering-api/v1")
 app.register_blueprint(visualization, url_prefix="/visualization-api/v1")
 
 if __name__ == "__main__":

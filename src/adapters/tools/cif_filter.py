@@ -1,4 +1,3 @@
-import re
 from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
 from typing import Any, Callable, Dict, Iterable, List, Tuple
 
@@ -9,26 +8,29 @@ from adapters.tools import maxit
 
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
+    # ensure the format is mmCIF
+    cif_content = maxit.ensure_cif(file_content)
+
+    # filter to leave only DNA, RNA and hybrids
+    cif_content = filter_by_poly_types(
+        cif_content,
+        [
+            "polydeoxyribonucleotide",
+            "polydeoxyribonucleotide/polyribonucleotide hybrid",
+            "polyribonucleotide",
+        ],
+        ["chem_comp"],
+    )
+
+    # apply all filtering functions
     with NamedTemporaryFile("w+", suffix=".cif") as cif_file:
-        data = begin(cif_file, file_content)
+        data = begin(cif_file, cif_content)
 
         for function, kwargs in functions_args:
             function(data, **kwargs)
 
         cif_content = end(cif_file, data)
 
-    filtered_content = filter_by_poly_types(
-        cif_content,
-        [
-            "polydeoxyribonucleotide",
-            "polydeoxyribonucleotide/polyribonucleotide hybrid",
-            "polyribonucleotide",
-        ], ["chem_comp"]
-    )
-
-    # check if filtering left any atoms, if not return original content
-    if re.search(r"^_atom_site", filtered_content, re.MULTILINE):
-        return filtered_content
     return cif_content
 
 
@@ -80,45 +82,8 @@ def fix_occupancy(data: List, *_):
             occupancy = atom_site.getAttributeIndex("occupancy")
 
             if occupancy != -1:
-                for _, row in enumerate(atom_site.getRowList()):  # type: ignore
+                for row in atom_site.getRowList():
                     try:
                         float(row[occupancy])
                     except (KeyError, ValueError):
                         row[occupancy] = "1.0"
-
-
-# Remove all atoms which belong to proteins
-def remove_proteins(data: List, *_):
-    if len(data) > 0:
-        entity_poly = data[0].getObj("entity_poly")
-        atom_site = data[0].getObj("atom_site")
-
-        if entity_poly and atom_site:
-            entity_id = entity_poly.getAttributeIndex("entity_id")
-            type_ = entity_poly.getAttributeIndex("type")
-
-            if entity_id != -1 and type_ != -1:
-                id_type_map = {
-                    row[entity_id]: row[type_] for row in entity_poly.getRowList()
-                }
-            else:
-                id_type_map = {}
-
-            label_entity_id = atom_site.getAttributeIndex("label_entity_id")
-
-            if label_entity_id != -1:
-                toremove = []
-
-                for i, row in enumerate(atom_site.getRowList()):
-                    entity_type = id_type_map.get(row[label_entity_id], "other")
-
-                    # see: https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_entity_poly.type.html
-                    if entity_type in [
-                        "cyclic-pseudo-peptide",
-                        "polypeptide(D)",
-                        "polypeptide(L)",
-                    ]:
-                        toremove.append(i)
-
-                for i in reversed(toremove):
-                    del atom_site.getRowList()[i]
