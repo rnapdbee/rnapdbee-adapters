@@ -24,7 +24,7 @@ def apply(
     adapter = IoAdapterPy()
 
     with tempfile.NamedTemporaryFile(mode="wt") as f:
-        f.write(file_content)
+        f.write(cif_content)
         f.seek(0)
         data = adapter.readFile(f.name)
 
