@@ -278,23 +278,25 @@ class RNAViewAdapter:
         else:
             raise PdbParsingError(f"Unknown RNAView interaction: {token}")
 
-    def check_indexing_correctness(self, regex_result: Tuple[str, ...]) -> None:
+    def check_indexing_correctness(
+        self, regex_result: Tuple[str, ...], line: str
+    ) -> None:
         residue_left = self.residues_from_pdb[int(regex_result[0])]
 
-        if residue_left.auth.chain != regex_result[
+        if residue_left.auth.chain.lower() != regex_result[
             2
-        ] or residue_left.auth.number != int(regex_result[3]):
+        ].lower() or residue_left.auth.number != int(regex_result[3]):
             raise PdbParsingError(
-                f"Wrong internal index for {residue_left}. Fix RNAView internal index mapping."
+                f"Wrong internal index for {residue_left}. Fix RNAView internal index mapping. Line: {line}"
             )
 
         residue_right = self.residues_from_pdb[int(regex_result[1])]
 
-        if residue_right.auth.chain != regex_result[
+        if residue_right.auth.chain.lower() != regex_result[
             7
-        ] or residue_right.auth.number != int(regex_result[6]):
+        ].lower() or residue_right.auth.number != int(regex_result[6]):
             raise PdbParsingError(
-                f"Wrong internal index for {residue_right}. Fix RNAView internal index mapping."
+                f"Wrong internal index for {residue_right}. Fix RNAView internal index mapping. Line: {line}"
             )
 
     def analyze_by_rnaview(
@@ -314,7 +316,7 @@ class RNAViewAdapter:
                 if rnaview_regex_result is None:
                     raise RegexError("RNAView regex failed")
                 rnaview_regex_groups = rnaview_regex_result.groups()
-                self.check_indexing_correctness(rnaview_regex_groups)
+                self.check_indexing_correctness(rnaview_regex_groups, line)
                 self.append_interaction(rnaview_regex_groups)
 
         return self.analysis_output
