@@ -168,14 +168,9 @@ ADD app/mc-annotate/mc-annotate.tar.gz /mc-annotate/
 ADD app/svg-cleaner/svgcleaner.tar.gz /svg-cleaner/
 
 EXPOSE 80
-CMD ["gunicorn", \
-    "--worker-tmp-dir", "/dev/shm", \
-    "--workers", "${ADAPTERS_WORKERS}", \
-    "--threads", "${ADAPTERS_THREADS}", \
-    "--timeout", "${ADAPTERS_WORKER_TIMEOUT}", \
-    "--log-level", "${ADAPTERS_GUNICORN_LOG_LEVEL}", \
-    "--max-requests", "${ADAPTERS_MAX_REQUESTS}", \
-    "--bind", "0.0.0.0:80", \
-    "adapters.server:app"]
+
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 COPY src/adapters /rnapdbee-adapters/src/adapters
