@@ -199,7 +199,7 @@ class RNAViewAdapter:
             if potential_residue.is_correct_according_to_rnaview():
                 self.residues_from_pdb[counter] = potential_residue.residue
                 counter += 1
-                
+
         logger.debug("RNAView residues mapping:")
         for idx, residue in sorted(self.residues_from_pdb.items()):
             logger.debug(f"  {idx}: {residue}")
