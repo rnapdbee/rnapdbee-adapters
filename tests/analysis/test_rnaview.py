@@ -30,3 +30,11 @@ def test_279d():
         expected_base_interactions = orjson.loads(f.read())
 
     assert actual_base_interactions == expected_base_interactions
+
+def test_R1107TS091_1():
+    with open("files/input/R1107TS091_1.pdb") as f:
+        file_content = f.read()
+
+    adapter = rnaview.RNAViewAdapter()
+    adapter.analyze_by_rnaview(file_content)
+    assert len(adapter.residues_from_pdb) == 69
