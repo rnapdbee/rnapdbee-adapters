@@ -316,18 +316,22 @@ class RNAViewAdapter:
                 if rnaview_regex_result is None:
                     raise RegexError("RNAView regex failed")
                 rnaview_regex_groups = rnaview_regex_result.groups()
-                
+
                 # Log parsed groups with their meanings
                 logger.debug("RNAView regex parsed:")
-                logger.debug(f"  First residue:  idx={rnaview_regex_groups[0]}, chain={rnaview_regex_groups[2]}, num={rnaview_regex_groups[3]}, name={rnaview_regex_groups[4]}")
-                logger.debug(f"  Second residue: idx={rnaview_regex_groups[1]}, chain={rnaview_regex_groups[7]}, num={rnaview_regex_groups[6]}, name={rnaview_regex_groups[5]}")
+                logger.debug(
+                    f"  First residue:  idx={rnaview_regex_groups[0]}, chain={rnaview_regex_groups[2]}, num={rnaview_regex_groups[3]}, name={rnaview_regex_groups[4]}"
+                )
+                logger.debug(
+                    f"  Second residue: idx={rnaview_regex_groups[1]}, chain={rnaview_regex_groups[7]}, num={rnaview_regex_groups[6]}, name={rnaview_regex_groups[5]}"
+                )
                 if rnaview_regex_groups[9] == "stacked":
                     logger.debug("  Interaction: stacking")
                 else:
                     logger.debug(f"  LW edges: {rnaview_regex_groups[10]}")
                     logger.debug(f"  LW orientation: {rnaview_regex_groups[11]}")
                     logger.debug(f"  Classification: {rnaview_regex_groups[13]}")
-                
+
                 self.check_indexing_correctness(rnaview_regex_groups, line)
                 self.append_interaction(rnaview_regex_groups)
 
