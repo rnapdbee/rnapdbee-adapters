@@ -43,7 +43,9 @@ def run_pdb_adapter(
 
     # If the result is None, it means that the input data is not representable as a valid PDB file
     if result is None:
-        logging.info("Data not representable as a valid PDB file, returning empty 2D structure")
+        logging.info(
+            "Data not representable as a valid PDB file, returning empty 2D structure"
+        )
         return BaseInteractions([], [], [], [], [])
 
     pdb_content, mapped_chains = result

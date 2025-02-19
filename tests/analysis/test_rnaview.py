@@ -31,6 +31,7 @@ def test_279d():
 
     assert actual_base_interactions == expected_base_interactions
 
+
 def test_R1107TS091_1():
     with open("files/input/R1107TS091_1.pdb") as f:
         file_content = f.read()
