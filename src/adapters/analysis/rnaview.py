@@ -29,9 +29,7 @@ logger = logging.getLogger(__name__)
 
 class RNAViewAdapter:
     RNAVIEW_REGEX = re.compile(
-        "\\s*(\\d+)_(\\d+),\\s+(\\w):\\s+(-?\\d+)\\s+(\\w+)-(\\w+)\\s+"
-        + "(-?\\d+)\\s+(\\w):\\s+(syn|\\s+)*((./.)\\s+(cis|tran)"
-        + "(syn|\\s+)*([IVX,]+|n/a|![^.]+)|stacked)\\.?"
+        r"\s*(\d+)_(\d+),\s+(\w):\s+(-?\d+)\s+(\w+)-(\w+)\s+(-?\d+)\s+(\w):\s+(syn|\s+)*((./.)\s+(cis|tran)(syn|\s+)*([IVX,]+|n/a|![^.]+)|stacked)\.?"
     )
 
     #    * Example lines:
@@ -77,9 +75,11 @@ class RNAViewAdapter:
         position_c2: Optional[Tuple[float, float, float]]
         position_c6: Optional[Tuple[float, float, float]]
         position_n1: Optional[Tuple[float, float, float]]
-        position_n9: Optional[Tuple[float, float, float]]
 
         def is_correct_according_to_rnaview(self) -> bool:
+            """
+            This is a reimplementation of residue_ident() function from fpair_sub.c from RNAView source code.
+            """
             if any(
                 (
                     self.position_c2 is None,
@@ -88,17 +88,13 @@ class RNAViewAdapter:
                 )
             ):
                 return False
-            distance_c2_c6 = math.dist(self.position_c2, self.position_c6)  # type: ignore
-            distance_n1_c6 = math.dist(self.position_n1, self.position_c6)  # type: ignore
+
             distance_n1_c2 = math.dist(self.position_n1, self.position_c2)  # type: ignore
-            if all(
-                (distance_c2_c6 <= 3.0, distance_n1_c6 <= 2.0, distance_n1_c2 <= 2.0)
-            ):
-                if self.position_n9 is not None:
-                    distance_n1_n9 = math.dist(self.position_n1, self.position_n9)  # type: ignore
-                    return 3.5 <= distance_n1_n9 <= 4.5
-                return True
-            return False
+            distance_n1_c6 = math.dist(self.position_n1, self.position_c6)  # type: ignore
+            distance_c2_c6 = math.dist(self.position_c2, self.position_c6)  # type: ignore
+            return all(
+                (distance_n1_c2 <= 2.0, distance_n1_c6 <= 2.0, distance_c2_c6 <= 3.0)
+            )
 
     # Positions of resiudes info in PDB files
     ATOM_NAME_INDEX = slice(12, 16)
@@ -114,7 +110,6 @@ class RNAViewAdapter:
     ATOM_C6 = "C6"
     ATOM_C2 = "C2"
     ATOM_N1 = "N1"
-    ATOM_N9 = "N9"
 
     # Groups of RNAVIEW_REGEX
 
@@ -175,7 +170,7 @@ class RNAViewAdapter:
 
                 if str(residue) not in potential_residues:
                     potential_residues[str(residue)] = RNAViewAdapter.PotentialResidue(
-                        residue, None, None, None, None
+                        residue, None, None, None
                     )
                 potential_residue = potential_residues[str(residue)]
 
@@ -191,14 +186,16 @@ class RNAViewAdapter:
                     potential_residue.position_c2 = atom_position
                 elif atom_name == self.ATOM_N1:
                     potential_residue.position_n1 = atom_position
-                elif atom_name == self.ATOM_N9:
-                    potential_residue.position_n9 = atom_position
 
         counter = 1
         for potential_residue in potential_residues.values():
             if potential_residue.is_correct_according_to_rnaview():
                 self.residues_from_pdb[counter] = potential_residue.residue
                 counter += 1
+
+        logger.debug("RNAView residues mapping:")
+        for idx, residue in sorted(self.residues_from_pdb.items()):
+            logger.debug(f"  {idx}: {residue}")
 
     def get_leontis_westhof(
         self, lw_info: str, trans_cis_info: str
@@ -314,8 +311,24 @@ class RNAViewAdapter:
             elif base_pair_section:
                 rnaview_regex_result = re.search(self.RNAVIEW_REGEX, line)
                 if rnaview_regex_result is None:
-                    raise RegexError("RNAView regex failed")
+                    raise RegexError("RNAView regex failed for line: " + line)
                 rnaview_regex_groups = rnaview_regex_result.groups()
+
+                # Log parsed groups with their meanings
+                logger.debug("RNAView regex parsed:")
+                logger.debug(
+                    f"  First residue:  idx={rnaview_regex_groups[0]}, chain={rnaview_regex_groups[2]}, num={rnaview_regex_groups[3]}, name={rnaview_regex_groups[4]}"
+                )
+                logger.debug(
+                    f"  Second residue: idx={rnaview_regex_groups[1]}, chain={rnaview_regex_groups[7]}, num={rnaview_regex_groups[6]}, name={rnaview_regex_groups[5]}"
+                )
+                if rnaview_regex_groups[9] == "stacked":
+                    logger.debug("  Interaction: stacking")
+                else:
+                    logger.debug(f"  LW edges: {rnaview_regex_groups[10]}")
+                    logger.debug(f"  LW orientation: {rnaview_regex_groups[11]}")
+                    logger.debug(f"  Classification: {rnaview_regex_groups[13]}")
+
                 self.check_indexing_correctness(rnaview_regex_groups, line)
                 self.append_interaction(rnaview_regex_groups)
 
