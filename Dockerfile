@@ -3,6 +3,10 @@
 ARG maxit_version=11.100
 ARG rchie_dir=/usr/local/lib/R/site-library/rchie
 
+# Use latest branch, but another working alternative is this commit:
+# https://github.com/BGSU-RNA/fr3d-python/commit/407c8b2f0fa2bc9682e4ab8f3108867a8892d6fd
+ARG fr3d_commit=latest
+
 ################################################################################
 
 FROM ubuntu:22.04 AS maxit-builder
@@ -100,6 +104,8 @@ FROM ubuntu:22.04 AS server
 
 ARG maxit_version
 ARG rchie_dir
+ARG fr3d_commit
+
 ENV DEBIAN_FRONTEND=noninteractive \
     NUCLEIC_ACID_DIR=/bpnet-master/sysfiles \
     PATH=${PATH}:/bpnet-master/bin:/metbp-MetBPv1.2.4/bin:/maxit/bin:/mc-annotate:/rnaview/bin:/venv/bin:${rchie_dir}:/pseudoviewer:/RNAplot:/svg-cleaner \
@@ -114,15 +120,19 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get update -y \
  && apt-get install -y \
+       build-essential \
+       ca-certificates \
+       curl \
+       ghostscript \
+       git \
+       gnupg \
+       inkscape \
+       pdf2svg \
+       python2.7 \
+       python2.7-dev \
        python3 \
        python3-venv \
-       build-essential \
-       pdf2svg \
-       ghostscript \
        r-base \
-       gnupg \
-       ca-certificates \
-       inkscape \
  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
  && echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
  && apt-get update && apt-get install -y mono-devel \
@@ -130,6 +140,12 @@ RUN apt-get update -y \
 
 # Install HiGHS
 ADD app/highs/HiGHSstatic.v1.8.1.x86_64-linux-gnu-cxx11.tar.gz /usr/local
+
+# Prepare Python 2.7 environment for FR3D
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py \
+ && python2.7 get-pip.py \
+ && python2.7 -m pip install virtualenv \
+ && python2.7 -m virtualenv /py27_env
 
 # MAXIT build
 COPY --from=maxit-builder /maxit-v${maxit_version}-prod-src /maxit
@@ -166,6 +182,15 @@ ADD app/mc-annotate/mc-annotate.tar.gz /mc-annotate/
 
 # svgcleaner copy
 ADD app/svg-cleaner/svgcleaner.tar.gz /svg-cleaner/
+
+# FR3D
+ADD app/fr3d/pdbx.tar.gz /py27_env/lib/python2.7/site-packages/
+RUN git clone https://github.com/BGSU-RNA/fr3d-python \
+ && cd fr3d-python \
+ && git checkout ${fr3d_commit} \
+ && sed -i '1 i from __future__ import print_function' fr3d/classifiers/NA_pairwise_interactions.py \
+ && touch fr3d/modified/__init__.py \
+ && /py27_env/bin/pip install .
 
 EXPOSE 80
 
