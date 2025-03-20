@@ -9,6 +9,7 @@ config = {
     "SUBPROCESS_DEFAULT_TIMEOUT": int(
         environ.get("ADAPTERS_SUBPROCESS_TIMEOUT", "600")
     ),
+    "FR3D_SERVICE_URL": environ.get("FR3D_SERVICE_URL", "http://localhost:8080"),
 }
 
 logging.basicConfig(format="[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s")
