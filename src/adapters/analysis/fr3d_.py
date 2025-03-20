@@ -187,8 +187,11 @@ def run_fr3d_script(mmcif_content: str) -> Tuple[List[str], List[str], List[str]
             f.write(mmcif_content)
 
         # Run the FR3D script
-        fr3d_script = "/py27_env/bin/python /py27_env/lib/python2.7/site-packages/fr3d/classifiers/NA_pairwise_interactions.py"
-        cmd = f'{fr3d_script} -i {tmpdir} -o {tmpdir} -c "basepair,basepair_detail,stacking,backbone" fr3d'
+        cmd = [
+            "/py27_env/bin/python",
+            "/py27_env/lib/python2.7/site-packages/fr3d/classifiers/NA_pairwise_interactions.py",
+            "-i", tmpdir, "-o", tmpdir, "-c", "basepair,basepair_detail,stacking,backbone", "fr3d"
+        ]
 
         try:
             result = run_external_cmd(
