@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 # IMPORTANT! this file cannot be named fr3d.py, because it imports from "fr3d", and Python complains about that
 import logging
+import os
 import sys
-from typing import Any, Dict
+import tempfile
+from pathlib import Path
+from typing import Any, Dict, List, Tuple
 
 import orjson
-import requests
 from rnapolis.common import (
     BR,
     BaseInteractions,
@@ -22,6 +24,8 @@ from rnapolis.common import (
 )
 
 from adapters.config import config
+from adapters.tools.maxit import cif2mmcif
+from adapters.tools.utils import run_external_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -155,22 +159,70 @@ def _process_interaction_line(
         return False
 
 
-def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
-    # Call the external FR3D service
-    try:
-        response = requests.post(
-            f"{config['FR3D_SERVICE_URL']}/",
-            data=file_content,
-            headers={"Content-Type": "text/plain"},
-            timeout=300,
-        )
-        response.raise_for_status()
-        result = response.json()
-        logger.debug(f"FR3D service response: {result}")
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Error calling FR3D service: {e}")
-        return BaseInteractions([], [], [], [], [])
+def run_fr3d_script(mmcif_content: str) -> Tuple[List[str], List[str], List[str]]:
+    """
+    Run the FR3D Python 2.7 script to analyze RNA structure.
+    
+    Args:
+        mmcif_content: The mmCIF file content as a string
+        
+    Returns:
+        Tuple of (basepair_lines, stacking_lines, backbone_lines)
+    """
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Write the mmCIF file to the temporary directory
+        cif_path = os.path.join(tmpdir, "fr3d.cif")
+        with open(cif_path, "w") as f:
+            f.write(mmcif_content)
+        
+        # Run the FR3D script
+        fr3d_script = "/py27_env/bin/python /py27_env/lib/python2.7/site-packages/fr3d/classifiers/NA_pairwise_interactions.py"
+        cmd = f"{fr3d_script} -i {tmpdir} -o {tmpdir} -c \"basepair,basepair_detail,stacking,backbone\" fr3d"
+        
+        try:
+            result = run_external_cmd(
+                cmd,
+                cwd=tmpdir,
+                shell=True,
+                timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
+            )
+            logger.debug(f"FR3D script exit code: {result.returncode}")
+            
+            # Read the output files
+            basepair_file = os.path.join(tmpdir, "fr3d_basepair_detail.txt")
+            stacking_file = os.path.join(tmpdir, "fr3d_stacking.txt")
+            backbone_file = os.path.join(tmpdir, "fr3d_backbone.txt")
+            
+            basepair_lines = []
+            stacking_lines = []
+            backbone_lines = []
+            
+            if os.path.exists(basepair_file):
+                with open(basepair_file, "r") as f:
+                    basepair_lines = f.read().splitlines()
+            
+            if os.path.exists(stacking_file):
+                with open(stacking_file, "r") as f:
+                    stacking_lines = f.read().splitlines()
+                    
+            if os.path.exists(backbone_file):
+                with open(backbone_file, "r") as f:
+                    backbone_lines = f.read().splitlines()
+                    
+            return basepair_lines, stacking_lines, backbone_lines
+            
+        except Exception as e:
+            logger.error(f"Error running FR3D script: {e}")
+            return [], [], []
 
+
+def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
+    # Convert to mmCIF format if needed
+    mmcif_content = cif2mmcif(file_content)
+    
+    # Run the FR3D script
+    basepair_lines, stacking_lines, backbone_lines = run_fr3d_script(mmcif_content)
+    
     # Initialize the interaction data dictionary
     interactions_data = {
         "base_pairs": [],
@@ -179,14 +231,21 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
         "base_phosphate_interactions": [],
         "other_interactions": []
     }
-
-    # Process each category of interactions
-    for category, lines in result.items():
-        if not isinstance(lines, list):
-            continue
-            
-        for line in lines:
-            _process_interaction_line(line, category, interactions_data)
+    
+    # Process base pair interactions
+    for line in basepair_lines:
+        if line.strip() and not line.startswith('#'):
+            _process_interaction_line(line, "basepair", interactions_data)
+    
+    # Process stacking interactions
+    for line in stacking_lines:
+        if line.strip() and not line.startswith('#'):
+            _process_interaction_line(line, "stacking", interactions_data)
+    
+    # Process backbone interactions
+    for line in backbone_lines:
+        if line.strip() and not line.startswith('#'):
+            _process_interaction_line(line, "backbone", interactions_data)
 
     # Return a BaseInteractions object with all the processed interactions
     return BaseInteractions(
