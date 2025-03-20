@@ -4,7 +4,6 @@ import logging
 import os
 import sys
 import tempfile
-from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 import orjson
@@ -195,7 +194,6 @@ def run_fr3d_script(mmcif_content: str) -> Tuple[List[str], List[str], List[str]
             result = run_external_cmd(
                 cmd,
                 cwd=tmpdir,
-                shell=True,
                 timeout=config["SUBPROCESS_DEFAULT_TIMEOUT"],
             )
             logger.debug(f"FR3D script exit code: {result.returncode}")
