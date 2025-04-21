@@ -9,6 +9,6 @@ mmcif-pdbx==2.0.1
 mmcif==0.91.0
 orjson==3.10.*
 pandas==2.2.3
-rnapolis==0.8.1
+rnapolis==0.8.2
 svg-stack==0.1.0
 weblogo==3.7.*
