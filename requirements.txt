@@ -4,7 +4,7 @@ barnaba==0.1.9
 dataclasses-json==0.6.*
 graphviz==0.20.3
 gunicorn==23.0.*
-lxml==5.3.*
+lxml==5.4.*
 mmcif-pdbx==2.0.1
 mmcif==0.91.0
 orjson==3.10.*
