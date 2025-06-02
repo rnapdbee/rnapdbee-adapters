@@ -6,7 +6,7 @@ graphviz==0.20.3
 gunicorn==23.0.*
 lxml==5.4.*
 mmcif-pdbx==2.0.1
-mmcif==0.91.0
+mmcif==0.92.0
 orjson==3.10.*
 pandas==2.2.3
 rnapolis==0.8.2
