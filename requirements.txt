@@ -7,7 +7,7 @@ gunicorn==23.0.*
 lxml==6.0.*
 mmcif-pdbx==2.0.1
 mmcif==0.92.0
-orjson==3.10.*
+orjson==3.11.*
 pandas==2.3.1
 rnapolis==0.8.2
 svg-stack==0.1.0
