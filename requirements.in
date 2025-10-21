@@ -1,0 +1,16 @@
+Flask-Caching
+Flask
+barnaba
+dataclasses-json
+graphviz
+gunicorn
+lxml
+mmcif-pdbx
+mmcif
+orjson
+pandas
+rnapolis
+svg-stack
+weblogo
+
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.0
