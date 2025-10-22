@@ -29,7 +29,7 @@ Arguments = namedtuple("Arguments", ["output_prefix_format", "no_auto_ungzip"])
 # rnaview/config-cif.yaml
 # rnaview/config-pdb.yaml
 # varna-tz OR varna-tz/config.yaml
-def cli2rest_run_in_directory(base_url, input_file, tool, output_dir):
+def _cli2rest_run_in_directory(base_url, input_file, tool, output_dir):
     config = load_tool_config(tool)
     tool_name = config["name"]
     args = Arguments(output_prefix_format="", no_auto_ungzip=True)
@@ -49,7 +49,7 @@ def cli2rest_run(
         with open(input_file, "w") as f:
             f.write(input_file_content)
 
-        cli2rest_run_in_directory(base_url, input_file, config_name, directory)
+        _cli2rest_run_in_directory(base_url, input_file, config_name, directory)
 
         result = {}
         for output_file in output_files:
@@ -72,7 +72,7 @@ def cli2rest_analyze_structure(
         with open(input_file, "w+") as f:
             f.write(input_file_content)
             f.seek(0)
-            cli2rest_run_in_directory(base_url, input_file, config_name, directory)
+            _cli2rest_run_in_directory(base_url, input_file, config_name, directory)
             f.seek(0)
             structure3d = read_3d_structure(f, None)
 
