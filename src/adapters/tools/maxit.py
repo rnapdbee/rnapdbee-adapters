@@ -5,7 +5,7 @@ import sys
 
 from tempfile import TemporaryDirectory
 
-from adapters.cli2rest_client import cli2rest_process
+from adapters.cli2rest_client import cli2rest_run
 from adapters.tools.utils import is_cif
 
 logger = logging.getLogger(__name__)
@@ -28,46 +28,34 @@ def ensure_mmcif(file_content: str) -> str:
     return cif2mmcif(ensure_cif(file_content))
 
 
-def cli2rest_convert(
-    file_content: str, extension: str, config_name: str, output_file: str
-) -> str:
-    with TemporaryDirectory() as directory:
-        input_file = os.path.join(directory, f"input{extension}")
-
-        with open(input_file, "w") as f:
-            f.write(file_content)
-
-        cli2rest_process(base_url, input_file, config_name, directory)
-
-        with open(os.path.join(directory, output_file)) as f:
-            return f.read()
-
-
 def pdb2cif(pdb_content) -> str:
-    return cli2rest_convert(
-        file_content=pdb_content,
-        extension=".pdb",
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=pdb_content,
+        input_file_extension=".pdb",
+        output_files=["output.cif"],
         config_name="maxit/config-pdb2cif.yaml",
-        output_file="output.cif",
-    )
+    )["output.cif"]
 
 
 def cif2pdb(cif_content) -> str:
-    return cli2rest_convert(
-        file_content=cif_content,
-        extension=".cif",
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=cif_content,
+        input_file_extension=".cif",
+        output_files=["output.pdb"],
         config_name="maxit/config-cif2pdb.yaml",
-        output_file="output.pdb",
-    )
+    )["output.pdb"]
 
 
 def cif2mmcif(cif_content: str) -> str:
-    return cli2rest_convert(
-        file_content=cif_content,
-        extension=".cif",
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=cif_content,
+        input_file_extension=".cif",
+        output_files=["output.cif"],
         config_name="maxit/config-cif2mmcif.yaml",
-        output_file="output.cif",
-    )
+    )["output.cif"]
 
 
 def main():

@@ -23,14 +23,7 @@ def apply(
 ) -> BaseInteractions:
     for function, kwargs in functions_args:
         analysis_output = function(analysis_output, **kwargs)
-
-    return {
-        "basePairs": analysis_output.basePairs,
-        "stackings": analysis_output.stackings,
-        "baseRiboseInteractions": analysis_output.baseRiboseInteractions,
-        "basePhosphateInteractions": analysis_output.basePhosphateInteractions,
-        "otherInteractions": analysis_output.otherInteractions,
-    }
+    return analysis_output
 
 
 def remove_duplicate_pairs(analysis_output: BaseInteractions, *_) -> BaseInteractions:
@@ -68,21 +61,21 @@ def remove_duplicate_pairs(analysis_output: BaseInteractions, *_) -> BaseInterac
         return list(unique_interactions.values())
 
     filtered_base_pairs = remove_duplicate_pairs_from_list(
-        analysis_output.basePairs, reverse_base_interaction
+        analysis_output.base_pairs, reverse_base_interaction
     )
     filtered_stackings = remove_duplicate_pairs_from_list(
         analysis_output.stackings, reverse_stacking_interaction
     )
     filtered_other_interactions = remove_duplicate_pairs_from_list(
-        analysis_output.otherInteractions,
+        analysis_output.other_interactions,
         reverse_other_interaction,
     )
 
     return BaseInteractions(
         filtered_base_pairs,
         filtered_stackings,
-        analysis_output.baseRiboseInteractions,
-        analysis_output.basePhosphateInteractions,
+        analysis_output.base_ribose_interactions,
+        analysis_output.base_phosphate_interactions,
         filtered_other_interactions,
     )
 
@@ -90,18 +83,20 @@ def remove_duplicate_pairs(analysis_output: BaseInteractions, *_) -> BaseInterac
 def sort_interactions_lists(analysis_output: BaseInteractions, *_) -> BaseInteractions:
     interactions_list: List[Type[Interaction]]
     for interactions_list in [
-        analysis_output.basePairs,
+        analysis_output.base_pairs,
         analysis_output.stackings,
-        analysis_output.baseRiboseInteractions,
-        analysis_output.basePhosphateInteractions,
-        analysis_output.otherInteractions,
+        analysis_output.base_ribose_interactions,
+        analysis_output.base_phosphate_interactions,
+        analysis_output.other_interactions,
     ]:
         interactions_list.sort(
             key=lambda pair: (
                 pair.nt1.chain,
                 pair.nt1.number,
+                pair.nt1.icode or "",
                 pair.nt2.chain,
                 pair.nt2.number,
+                pair.nt2.icode or "",
             )
         )
 
@@ -131,7 +126,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
 
         return Residue(label, auth)
 
-    mapped_chains: Dict[str, str] = kwargs.get("mapped_chains")
+    mapped_chains: Dict[str, str] = kwargs.get("mapped_chains", {})
 
     base_pairs: List[BasePair] = []
     stackings: List[Stacking] = []
@@ -139,7 +134,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
     base_phosphates: List[BasePhosphate] = []
     other_interactions: List[OtherInteraction] = []
 
-    for base_pair in analysis_output.basePairs:
+    for base_pair in analysis_output.base_pairs:
         base_pairs.append(
             BasePair(
                 map_residue(base_pair.nt1, mapped_chains),
@@ -158,7 +153,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
             )
         )
 
-    for base_ribose in analysis_output.baseRiboseInteractions:
+    for base_ribose in analysis_output.base_ribose_interactions:
         base_riboses.append(
             BaseRibose(
                 map_residue(base_ribose.nt1, mapped_chains),
@@ -167,7 +162,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
             )
         )
 
-    for base_phosphate in analysis_output.basePhosphateInteractions:
+    for base_phosphate in analysis_output.base_phosphate_interactions:
         base_phosphates.append(
             BasePhosphate(
                 map_residue(base_phosphate.nt1, mapped_chains),
@@ -176,7 +171,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
             )
         )
 
-    for other_interaction in analysis_output.otherInteractions:
+    for other_interaction in analysis_output.other_interactions:
         other_interactions.append(
             OtherInteraction(
                 map_residue(other_interaction.nt1, mapped_chains),
