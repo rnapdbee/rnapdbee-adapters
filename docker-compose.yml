@@ -1,0 +1,47 @@
+services:
+  adapters:
+    build: ./
+    restart: on-failure
+    ports:
+      - 8000:80
+    environment:
+      - CLI2REST_BARNABA_URL=http://cli2rest-barnaba:8000
+      - CLI2REST_BPNET_URL=http://cli2rest-bpnet:8000
+      - CLI2REST_FR3D_URL=http://cli2rest-fr3d:8000
+      - CLI2REST_INKSCAPE_URL=http://cli2rest-inkscape:8000
+      - CLI2REST_MAXIT_URL=http://cli2rest-maxit:8000
+      - CLI2REST_MCANNOTATE_URL=http://cli2rest-mc-annotate:8000
+      - CLI2REST_RCHIE_URL=http://cli2rest-rchie:8000
+      - CLI2REST_RNAVIEW_URL=http://cli2rest-rnaview:8000
+
+  cli2rest-barnaba:
+    image: ghcr.io/tzok/cli2rest-barnaba
+    restart: on-failure
+
+  cli2rest-bpnet:
+    image: ghcr.io/tzok/cli2rest-bpnet
+    restart: on-failure
+
+  cli2rest-fr3d:
+    image: ghcr.io/tzok/cli2rest-fr3d
+    restart: on-failure
+
+  cli2rest-inkscape:
+    image: ghcr.io/tzok/cli2rest-inkscape
+    restart: on-failure
+
+  cli2rest-maxit:
+    image: ghcr.io/tzok/cli2rest-maxit
+    restart: on-failure
+
+  cli2rest-mc-annotate:
+    image: ghcr.io/tzok/cli2rest-mc-annotate
+    restart: on-failure
+
+  cli2rest-rchie:
+    image: ghcr.io/tzok/cli2rest-rchie
+    restart: on-failure
+
+  cli2rest-rnaview:
+    image: ghcr.io/tzok/cli2rest-rnaview
+    restart: on-failure

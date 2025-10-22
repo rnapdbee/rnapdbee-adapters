@@ -6,8 +6,6 @@
 #
 appdirs==1.4.4
     # via rnapolis
-barnaba==0.1.9
-    # via -r requirements.in
 blinker==1.9.0
     # via flask
 cachelib==0.13.0
@@ -16,7 +14,7 @@ certifi==2025.10.5
     # via requests
 charset-normalizer==3.4.4
     # via requests
-cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.0
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.2
     # via -r requirements.in
 click==8.3.0
     # via flask
@@ -33,9 +31,7 @@ flask==3.1.2
 flask-caching==2.3.1
     # via -r requirements.in
 future==1.0.0
-    # via
-    #   barnaba
-    #   mmcif
+    # via mmcif
 graphviz==0.21
     # via
     #   -r requirements.in
@@ -59,8 +55,6 @@ markupsafe==3.0.3
     #   werkzeug
 marshmallow==3.26.1
     # via dataclasses-json
-mdtraj==1.11.0
-    # via barnaba
 mmcif==0.92.0
     # via
     #   -r requirements.in
@@ -73,9 +67,7 @@ mypy-extensions==1.1.0
     # via typing-inspect
 numpy==2.3.4
     # via
-    #   barnaba
     #   faiss-cpu
-    #   mdtraj
     #   pandas
     #   rnapolis
     #   scikit-learn
@@ -92,15 +84,12 @@ packaging==25.0
     #   faiss-cpu
     #   gunicorn
     #   marshmallow
-    #   mdtraj
 pandas==2.3.3
     # via
     #   -r requirements.in
     #   rnapolis
 pulp==3.3.0
     # via rnapolis
-pyparsing==3.2.5
-    # via mdtraj
 python-dateutil==2.9.0.post0
     # via pandas
 pytz==2025.2
@@ -116,13 +105,9 @@ requests==2.32.5
 rnapolis==0.10.8
     # via -r requirements.in
 scikit-learn==1.7.2
-    # via
-    #   barnaba
-    #   rnapolis
+    # via rnapolis
 scipy==1.16.2
     # via
-    #   barnaba
-    #   mdtraj
     #   rnapolis
     #   scikit-learn
     #   weblogo

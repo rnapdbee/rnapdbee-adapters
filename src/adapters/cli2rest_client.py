@@ -72,7 +72,9 @@ def cli2rest_analyze_structure(
         with open(input_file, "w+") as f:
             f.write(input_file_content)
             f.seek(0)
-            _cli2rest_run_in_directory(base_url, input_file, config_name, directory)
+            _cli2rest_run_in_directory(
+                base_url, input_file, config_name or external_tool.value, directory
+            )
             f.seek(0)
             structure3d = read_3d_structure(f, None)
 
