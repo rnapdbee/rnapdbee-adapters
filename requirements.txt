@@ -113,7 +113,7 @@ requests==2.32.5
     #   docker
     #   mmcif
     #   rnapolis
-rnapolis==0.10.2
+rnapolis==0.10.4
     # via -r requirements.in
 scikit-learn==1.7.2
     # via

@@ -1,6 +1,5 @@
 Flask-Caching
 Flask
-barnaba
 dataclasses-json
 graphviz
 gunicorn

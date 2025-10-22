@@ -8,4 +8,7 @@
     };
   };
   packages = [ pkgs.zlib ];
+  enterShell = ''
+    export PYTHONPATH=src/
+  '';
 }

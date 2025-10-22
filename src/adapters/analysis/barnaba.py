@@ -11,17 +11,16 @@ from rnapolis.common import BaseInteractions
 from adapters.analysis.generic import cli2rest_analyze
 
 logger = logging.getLogger(__name__)
-base_url = os.getenv("CLI2REST_BPNET_URL", "http://localhost:8000")
+base_url = os.getenv("CLI2REST_BARNABA_URL", "http://localhost:8000")
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze(
         base_url,
         file_content,
-        ExternalTool.BPNET,
-        ["input.rob", "input_basepair.json"],
-        extension=".cif",
-        config_name="bpnet/config-cif.yaml",
+        ExternalTool.BARNABA,
+        ["outfile.ANNOTATE.pairing.out", "outfile.ANNOTATE.stacking.out"],
+        extension=".pdb",
     )
 
 
