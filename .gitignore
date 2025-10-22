@@ -31,3 +31,4 @@ devenv.local.nix
 .pre-commit-config.yaml
 .env
 .env
+.env
