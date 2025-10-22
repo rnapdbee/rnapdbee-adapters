@@ -4,9 +4,10 @@ from flask import Blueprint, request
 
 from adapters import services
 from adapters.analysis import (
-    barnaba_,
+    barnaba,
     bpnet,
-    fr3d_,
+    dssr,
+    fr3d,
     maxit,
     mc_annotate,
     rnapolis_,
@@ -16,9 +17,8 @@ from adapters.tools.utils import content_type, json_response
 
 server = Blueprint("analysis", __name__)
 
+
 # BPNet adapter routes
-
-
 @server.route("/bpnet/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
@@ -35,15 +35,30 @@ def analyze_bpnet():
     return analyze_bpnet_model(1)
 
 
+# DSSR adapter routes
+@server.route("/dssr/<int:model>", methods=["POST"])
+@content_type("text/plain")
+@json_response()
+def analyze_dssr_model(model: int):
+    return services.run_cif_adapter(
+        dssr.analyze,
+        request.data.decode("utf-8"),
+        model,
+    )
+
+
+@server.route("/dssr", methods=["POST"])
+def analyze_dssr():
+    return analyze_dssr_model(1)
+
+
 # FR3D adapter routes
-
-
 @server.route("/fr3d/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
 def analyze_fr3d_model(model: int):
     return services.run_cif_adapter(
-        fr3d_.analyze,
+        fr3d.analyze,
         request.data.decode("utf-8"),
         model,
     )
@@ -55,14 +70,12 @@ def analyze_fr3d():
 
 
 # BaRNAba adapter routes
-
-
 @server.route("/barnaba/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
 def analyze_barnaba_model(model: int):
     return services.run_pdb_adapter(
-        barnaba_.analyze,
+        barnaba.analyze,
         request.data.decode("utf-8"),
         model,
     )
@@ -74,8 +87,6 @@ def analyze_barnaba():
 
 
 # MC-Annotate adapter routes
-
-
 @server.route("/mc-annotate/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
@@ -93,13 +104,11 @@ def analyze_mc_annotate():
 
 
 # RNAView adapter routes
-
-
 @server.route("/rnaview/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
 def analyze_rnaview_model(model: int):
-    return services.run_pdb_adapter(
+    return services.run_cif_adapter(
         rnaview.analyze,
         request.data.decode("utf-8"),
         model,
@@ -112,8 +121,6 @@ def analyze_rnaview():
 
 
 # RNApolis adapter routes
-
-
 @server.route("/rnapolis/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
@@ -131,8 +138,6 @@ def analyze_rnapolis():
 
 
 # MAXIT adapter routes
-
-
 @server.route("/maxit/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
