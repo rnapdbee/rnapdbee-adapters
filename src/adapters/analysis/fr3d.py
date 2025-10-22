@@ -11,16 +11,15 @@ from rnapolis.common import BaseInteractions
 from adapters.analysis.generic import cli2rest_analyze
 
 logger = logging.getLogger(__name__)
-base_url = os.getenv("CLI2REST_BPNET_URL", "http://localhost:8000")
+base_url = os.getenv("CLI2REST_FR3D_URL", "http://localhost:8000")
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze(
         base_url,
         file_content,
-        ExternalTool.BPNET,
-        ["input.rob", "input_basepair.json"],
-        config_name="bpnet/config-cif.yaml",
+        ExternalTool.FR3D,
+        ["basepair_detail.txt", "stacking.txt", "backbone.txt"],
     )
 
 
