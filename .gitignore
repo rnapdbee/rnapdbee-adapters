@@ -18,7 +18,6 @@ __pycache__
 dev/
 .aider*
 .env
-.env
 
 # Devenv
 .devenv*
@@ -29,12 +28,3 @@ devenv.local.nix
 
 # pre-commit
 .pre-commit-config.yaml
-.env
-.env
-.env
-.env
-.env
-.env
-.env
-.env
-.env
