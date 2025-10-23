@@ -15,33 +15,33 @@ services:
       - CLI2REST_RNAVIEW_URL=http://cli2rest-rnaview:8000
 
   cli2rest-barnaba:
-    image: ghcr.io/tzok/cli2rest-barnaba
+    image: ghcr.io/tzok/cli2rest-barnaba:master-20251023
     restart: on-failure
 
   cli2rest-bpnet:
-    image: ghcr.io/tzok/cli2rest-bpnet
+    image: ghcr.io/tzok/cli2rest-bpnet:59a0c636d07e420db437bd888313b3123990fefd # 2025-10-23
     restart: on-failure
 
   cli2rest-fr3d:
-    image: ghcr.io/tzok/cli2rest-fr3d
+    image: ghcr.io/tzok/cli2rest-fr3d:latest-20251023
     restart: on-failure
 
   cli2rest-inkscape:
-    image: ghcr.io/tzok/cli2rest-inkscape
+    image: ghcr.io/tzok/cli2rest-inkscape:59a0c636d07e420db437bd888313b3123990fefd # 2025-10-23
     restart: on-failure
 
   cli2rest-maxit:
-    image: ghcr.io/tzok/cli2rest-maxit
+    image: ghcr.io/tzok/cli2rest-maxit:11.400
     restart: on-failure
 
   cli2rest-mc-annotate:
-    image: ghcr.io/tzok/cli2rest-mc-annotate
+    image: ghcr.io/tzok/cli2rest-mc-annotate:1.6.2
     restart: on-failure
 
   cli2rest-rchie:
-    image: ghcr.io/tzok/cli2rest-rchie
+    image: ghcr.io/tzok/cli2rest-rchie:1.36.0_0.9.5
     restart: on-failure
 
   cli2rest-rnaview:
-    image: ghcr.io/tzok/cli2rest-rnaview
+    image: ghcr.io/tzok/cli2rest-rnaview:v2.0.0
     restart: on-failure
