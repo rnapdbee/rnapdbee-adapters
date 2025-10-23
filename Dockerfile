@@ -1,62 +1,62 @@
-FROM ubuntu:24.04
+FROM python:3 AS builder
 
-ENV DEBIAN_FRONTEND=noninteractive \
+RUN apt-get update \
+ && apt-get install --no-install-recommends -y \
+      bison \
+      cmake \
+      flex \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+RUN python -m venv /opt/venv \
+ && . /opt/venv/bin/activate \
+ && pip install --upgrade pip \
+ && pip install -r requirements.txt
+
+#######################################
+
+FROM python:3-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/rnapdbee-adapters/src
 
 RUN apt-get update -y \
  && apt-get install -y \
-       build-essential \
        ca-certificates \
-       curl \
-       git \
+       dirmngr \
+       ghostscript \
        gnupg \
        pdf2svg \
-       python3 \
-       python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
 # Install Mono
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
- && echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
- && apt-get update -y \
- && apt-get install -y \
-       mono-devel \
+RUN gpg --homedir /tmp --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+ && chmod +r /usr/share/keyrings/mono-official-archive-keyring.gpg \
+ && echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/debian stable-buster main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+      mono-devel \
  && rm -rf /var/lib/apt/lists/*
 
-# Install ViennaRNA (RNAplot for RNApuzzler)
-# ADD https://www.tbi.univie.ac.at/RNA/download/ubuntu/ubuntu_24_04/viennarna_2.7.0-1_amd64.deb /tmp/viennarna.deb
-# RUN dpkg -i /tmp/viennarna.deb
-
-# Install HiGHS
-# ADD https://github.com/JuliaBinaryWrappers/HiGHSstatic_jll.jl/releases/download/HiGHSstatic-v1.11.0%2B1/HiGHSstatic.v1.11.0.x86_64-linux-gnu-cxx11.tar.gz /usr/local
+# Install HiGHS (https://github.com/JuliaBinaryWrappers/HiGHSstatic_jll.jl/releases/download/HiGHSstatic-v1.11.0%2B1/HiGHSstatic.v1.11.0.x86_64-linux-gnu-cxx11.tar.gz)
 ADD app/HiGHSstatic.v1.11.0.x86_64-linux-gnu-cxx11.tar.gz /usr/local
 
-# Install svgcleaner
-# ADD https://github.com/RazrFalcon/svgcleaner/releases/download/v0.9.5/svgcleaner_linux_x86_64_0.9.5.tar.gz /usr/local/bin
+# Install svgcleaner (https://github.com/RazrFalcon/svgcleaner/releases/download/v0.9.5/svgcleaner_linux_x86_64_0.9.5.tar.gz)
 ADD app/svgcleaner_linux_x86_64_0.9.5.tar.gz /usr/local/bin
 
-# Install IronPython
-# ADD https://github.com/IronLanguages/ironpython3/releases/download/v3.4.2/ironpython_3.4.2.deb /tmp/ironpython_3.4.2.deb
+# Install IronPython (https://github.com/IronLanguages/ironpython3/releases/download/v3.4.2/ironpython_3.4.2.deb)
 COPY app/ironpython_3.4.2.deb /tmp/ironpython_3.4.2.deb
 RUN dpkg -i /tmp/ironpython_3.4.2.deb
 
 # PseudoViewer and RNApuzzler wrappers
 COPY app/pseudoviewer/ /pseudoviewer/
 COPY app/rnapuzzler/ /RNAplot/
-ENV PATH=/pseudoviewer:/RNAplot:${PATH}
 
-EXPOSE 80
-
-COPY docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --break-system-packages --no-cache-dir --ignore-installed -r /tmp/requirements.txt
-
-COPY src/adapters /rnapdbee-adapters/src/adapters
-
-ENV ADAPTERS_GUNICORN_LOG_LEVEL=INFO \
+ENV PATH="/opt/venv/bin:/pseudoviewer:/RNAplot:${PATH}" \
+    VIRTUAL_ENV="/opt/venv" \
+    ADAPTERS_GUNICORN_LOG_LEVEL=INFO \
     ADAPTERS_MAX_REQUESTS=10 \
     ADAPTERS_PSEUDOVIEWER_TIMEOUT=60 \
     ADAPTERS_THREADS=1 \
@@ -69,3 +69,13 @@ ENV ADAPTERS_GUNICORN_LOG_LEVEL=INFO \
     CLI2REST_MCANNOTATE_URL=http://localhost:8000 \
     CLI2REST_RCHIE_URL=http://localhost:8000 \
     CLI2REST_RNAVIEW_URL=http://localhost:8000
+
+EXPOSE 80
+
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+COPY --from=builder /opt/venv /opt/venv
+
+COPY src/adapters /rnapdbee-adapters/src/adapters
