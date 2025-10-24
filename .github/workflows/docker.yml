@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the docker image
-        run: DOCKER_BUILDKIT=1 docker build --progress=plain --target server -t $DOCKER_IMAGE .
+        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t $DOCKER_IMAGE .
 
       - name: Create the docker container
         run: |
