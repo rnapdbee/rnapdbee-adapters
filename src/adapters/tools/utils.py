@@ -14,8 +14,10 @@ from werkzeug.exceptions import UnsupportedMediaType
 
 from adapters.config import config
 from adapters.exceptions import InvalidSvgError
+from adapters.cli2rest_client import cli2rest_run
 
 logger = logging.getLogger(__name__)
+base_url = os.getenv("CLI2REST_INKSCAPE_URL", "http://localhost:8000")
 
 
 def is_cif(file_content: str) -> bool:
@@ -176,46 +178,14 @@ def wrapped_popen(
     return subprocess.CompletedProcess(process.args, retcode, stdout, stderr)
 
 
-def convert_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
-    """Convert file_type -> SVG using Inkscape
-
-    Args:
-        file_content (str): content of file as string
-        file_type (str): e.g. .eps, .ps, .png, .jpg
-
-    Raises:
-        FileNotFoundError: Subprocess of Inkscape failed
-        InvalidSvgError: Subprocess of Inkscape failed
-
-    Returns:
-        str: SVG content as string
-    """
-
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile("w+", dir=directory, suffix=file_type) as file:
-            file.write(file_content)
-            file.seek(0)
-            output_file = os.path.join(directory, "output.svg")
-            run_external_cmd(
-                [
-                    "inkscape",
-                    "--export-plain-svg",
-                    "--export-area-drawing",
-                    "--export-filename",
-                    output_file,
-                    file.name,
-                ],
-                cwd=directory,
-            )
-            if not os.path.isfile(output_file):
-                raise FileNotFoundError(
-                    "Inkscape conversion failed: file does not exist!"
-                )
-            with open(output_file, encoding="utf-8") as svg_file:
-                svg_content = svg_file.read()
-    if "svg" not in svg_content:
-        raise InvalidSvgError("Inkscape conversion failed: SVG not valid!")
-    return svg_content
+def convert_eps_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=file_content,
+        input_file_extension=".eps",
+        config_name="inkscape/config-eps2svg.yaml",
+        output_files=["output.svg"],
+    )["output.svg"]
 
 
 def content_type(mimetype: str):

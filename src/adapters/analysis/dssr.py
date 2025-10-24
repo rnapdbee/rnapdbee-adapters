@@ -12,16 +12,15 @@ from adapters.cli2rest_client import cli2rest_analyze_structure
 
 
 logger = logging.getLogger(__name__)
-base_url = os.getenv("CLI2REST_RNAVIEW_URL", "http://localhost:8000")
+base_url = os.getenv("CLI2REST_DSSR_URL", "http://localhost:8000")
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze_structure(
         base_url,
         file_content,
-        ExternalTool.RNAVIEW,
-        ["input.cif.out"],
-        config_name="rnaview/config-cif.yaml",
+        ExternalTool.DSSR,
+        ["output.json"],
     )
 
 

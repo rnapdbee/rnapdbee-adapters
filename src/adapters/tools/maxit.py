@@ -1,14 +1,13 @@
 #! /usr/bin/env python
+import logging
+import os
 import sys
-from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from adapters.cache import cache
-from adapters.tools.utils import is_cif, run_external_cmd
+from adapters.cli2rest_client import cli2rest_run
+from adapters.tools.utils import is_cif
 
-# constants defined by MAXIT
-MODE_PDB2CIF = "1"
-MODE_CIF2PDB = "2"
-MODE_CIF2MMCIF = "8"
+logger = logging.getLogger(__name__)
+base_url = os.getenv("CLI2REST_MAXIT_URL", "http://localhost:8000")
 
 
 def ensure_cif(file_content: str) -> str:
@@ -27,83 +26,39 @@ def ensure_mmcif(file_content: str) -> str:
     return cif2mmcif(ensure_cif(file_content))
 
 
-@cache.memoize()
-def pdb2cif(pdb_content):
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile("w+", suffix=".pdb", dir=directory) as pdb:
-            with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
-                pdb.write(pdb_content)
-                pdb.seek(0)
-                run_external_cmd(
-                    [
-                        "maxit",
-                        "-input",
-                        pdb.name,
-                        "-output",
-                        cif.name,
-                        "-o",
-                        MODE_PDB2CIF,
-                    ],
-                    cwd=directory,
-                )
-                cif.seek(0)
-                cif_content = cif.read()
-
-    return cif_content
+def pdb2cif(pdb_content) -> str:
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=pdb_content,
+        input_file_extension=".pdb",
+        output_files=["output.cif"],
+        config_name="maxit/config-pdb2cif.yaml",
+    )["output.cif"]
 
 
-@cache.memoize()
-def cif2pdb(cif_content):
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
-            with NamedTemporaryFile("w+", suffix=".pdb", dir=directory) as pdb:
-                cif.write(cif_content)
-                cif.seek(0)
-                run_external_cmd(
-                    [
-                        "maxit",
-                        "-input",
-                        cif.name,
-                        "-output",
-                        pdb.name,
-                        "-o",
-                        MODE_CIF2PDB,
-                    ],
-                    cwd=directory,
-                )
-                pdb.seek(0)
-                pdb_content = pdb.read()
-
-    return pdb_content
+def cif2pdb(cif_content) -> str:
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=cif_content,
+        input_file_extension=".cif",
+        output_files=["output.pdb"],
+        config_name="maxit/config-cif2pdb.yaml",
+    )["output.pdb"]
 
 
-@cache.memoize()
 def cif2mmcif(cif_content: str) -> str:
-    with TemporaryDirectory() as directory:
-        with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as cif:
-            with NamedTemporaryFile("w+", suffix=".cif", dir=directory) as mmcif:
-                cif.write(cif_content)
-                cif.seek(0)
-                run_external_cmd(
-                    [
-                        "maxit",
-                        "-input",
-                        cif.name,
-                        "-output",
-                        mmcif.name,
-                        "-o",
-                        MODE_CIF2MMCIF,
-                    ],
-                    cwd=directory,
-                )
-                mmcif.seek(0)
-                cif_content = mmcif.read()
-
-    return cif_content
+    return cli2rest_run(
+        base_url=base_url,
+        input_file_content=cif_content,
+        input_file_extension=".cif",
+        output_files=["output.cif"],
+        config_name="maxit/config-cif2mmcif.yaml",
+    )["output.cif"]
 
 
 def main():
-    print(ensure_cif(sys.stdin.read()))
+    with open(sys.argv[1]) as f:
+        print(ensure_mmcif(f.read()))
 
 
 if __name__ == "__main__":

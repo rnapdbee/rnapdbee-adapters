@@ -15,20 +15,17 @@ logger = logging.getLogger(__name__)
 
 
 def analyze(file_content: str, **kwargs: Dict[str, Any]) -> BaseInteractions:
-    model = int(kwargs.get("model"))
     with tempfile.NamedTemporaryFile("w+") as cif_file:
         cif_file.write(file_content)
         cif_file.seek(0)
-        tertiary_structure = rnapolis.parser.read_3d_structure(cif_file, model)
-    base_interactions = rnapolis.annotator.extract_base_interactions(
-        tertiary_structure, model
-    )
-    logger.debug(base_interactions)
+        tertiary_structure = rnapolis.parser.read_3d_structure(cif_file)
+    base_interactions = rnapolis.annotator.extract_base_interactions(tertiary_structure)
     return base_interactions
 
 
 def main() -> None:
-    structure = analyze(sys.stdin.read(), model=1)
+    with open(sys.argv[1]) as f:
+        structure = analyze(f.read())
     print(orjson.dumps(structure).decode("utf-8"))
 
 

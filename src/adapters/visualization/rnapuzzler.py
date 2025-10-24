@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 from typing import DefaultDict, Deque, List
 
 from adapters.exceptions import InvalidEpsError, ThirdPartySoftwareError
-from adapters.tools.utils import convert_to_svg_using_inkscape, run_external_cmd
+from adapters.tools.utils import convert_eps_to_svg_using_inkscape, run_external_cmd
 from adapters.visualization.model import SYMBOLS, Model2D, SymbolType
 
 logger = logging.getLogger(__name__)
@@ -266,7 +266,7 @@ class RNAPuzzlerDrawer:
         self.generate_rnapuzzler_eps()
         self.postprocess()
 
-        return convert_to_svg_using_inkscape(self.result, ".eps")
+        return convert_eps_to_svg_using_inkscape(self.result, ".eps")
 
 
 def main() -> None:
@@ -276,7 +276,7 @@ def main() -> None:
     print("Read structure:")
     drawer.modified_structure = sys.stdin.read()
     drawer.generate_rnapuzzler_eps()
-    print(convert_to_svg_using_inkscape(drawer.result, ".eps"))
+    print(convert_eps_to_svg_using_inkscape(drawer.result, ".eps"))
 
 
 if __name__ == "__main__":

@@ -1,67 +1,80 @@
 #! /usr/bin/env python
-
+import json
 import logging
 import os
 import sys
-import tempfile
-
-from adapters.tools.utils import pdf_to_svg, run_external_cmd
+from typing import List, Optional, TypedDict
 from adapters.visualization.model import Model2D
+from adapters.cli2rest_client import cli2rest_run
+from rnapolis.common import MultiStrandDotBracket, DotBracket
 
 logger = logging.getLogger(__name__)
+base_url = os.getenv("CLI2REST_RCHIE_URL", "http://localhost:8000")
+
+
+class Interaction(TypedDict):
+    i: int
+    j: int
+    color: Optional[str]
+
+
+class RchieData(TypedDict):
+    sequence: str
+    title: Optional[str]
+    top: List[Interaction]
+    bottom: List[Interaction]
 
 
 class RChieDrawer:
     # Only 8 colors are supported by RChie
     COLORS = {
-        "()": "#808080",  # Base pair
-        "<>": "#831300",  # 3rd order
-        "[]": "#2E7012",  # 1st order
-        "{}": "#0F205F",  # 2nd order
-        "Aa": "#550B5B",  # 4th order
-        "Bb": "#4A729D",  # 5th order
-        "Cc": "#8B7605",  # 6th order
-        "Dd": "#C565CF",  # 7th order
+        "(": "#808080",  # Base pair
+        "<": "#831300",  # 3rd order
+        "[": "#2E7012",  # 1st order
+        "{": "#0F205F",  # 2nd order
+        "A": "#550B5B",  # 4th order
+        "B": "#4A729D",  # 5th order
+        "C": "#8B7605",  # 6th order
+        "D": "#C565CF",  # 7th order
     }
 
-    def generate_rchie_svg(self, dot_bracket: str) -> str:
-        with tempfile.TemporaryDirectory() as directory:
-            with tempfile.NamedTemporaryFile(
-                "w+", dir=directory, suffix=".dbn"
-            ) as file:
-                file.write(dot_bracket)
-                file.seek(0)
-                output_pdf = os.path.join(directory, "out.pdf")
-                run_external_cmd(
-                    [
-                        "rchie.R",
-                        file.name,
-                        "--format1",
-                        "vienna",
-                        "--rule1",
-                        "6",
-                        "--colour1",
-                        ",".join(tuple(self.COLORS.values())),
-                        "--pdf",
-                        "--output",
-                        output_pdf,
-                    ],
-                    cwd=directory,
+    def generate_rchie_svg(self, dot_bracket: DotBracket) -> str:
+        interactions = []
+        for i, j in dot_bracket.pairs:
+            interactions.append(
+                Interaction(
+                    i=i + 1,
+                    j=j + 1,
+                    color=self.COLORS.get(dot_bracket.structure[i], None),
                 )
-                if not os.path.isfile(output_pdf):
-                    raise FileNotFoundError("Rchie PDF was not generated!")
-            svg_content = pdf_to_svg(output_pdf)
-        logger.debug(f"Rchie svg: {svg_content}")
-        return svg_content
+            )
+        data = RchieData(
+            sequence=dot_bracket.sequence,
+            title="",
+            top=interactions,
+            bottom=[],
+        )
+
+        return cli2rest_run(
+            base_url=base_url,
+            input_file_content=json.dumps(data),
+            input_file_extension=".json",
+            config_name="rchie",
+            output_files=["clean.svg"],
+        )["clean.svg"]
 
     def visualize(self, data: Model2D) -> str:
-        structure = "".join(tuple(strand.structure for strand in data.strands))
-        return self.generate_rchie_svg(structure)
+        return self.generate_rchie_svg(
+            DotBracket(
+                "".join(strand.sequence for strand in data.strands),
+                "".join(strand.structure for strand in data.strands),
+            )
+        )
 
 
 def main() -> None:
     drawer = RChieDrawer()
-    dot_bracket = sys.stdin.read()
+    dot_bracket = MultiStrandDotBracket.from_file(sys.argv[1])
     print(drawer.generate_rchie_svg(dot_bracket))
 
 

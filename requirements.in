@@ -1,0 +1,11 @@
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.1
+dataclasses-json
+flask-caching
+flask
+gunicorn
+lxml
+mmcif
+orjson
+rnapolis
+svg-stack
+weblogo
