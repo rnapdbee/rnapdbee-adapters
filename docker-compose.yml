@@ -5,43 +5,91 @@ services:
     ports:
       - 8000:80
     environment:
-      - CLI2REST_BARNABA_URL=http://cli2rest-barnaba:8000
-      - CLI2REST_BPNET_URL=http://cli2rest-bpnet:8000
-      - CLI2REST_FR3D_URL=http://cli2rest-fr3d:8000
-      - CLI2REST_INKSCAPE_URL=http://cli2rest-inkscape:8000
-      - CLI2REST_MAXIT_URL=http://cli2rest-maxit:8000
-      - CLI2REST_MCANNOTATE_URL=http://cli2rest-mc-annotate:8000
-      - CLI2REST_RCHIE_URL=http://cli2rest-rchie:8000
-      - CLI2REST_RNAVIEW_URL=http://cli2rest-rnaview:8000
+      - CLI2REST_BARNABA_URL=http://load-balancer/cli2rest-barnaba
+      - CLI2REST_BPNET_URL=http://load-balancer/cli2rest-bpnet
+      - CLI2REST_FR3D_URL=http://load-balancer/cli2rest-fr3d
+      - CLI2REST_INKSCAPE_URL=http://load-balancer/cli2rest-inkscape
+      - CLI2REST_MAXIT_URL=http://load-balancer/cli2rest-maxit
+      - CLI2REST_MCANNOTATE_URL=http://load-balancer/cli2rest-mc-annotate
+      - CLI2REST_RCHIE_URL=http://load-balancer/cli2rest-rchie
+      - CLI2REST_RNAVIEW_URL=http://load-balancer/cli2rest-rnaview
+    depends_on:
+      load-balancer:
+        condition: service_healthy
+
+  load-balancer:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      cli2rest-barnaba:
+        condition: service_healthy
+      cli2rest-bpnet:
+        condition: service_healthy
+      cli2rest-fr3d:
+        condition: service_healthy
+      cli2rest-inkscape:
+        condition: service_healthy
+      cli2rest-maxit:
+        condition: service_healthy
+      cli2rest-mc-annotate:
+        condition: service_healthy
+      cli2rest-rchie:
+        condition: service_healthy
+      cli2rest-rnaview:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      start_period: 30s
+      start_interval: 1s
+    restart: on-failure
 
   cli2rest-barnaba:
-    image: ghcr.io/tzok/cli2rest-barnaba:master-20251023
+    image: ghcr.io/tzok/cli2rest-barnaba
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-bpnet:
-    image: ghcr.io/tzok/cli2rest-bpnet:59a0c636d07e420db437bd888313b3123990fefd # 2025-10-23
+    image: ghcr.io/tzok/cli2rest-bpnet
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-fr3d:
-    image: ghcr.io/tzok/cli2rest-fr3d:latest-20251023
+    image: ghcr.io/tzok/cli2rest-fr3d
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-inkscape:
-    image: ghcr.io/tzok/cli2rest-inkscape:59a0c636d07e420db437bd888313b3123990fefd # 2025-10-23
+    image: ghcr.io/tzok/cli2rest-inkscape
+    deploy:
+      replicas: 2
     restart: on-failure
 
   cli2rest-maxit:
-    image: ghcr.io/tzok/cli2rest-maxit:11.400
+    image: ghcr.io/tzok/cli2rest-maxit
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-mc-annotate:
-    image: ghcr.io/tzok/cli2rest-mc-annotate:1.6.2
+    image: ghcr.io/tzok/cli2rest-mc-annotate
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-rchie:
-    image: ghcr.io/tzok/cli2rest-rchie:1.36.0_0.9.5
+    image: ghcr.io/tzok/cli2rest-rchie
+    deploy:
+      replicas: 3
     restart: on-failure
 
   cli2rest-rnaview:
-    image: ghcr.io/tzok/cli2rest-rnaview:v2.0.0
+    image: ghcr.io/tzok/cli2rest-rnaview
+    deploy:
+      replicas: 3
     restart: on-failure
