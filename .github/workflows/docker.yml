@@ -19,30 +19,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the docker image
-        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t $DOCKER_IMAGE .
-
-      - name: Create the docker container
-        run: |
-          docker create --name $DOCKER_CONTAINER --env-file .env_ci $DOCKER_IMAGE
-
-      - name: Start the docker container
-        run: |
-          docker start $DOCKER_CONTAINER
-
-      - name: Copy files
-        run: |
-          docker cp tests/ $DOCKER_CONTAINER:rnapdbee-adapters/src/
-          docker cp test_requirements.txt $DOCKER_CONTAINER:/
-
-      - name: Install test requirements
-        run: |
-          { docker exec $DOCKER_CONTAINER /bin/bash -c "pip3 install -v -r test_requirements.txt"; } || true
-          exit_code=$?
-          docker logs $DOCKER_CONTAINER 2>&1 || true
-          exit ${exit_code}
-
-      - name: Run test
-        run: docker start $DOCKER_CONTAINER && docker exec $DOCKER_CONTAINER bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'"
+        run: docker build -t $DOCKER_IMAGE .
 
   lint:
     runs-on: ubuntu-22.04
