@@ -1,15 +1,11 @@
-Flask-Caching
-Flask
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.1
 dataclasses-json
-graphviz
+flask-caching
+flask
 gunicorn
 lxml
-mmcif-pdbx
 mmcif
 orjson
-pandas
 rnapolis
 svg-stack
 weblogo
-
-cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.0

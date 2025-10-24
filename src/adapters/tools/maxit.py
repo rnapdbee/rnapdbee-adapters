@@ -3,8 +3,6 @@ import logging
 import os
 import sys
 
-from tempfile import TemporaryDirectory
-
 from adapters.cli2rest_client import cli2rest_run
 from adapters.tools.utils import is_cif
 
