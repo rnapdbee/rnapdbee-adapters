@@ -3,10 +3,14 @@ from collections import namedtuple
 from tempfile import TemporaryDirectory
 import os
 from typing import List, Optional, Dict
+import logging
 
 from rnapolis.adapter import parse_external_output, ExternalTool
 from rnapolis.common import BaseInteractions
 from rnapolis.parser import read_3d_structure
+
+
+logger = logging.getLogger(__name__)
 
 
 Arguments = namedtuple("Arguments", ["output_prefix_format", "no_auto_ungzip"])
@@ -52,9 +56,20 @@ def cli2rest_run(
         _cli2rest_run_in_directory(base_url, input_file, config_name, directory)
 
         result = {}
-        for output_file in output_files:
-            with open(os.path.join(directory, output_file)) as f:
-                result[output_file] = f.read()
+        missing_files = []
+        for output_file in ["stdout.txt", "stderr.txt"] + output_files:
+            output_path = os.path.join(directory, output_file)
+            if os.path.exists(output_path):
+                with open(output_path) as f:
+                    result[output_file] = f.read()
+            else:
+                logger.warning("File %s not found", output_path)
+                missing_files.append(output_file)
+
+        if missing_files:
+            print("stdout:", result.get("stdout.txt"))
+            print("stderr:", result.get("stderr.txt"))
+
         return result
 
 
