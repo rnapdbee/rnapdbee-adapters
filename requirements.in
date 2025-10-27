@@ -1,4 +1,4 @@
-cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.2.1
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.3.0
 dataclasses-json
 flask-caching
 flask
