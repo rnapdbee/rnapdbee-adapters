@@ -9,7 +9,7 @@ from adapters.tools import maxit
 
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
     # ensure the format is mmCIF
-    cif_content = maxit.ensure_cif(file_content)
+    cif_content = maxit.ensure_mmcif(file_content)
 
     # filter to leave only DNA, RNA and hybrids
     cif_content = filter_by_poly_types(
@@ -35,7 +35,7 @@ def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) ->
 
 
 def begin(cif: _TemporaryFileWrapper, file_content: str) -> List[Any]:
-    cif.write(maxit.ensure_mmcif(file_content))
+    cif.write(file_content)
     cif.flush()
     cif.seek(0)
     return mmcif.io.IoAdapter().readFile(cif.name)
