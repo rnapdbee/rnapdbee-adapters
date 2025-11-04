@@ -20,7 +20,7 @@ def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
         base_url,
         file_content,
         ExternalTool.RNAVIEW,
-        ["input.cif.out"],
+        ["input.cif", "input.cif.out"],
         config_name="rnaview/config-cif.yaml",
     )
 

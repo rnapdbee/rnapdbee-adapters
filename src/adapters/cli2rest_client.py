@@ -93,6 +93,21 @@ def cli2rest_analyze_structure(
             f.seek(0)
             structure3d = read_3d_structure(f, None)
 
+        result = {}
+        missing_files = []
+        for output_file in ["stdout.txt", "stderr.txt"] + output_files:
+            output_path = os.path.join(directory, output_file)
+            if os.path.exists(output_path):
+                with open(output_path) as f:
+                    result[output_file] = f.read()
+            else:
+                logger.warning("File %s not found", output_path)
+                missing_files.append(output_file)
+
+        if missing_files:
+            print("stdout:", result.get("stdout.txt"))
+            print("stderr:", result.get("stderr.txt"))
+
         return parse_external_output(
             [f"{directory}/{output_file}" for output_file in output_files],
             external_tool,

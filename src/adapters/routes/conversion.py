@@ -9,6 +9,13 @@ server = Blueprint("conversion", __name__)
 # MAXIT tool routes
 
 
+@server.route("/ensure-mmcif", methods=["POST"])
+@content_type("text/plain")
+@plain_response()
+def convert_ensure_mmcif():
+    return maxit.ensure_mmcif(request.data.decode("utf-8"))
+
+
 @server.route("/ensure-cif", methods=["POST"])
 @content_type("text/plain")
 @plain_response()
