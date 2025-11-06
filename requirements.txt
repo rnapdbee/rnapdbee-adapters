@@ -90,6 +90,8 @@ pytz==2025.2
     # via pandas
 pyyaml==6.0.3
     # via cli2rest-bio
+redis==5.2.0
+    # via -r requirements.in
 requests==2.32.5
     # via
     #   cli2rest-bio
@@ -131,8 +133,6 @@ weblogo==3.7.12
     # via -r requirements.in
 werkzeug==3.1.3
     # via flask
-redis==5.2.0
-    # via flask-caching
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
