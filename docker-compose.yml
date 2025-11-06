@@ -5,6 +5,8 @@ services:
     ports:
       - 8000:80
     environment:
+      - ADAPTERS_CACHE_TYPE=RedisCache
+      - ADAPTERS_REDIS_URL=redis://redis:6379/0
       - CLI2REST_BARNABA_URL=http://load-balancer/cli2rest-barnaba
       - CLI2REST_BPNET_URL=http://load-balancer/cli2rest-bpnet
       - CLI2REST_FR3D_URL=http://load-balancer/cli2rest-fr3d
@@ -16,6 +18,8 @@ services:
     depends_on:
       load-balancer:
         condition: service_healthy
+      redis:
+        condition: service_started
 
   load-balancer:
     image: nginx:alpine
@@ -93,3 +97,12 @@ services:
     deploy:
       replicas: 3
     restart: on-failure
+
+  redis:
+    image: redis:7-alpine
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20

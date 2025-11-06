@@ -1,5 +1,6 @@
 import logging
 import os
+import hashlib
 import signal
 import subprocess
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
@@ -18,6 +19,14 @@ from adapters.cli2rest_client import cli2rest_run
 
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_INKSCAPE_URL", "http://localhost:8000")
+
+
+def make_cache_key() -> str:
+    body = request.get_data(cache=True, as_text=False) or b""
+    body_hash = hashlib.sha256(body).hexdigest()
+    qs = request.query_string.decode("utf-8")
+    ct = request.headers.get("Content-Type", "")
+    return f"{request.path}|{qs}|{ct}|{body_hash}"
 
 
 def is_cif(file_content: str) -> bool:

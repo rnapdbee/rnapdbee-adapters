@@ -2,8 +2,9 @@ import logging
 from os import environ
 
 config = {
-    "CACHE_TYPE": "FileSystemCache",
+    "CACHE_TYPE": environ.get("ADAPTERS_CACHE_TYPE", "FileSystemCache"),
     "CACHE_DIR": environ.get("ADAPTERS_CACHE_DIR", "/var/tmp/adapters_cache/"),
+    "CACHE_REDIS_URL": environ.get("ADAPTERS_REDIS_URL", "redis://localhost:6379/0"),
     "CACHE_THRESHOLD": int(environ.get("ADAPTERS_CACHE_THRESHOLD", "50")),
     "CACHE_DEFAULT_TIMEOUT": int(environ.get("ADAPTERS_CACHE_TIMEOUT", "3600")),
     "SUBPROCESS_DEFAULT_TIMEOUT": int(
