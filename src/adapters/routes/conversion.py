@@ -2,7 +2,9 @@ from flask import Blueprint, request
 from rnapolis.common import BpSeq
 
 from adapters.tools import maxit
-from adapters.tools.utils import content_type, plain_response
+from adapters.tools.utils import content_type, plain_response, make_cache_key
+from adapters.cache import cache
+from adapters.config import config
 
 server = Blueprint("conversion", __name__)
 
@@ -12,6 +14,7 @@ server = Blueprint("conversion", __name__)
 @server.route("/ensure-mmcif", methods=["POST"])
 @content_type("text/plain")
 @plain_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def convert_ensure_mmcif():
     return maxit.ensure_mmcif(request.data.decode("utf-8"))
 
@@ -19,6 +22,7 @@ def convert_ensure_mmcif():
 @server.route("/ensure-cif", methods=["POST"])
 @content_type("text/plain")
 @plain_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def convert_ensure_cif():
     return maxit.ensure_cif(request.data.decode("utf-8"))
 
@@ -26,6 +30,7 @@ def convert_ensure_cif():
 @server.route("/ensure-pdb", methods=["POST"])
 @content_type("text/plain")
 @plain_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def convert_ensure_pdb():
     return maxit.ensure_pdb(request.data.decode("utf-8"))
 
@@ -33,5 +38,6 @@ def convert_ensure_pdb():
 @server.route("/bpseq2dbn", methods=["POST"])
 @content_type("text/plain")
 @plain_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def convert_bpseq2dbn():
     return str(BpSeq.from_string(request.data.decode("utf-8")).dot_bracket)

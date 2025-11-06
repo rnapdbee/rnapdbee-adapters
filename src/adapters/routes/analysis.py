@@ -13,7 +13,9 @@ from adapters.analysis import (
     rnapolis_,
     rnaview,
 )
-from adapters.tools.utils import content_type, json_response
+from adapters.tools.utils import content_type, json_response, make_cache_key
+from adapters.cache import cache
+from adapters.config import config
 
 server = Blueprint("analysis", __name__)
 
@@ -22,6 +24,7 @@ server = Blueprint("analysis", __name__)
 @server.route("/bpnet/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_bpnet_model(model: int):
     return services.run_cif_adapter(
         bpnet.analyze,
@@ -39,6 +42,7 @@ def analyze_bpnet():
 @server.route("/dssr/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_dssr_model(model: int):
     return services.run_cif_adapter(
         dssr.analyze,
@@ -56,6 +60,7 @@ def analyze_dssr():
 @server.route("/fr3d/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_fr3d_model(model: int):
     return services.run_cif_adapter(
         fr3d.analyze,
@@ -73,6 +78,7 @@ def analyze_fr3d():
 @server.route("/barnaba/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_barnaba_model(model: int):
     return services.run_pdb_adapter(
         barnaba.analyze,
@@ -90,6 +96,7 @@ def analyze_barnaba():
 @server.route("/mc-annotate/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_mc_annotate_model(model: int):
     return services.run_pdb_adapter(
         mc_annotate.analyze,
@@ -107,6 +114,7 @@ def analyze_mc_annotate():
 @server.route("/rnaview/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_rnaview_model(model: int):
     return services.run_cif_adapter(
         rnaview.analyze,
@@ -124,6 +132,7 @@ def analyze_rnaview():
 @server.route("/rnapolis/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_rnapolis_model(model: int):
     return services.run_cif_adapter(
         rnapolis_.analyze,
@@ -141,6 +150,7 @@ def analyze_rnapolis():
 @server.route("/maxit/<int:model>", methods=["POST"])
 @content_type("text/plain")
 @json_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def analyze_maxit_model(model: int):
     return services.run_cif_adapter(
         maxit.analyze,

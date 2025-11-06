@@ -5,7 +5,9 @@ from __future__ import annotations
 from flask import Blueprint, request
 
 from adapters.services import run_multi_visualization_adapter, run_visualization_adapter
-from adapters.tools.utils import content_type, svg_response
+from adapters.tools.utils import content_type, svg_response, make_cache_key
+from adapters.cache import cache
+from adapters.config import config
 from adapters.visualization.pseudoviewer import PseudoViewerDrawer
 from adapters.visualization.rchie import RChieDrawer
 from adapters.visualization.rnapuzzler import RNAPuzzlerDrawer
@@ -17,6 +19,7 @@ server = Blueprint("visualization", __name__)
 @server.route("/weblogo", methods=["POST"])
 @content_type("application/json")
 @svg_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def visualize_weblogo():
     return run_multi_visualization_adapter(
         WeblogoDrawer(),
@@ -27,6 +30,7 @@ def visualize_weblogo():
 @server.route("/rchie", methods=["POST"])
 @content_type("application/json")
 @svg_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def visualize_rchie():
     return run_visualization_adapter(
         RChieDrawer(),
@@ -37,6 +41,7 @@ def visualize_rchie():
 @server.route("/pseudoviewer", methods=["POST"])
 @content_type("application/json")
 @svg_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def visualize_pseudoviewer():
     return run_visualization_adapter(
         PseudoViewerDrawer(),
@@ -47,6 +52,7 @@ def visualize_pseudoviewer():
 @server.route("/rnapuzzler", methods=["POST"])
 @content_type("application/json")
 @svg_response()
+@cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def visualize_rnapuzzler():
     return run_visualization_adapter(
         RNAPuzzlerDrawer(),
