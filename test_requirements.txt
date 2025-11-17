@@ -4,7 +4,7 @@
 #
 #    pip-compile test_requirements.in
 #
-astroid==4.0.1
+astroid==4.0.2
     # via pylint
 dill==0.4.0
     # via pylint
@@ -14,7 +14,7 @@ mccabe==0.7.0
     # via pylint
 platformdirs==4.5.0
     # via pylint
-pylint==4.0.2
+pylint==4.0.3
     # via -r test_requirements.in
 tomlkit==0.13.3
     # via pylint
