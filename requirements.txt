@@ -71,7 +71,7 @@ numpy==2.3.4
     #   weblogo
 ordered-set==4.1.0
     # via rnapolis
-orjson==3.11.4
+orjson==3.11.5
     # via
     #   -r requirements.in
     #   rnapolis
