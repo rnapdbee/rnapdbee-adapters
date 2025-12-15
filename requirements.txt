@@ -68,6 +68,7 @@ numpy==2.3.4
     #   rnapolis
     #   scikit-learn
     #   scipy
+    #   shapely
     #   weblogo
 ordered-set==4.1.0
     # via rnapolis
@@ -98,7 +99,7 @@ requests==2.32.5
     #   docker
     #   mmcif
     #   rnapolis
-rnapolis==0.12.0
+rnapolis==0.12.1
     # via -r requirements.in
 scikit-learn==1.7.2
     # via rnapolis
@@ -107,6 +108,8 @@ scipy==1.16.2
     #   rnapolis
     #   scikit-learn
     #   weblogo
+shapely==2.1.2
+    # via rnapolis
 six==1.17.0
     # via
     #   mmcif
