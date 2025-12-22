@@ -30,8 +30,6 @@ flask==3.1.2
     #   flask-caching
 flask-caching==2.3.1
     # via -r requirements.in
-future==1.0.0
-    # via mmcif
 graphviz==0.21
     # via rnapolis
 gunicorn==23.0.0
@@ -53,7 +51,7 @@ markupsafe==3.0.3
     #   werkzeug
 marshmallow==3.26.2
     # via dataclasses-json
-mmcif==0.92.0
+mmcif==1.1.0
     # via
     #   -r requirements.in
     #   rnapolis
@@ -111,9 +109,7 @@ scipy==1.16.2
 shapely==2.1.2
     # via rnapolis
 six==1.17.0
-    # via
-    #   mmcif
-    #   python-dateutil
+    # via python-dateutil
 svg-stack==0.1.0
     # via -r requirements.in
 threadpoolctl==3.6.0
