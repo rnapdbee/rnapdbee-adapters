@@ -12,9 +12,9 @@ def run_cif_adapter(
     analyze: Callable[..., BaseInteractions], data: str, model: int
 ) -> BaseInteractions:
     cif_content = cif_filter.apply(
-        file_content=data,
-        model=model,
-        functions_args=[
+        data,
+        [
+            (cif_filter.leave_single_model, {"model": model}),
             (cif_filter.fix_occupancy, {}),
         ],
     )
@@ -34,9 +34,9 @@ def run_pdb_adapter(
     analyze: Callable[..., BaseInteractions], data: str, model: int
 ) -> BaseInteractions:
     result = pdb_filter.apply(
-        file_content=data,
-        model=model,
-        functions_args=[
+        data,
+        [
+            (cif_filter.leave_single_model, {"model": model}),
             (cif_filter.fix_occupancy, {}),
         ],
     )

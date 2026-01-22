@@ -3,6 +3,8 @@ import logging
 import os
 import sys
 
+from rnapolis.quick_filter import filter_content
+
 from adapters.cli2rest_client import cli2rest_run_single
 from adapters.tools.utils import is_cif
 
@@ -11,12 +13,34 @@ base_url = os.getenv("CLI2REST_MAXIT_URL", "http://localhost:8000")
 
 
 def ensure_cif(file_content: str) -> str:
+    file_content = filter_content(
+        content=file_content,
+        mode="nucleic-acid",
+        keep_ligands=True,
+        keep_waters=False,
+        keep_ions=True,
+        keep_altlocs=False,
+        chains=None,  # leave all chains
+        model=None,  # leave all models
+    )
+
     if is_cif(file_content):
         return file_content
     return pdb2cif(file_content)
 
 
 def ensure_pdb(file_content: str) -> str:
+    file_content = filter_content(
+        content=file_content,
+        mode="nucleic-acid",
+        keep_ligands=True,
+        keep_waters=False,
+        keep_ions=True,
+        keep_altlocs=False,
+        chains=None,  # leave all chains
+        model=None,  # leave all models
+    )
+
     if is_cif(file_content):
         return cif2pdb(file_content)
     return file_content
