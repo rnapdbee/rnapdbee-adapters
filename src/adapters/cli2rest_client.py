@@ -119,7 +119,4 @@ def cli2rest_analyze_structure(
                 raise FileNotFoundError(f"Output file {output_file} not found")
             output_paths.append(output_path)
 
-            with open(output_path) as f:
-                logger.info(f"Contents of {output_file}:\n" + f.read())
-
         return parse_external_output(output_paths, external_tool, structure3d)
