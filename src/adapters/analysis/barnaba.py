@@ -16,11 +16,12 @@ base_url = os.getenv("CLI2REST_BARNABA_URL", "http://localhost:8000")
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze_structure(
-        base_url,
-        file_content,
-        ExternalTool.BARNABA,
-        ["outfile.ANNOTATE.pairing.out", "outfile.ANNOTATE.stacking.out"],
+        base_url=base_url,
+        input_file_content=file_content,
         input_file_extension=".pdb",
+        config_name="barnaba/config.yaml",
+        output_files=["outfile.ANNOTATE.pairing.out", "outfile.ANNOTATE.stacking.out"],
+        external_tool=ExternalTool.BARNABA,
     )
 
 

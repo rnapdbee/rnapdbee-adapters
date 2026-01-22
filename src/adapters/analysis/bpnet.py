@@ -10,18 +10,18 @@ from rnapolis.common import BaseInteractions
 
 from adapters.cli2rest_client import cli2rest_analyze_structure
 
-
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_BPNET_URL", "http://localhost:8000")
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze_structure(
-        base_url,
-        file_content,
-        ExternalTool.BPNET,
-        ["input.rob", "input_basepair.json"],
+        base_url=base_url,
+        input_file_content=file_content,
+        input_file_extension=".cif",
         config_name="bpnet/config-cif.yaml",
+        output_files=["input.rob", "input_basepair.json"],
+        external_tool=ExternalTool.BPNET,
     )
 
 

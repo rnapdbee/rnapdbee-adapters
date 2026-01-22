@@ -3,7 +3,7 @@ import logging
 import os
 import sys
 
-from adapters.cli2rest_client import cli2rest_run
+from adapters.cli2rest_client import cli2rest_run_single
 from adapters.tools.utils import is_cif
 
 logger = logging.getLogger(__name__)
@@ -26,34 +26,34 @@ def ensure_mmcif(file_content: str) -> str:
     return cif2mmcif(ensure_cif(file_content))
 
 
-def pdb2cif(pdb_content) -> str:
-    return cli2rest_run(
+def pdb2cif(pdb_content: str) -> str:
+    return cli2rest_run_single(
         base_url=base_url,
         input_file_content=pdb_content,
         input_file_extension=".pdb",
-        output_files=["output.cif"],
+        output_file="output.cif",
         config_name="maxit/config-pdb2cif.yaml",
-    )["output.cif"]
+    )
 
 
-def cif2pdb(cif_content) -> str:
-    return cli2rest_run(
+def cif2pdb(cif_content: str) -> str:
+    return cli2rest_run_single(
         base_url=base_url,
         input_file_content=cif_content,
         input_file_extension=".cif",
-        output_files=["output.pdb"],
+        output_file="output.pdb",
         config_name="maxit/config-cif2pdb.yaml",
-    )["output.pdb"]
+    )
 
 
 def cif2mmcif(cif_content: str) -> str:
-    return cli2rest_run(
+    return cli2rest_run_single(
         base_url=base_url,
         input_file_content=cif_content,
         input_file_extension=".cif",
-        output_files=["output.cif"],
+        output_file="output.cif",
         config_name="maxit/config-cif2mmcif.yaml",
-    )["output.cif"]
+    )
 
 
 def main():

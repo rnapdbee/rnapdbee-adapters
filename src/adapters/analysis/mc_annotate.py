@@ -10,18 +10,18 @@ from rnapolis.common import BaseInteractions
 
 from adapters.cli2rest_client import cli2rest_analyze_structure
 
-
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_MCANNOTATE_URL", "http://localhost:8000")
 
 
 def analyze(file_content: str, **_: Dict[str, Any]) -> BaseInteractions:
     return cli2rest_analyze_structure(
-        base_url,
-        file_content,
-        ExternalTool.MCANNOTATE,
-        ["input.pdb", "stdout.txt"],
+        base_url=base_url,
+        input_file_content=file_content,
         input_file_extension=".pdb",
+        config_name="mc-annotate/config.yaml",
+        output_files=["input.pdb", "stdout.txt"],
+        external_tool=ExternalTool.MCANNOTATE,
     )
 
 
