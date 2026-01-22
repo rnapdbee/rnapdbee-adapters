@@ -1,6 +1,6 @@
+import hashlib
 import logging
 import os
-import hashlib
 import signal
 import subprocess
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
@@ -13,9 +13,9 @@ import orjson
 from flask import Response, request
 from werkzeug.exceptions import UnsupportedMediaType
 
+from adapters.cli2rest_client import cli2rest_run_single
 from adapters.config import config
 from adapters.exceptions import InvalidSvgError
-from adapters.cli2rest_client import cli2rest_run
 
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_INKSCAPE_URL", "http://localhost:8000")
@@ -187,14 +187,14 @@ def wrapped_popen(
     return subprocess.CompletedProcess(process.args, retcode, stdout, stderr)
 
 
-def convert_eps_to_svg_using_inkscape(file_content: str, file_type: str) -> str:
-    return cli2rest_run(
+def convert_eps_to_svg_using_inkscape(file_content: str) -> str:
+    return cli2rest_run_single(
         base_url=base_url,
         input_file_content=file_content,
         input_file_extension=".eps",
         config_name="inkscape/config-eps2svg.yaml",
-        output_files=["output.svg"],
-    )["output.svg"]
+        output_file="output.svg",
+    )
 
 
 def content_type(mimetype: str):

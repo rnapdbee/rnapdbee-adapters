@@ -4,9 +4,11 @@ import logging
 import os
 import sys
 from typing import List, Optional, TypedDict
+
+from rnapolis.common import DotBracket, MultiStrandDotBracket
+
+from adapters.cli2rest_client import cli2rest_run_single
 from adapters.visualization.model import Model2D
-from adapters.cli2rest_client import cli2rest_run
-from rnapolis.common import MultiStrandDotBracket, DotBracket
 
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_RCHIE_URL", "http://localhost:8000")
@@ -39,7 +41,7 @@ class RChieDrawer:
     }
 
     def generate_rchie_svg(self, dot_bracket: DotBracket) -> str:
-        interactions = []
+        interactions: List[Interaction] = []
         for i, j in dot_bracket.pairs:
             interactions.append(
                 Interaction(
@@ -55,13 +57,13 @@ class RChieDrawer:
             bottom=[],
         )
 
-        return cli2rest_run(
+        return cli2rest_run_single(
             base_url=base_url,
             input_file_content=json.dumps(data),
             input_file_extension=".json",
             config_name="rchie",
-            output_files=["clean.svg"],
-        )["clean.svg"]
+            output_file="clean.svg",
+        )
 
     def visualize(self, data: Model2D) -> str:
         return self.generate_rchie_svg(

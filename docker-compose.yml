@@ -6,6 +6,7 @@ services:
       - 8000:80
     environment:
       - ADAPTERS_CACHE_TYPE=RedisCache
+      - ADAPTERS_FLASK_LOG_LEVEL=INFO
       - ADAPTERS_REDIS_URL=redis://redis:6379/0
       - CLI2REST_BARNABA_URL=http://load-balancer/cli2rest-barnaba
       - CLI2REST_BPNET_URL=http://load-balancer/cli2rest-bpnet
@@ -43,6 +44,8 @@ services:
       cli2rest-rchie:
         condition: service_healthy
       cli2rest-rnaview:
+        condition: service_healthy
+      cli2rest-varna-tz:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
@@ -94,6 +97,12 @@ services:
 
   cli2rest-rnaview:
     image: ghcr.io/tzok/cli2rest-rnaview
+    deploy:
+      replicas: 3
+    restart: on-failure
+
+  cli2rest-varna-tz:
+    image: ghcr.io/tzok/cli2rest-varna-tz
     deploy:
       replicas: 3
     restart: on-failure

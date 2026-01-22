@@ -266,7 +266,7 @@ class RNAPuzzlerDrawer:
         self.generate_rnapuzzler_eps()
         self.postprocess()
 
-        return convert_eps_to_svg_using_inkscape(self.result, ".eps")
+        return convert_eps_to_svg_using_inkscape(self.result)
 
 
 def main() -> None:
@@ -276,7 +276,7 @@ def main() -> None:
     print("Read structure:")
     drawer.modified_structure = sys.stdin.read()
     drawer.generate_rnapuzzler_eps()
-    print(convert_eps_to_svg_using_inkscape(drawer.result, ".eps"))
+    print(convert_eps_to_svg_using_inkscape(drawer.result))
 
 
 if __name__ == "__main__":
