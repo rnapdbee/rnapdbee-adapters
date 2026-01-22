@@ -2,7 +2,6 @@ from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
 from typing import Any, Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
-from rnapolis.molecule_filter import filter_by_poly_types
 
 from adapters.tools import maxit
 
@@ -10,18 +9,6 @@ from adapters.tools import maxit
 def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
     # ensure the format is mmCIF
     cif_content = maxit.ensure_mmcif(file_content)
-
-    # TODO: this filtering breaks FR3D if the input contained non-nucleic acid in the first place
-    # filter to leave only DNA, RNA and hybrids
-    # cif_content = filter_by_poly_types(
-    #     cif_content,
-    #     [
-    #         "polydeoxyribonucleotide",
-    #         "polydeoxyribonucleotide/polyribonucleotide hybrid",
-    #         "polyribonucleotide",
-    #     ],
-    #     ["chem_comp"],
-    # )
 
     # apply all filtering functions
     with NamedTemporaryFile("w+", suffix=".cif") as cif_file:
