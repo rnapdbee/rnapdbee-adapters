@@ -2,26 +2,28 @@ from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
 from typing import Any, Callable, Dict, Iterable, List, Tuple
 
 import mmcif.io
-from rnapolis.molecule_filter import filter_by_poly_types
+from rnapolis.quick_filter import filter_content
 
 from adapters.tools import maxit
 
 
-def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
-    # ensure the format is mmCIF
-    cif_content = maxit.ensure_mmcif(file_content)
+def apply(
+    file_content: str, model: int, functions_args: Iterable[Tuple[Callable, Dict]]
+) -> str:
+    # quick filter to remove non-nucleic acid content
+    filtered_content = filter_content(
+        content=file_content,
+        mode="nucleic-acid",
+        keep_ligands=True,
+        keep_waters=False,
+        keep_ions=True,
+        keep_altlocs=False,
+        chains=None,  # leave all chains among those filtered
+        model=model,
+    )
 
-    # TODO: this filtering breaks FR3D if the input contained non-nucleic acid in the first place
-    # filter to leave only DNA, RNA and hybrids
-    # cif_content = filter_by_poly_types(
-    #     cif_content,
-    #     [
-    #         "polydeoxyribonucleotide",
-    #         "polydeoxyribonucleotide/polyribonucleotide hybrid",
-    #         "polyribonucleotide",
-    #     ],
-    #     ["chem_comp"],
-    # )
+    # ensure the format is mmCIF
+    cif_content = maxit.ensure_mmcif(filtered_content)
 
     # apply all filtering functions
     with NamedTemporaryFile("w+", suffix=".cif") as cif_file:
@@ -49,29 +51,6 @@ def end(cif: _TemporaryFileWrapper, data: List[Any]) -> str:
     cif.flush()
     cif.seek(0)
     return cif.read()
-
-
-# Leave only one specified model in the file and sets its number to 1.
-# Some tools like BPNET work only with model number 1.
-def leave_single_model(data: List, **kwargs):
-    model = kwargs.get("model", 1)
-
-    if len(data) > 0:
-        atom_site = data[0].getObj("atom_site")
-
-        if atom_site:
-            pdbx_PDB_model_num = atom_site.getAttributeIndex("pdbx_PDB_model_num")
-
-            if pdbx_PDB_model_num != -1:
-                toremove = []
-
-                for i, row in enumerate(atom_site.getRowList()):
-                    if int(row[pdbx_PDB_model_num]) != model:
-                        toremove.append(i)
-                    else:
-                        row[pdbx_PDB_model_num] = "1"
-                for i in reversed(toremove):
-                    del atom_site.getRowList()[i]
 
 
 # Modify occupancy column so that it always parses to a float
