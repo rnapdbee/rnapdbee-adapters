@@ -74,7 +74,9 @@ def _log_output_on_error(directory: str):
             with open(path, "r") as f:
                 content = f.read()
                 if len(content) > 2000:
-                    display = f"{content[:1000]}\n... [truncated] ...\n{content[-1000:]}"
+                    display = (
+                        f"{content[:1000]}\n... [truncated] ...\n{content[-1000:]}"
+                    )
                 else:
                     display = content
                 logger.error(f"Content of {filename}:\n{display}")
