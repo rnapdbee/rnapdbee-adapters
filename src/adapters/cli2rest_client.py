@@ -67,6 +67,19 @@ def _cli2rest_run(
         f.write(metadata.get("stderr", ""))
 
 
+def _log_output_on_error(directory: str):
+    for filename in ["stdout.txt", "stderr.txt"]:
+        path = os.path.join(directory, filename)
+        if os.path.exists(path):
+            with open(path, "r") as f:
+                content = f.read()
+                if len(content) > 2000:
+                    display = f"{content[:1000]}\n... [truncated] ...\n{content[-1000:]}"
+                else:
+                    display = content
+                logger.error(f"Content of {filename}:\n{display}")
+
+
 def cli2rest_run_single(
     base_url: str,
     input_file_content: str,
@@ -85,6 +98,7 @@ def cli2rest_run_single(
 
         output_path = os.path.join(directory, output_file)
         if not os.path.exists(output_path):
+            _log_output_on_error(directory)
             raise FileNotFoundError(f"Output file {output_file} not found")
 
         with open(output_path) as f:
@@ -116,6 +130,7 @@ def cli2rest_analyze_structure(
         for output_file in output_files:
             output_path = os.path.join(directory, output_file)
             if not os.path.exists(output_path):
+                _log_output_on_error(directory)
                 raise FileNotFoundError(f"Output file {output_file} not found")
             output_paths.append(output_path)
 
