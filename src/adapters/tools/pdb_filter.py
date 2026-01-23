@@ -15,10 +15,14 @@ class DefaultMapping(defaultdict):
 
 
 def apply(
-    file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]
+    file_content: str,
+    functions_args: Iterable[Tuple[Callable, Dict]],
+    mmcif_ensured: bool = False,
 ) -> Optional[Tuple[str, Dict[str, str]]]:
     # apply all filters on mmCIF representation
-    cif_content = cif_filter.apply(file_content, functions_args)
+    cif_content = cif_filter.apply(
+        file_content, functions_args, mmcif_ensured=mmcif_ensured
+    )
 
     # check if the filtered data is PDB-compatible
     adapter = IoAdapterPy()

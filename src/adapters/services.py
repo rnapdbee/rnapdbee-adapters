@@ -9,7 +9,10 @@ from adapters.visualization.model import Model2D, ModelMulti2D
 
 
 def run_cif_adapter(
-    analyze: Callable[..., BaseInteractions], data: str, model: int
+    analyze: Callable[..., BaseInteractions],
+    data: str,
+    model: int,
+    mmcif_ensured: bool = False,
 ) -> BaseInteractions:
     cif_content = cif_filter.apply(
         data,
@@ -17,6 +20,7 @@ def run_cif_adapter(
             (cif_filter.leave_single_model, {"model": model}),
             (cif_filter.fix_occupancy, {}),
         ],
+        mmcif_ensured=mmcif_ensured,
     )
 
     analysis_output = analyze(cif_content, model=model)
@@ -31,7 +35,10 @@ def run_cif_adapter(
 
 
 def run_pdb_adapter(
-    analyze: Callable[..., BaseInteractions], data: str, model: int
+    analyze: Callable[..., BaseInteractions],
+    data: str,
+    model: int,
+    mmcif_ensured: bool = False,
 ) -> BaseInteractions:
     result = pdb_filter.apply(
         data,
@@ -39,6 +46,7 @@ def run_pdb_adapter(
             (cif_filter.leave_single_model, {"model": model}),
             (cif_filter.fix_occupancy, {}),
         ],
+        mmcif_ensured=mmcif_ensured,
     )
 
     # If the result is None, it means that the input data is not representable as a valid PDB file

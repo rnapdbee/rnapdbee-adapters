@@ -6,9 +6,15 @@ import mmcif.io
 from adapters.tools import maxit
 
 
-def apply(file_content: str, functions_args: Iterable[Tuple[Callable, Dict]]) -> str:
-    # ensure the format is mmCIF
-    cif_content = maxit.ensure_mmcif(file_content)
+def apply(
+    file_content: str,
+    functions_args: Iterable[Tuple[Callable, Dict]],
+    mmcif_ensured: bool = False,
+) -> str:
+    if mmcif_ensured:
+        cif_content = file_content
+    else:
+        cif_content = maxit.ensure_mmcif(file_content)
 
     # apply all filtering functions
     with NamedTemporaryFile("w+", suffix=".cif") as cif_file:

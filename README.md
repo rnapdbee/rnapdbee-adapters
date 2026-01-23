@@ -64,6 +64,8 @@ http://localhost:8000
 
 Use `Content-Type: text/plain` and send `PDB` or `PDBx/mmCIF` with RNA structure ([example input](tests/files/input/2z_74.cif)). The response will be in `json` ([example output](tests/files/analysis_output/rnapolis.json)).
 
+If the payload was already produced by `/conversion-api/v1/ensure-mmcif`, you can skip re-ensuring by sending `X-MMCIF-Ensured: 1` and the service will treat the input as mmCIF without additional conversion.
+
 ```
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/barnaba
 $ curl -H 'Content-Type: text/plain' --data-binary @/path/to/input http://localhost:8000/analysis-api/v1/bpnet

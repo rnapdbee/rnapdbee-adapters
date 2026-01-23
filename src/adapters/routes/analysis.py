@@ -20,6 +20,14 @@ from adapters.config import config
 server = Blueprint("analysis", __name__)
 
 
+def is_mmcif_ensured() -> bool:
+    return request.headers.get("X-MMCIF-Ensured", "").lower() in {
+        "1",
+        "true",
+        "yes",
+    }
+
+
 # BPNet adapter routes
 @server.route("/bpnet/<int:model>", methods=["POST"])
 @content_type("text/plain")
@@ -30,6 +38,7 @@ def analyze_bpnet_model(model: int):
         bpnet.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -48,6 +57,7 @@ def analyze_dssr_model(model: int):
         dssr.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -66,6 +76,7 @@ def analyze_fr3d_model(model: int):
         fr3d.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -84,6 +95,7 @@ def analyze_barnaba_model(model: int):
         barnaba.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -102,6 +114,7 @@ def analyze_mc_annotate_model(model: int):
         mc_annotate.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -120,6 +133,7 @@ def analyze_rnaview_model(model: int):
         rnaview.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -138,6 +152,7 @@ def analyze_rnapolis_model(model: int):
         rnapolis_.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
@@ -156,6 +171,7 @@ def analyze_maxit_model(model: int):
         maxit.analyze,
         request.data.decode("utf-8"),
         model,
+        mmcif_ensured=is_mmcif_ensured(),
     )
 
 
