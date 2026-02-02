@@ -45,6 +45,8 @@ services:
         condition: service_healthy
       cli2rest-rnaview:
         condition: service_healthy
+      cli2rest-rnapolis:
+        condition: service_healthy
       cli2rest-varna-tz:
         condition: service_healthy
     healthcheck:
@@ -97,6 +99,12 @@ services:
 
   cli2rest-rnaview:
     image: ghcr.io/tzok/cli2rest-rnaview
+    deploy:
+      replicas: 3
+    restart: on-failure
+
+  cli2rest-rnapolis:
+    image: ghcr.io/tzok/cli2rest-rnapolis
     deploy:
       replicas: 3
     restart: on-failure
