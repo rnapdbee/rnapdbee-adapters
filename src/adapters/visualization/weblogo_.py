@@ -1,60 +1,56 @@
 #! /usr/bin/env python
 
-# IMPORTANT! this file cannot be named weblogo.py, because it imports from "weblogo", and Python complains about that
-# Weblogo (docs: https://weblogo.readthedocs.io/en/latest)
-# Requires pdf2svg (repo: https://github.com/dawbarton/pdf2svg)
-# Requires svg-stack (repo: https://github.com/astraw/svg_stack)
-# Requires ghostscript (website: https://www.ghostscript.com)
+# Structure consensus logo visualization using logomaker + matplotlib
+# Replaces the previous weblogo-based implementation which depended on
+# pkg_resources/setuptools, ghostscript, and pdf2svg
 
 import logging
-import os
-import shutil
 import sys
-import tempfile
-import uuid
-from collections import defaultdict
-from io import StringIO
-from typing import DefaultDict, List, Tuple
+from collections import Counter, defaultdict
+from io import BytesIO, StringIO
+from typing import DefaultDict, Dict, List
 
-import svg_stack
-import weblogo as w
+import logomaker
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from lxml import etree as ET
 
-from adapters.exceptions import InvalidSvgError, ThirdPartySoftwareError
-from adapters.tools.utils import clean_svg, run_external_cmd
 from adapters.visualization.model import ModelMulti2D
 
 logger = logging.getLogger(__name__)
 
+STACKS_PER_LINE = 80
+
 
 class WeblogoDrawer:
-    COLORS = {
+    COLORS: Dict[str, str] = {
         "U": "#000000",  # Unpaired residue (dot in dotBracket)
         "Z": "#000000",  # Missing residue (dash in extended dotBracket)
-        "()": "#808080",  # Base pair
-        "[]": "#2E7012",  # 1st order
-        "{}": "#0F205F",  # 2nd order
-        "<>": "#831300",  # 3rd order
-        "Aa": "#550B5B",  # 4th order
-        "Bb": "#4A729D",  # 5th order
-        "Cc": "#8B7605",  # 6th order
-        "Dd": "#C565CF",  # 7th order
-        "Ee": "#9FB925",  # 8th order
+        "(": "#808080",  # Base pair
+        ")": "#808080",
+        "[": "#2E7012",  # 1st order
+        "]": "#2E7012",
+        "{": "#0F205F",  # 2nd order
+        "}": "#0F205F",
+        "<": "#831300",  # 3rd order
+        ">": "#831300",
+        "A": "#550B5B",  # 4th order
+        "a": "#550B5B",
+        "B": "#4A729D",  # 5th order
+        "b": "#4A729D",
+        "C": "#8B7605",  # 6th order
+        "c": "#8B7605",
+        "D": "#C565CF",  # 7th order
+        "d": "#C565CF",
+        "E": "#9FB925",  # 8th order
+        "e": "#9FB925",
     }
 
-    BASE_RULES = tuple(
-        w.SymbolColor(symbol, color, "neutral") for symbol, color in COLORS.items()
-    )
-    ALPHABET = w.Alphabet("".join(tuple(COLORS.keys())), [])
-
-    LOGO_OPTIONS = w.LogoOptions(
-        show_fineprint=False,
-        color_scheme=w.ColorScheme(BASE_RULES, alphabet=ALPHABET),
-        unit_name="probability",
-        yaxis_label="probability",
-        title_fontsize=12,
-        stacks_per_line=80,
-    )
+    ALPHABET = list(COLORS.keys())
 
     def convert_to_fasta(self, data: ModelMulti2D) -> DefaultDict[str, str]:
         strands_structures: DefaultDict[str, str] = defaultdict(str)
@@ -68,95 +64,151 @@ class WeblogoDrawer:
     def replace_unreadable_characters(self, fasta: str) -> str:
         return fasta.replace(".", "U").replace("-", "Z")
 
-    def generate_weblogo(
-        self, title: str, fasta: str
-    ) -> Tuple[w.LogoData, w.LogoFormat]:
-        sequence_list = w.read_seq_data(StringIO(fasta), alphabet=self.ALPHABET)
+    def _parse_sequences(self, fasta: str) -> List[str]:
+        """Parse FASTA-formatted string into a list of sequences."""
+        sequences = []
+        for line in fasta.strip().splitlines():
+            line = line.strip()
+            if line.startswith(">") or not line:
+                continue
+            sequences.append(line)
+        return sequences
 
-        logo_data = w.LogoData.from_seqs(sequence_list)
-        self.LOGO_OPTIONS.logo_title = f"Strand {title}"
-        logo_format = w.LogoFormat(logo_data, self.LOGO_OPTIONS)
+    def _sequences_to_probability_matrix(
+        self, sequences: List[str]
+    ) -> pd.DataFrame:
+        """Convert a list of equal-length sequences into a probability matrix."""
+        if not sequences:
+            return pd.DataFrame()
 
-        return logo_data, logo_format
+        seq_length = len(sequences[0])
+        n_seqs = len(sequences)
 
-    def save_to_svg(self, logo_data: w.LogoData, logo_format: w.LogoFormat) -> str:
-        """Makes EPS -> SVG conversion through PDF"""
+        data = np.zeros((seq_length, len(self.ALPHABET)), dtype=float)
+        alphabet_index = {char: i for i, char in enumerate(self.ALPHABET)}
 
-        eps_bytes = w.eps_formatter(logo_data, logo_format)
+        for seq in sequences:
+            for pos, char in enumerate(seq):
+                if char in alphabet_index:
+                    data[pos, alphabet_index[char]] += 1
 
-        # Important: we have to escape some characters to the needs of PostScript
-        for patch in (("(()", "(\\()"), ("())", "(\\))")):
-            eps_bytes = eps_bytes.replace(patch[0].encode(), patch[1].encode())
+        data /= n_seqs
 
-        ghost_script = w.GhostscriptAPI()
+        return pd.DataFrame(data, columns=self.ALPHABET)
 
-        pdf_bytes = ghost_script.convert(
-            "pdf", eps_bytes.decode(), logo_format.logo_width, logo_format.logo_height
+    def generate_logo_svg(self, title: str, fasta: str) -> str:
+        """Generate a sequence logo SVG string from FASTA data."""
+        sequences = self._parse_sequences(fasta)
+        if not sequences:
+            return ""
+
+        prob_matrix = self._sequences_to_probability_matrix(sequences)
+        seq_length = len(prob_matrix)
+
+        n_lines = max(1, (seq_length + STACKS_PER_LINE - 1) // STACKS_PER_LINE)
+
+        fig_width = min(seq_length, STACKS_PER_LINE) * 0.3 + 1.5
+        fig_height = n_lines * 2.5
+        fig, axes = plt.subplots(
+            n_lines, 1, figsize=(fig_width, fig_height), squeeze=False
         )
 
-        command = shutil.which("pdf2svg")
-        if command is None:
-            raise ThirdPartySoftwareError(
-                '"pdf2svg" software not found. Please install it.'
+        for i in range(n_lines):
+            ax = axes[i, 0]
+            start = i * STACKS_PER_LINE
+            end = min(start + STACKS_PER_LINE, seq_length)
+            chunk = prob_matrix.iloc[start:end].reset_index(drop=True)
+
+            logo = logomaker.Logo(
+                chunk,
+                ax=ax,
+                color_scheme=self.COLORS,
+                font_name="DejaVu Sans Mono",
             )
 
-        with tempfile.TemporaryDirectory() as directory_name:
-            with tempfile.NamedTemporaryFile(
-                "wb+", dir=directory_name, suffix=".pdf"
-            ) as temp_pdf:
-                temp_pdf.write(pdf_bytes)
-                temp_pdf.seek(0)
-                file_name = os.path.join(directory_name, f"{str(uuid.uuid4())}.svg")
-                run_external_cmd(
-                    [command, temp_pdf.name, file_name],
-                    cwd=directory_name,
-                )
-            if not os.path.isfile(file_name):
-                raise FileNotFoundError(
-                    f'File "{file_name}" does not exist - "pdf2svg" conversion failed!'
-                )
-            with open(file_name, "r", encoding="utf-8") as svg_file:
-                svg_result = svg_file.read()
-            if "svg" not in svg_result:
-                raise InvalidSvgError("Weblogo image is not a valid SVG!")
-        logger.debug(f"svg weblogo: {svg_result}")
-        return svg_result
+            ax.set_ylabel("probability")
+            ax.set_ylim(0, 1)
+            ax.set_xlim(-0.5, len(chunk) - 0.5)
 
-    def merge_svg_files(self, svg_contents: List[str]) -> str:
-        with tempfile.TemporaryDirectory() as directory:
-            svg_files: List[str] = []
+            tick_positions = list(range(0, len(chunk), 10))
+            ax.set_xticks(tick_positions)
+            ax.set_xticklabels([str(start + t + 1) for t in tick_positions])
 
-            for svg_content in svg_contents:
-                svg_file_path = os.path.join(directory, f"{str(uuid.uuid4())}.svg")
-                svg_files.append(svg_file_path)
-                with open(svg_file_path, "w", encoding="utf-8") as svg_file:
-                    svg_file.write(svg_content)
+            if i == 0:
+                ax.set_title(f"Strand {title}", fontsize=12)
 
-            document = svg_stack.Document()
-            layout = svg_stack.VBoxLayout()
+        plt.tight_layout()
 
-            for file in svg_files:
-                layout.addSVG(file, alignment=svg_stack.AlignLeft)
+        buffer = BytesIO()
+        fig.savefig(buffer, format="svg")
+        plt.close(fig)
 
-            layout.setSpacing(50)
-            document.setLayout(layout)
-            output_file = os.path.join(directory, f"{str(uuid.uuid4())}.svg")
-            document.save(output_file)
-
-            with open(output_file, "r", encoding="utf-8") as result_file:
-                merged_svg = result_file.read()
-            if "svg" not in merged_svg:
-                raise InvalidSvgError("Weblogo merged image is not a valid SVG!")
-
-        return merged_svg
+        buffer.seek(0)
+        return buffer.read().decode("utf-8")
 
     def add_viewbox(self, svg_content: str) -> str:
         root = ET.XML(svg_content.encode("utf-8"))
         width = root.get("width")
         height = root.get("height")
-        root.set("viewBox", f"0 0 {width} {height}")
+
+        if width and height:
+            # Strip units (e.g., "432pt" -> "432")
+            w = width.replace("pt", "").replace("px", "")
+            h = height.replace("pt", "").replace("px", "")
+            root.set("viewBox", f"0 0 {w} {h}")
 
         return ET.tostring(root, encoding="unicode", method="xml")
+
+    def merge_svgs(self, svg_contents: List[str]) -> str:
+        """Merge multiple SVG strings into a single vertically-stacked SVG."""
+        if len(svg_contents) == 1:
+            return svg_contents[0]
+
+        svg_elements = []
+        total_height = 0.0
+        max_width = 0.0
+        spacing = 50.0
+
+        for svg_str in svg_contents:
+            root = ET.XML(svg_str.encode("utf-8"))
+            width_str = root.get("width", "0").replace("pt", "").replace("px", "")
+            height_str = root.get("height", "0").replace("pt", "").replace("px", "")
+
+            try:
+                w = float(width_str)
+                h = float(height_str)
+            except ValueError:
+                w, h = 500.0, 200.0
+
+            svg_elements.append((root, w, h))
+            max_width = max(max_width, w)
+            total_height += h
+
+        total_height += spacing * (len(svg_elements) - 1)
+
+        nsmap = {"xlink": "http://www.w3.org/1999/xlink"}
+        merged = ET.Element(
+            "svg",
+            xmlns="http://www.w3.org/2000/svg",
+            nsmap=nsmap,
+            width=str(max_width),
+            height=str(total_height),
+            viewBox=f"0 0 {max_width} {total_height}",
+        )
+
+        y_offset = 0.0
+        for root, w, h in svg_elements:
+            group = ET.SubElement(
+                merged, "g", transform=f"translate(0,{y_offset})"
+            )
+
+            # Copy all children from the original SVG into the group
+            for child in root:
+                group.append(child)
+
+            y_offset += h + spacing
+
+        return ET.tostring(merged, encoding="unicode", method="xml")
 
     def visualize(self, data: ModelMulti2D) -> str:
         strands_in_fasta_format = self.convert_to_fasta(data)
@@ -164,15 +216,15 @@ class WeblogoDrawer:
         svg_files = []
         for strand_name, strand_fasta in strands_in_fasta_format.items():
             modified_strand_fasta = self.replace_unreadable_characters(strand_fasta)
-            logo_data, logo_format = self.generate_weblogo(
-                strand_name, modified_strand_fasta
-            )
-            svg_content = self.save_to_svg(logo_data, logo_format)
-            svg_files.append(svg_content)
+            svg_content = self.generate_logo_svg(strand_name, modified_strand_fasta)
+            if svg_content:
+                svg_files.append(svg_content)
 
-        svg_result = self.merge_svg_files(svg_files)
-        fixed_svg = clean_svg(svg_result)
-        boxed_svg = self.add_viewbox(fixed_svg)
+        if not svg_files:
+            return "<svg xmlns='http://www.w3.org/2000/svg'/>"
+
+        svg_result = self.merge_svgs(svg_files)
+        boxed_svg = self.add_viewbox(svg_result)
 
         return boxed_svg
 
@@ -181,10 +233,8 @@ def main() -> None:
     drawer = WeblogoDrawer()
     fasta = sys.stdin.read()
     modified_fasta = drawer.replace_unreadable_characters(fasta)
-    logo_data, logo_format = drawer.generate_weblogo("", modified_fasta)
-    svg_content = drawer.save_to_svg(logo_data, logo_format)
-    fixed_svg = clean_svg(svg_content)
-    boxed_svg = drawer.add_viewbox(fixed_svg)
+    svg_content = drawer.generate_logo_svg("", modified_fasta)
+    boxed_svg = drawer.add_viewbox(svg_content)
     print(boxed_svg)
 
 

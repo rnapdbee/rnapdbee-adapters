@@ -13,12 +13,10 @@ import orjson
 from flask import Response, request
 from werkzeug.exceptions import UnsupportedMediaType
 
-from adapters.cli2rest_client import cli2rest_run_single
 from adapters.config import config
 from adapters.exceptions import InvalidSvgError
 
 logger = logging.getLogger(__name__)
-base_url = os.getenv("CLI2REST_INKSCAPE_URL", "http://localhost:8000")
 
 
 def make_cache_key() -> str:
@@ -50,7 +48,6 @@ def clean_svg(svg_content: str, copy_on_error: bool = False) -> str:
     Returns:
         str: content of clean SVG file
     """
-
     with TemporaryDirectory() as directory:
         with NamedTemporaryFile("w+", dir=directory, suffix=".svg") as input_svg:
             input_svg.write(svg_content)
@@ -67,35 +64,6 @@ def clean_svg(svg_content: str, copy_on_error: bool = False) -> str:
         if "svg" not in clean_svg_content:
             raise InvalidSvgError("svgcleaner failed: generated file is not valid SVG!")
     return clean_svg_content
-
-
-def pdf_to_svg(pdf_path: str) -> str:
-    """Convert PDF to SVG using pdf2svg
-
-    Args:
-        pdf_path (str): path to existing PDF file
-
-    Raises:
-        FileNotFoundError: conversion failed
-        InvalidSvgError: conversion failed
-
-    Returns:
-        str: content of SVG file
-    """
-
-    with TemporaryDirectory() as directory:
-        output_svg = os.path.join(directory, "out.svg")
-        run_external_cmd(
-            ["pdf2svg", pdf_path, output_svg],
-            cwd=directory,
-        )
-        if not os.path.isfile(output_svg):
-            raise FileNotFoundError("pdf2svg: Output SVG does not exist!")
-        with open(output_svg, "r", encoding="utf-8") as svg_file:
-            svg_content = svg_file.read()
-        if "svg" not in svg_content:
-            raise InvalidSvgError("pdf2svg: Generated file is not valid SVG!")
-    return svg_content
 
 
 def run_external_cmd(
@@ -185,16 +153,6 @@ def wrapped_popen(
             )
 
     return subprocess.CompletedProcess(process.args, retcode, stdout, stderr)
-
-
-def convert_eps_to_svg_using_inkscape(file_content: str) -> str:
-    return cli2rest_run_single(
-        base_url=base_url,
-        input_file_content=file_content,
-        input_file_extension=".eps",
-        config_name="inkscape/config-eps2svg.yaml",
-        output_file="output.svg",
-    )
 
 
 def content_type(mimetype: str):

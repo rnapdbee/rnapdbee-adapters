@@ -3,10 +3,10 @@ dataclasses-json
 flask
 flask-caching
 gunicorn
+logomaker
 lxml
+matplotlib
 mmcif
 orjson
 redis
 rnapolis
-svg-stack
-weblogo

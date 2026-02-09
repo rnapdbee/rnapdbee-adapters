@@ -1,4 +1,4 @@
-FROM python:3 AS builder
+FROM python:3.13-bookworm AS builder
 
 RUN apt-get update \
  && apt-get install --no-install-recommends -y \
@@ -16,7 +16,7 @@ RUN python -m venv /opt/venv \
 
 #######################################
 
-FROM python:3-slim
+FROM python:3.13-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -26,9 +26,7 @@ RUN apt-get update -y \
  && apt-get install -y \
        ca-certificates \
        dirmngr \
-       ghostscript \
        gnupg \
-       pdf2svg \
  && rm -rf /var/lib/apt/lists/*
 
 # Install Mono
@@ -50,11 +48,10 @@ ADD app/svgcleaner_linux_x86_64_0.9.5.tar.gz /usr/local/bin
 COPY app/ironpython_3.4.2.deb /tmp/ironpython_3.4.2.deb
 RUN dpkg -i /tmp/ironpython_3.4.2.deb
 
-# PseudoViewer and RNApuzzler wrappers
+# PseudoViewer wrapper
 COPY app/pseudoviewer/ /pseudoviewer/
-COPY app/rnapuzzler/ /RNAplot/
 
-ENV PATH="/opt/venv/bin:/pseudoviewer:/RNAplot:${PATH}" \
+ENV PATH="/opt/venv/bin:/pseudoviewer:${PATH}" \
     VIRTUAL_ENV="/opt/venv" \
     ADAPTERS_GUNICORN_LOG_LEVEL=INFO \
     ADAPTERS_MAX_REQUESTS=10 \

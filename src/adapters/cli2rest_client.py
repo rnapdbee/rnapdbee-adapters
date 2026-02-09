@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 # bpnet/config-pdb.yaml
 # dssr/config.yaml
 # fr3d/config.yaml
-# inkscape/config-eps2svg.yaml
 # inkscape/config-svg2pdf-with-caption.yaml
 # inkscape/config-svg2pdf.yaml
 # inkscape/config-svg2png.yaml
