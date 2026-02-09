@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from flask import Blueprint, request
+from http import HTTPStatus
+
+from flask import Blueprint, Response, request
 
 from adapters.services import run_multi_visualization_adapter, run_visualization_adapter
 from adapters.tools.utils import content_type, svg_response, make_cache_key
@@ -18,12 +20,18 @@ server = Blueprint("visualization", __name__)
 
 @server.route("/weblogo", methods=["POST"])
 @content_type("application/json")
-@svg_response()
+# Note: this endpoint does not use @svg_response() because svgcleaner
+# corrupts the matplotlib-generated SVGs used by logomaker
 @cache.cached(timeout=config["CACHE_DEFAULT_TIMEOUT"], key_prefix=make_cache_key)
 def visualize_weblogo():
-    return run_multi_visualization_adapter(
+    svg_content = run_multi_visualization_adapter(
         WeblogoDrawer(),
         request.data,
+    )
+    return Response(
+        response=svg_content,
+        status=HTTPStatus.OK,
+        mimetype="image/svg+xml",
     )
 
 
