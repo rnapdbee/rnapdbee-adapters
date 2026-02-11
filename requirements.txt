@@ -100,7 +100,7 @@ pandas==2.3.3
     # via
     #   logomaker
     #   rnapolis
-pillow==12.1.0
+pillow==12.1.1
     # via matplotlib
 pulp==3.3.0
     # via rnapolis
