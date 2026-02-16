@@ -38,7 +38,7 @@ fonttools==4.61.1
     # via matplotlib
 graphviz==0.21
     # via rnapolis
-gunicorn==23.0.0
+gunicorn==25.1.0
     # via -r requirements.in
 idna==3.11
     # via requests
