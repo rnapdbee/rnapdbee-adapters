@@ -131,7 +131,7 @@ pyyaml==6.0.3
     # via cli2rest-bio
 redis==7.3.0
     # via -r requirements.in
-requests==2.32.5
+requests==2.33.0
     # via
     #   cli2rest-bio
     #   docker
