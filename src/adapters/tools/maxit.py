@@ -19,7 +19,6 @@ def ensure_cif(file_content: str) -> str:
         keep_ligands=True,
         keep_waters=False,
         keep_ions=True,
-        keep_altlocs=False,
         chains=None,  # leave all chains
         model=None,  # leave all models
     )
@@ -36,7 +35,6 @@ def ensure_pdb(file_content: str) -> str:
         keep_ligands=True,
         keep_waters=False,
         keep_ions=True,
-        keep_altlocs=False,
         chains=None,  # leave all chains
         model=None,  # leave all models
     )
