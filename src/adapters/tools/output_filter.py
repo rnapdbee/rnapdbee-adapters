@@ -91,10 +91,10 @@ def sort_interactions_lists(analysis_output: BaseInteractions, *_) -> BaseIntera
     ]:
         interactions_list.sort(
             key=lambda pair: (
-                pair.nt1.chain,
+                pair.nt1.chain or "",
                 pair.nt1.number,
                 pair.nt1.icode or "",
-                pair.nt2.chain,
+                pair.nt2.chain or "",
                 pair.nt2.number,
                 pair.nt2.icode or "",
             )
@@ -109,7 +109,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
             label = None
         else:
             label = ResidueLabel(
-                mapped_chains[res.label.chain],
+                mapped_chains.get(res.label.chain, res.label.chain),
                 res.label.number,
                 res.label.name,
             )
@@ -118,7 +118,7 @@ def restore_chains(analysis_output: BaseInteractions, **kwargs) -> BaseInteracti
             auth = None
         else:
             auth = ResidueAuth(
-                mapped_chains[res.auth.chain],
+                mapped_chains.get(res.auth.chain, res.auth.chain),
                 res.auth.number,
                 res.auth.icode,
                 res.auth.name,
