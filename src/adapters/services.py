@@ -13,6 +13,7 @@ def run_cif_adapter(
     data: str,
     model: int,
     mmcif_ensured: bool = False,
+    sanitize_chains: bool = False,
 ) -> BaseInteractions:
     cif_content = cif_filter.apply(
         data,
@@ -23,15 +24,20 @@ def run_cif_adapter(
         mmcif_ensured=mmcif_ensured,
     )
 
+    mapped_chains = {}
+    if sanitize_chains:
+        cif_content, mapped_chains = cif_filter.sanitize_chains(cif_content)
+
     analysis_output = analyze(cif_content, model=model)
 
-    return output_filter.apply(
-        analysis_output,
-        [
-            (output_filter.remove_duplicate_pairs, {}),
-            (output_filter.sort_interactions_lists, {}),
-        ],
-    )
+    filters = [
+        (output_filter.remove_duplicate_pairs, {}),
+    ]
+    if mapped_chains:
+        filters.append((output_filter.restore_chains, {"mapped_chains": mapped_chains}))
+    filters.append((output_filter.sort_interactions_lists, {}))
+
+    return output_filter.apply(analysis_output, filters)
 
 
 def run_pdb_adapter(

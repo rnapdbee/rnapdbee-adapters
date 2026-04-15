@@ -77,6 +77,7 @@ def analyze_fr3d_model(model: int):
         request.data.decode("utf-8"),
         model,
         mmcif_ensured=is_mmcif_ensured(),
+        sanitize_chains=True,
     )
 
 

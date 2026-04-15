@@ -67,7 +67,7 @@ def apply(
         "auth_asym_id",
         available_chain_names,
     )
-    mapping = {v: k for k, v in mapping.items()}
+    mapping = {v: (None if k in ("?", ".") else k) for k, v in mapping.items()}
 
     # convert back to PDB
     pdb_content = maxit.ensure_pdb(cif_content)
