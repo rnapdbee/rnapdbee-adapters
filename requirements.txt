@@ -70,7 +70,7 @@ matplotlib==3.10.8
     #   -r requirements.in
     #   logomaker
     #   pycircstat2
-mmcif==1.1.0
+mmcif==1.1.1
     # via
     #   -r requirements.in
     #   rnapolis
