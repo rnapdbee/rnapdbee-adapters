@@ -40,7 +40,9 @@ class RChieDrawer:
         "D": "#C565CF",  # 7th order
     }
 
-    def generate_rchie_svg(self, dot_bracket: DotBracket) -> str:
+    def generate_rchie_svg(
+        self, dot_bracket: DotBracket, model: Optional[Model2D] = None
+    ) -> str:
         interactions: List[Interaction] = []
         for i, j in dot_bracket.pairs:
             interactions.append(
@@ -50,6 +52,35 @@ class RChieDrawer:
                     color=self.COLORS.get(dot_bracket.structure[i], None),
                 )
             )
+
+        # Add non-canonical interactions from Model2D if provided
+        if model is not None:
+            for nc_interaction in model.nonCanonicalInteractions.notRepresented:
+                res_left = nc_interaction.residueLeft
+                res_right = nc_interaction.residueRight
+                # Use 1-based indexing and get chain-residue position
+                # Note: This assumes single-chain or needs chain mapping
+                i = res_left.position + 1
+                j = res_right.position + 1
+                interactions.append(
+                    Interaction(
+                        i=i,
+                        j=j,
+                        color="#000000",  # Black for non-canonical
+                    )
+                )
+            for nc_interaction in model.nonCanonicalInteractions.represented:
+                res_left = nc_interaction.residueLeft
+                res_right = nc_interaction.residueRight
+                i = res_left.position + 1
+                j = res_right.position + 1
+                interactions.append(
+                    Interaction(
+                        i=i,
+                        j=j,
+                        color="#000000",  # Black for non-canonical
+                    )
+                )
         data = RchieData(
             sequence=dot_bracket.sequence,
             title="",
@@ -70,7 +101,8 @@ class RChieDrawer:
             DotBracket(
                 "".join(strand.sequence for strand in data.strands),
                 "".join(strand.structure for strand in data.strands),
-            )
+            ),
+            model=data,
         )
 
 
