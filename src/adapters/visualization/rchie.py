@@ -55,32 +55,46 @@ class RChieDrawer:
 
         # Add non-canonical interactions from Model2D if provided
         if model is not None:
+            # Create mapping from (chain, residue_number) to sequence position
+            residue_to_position: dict = {}
+            seq_pos = 0
+            for chain_with_residues in model.chainsWithResidues:
+                chain = chain_with_residues.name
+                for residue in chain_with_residues.residues:
+                    residue_to_position[(chain, residue.number)] = seq_pos + 1
+                    seq_pos += 1
+
+            def get_position(residue) -> Optional[int]:
+                """Get 1-based position in concatenated sequence for a residue."""
+                key = (residue.chain, residue.number)
+                return residue_to_position.get(key)
+
             for nc_interaction in model.nonCanonicalInteractions.notRepresented:
                 res_left = nc_interaction.residueLeft
                 res_right = nc_interaction.residueRight
-                # Use 1-based indexing and get chain-residue position
-                # Note: This assumes single-chain or needs chain mapping
-                i = res_left.position + 1
-                j = res_right.position + 1
-                interactions.append(
-                    Interaction(
-                        i=i,
-                        j=j,
-                        color="#000000",  # Black for non-canonical
+                i = get_position(res_left)
+                j = get_position(res_right)
+                if i is not None and j is not None:
+                    interactions.append(
+                        Interaction(
+                            i=i,
+                            j=j,
+                            color="#000000",  # Black for non-canonical
+                        )
                     )
-                )
             for nc_interaction in model.nonCanonicalInteractions.represented:
                 res_left = nc_interaction.residueLeft
                 res_right = nc_interaction.residueRight
-                i = res_left.position + 1
-                j = res_right.position + 1
-                interactions.append(
-                    Interaction(
-                        i=i,
-                        j=j,
-                        color="#000000",  # Black for non-canonical
+                i = get_position(res_left)
+                j = get_position(res_right)
+                if i is not None and j is not None:
+                    interactions.append(
+                        Interaction(
+                            i=i,
+                            j=j,
+                            color="#000000",  # Black for non-canonical
+                        )
                     )
-                )
         data = RchieData(
             sequence=dot_bracket.sequence,
             title="",
