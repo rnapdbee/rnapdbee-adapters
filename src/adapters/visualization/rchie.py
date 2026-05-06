@@ -82,19 +82,7 @@ class RChieDrawer:
                             color="#000000",  # Black for non-canonical
                         )
                     )
-            for nc_interaction in model.nonCanonicalInteractions.represented:
-                res_left = nc_interaction.residueLeft
-                res_right = nc_interaction.residueRight
-                i = get_position(res_left)
-                j = get_position(res_right)
-                if i is not None and j is not None:
-                    interactions.append(
-                        Interaction(
-                            i=i,
-                            j=j,
-                            color="#000000",  # Black for non-canonical
-                        )
-                    )
+            
         data = RchieData(
             sequence=dot_bracket.sequence,
             title="",
