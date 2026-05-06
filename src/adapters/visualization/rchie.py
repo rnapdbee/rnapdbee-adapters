@@ -40,7 +40,9 @@ class RChieDrawer:
         "D": "#C565CF",  # 7th order
     }
 
-    def generate_rchie_svg(self, dot_bracket: DotBracket) -> str:
+    def generate_rchie_svg(
+        self, dot_bracket: DotBracket, model: Optional[Model2D] = None
+    ) -> str:
         interactions: List[Interaction] = []
         for i, j in dot_bracket.pairs:
             interactions.append(
@@ -50,6 +52,37 @@ class RChieDrawer:
                     color=self.COLORS.get(dot_bracket.structure[i], None),
                 )
             )
+
+        # Add non-canonical interactions from Model2D if provided
+        if model is not None:
+            # Create mapping from (chain, residue_number) to sequence position
+            residue_to_position: dict = {}
+            seq_pos = 0
+            for chain_with_residues in model.chainsWithResidues:
+                chain = chain_with_residues.name
+                for residue in chain_with_residues.residues:
+                    residue_to_position[(chain, residue.number)] = seq_pos + 1
+                    seq_pos += 1
+
+            def get_position(residue) -> Optional[int]:
+                """Get 1-based position in concatenated sequence for a residue."""
+                key = (residue.chain, residue.number)
+                return residue_to_position.get(key)
+
+            for nc_interaction in model.nonCanonicalInteractions.notRepresented:
+                res_left = nc_interaction.residueLeft
+                res_right = nc_interaction.residueRight
+                i = get_position(res_left)
+                j = get_position(res_right)
+                if i is not None and j is not None:
+                    interactions.append(
+                        Interaction(
+                            i=i,
+                            j=j,
+                            color="#000000",  # Black for non-canonical
+                        )
+                    )
+            
         data = RchieData(
             sequence=dot_bracket.sequence,
             title="",
@@ -70,7 +103,8 @@ class RChieDrawer:
             DotBracket(
                 "".join(strand.sequence for strand in data.strands),
                 "".join(strand.structure for strand in data.strands),
-            )
+            ),
+            model=data,
         )
 
 
