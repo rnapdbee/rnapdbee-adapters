@@ -1,5 +1,6 @@
 # pylint: disable=redefined-outer-name
 import json
+import logging
 from unittest.mock import patch
 
 import pytest  # pylint: disable=import-error
@@ -114,3 +115,33 @@ def test_visualize_omits_stackings_and_nucleotide_colors(sample_model: Model2D) 
         payload = json.loads(mock_run.call_args.kwargs["input_file_content"])
         assert "stackings" not in payload
         assert "nucleotide_colors" not in payload
+
+
+def test_visualize_logs_json_when_config_enabled(
+    sample_model: Model2D, caplog: pytest.LogCaptureFixture
+) -> None:
+    with patch("adapters.visualization.rnapuzzler.cli2rest_run_single"):
+        with patch.dict(
+            "adapters.visualization.rnapuzzler.config",
+            {"RNAPUZZLER_LOG_JSON": True},
+        ):
+            caplog.set_level(logging.INFO)
+            RNAPuzzlerDrawer().visualize(sample_model)
+
+    assert "RNApuzzler JSON payload:" in caplog.text
+    logged_payload = json.loads(caplog.records[0].message.split(": ", 1)[1])
+    assert logged_payload["bp_style"] == "lw"
+
+
+def test_visualize_does_not_log_json_when_config_disabled(
+    sample_model: Model2D, caplog: pytest.LogCaptureFixture
+) -> None:
+    with patch("adapters.visualization.rnapuzzler.cli2rest_run_single"):
+        with patch.dict(
+            "adapters.visualization.rnapuzzler.config",
+            {"RNAPUZZLER_LOG_JSON": False},
+        ):
+            caplog.set_level(logging.INFO)
+            RNAPuzzlerDrawer().visualize(sample_model)
+
+    assert "RNApuzzler JSON payload:" not in caplog.text

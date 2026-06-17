@@ -6,6 +6,7 @@ import sys
 from typing import Dict, List, Optional, TypedDict
 
 from adapters.cli2rest_client import cli2rest_run_single
+from adapters.config import config
 from adapters.visualization.model import Interaction, Model2D, SYMBOLS, SymbolType
 
 logger = logging.getLogger(__name__)
@@ -82,6 +83,12 @@ class RNAPuzzlerDrawer:
             ],
             interactions=interactions,
         )
+
+        if config.get("RNAPUZZLER_LOG_JSON"):
+            logger.info(
+                "RNApuzzler JSON payload: %s",
+                json.dumps(puzzler_data, separators=(",", ":")),
+            )
 
         return cli2rest_run_single(
             base_url=base_url,

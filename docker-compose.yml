@@ -8,6 +8,7 @@ services:
       - ADAPTERS_CACHE_TYPE=RedisCache
       - ADAPTERS_FLASK_LOG_LEVEL=INFO
       - ADAPTERS_REDIS_URL=redis://redis:6379/0
+      - ADAPTERS_RNAPUZZLER_LOG_JSON=false
       - CLI2REST_BARNABA_URL=http://load-balancer/cli2rest-barnaba
       - CLI2REST_BPNET_URL=http://load-balancer/cli2rest-bpnet
       - CLI2REST_FR3D_URL=http://load-balancer/cli2rest-fr3d

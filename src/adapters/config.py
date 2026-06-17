@@ -10,6 +10,8 @@ config = {
     "SUBPROCESS_DEFAULT_TIMEOUT": int(
         environ.get("ADAPTERS_SUBPROCESS_TIMEOUT", "600")
     ),
+    "RNAPUZZLER_LOG_JSON": environ.get("ADAPTERS_RNAPUZZLER_LOG_JSON", "").lower()
+    in ("1", "true", "yes"),
 }
 
 logging.basicConfig(format="[%(asctime)s] [%(levelname)s] [%(filename)s] %(message)s")
