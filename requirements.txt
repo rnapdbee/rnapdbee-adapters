@@ -16,7 +16,7 @@ certifi==2025.10.5
     # via requests
 charset-normalizer==3.4.4
     # via requests
-cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.4.2
+cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.4.6
     # via -r requirements.in
 click==8.3.0
     # via flask

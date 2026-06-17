@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 # maxit/config-pdb2cif.yaml
 # mc-annotate/config.yaml
 # rchie/config.yaml
+# rnapuzzler/config.yaml
 # reduce/config.yaml
 # rnapolis/config-annotator.yaml
 # rnapolis/config-coplanarity-checker.yaml
@@ -52,17 +53,18 @@ def _cli2rest_run(
         output_prefix_format="",
         no_auto_ungzip=True,
         output_metadata=f"{directory}/metadata.json",
+        timeout=None,
     )
-    process_file(input_file, config, args, base_url, tool_name, directory)
+    metadata = process_file(input_file, config, args, base_url, tool_name, directory)
 
-    with open(f"{directory}/metadata.json") as f:
-        metadata = orjson.loads(f.read())
-        logger.debug("Metadata:\n" + orjson.dumps(metadata).decode("utf-8"))
+    with open(f"{directory}/metadata.json", "wb") as f:
+        f.write(orjson.dumps(metadata))
+    logger.debug("Metadata:\n" + orjson.dumps(metadata).decode("utf-8"))
 
-    with open(f"{directory}/stdout.txt", "w") as f:
+    with open(f"{directory}/stdout.txt", "w", encoding="utf-8") as f:
         f.write(metadata.get("stdout", ""))
 
-    with open(f"{directory}/stderr.txt", "w") as f:
+    with open(f"{directory}/stderr.txt", "w", encoding="utf-8") as f:
         f.write(metadata.get("stderr", ""))
 
 

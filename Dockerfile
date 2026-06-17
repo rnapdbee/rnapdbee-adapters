@@ -65,7 +65,8 @@ ENV PATH="/opt/venv/bin:/pseudoviewer:${PATH}" \
     CLI2REST_MAXIT_URL=http://localhost:8000 \
     CLI2REST_MCANNOTATE_URL=http://localhost:8000 \
     CLI2REST_RCHIE_URL=http://localhost:8000 \
-    CLI2REST_RNAVIEW_URL=http://localhost:8000
+    CLI2REST_RNAVIEW_URL=http://localhost:8000 \
+    CLI2REST_RNAPUZZLER_URL=http://localhost:8000
 
 EXPOSE 80
 
