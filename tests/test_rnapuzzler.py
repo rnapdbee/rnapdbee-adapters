@@ -117,6 +117,86 @@ def test_visualize_omits_stackings_and_nucleotide_colors(sample_model: Model2D) 
         assert "nucleotide_colors" not in payload
 
 
+def test_visualize_includes_num_labels_with_real_residue_numbers() -> None:
+    model = Model2D(
+        strands=[
+            Strand(name="A", sequence="AAAAA", structure="....."),
+            Strand(name="B", sequence="AAAAA", structure="....."),
+        ],
+        residues=[
+            Residue(chain="A", number=-1, name="A"),
+            Residue(chain="A", number=2, name="A"),
+            Residue(chain="A", number=3, name="A"),
+            Residue(chain="A", number=4, name="A"),
+            Residue(chain="A", number=10, name="A", icode="A"),
+            Residue(chain="B", number=1, name="A"),
+            Residue(chain="B", number=2, name="A"),
+            Residue(chain="B", number=3, name="A"),
+            Residue(chain="B", number=4, name="A"),
+            Residue(chain="B", number=5, name="A"),
+        ],
+        chainsWithResidues=[],
+        nonCanonicalInteractions=NonCanonicalInteractions([], []),
+    )
+
+    with patch("adapters.visualization.rnapuzzler.cli2rest_run_single") as mock_run:
+        RNAPuzzlerDrawer().visualize(model)
+
+        payload = json.loads(mock_run.call_args.kwargs["input_file_content"])
+        num_labels = payload["num_labels"]
+        assert payload["num_period"] == 10
+        # First and last of each strand are labelled with real identifiers.
+        assert num_labels["1"] == "-1"
+        assert num_labels["6"] == "1"
+        assert num_labels["10"] == "5"
+        # Negative numbers and insertion codes are preserved verbatim. The
+        # last residue of strand A carries number 10 with insertion code "A".
+        assert num_labels["5"] == "10A"
+
+
+def test_visualize_num_labels_respects_period_and_strand_boundaries() -> None:
+    model = Model2D(
+        strands=[
+            Strand(name="A", sequence="A" * 25, structure="." * 25),
+        ],
+        residues=[
+            Residue(chain="A", number=i, name="A") for i in range(1, 26)
+        ],
+        chainsWithResidues=[],
+        nonCanonicalInteractions=NonCanonicalInteractions([], []),
+    )
+
+    with patch(
+        "adapters.visualization.rnapuzzler.DEFAULT_NUM_PERIOD", 10
+    ), patch(
+        "adapters.visualization.rnapuzzler.cli2rest_run_single"
+    ) as mock_run:
+        RNAPuzzlerDrawer().visualize(model)
+
+        payload = json.loads(mock_run.call_args.kwargs["input_file_content"])
+        num_labels = payload["num_labels"]
+        # First, last, and every 10th residue from the strand start.
+        assert set(num_labels) == {"1", "10", "20", "25"}
+        assert num_labels["10"] == "10"
+        assert num_labels["20"] == "20"
+        assert num_labels["25"] == "25"
+
+
+def test_visualize_omits_num_labels_when_residues_misaligned(sample_model: Model2D) -> None:
+    misaligned = Model2D(
+        strands=sample_model.strands,
+        residues=sample_model.residues[:3],
+        chainsWithResidues=sample_model.chainsWithResidues,
+        nonCanonicalInteractions=sample_model.nonCanonicalInteractions,
+    )
+
+    with patch("adapters.visualization.rnapuzzler.cli2rest_run_single") as mock_run:
+        RNAPuzzlerDrawer().visualize(misaligned)
+
+        payload = json.loads(mock_run.call_args.kwargs["input_file_content"])
+        assert "num_labels" not in payload
+
+
 def test_visualize_logs_json_when_config_enabled(
     sample_model: Model2D, caplog: pytest.LogCaptureFixture
 ) -> None:

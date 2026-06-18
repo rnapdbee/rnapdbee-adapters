@@ -12,6 +12,8 @@ from adapters.visualization.model import Interaction, Model2D, SYMBOLS, SymbolTy
 logger = logging.getLogger(__name__)
 base_url = os.getenv("CLI2REST_RNAPUZZLER_URL", "http://localhost:8000")
 
+DEFAULT_NUM_PERIOD = 10
+
 
 class StrandInput(TypedDict):
     name: str
@@ -26,10 +28,12 @@ class InteractionInput(TypedDict):
     color: str
 
 
-class PuzzlerData(TypedDict):
+class PuzzlerData(TypedDict, total=False):
     bp_style: str
     strands: List[StrandInput]
     interactions: List[InteractionInput]
+    num_labels: Dict[str, str]
+    num_period: int
 
 
 # pylint: disable=too-few-public-methods
@@ -71,6 +75,9 @@ class RNAPuzzlerDrawer:
                 is_not_represented=True,
             )
 
+        num_period = DEFAULT_NUM_PERIOD
+        num_labels = self._build_num_labels(data, num_period)
+
         puzzler_data = PuzzlerData(
             bp_style="lw",
             strands=[
@@ -82,7 +89,10 @@ class RNAPuzzlerDrawer:
                 for strand in data.strands
             ],
             interactions=interactions,
+            num_period=num_period,
         )
+        if num_labels:
+            puzzler_data["num_labels"] = num_labels
 
         if config.get("RNAPUZZLER_LOG_JSON"):
             logger.info(
@@ -129,6 +139,44 @@ class RNAPuzzlerDrawer:
     @staticmethod
     def _build_residue_to_position(data: Model2D) -> Dict[str, int]:
         return {str(residue): index + 1 for index, residue in enumerate(data.residues)}
+
+    @staticmethod
+    def _build_num_labels(
+        data: Model2D, num_period: int
+    ) -> Dict[str, str]:
+        """Map selected global positions to their real residue-number labels.
+
+        Mirrors the cli2rest-rnapuzzler ``_number_positions`` selection rule:
+        the first and last residue of each strand plus every ``num_period``-th
+        residue (counted from the start of each strand) are labelled. The
+        label text is the real PDB residue identifier (number followed by the
+        insertion code, e.g. ``-1`` or ``10A``).
+
+        Returns an empty dict when the ``residues`` list does not align with
+        the concatenated strand sequences, so the wrapper can fall back to
+        its default intra-strand numbering.
+        """
+        total_length = sum(len(strand.sequence) for strand in data.strands)
+        if num_period <= 0 or total_length != len(data.residues):
+            return {}
+
+        labels: Dict[str, str] = {}
+        cumulative = 0
+        for strand in data.strands:
+            length = len(strand.sequence)
+            for intra_pos in range(1, length + 1):
+                global_pos = cumulative + intra_pos
+                if not (
+                    intra_pos == 1
+                    or intra_pos == length
+                    or intra_pos % num_period == 0
+                ):
+                    continue
+                residue = data.residues[global_pos - 1]
+                icode = residue.icode or ""
+                labels[str(global_pos)] = f"{residue.number}{icode}"
+            cumulative += length
+        return labels
 
     @staticmethod
     def _lw_to_string(leontis_westhof) -> Optional[str]:
