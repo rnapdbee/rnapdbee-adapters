@@ -63,10 +63,10 @@ def _cli2rest_run(
     logger.debug("Metadata:\n" + orjson.dumps(metadata).decode("utf-8"))
 
     with open(f"{directory}/stdout.txt", "w", encoding="utf-8") as f:
-        f.write(metadata.get("stdout", ""))
+        f.write(metadata.get("stdout") or "")
 
     with open(f"{directory}/stderr.txt", "w", encoding="utf-8") as f:
-        f.write(metadata.get("stderr", ""))
+        f.write(metadata.get("stderr") or "")
 
 
 def _log_output_on_error(directory: str):
