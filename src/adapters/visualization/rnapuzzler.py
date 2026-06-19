@@ -90,6 +90,7 @@ class RNAPuzzlerDrawer:
             ],
             interactions=interactions,
             num_period=num_period,
+            draw_backbone=True,
         )
         if num_labels:
             puzzler_data["num_labels"] = num_labels
@@ -106,6 +107,7 @@ class RNAPuzzlerDrawer:
             input_file_extension=".json",
             config_name="rnapuzzler",
             output_file="clean.svg",
+            timeout=60,
         )
 
     def _append_interaction(
@@ -130,9 +132,7 @@ class RNAPuzzlerDrawer:
                 i=position_left,
                 j=position_right,
                 lw=self._lw_to_string(interaction.leontisWesthof),
-                color=self._resolve_color(
-                    structure, position_left, is_not_represented
-                ),
+                color=self._resolve_color(structure, position_left, is_not_represented),
             )
         )
 
@@ -141,9 +141,7 @@ class RNAPuzzlerDrawer:
         return {str(residue): index + 1 for index, residue in enumerate(data.residues)}
 
     @staticmethod
-    def _build_num_labels(
-        data: Model2D, num_period: int
-    ) -> Dict[str, str]:
+    def _build_num_labels(data: Model2D, num_period: int) -> Dict[str, str]:
         """Map selected global positions to their real residue-number labels.
 
         Mirrors the cli2rest-rnapuzzler ``_number_positions`` selection rule:
@@ -167,9 +165,7 @@ class RNAPuzzlerDrawer:
             for intra_pos in range(1, length + 1):
                 global_pos = cumulative + intra_pos
                 if not (
-                    intra_pos == 1
-                    or intra_pos == length
-                    or intra_pos % num_period == 0
+                    intra_pos == 1 or intra_pos == length or intra_pos % num_period == 0
                 ):
                     continue
                 residue = data.residues[global_pos - 1]

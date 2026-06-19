@@ -2,7 +2,7 @@ import argparse
 import logging
 import os
 from tempfile import TemporaryDirectory
-from typing import List
+from typing import List, Optional
 
 import orjson
 from cli2rest_bio.cli2rest_bio import load_tool_config, process_file
@@ -42,6 +42,7 @@ def _cli2rest_run(
     input_file_extension: str,
     config_name: str,
     directory: str,
+    timeout: Optional[int] = None,
 ):
     input_file = os.path.join(directory, f"input{input_file_extension}")
     with open(input_file, "w") as f:
@@ -53,7 +54,7 @@ def _cli2rest_run(
         output_prefix_format="",
         no_auto_ungzip=True,
         output_metadata=f"{directory}/metadata.json",
-        timeout=None,
+        timeout=timeout,
     )
     metadata = process_file(input_file, config, args, base_url, tool_name, directory)
 
@@ -89,6 +90,7 @@ def cli2rest_run_single(
     input_file_extension: str,
     config_name: str,
     output_file: str,
+    timeout: Optional[int] = None,
 ) -> str:
     with TemporaryDirectory() as directory:
         _cli2rest_run(
@@ -97,6 +99,7 @@ def cli2rest_run_single(
             input_file_extension,
             config_name,
             directory,
+            timeout,
         )
 
         output_path = os.path.join(directory, output_file)
@@ -115,6 +118,7 @@ def cli2rest_analyze_structure(
     config_name: str,
     external_tool: ExternalTool,
     output_files: List[str],
+    timeout: Optional[str] = None,
 ) -> BaseInteractions:
     with TemporaryDirectory() as directory:
         _cli2rest_run(
@@ -123,6 +127,7 @@ def cli2rest_analyze_structure(
             input_file_extension,
             config_name,
             directory,
+            timeout,
         )
 
         input_file = os.path.join(directory, f"input{input_file_extension}")
