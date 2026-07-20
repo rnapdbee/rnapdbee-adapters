@@ -59,7 +59,7 @@ markupsafe==3.0.3
     #   werkzeug
 marshmallow==3.26.2
     # via dataclasses-json
-matplotlib==3.11.0
+matplotlib==3.11.1
     # via
     #   -r requirements.in
     #   logomaker
