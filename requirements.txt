@@ -99,7 +99,7 @@ pandas==2.3.3
     #   logomaker
     #   pycircstat2
     #   rnapolis
-pillow==12.2.0
+pillow==12.3.0
     # via matplotlib
 pulp==3.3.0
     # via rnapolis
