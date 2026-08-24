@@ -36,7 +36,7 @@ fonttools==4.61.1
     # via matplotlib
 graphviz==0.21
     # via rnapolis
-gunicorn==23.0.0
+gunicorn==26.1.0
     # via -r requirements.in
 idna==3.15
     # via requests
@@ -91,7 +91,6 @@ orjson==3.11.9
     #   rnapolis
 packaging==25.0
     # via
-    #   gunicorn
     #   marshmallow
     #   matplotlib
 pandas==2.3.3
