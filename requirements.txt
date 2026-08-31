@@ -8,7 +8,7 @@ appdirs==1.4.4
     # via rnapolis
 blinker==1.9.0
     # via flask
-cachelib==0.13.0
+cachelib==0.17.0
     # via flask-caching
 certifi==2025.10.5
     # via requests
@@ -30,7 +30,7 @@ flask==3.1.3
     # via
     #   -r requirements.in
     #   flask-caching
-flask-caching==2.4.0
+flask-caching==2.5.0
     # via -r requirements.in
 fonttools==4.61.1
     # via matplotlib
