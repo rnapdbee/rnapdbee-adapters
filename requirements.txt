@@ -85,7 +85,7 @@ numpy==2.3.4
     #   shapely
 ordered-set==4.1.0
     # via rnapolis
-orjson==3.11.9
+orjson==3.12.0
     # via
     #   -r requirements.in
     #   rnapolis
