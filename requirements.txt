@@ -115,7 +115,7 @@ pytz==2025.2
     # via pandas
 pyyaml==6.0.3
     # via cli2rest-bio
-redis==7.4.0
+redis==8.1.0
     # via -r requirements.in
 requests==2.33.0
     # via
