@@ -16,7 +16,7 @@ jobs:
       DOCKER_CONTAINER: rnapdbee-container
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Build the docker image
         run: docker build -t $DOCKER_IMAGE .
@@ -30,7 +30,7 @@ jobs:
         python-version: ["3.13"]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
