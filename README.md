@@ -146,3 +146,7 @@ The following software is used by RNApdbee adapters.
 - **Wiegreffe, Daniel, et al.** "RNApuzzler: efficient outerplanar drawing of RNA-secondary structures." Bioinformatics 35.8 (2019): 1342-1349.
 - **Lorenz, Ronny, et al.** "ViennaRNA Package 2.0." Algorithms for molecular biology 6.1 (2011): 1-14.
 - **Crooks, Gavin E., et al.** "WebLogo: a sequence logo generator." Genome research 14.6 (2004): 1188-1190.
+
+## Funding
+
+This work was supported by the National Science Centre, Poland (Narodowe Centrum Nauki) under grant No. 2023/51/D/ST6/01207, "Exploring Multiple Loop Motifs in RNA Structures".

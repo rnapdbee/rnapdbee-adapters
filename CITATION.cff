@@ -27,3 +27,29 @@ authors:
   - family-names: Zok
     given-names: Tomasz
     orcid: "https://orcid.org/0000-0003-4103-9238"
+preferred-citation:
+  type: article
+  title: "RNApdbee 3.0: A unified web server for comprehensive RNA secondary structure annotation from 3D coordinates"
+  authors:
+    - family-names: Pielesiak
+      given-names: Jan
+    - family-names: Niznik
+      given-names: Kamil
+    - family-names: Snioszek
+      given-names: Pawel
+    - family-names: Wachowski
+      given-names: Gabriel
+    - family-names: Zurawski
+      given-names: Mikolaj
+    - family-names: Antczak
+      given-names: Maciej
+    - family-names: Szachniuk
+      given-names: Marta
+    - family-names: Zok
+      given-names: Tomasz
+  journal: "Journal of Molecular Biology"
+  volume: 438
+  issue: 18
+  year: 2026
+  pages: "169795"
+  doi: "10.1016/j.jmb.2026.169795"
