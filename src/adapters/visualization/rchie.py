@@ -79,7 +79,7 @@ class RChieDrawer:
                         Interaction(
                             i=i,
                             j=j,
-                            color="rgba(0, 0, 0, 0.5)",  # Black for non-canonical with 50% opacity
+                            color="#00000080",  # Black for non-canonical with 50% opacity
                         )
                     )
             
