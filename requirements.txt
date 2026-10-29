@@ -68,7 +68,7 @@ mmcif==1.2.1
     # via
     #   -r requirements.in
     #   rnapolis
-msgpack==1.2.1
+msgpack==1.2.3
     # via mmcif
 mypy-extensions==1.1.0
     # via typing-inspect
