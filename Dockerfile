@@ -1,4 +1,9 @@
 ARG PYTHON_VERSION=3.14
+# Must satisfy tool.uv.required-version in pyproject.toml.
+ARG UV_VERSION=0.13.6
+
+# Single source of the uv binaries, pulled once and reused by both stages.
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
 
 FROM python:${PYTHON_VERSION}-bookworm AS builder
 
@@ -9,9 +14,7 @@ RUN apt-get update \
       flex \
  && rm -rf /var/lib/apt/lists/*
 
-# Install uv from the official image so the build does not need network access
-# to bootstrap it separately.
-COPY --from=ghcr.io/astral-sh/uv:0.11.21 /uv /uvx /bin/
+COPY --from=uv /uv /uvx /bin/
 
 WORKDIR /build
 
@@ -36,7 +39,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 # uv is needed by manage.sh to install the test group into the running
 # container; the runtime venv itself is populated from the builder stage.
-COPY --from=ghcr.io/astral-sh/uv:0.11.21 /uv /uvx /bin/
+COPY --from=uv /uv /uvx /bin/
 
 RUN apt-get update -y \
  && apt-get install -y \

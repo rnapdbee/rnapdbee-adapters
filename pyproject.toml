@@ -36,6 +36,12 @@ test = [
 ]
 
 [tool.uv]
+# Single source of truth for the uv version: astral-sh/setup-uv reads this
+# when the workflow does not pin a version, and uv itself refuses to run with
+# an older release. The floor must not exceed the uv version provided by the
+# devenv shell; keep the Dockerfile's UV_VERSION at or above it too.
+required-version = ">=0.13.4"
+
 # Dependencies are declared in [project.dependencies] and locked in uv.lock.
 # Refresh the lock with:
 #    uv lock
