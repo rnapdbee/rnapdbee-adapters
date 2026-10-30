@@ -36,7 +36,10 @@ test = [
 ]
 
 [tool.uv]
-# Compile the cross-version lock file with:
+# Dependencies are declared in [project.dependencies] and locked in uv.lock.
+# Refresh the lock with:
 #    uv lock
-# Export a pip-compatible lock file with:
-#    uv export --format requirements-txt --no-dev --no-emit-project -o requirements.txt
+# Install the runtime environment with:
+#    uv sync --frozen
+# Install the runtime and test environments with:
+#    uv sync --frozen --group test

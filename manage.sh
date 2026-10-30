@@ -84,9 +84,9 @@ if [ ${stage[test]} = true ]; then
 	docker start $container &&
 		docker cp tests/ $container:rnapdbee-adapters/src/ &&
 		docker cp pylintrc $container:/ &&
-		docker cp test_requirements.txt $container:/ &&
-		echo -e "${BLUE}Installing test_requirements.txt...${NORMAL}" &&
-		docker exec -t $container bin/bash -c "pip3 install -r test_requirements.txt" >/dev/null &&
+		docker cp pyproject.toml uv.lock $container:/ &&
+		echo -e "${BLUE}Installing test dependencies...${NORMAL}" &&
+		docker exec -t $container bin/bash -c "cd / && uv sync --frozen --group test" >/dev/null &&
 		docker exec -t $container bin/bash -c "pylint --rcfile pylintrc rnapdbee-adapters/src/adapters" &&
 		docker exec -t $container bin/bash -c "cd ./rnapdbee-adapters/src/tests && pytest -v --cov='adapters'" &&
 		docker stop $container &&

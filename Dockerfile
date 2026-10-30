@@ -31,7 +31,12 @@ FROM python:${PYTHON_VERSION}-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/rnapdbee-adapters/src
+    PYTHONPATH=/rnapdbee-adapters/src \
+    UV_PROJECT_ENVIRONMENT=/opt/venv
+
+# uv is needed by manage.sh to install the test group into the running
+# container; the runtime venv itself is populated from the builder stage.
+COPY --from=ghcr.io/astral-sh/uv:0.11.21 /uv /uvx /bin/
 
 RUN apt-get update -y \
  && apt-get install -y \
