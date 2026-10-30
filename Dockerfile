@@ -1,4 +1,11 @@
-FROM python:3.13-bookworm AS builder
+ARG PYTHON_VERSION=3.14
+# Must satisfy tool.uv.required-version in pyproject.toml.
+ARG UV_VERSION=0.13.6
+
+# Single source of the uv binaries, pulled once and reused by both stages.
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv
+
+FROM python:${PYTHON_VERSION}-bookworm AS builder
 
 RUN apt-get update \
  && apt-get install --no-install-recommends -y \
@@ -7,20 +14,32 @@ RUN apt-get update \
       flex \
  && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY --from=uv /uv /uvx /bin/
 
-RUN python -m venv /opt/venv \
- && . /opt/venv/bin/activate \
- && pip install --upgrade pip \
- && pip install --no-cache-dir -r requirements.txt
+WORKDIR /build
+
+# Copy only the files needed to resolve the environment so the expensive
+# dependency install is cached independently of the application sources.
+COPY pyproject.toml uv.lock ./
+
+# Keep the virtualenv at /opt/venv so the runtime stage, PATH and VIRTUAL_ENV
+# stay unchanged.
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+
+RUN uv sync --frozen --no-dev --no-install-project --python /usr/local/bin/python
 
 #######################################
 
-FROM python:3.13-slim-bookworm
+FROM python:${PYTHON_VERSION}-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/rnapdbee-adapters/src
+    PYTHONPATH=/rnapdbee-adapters/src \
+    UV_PROJECT_ENVIRONMENT=/opt/venv
+
+# uv is needed by manage.sh to install the test group into the running
+# container; the runtime venv itself is populated from the builder stage.
+COPY --from=uv /uv /uvx /bin/
 
 RUN apt-get update -y \
  && apt-get install -y \

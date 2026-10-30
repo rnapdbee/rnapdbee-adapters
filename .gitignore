@@ -19,6 +19,9 @@ dev/
 .aider*
 .env
 
+# uv
+.venv
+
 # Devenv
 .devenv*
 devenv.local.nix

@@ -26,8 +26,9 @@ jobs:
     if: ${{ github.actor != 'dependabot[bot]' }}
 
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.13"]
+        python-version: ["3.11", "3.12", "3.13", "3.14", "3.15"]
 
     steps:
       - uses: actions/checkout@v7
@@ -37,14 +38,18 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.3.3
+        with:
+          # No version: setup-uv reads tool.uv.required-version from
+          # pyproject.toml, keeping a single source of truth.
+          enable-cache: true
+
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r test_requirements.txt
+        run: uv sync --frozen --group test
 
       - name: Analyze with pylint
-        run: pylint --rcfile pylintrc src/
+        run: uv run --frozen --group test pylint --rcfile pylintrc src/
 
   auto-merge-dependabot-non-major-updates:
     needs: build

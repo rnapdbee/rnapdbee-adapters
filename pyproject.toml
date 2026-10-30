@@ -1,0 +1,51 @@
+[project]
+name = "rnapdbee-adapters"
+version = "1.0.0"
+description = "REST API adapters for RNA bioinformatics tools"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<3.16"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
+dependencies = [
+    "cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.4.6",
+    "dataclasses-json",
+    "flask",
+    "flask-caching",
+    "gunicorn",
+    "logomaker",
+    "lxml",
+    "matplotlib",
+    "mmcif",
+    "orjson",
+    "redis",
+    "rnapolis",
+]
+
+[dependency-groups]
+test = [
+    "pylint",
+    "pytest",
+]
+
+[tool.uv]
+# Single source of truth for the uv version: astral-sh/setup-uv reads this
+# when the workflow does not pin a version, and uv itself refuses to run with
+# an older release. The floor must not exceed the uv version provided by the
+# devenv shell; keep the Dockerfile's UV_VERSION at or above it too.
+required-version = ">=0.13.4"
+
+# Dependencies are declared in [project.dependencies] and locked in uv.lock.
+# Refresh the lock with:
+#    uv lock
+# Install the runtime environment with:
+#    uv sync --frozen
+# Install the runtime and test environments with:
+#    uv sync --frozen --group test
