@@ -1,4 +1,6 @@
-FROM python:3.13-bookworm AS builder
+ARG PYTHON_VERSION=3.14
+
+FROM python:${PYTHON_VERSION}-bookworm AS builder
 
 RUN apt-get update \
  && apt-get install --no-install-recommends -y \
@@ -16,7 +18,7 @@ RUN python -m venv /opt/venv \
 
 #######################################
 
-FROM python:3.13-slim-bookworm
+FROM python:${PYTHON_VERSION}-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \

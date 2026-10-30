@@ -116,7 +116,7 @@ Documentation can be found [here](documentation/api/adapters-api.yml).
 The following software is used by RNApdbee adapters.
 
 - [Ubuntu 22.04](https://ubuntu.com/)
-- [Python 3.10](https://www.python.org/)
+- [Python 3.11 or newer](https://www.python.org/) (3.11, 3.12, 3.13, 3.14 and 3.15 are supported)
 - [R](https://www.r-project.org/)
 - [IronPython](https://ironpython.net/)
 - [Docker](https://www.docker.com/)
