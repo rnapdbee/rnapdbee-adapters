@@ -1,14 +1,24 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 {
   languages.python = {
     enable = true;
-    version = "3.14";
-    venv = {
+    venv.enable = true;
+    uv = {
       enable = true;
-      requirements = ./requirements.txt;
+      sync.enable = true;
     };
   };
   packages = [ pkgs.zlib ];
+  env.LD_LIBRARY_PATH = "${lib.makeLibraryPath [
+    pkgs.stdenv.cc.cc.lib
+    pkgs.zlib
+  ]}";
   enterShell = ''
     export PYTHONPATH=src/
   '';

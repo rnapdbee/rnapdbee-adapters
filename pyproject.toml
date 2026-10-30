@@ -14,8 +14,28 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
+dependencies = [
+    "cli2rest-bio @ git+https://github.com/tzok/cli2rest-bio@0.4.6",
+    "dataclasses-json",
+    "flask",
+    "flask-caching",
+    "gunicorn",
+    "logomaker",
+    "lxml",
+    "matplotlib",
+    "mmcif",
+    "orjson",
+    "redis",
+    "rnapolis",
+]
+
+[dependency-groups]
+test = [
+    "pylint",
+]
 
 [tool.uv]
-# Runtime dependencies are declared in requirements.in and compiled into a
-# universal lock file (requirements.txt) that installs on every supported
-# Python version. See the header of that file for the compile command.
+# Compile the cross-version lock file with:
+#    uv lock
+# Export a pip-compatible lock file with:
+#    uv export --format requirements-txt --no-dev --no-emit-project -o requirements.txt

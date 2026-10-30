@@ -9,12 +9,21 @@ RUN apt-get update \
       flex \
  && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+# Install uv from the official image so the build does not need network access
+# to bootstrap it separately.
+COPY --from=ghcr.io/astral-sh/uv:0.11.21 /uv /uvx /bin/
 
-RUN python -m venv /opt/venv \
- && . /opt/venv/bin/activate \
- && pip install --upgrade pip \
- && pip install --no-cache-dir -r requirements.txt
+WORKDIR /build
+
+# Copy only the files needed to resolve the environment so the expensive
+# dependency install is cached independently of the application sources.
+COPY pyproject.toml uv.lock ./
+
+# Keep the virtualenv at /opt/venv so the runtime stage, PATH and VIRTUAL_ENV
+# stay unchanged.
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+
+RUN uv sync --frozen --no-dev --no-install-project --python /usr/local/bin/python
 
 #######################################
 
