@@ -1,7 +1,3 @@
-
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
 updates:
   - package-ecosystem: "uv"
@@ -10,7 +6,15 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "build"
-    target-branch: "main"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "build"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -18,4 +22,4 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "build"
-    target-branch: "main"
+    open-pull-requests-limit: 10
